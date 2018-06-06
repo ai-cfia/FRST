@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FRST</title>
+</head>
+<body>
+	<!--[if lt IE 9]>
+	<script src="../assets/global/plugins/respond.min.js"></script>
+	<script src="../assets/global/plugins/excanvas.min.js"></script>
+	<script src="../assets/global/plugins/ie8.fix.min.js"></script>
+	<![endif]-->
+	<!-- BEGIN CORE PLUGINS -->
+	<script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+	<script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+	<!-- END CORE PLUGINS -->
+	<script type="text/javascript">
+
+		if (window.localStorage.getItem("current_project") == null) {
+			var current_project = -1;
+			window.localStorage.setItem("current_project", current_project);
+		}
+
+		if (window.localStorage.getItem("visual_project1") == null) {
+			var visual_project1 = -1;
+			window.localStorage.setItem("visual_project1", visual_project1);
+		}
+
+		if (window.localStorage.getItem("visual_project2") == null) {
+			var visual_project2 = -1;
+			window.localStorage.setItem("visual_project2", visual_project2);
+		}
+
+		if (window.localStorage.getItem("projects") == null) {
+			var projects = [];
+			window.localStorage.setItem("projects", JSON.stringify(projects));
+		}
+
+		window.location.href = "/FRST/charts";
+
+	</script>
+	
+</body>
+</html>
