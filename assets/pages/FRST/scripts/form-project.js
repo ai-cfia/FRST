@@ -38,8 +38,8 @@ var FormProject = function () {
 					let startDatePhase2Year = startDatePhase2.getFullYear();
 
 					$("#startDatePhase2").val(leftPad(startDatePhase2Month, 2) + "/" + leftPad(startDatePhase2Day, 2) + "/" + startDatePhase2Year);
-					$("#startDatePhase2").datepicker("setStartDate", new Date(startDatePhase2.getFullYear(), startDatePhase2.getMonth(), startDatePhase2.getDate()));
-					$("#startDatePhase2").datepicker("update");
+					$("#datePickerStartDatePhase2").datepicker("setStartDate", new Date(startDatePhase2.getFullYear(), startDatePhase2.getMonth(), startDatePhase2.getDate()));
+					$("#datePickerStartDatePhase2").datepicker("update");
 				}
 			}
 		}
@@ -64,8 +64,8 @@ var FormProject = function () {
 					let startDatePhase3Year = startDatePhase3.getFullYear();
 
 					$("#startDatePhase3").val(leftPad(startDatePhase3Month, 2) + "/" + leftPad(startDatePhase3Day, 2) + "/" + startDatePhase3Year);
-					$("#startDatePhase3").datepicker("setStartDate", new Date(startDatePhase3.getFullYear(), startDatePhase3.getMonth(), startDatePhase3.getDate()));
-					$("#startDatePhase3").datepicker("update");
+					$("#datePickerStartDatePhase3").datepicker("setStartDate", new Date(startDatePhase3.getFullYear(), startDatePhase3.getMonth(), startDatePhase3.getDate()));
+					$("#datePickerStartDatePhase3").datepicker("update");
 				}
 			}
 		}
@@ -86,8 +86,8 @@ var FormProject = function () {
 				let startDatePhase2Time = startDatePhase1Time + quaterNumberPhase1 * (1000 * 60 * 60 * 24 * 30 * 3);
 				let startDatePhase2 = new Date(startDatePhase2Time);
 
-				$("#startDatePhase2").datepicker("setStartDate", new Date(startDatePhase2.getFullYear(), startDatePhase2.getMonth(), startDatePhase2.getDate()));
-				$("#startDatePhase2").datepicker("update");
+				$("#datePickerStartDatePhase2").datepicker("setStartDate", new Date(startDatePhase2.getFullYear(), startDatePhase2.getMonth(), startDatePhase2.getDate()));
+				$("#datePickerStartDatePhase2").datepicker("update");
 			}
 		}
 
@@ -105,8 +105,8 @@ var FormProject = function () {
 				let startDatePhase3Time = startDatePhase2Time + quaterNumberPhase2 * (1000 * 60 * 60 * 24 * 30 * 3);
 				let startDatePhase3 = new Date(startDatePhase3Time);
 
-				$("#startDatePhase3").datepicker("setStartDate", new Date(startDatePhase3.getFullYear(), startDatePhase3.getMonth(), startDatePhase3.getDate()));
-				$("#startDatePhase3").datepicker("update");
+				$("#datePickerStartDatePhase3").datepicker("setStartDate", new Date(startDatePhase3.getFullYear(), startDatePhase3.getMonth(), startDatePhase3.getDate()));
+				$("#datePickerStartDatePhase3").datepicker("update");
 			}
 		}
 
@@ -126,6 +126,38 @@ var FormProject = function () {
 
 		$("#quaterNumberPhase2").change(function() {
 			updateStartDatePhase3();
+		});
+
+		$("input[name='cost1']").change(function() {
+			if ($("input[name='cost1']:checked").val() == "1") {
+				$("input[name='procurement1'][value='1']").attr("checked", true);
+				$("input[name='procurement2'][value='1']").attr("checked", true);
+				$("input[name='procurement3'][value='1']").attr("checked", true);
+
+				for(let i = 0; i < $("input[name='procurement1']").length; i++) {
+					$("input[name='procurement1']")[i].disabled = true;
+				}
+				for(let i = 0; i < $("input[name='procurement2']").length; i++) {
+					$("input[name='procurement2']")[i].disabled = true;
+				}
+				for(let i = 0; i < $("input[name='procurement3']").length; i++) {
+					$("input[name='procurement3']")[i].disabled = true;
+				}
+			} else {
+				$("input[name='procurement1'][value='1']").attr("checked", false);
+				$("input[name='procurement2'][value='1']").attr("checked", false);
+				$("input[name='procurement3'][value='1']").attr("checked", false);
+
+				for(let i = 0; i < $("input[name='procurement1']").length; i++) {
+					$("input[name='procurement1']")[i].disabled = false;
+				}
+				for(let i = 0; i < $("input[name='procurement2']").length; i++) {
+					$("input[name='procurement2']")[i].disabled = false;
+				}
+				for(let i = 0; i < $("input[name='procurement3']").length; i++) {
+					$("input[name='procurement3']")[i].disabled = false;
+				}
+			}
 		});
 
 		var form1 = $("#form_submit");
@@ -156,18 +188,15 @@ var FormProject = function () {
 				},
 				quaterNumberPhase1: {
 					digits: true,
-					required: true,
-					range: [1, 5]
+					required: true
 				},
 				quaterNumberPhase2: {
 					digits: true,
-					required: true,
-					range: [1, 5]
+					required: true
 				},
 				quaterNumberPhase3: {
 					digits: true,
-					required: true,
-					range: [1, 5]
+					required: true
 				},
 				fteNumberCostPhase1: {
 					digits: true,
@@ -209,33 +238,96 @@ var FormProject = function () {
 					digits: true,
 					required: true
 				},
-				cost: {
+				cost1: {
 					required: true
 				},
-				novelty: {
+				cost2: {
 					required: true
 				},
-				duration: {
+				cost3: {
 					required: true
 				},
-				reach: {
+				scope1: {
 					required: true
 				},
-				agencyExperience: {
+				scope2: {
 					required: true
 				},
-				dependence: {
+				scope3: {
 					required: true
 				},
-				procurement: {
+				scope4: {
 					required: true
 				},
-				peakHR: {
+				scope5: {
 					required: true
 				},
-				HRAvailability: {
+				scope6: {
 					required: true
-				}
+				},
+				communications1: {
+					required: true
+				},
+				communications2: {
+					required: true
+				},
+				communications3: {
+					required: true
+				},
+				projectIntegrationManagement1: {
+					required: true
+				},
+				projectIntegrationManagement2: {
+					required: true
+				},
+				time1: {
+					required: true
+				},
+				time2: {
+					required: true
+				},
+				time3: {
+					required: true
+				},
+				time4: {
+					required: true
+				},
+				time5: {
+					required: true
+				},
+				time6: {
+					required: true
+				},
+				investmentPortfolioManagement1: {
+					required: true
+				},
+				investmentPortfolioManagement2: {
+					required: true
+				},
+				investmentPortfolioManagement3: {
+					required: true
+				},
+				procurement1: {
+					required: true
+				},
+				procurement2: {
+					required: true
+				},
+				procurement3: {
+					required: true
+				},
+				humanResources1: {
+					required: true
+				},
+				humanResources2: {
+					required: true
+				},
+				humanResources3: {
+					required: true
+				},
+				humanResourcesCommunications1: {
+					required: true
+				}				
 			},
 
 			errorPlacement: function (error, element) {
@@ -290,15 +382,101 @@ var FormProject = function () {
 				projects[current_project].costRelease.fteNumberReleasePhase3 = $("#fteNumberReleasePhase3").val();
 				projects[current_project].costRelease.operatingMoneyReleasePhase3 = $("#operatingMoneyReleasePhase3").val();
 
-				projects[current_project].complexityRisk.cost = $("input[name='cost']:checked").val();
-				projects[current_project].complexityRisk.novelty = $("input[name='novelty']:checked").val();
-				projects[current_project].complexityRisk.duration = $("input[name='duration']:checked").val();
-				projects[current_project].complexityRisk.reach = $("input[name='reach']:checked").val();
-				projects[current_project].complexityRisk.agencyExperience = $("input[name='agencyExperience']:checked").val();
-				projects[current_project].complexityRisk.dependence = $("input[name='dependence']:checked").val();
-				projects[current_project].complexityRisk.procurement = $("input[name='procurement']:checked").val();
-				projects[current_project].complexityRisk.peakHR = $("input[name='peakHR']:checked").val();
-				projects[current_project].complexityRisk.HRAvailability = $("input[name='HRAvailability']:checked").val();
+				let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseInt($("#fteNumberCostPhase1").val()) * 100000 + parseInt($("#operatingMoneyCostPhase1").val()))
+				+ parseInt($("#quaterNumberPhase2").val()) * (parseInt($("#fteNumberCostPhase2").val()) * 100000 + parseInt($("#operatingMoneyCostPhase2").val()))
+				+ parseInt($("#quaterNumberPhase3").val()) * (parseInt($("#fteNumberCostPhase3").val()) * 100000 + parseInt($("#operatingMoneyCostPhase3").val()));
+
+				let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
+
+				if (projectTotalCost <= 5000000) {
+					projectTotalCost = "1";
+				} else if (projectTotalCost > 5000000 && projectTotalCost <= 10000000) {
+					projectTotalCost = "2";
+				} else if (projectTotalCost > 10000000 && projectTotalCost <= 25000000) {
+					projectTotalCost = "3";
+				} else if (projectTotalCost > 25000000 && projectTotalCost <= 100000000) {
+					projectTotalCost = "4";
+				} else if (projectTotalCost > 100000000) {
+					projectTotalCost = "5";
+				}
+
+				if (projectTotalQuaterNumber <= 4) {
+					projectTotalQuaterNumber = "1";
+				} else if (projectTotalQuaterNumber > 4 && projectTotalQuaterNumber <= 8) {
+					projectTotalQuaterNumber = "2";
+				} else if (projectTotalQuaterNumber > 8 && projectTotalQuaterNumber <= 12) {
+					projectTotalQuaterNumber = "3";
+				} else if (projectTotalQuaterNumber > 12 && projectTotalQuaterNumber <= 16) {
+					projectTotalQuaterNumber = "4";
+				} else if (projectTotalQuaterNumber > 16) {
+					projectTotalQuaterNumber = "5";
+				}
+
+				let _cost = [
+				projectTotalCost,
+				$("input[name='cost1']:checked").val(),
+				$("input[name='cost2']:checked").val(),
+				$("input[name='cost3']:checked").val()
+				];
+
+				let _scope = [
+				$("input[name='scope1']:checked").val(),
+				$("input[name='scope2']:checked").val(),
+				$("input[name='scope3']:checked").val(),
+				$("input[name='scope4']:checked").val(),
+				$("input[name='scope5']:checked").val(),
+				$("input[name='scope6']:checked").val()
+				];
+
+				let _communications = [
+				$("input[name='communications1']:checked").val(),
+				$("input[name='communications2']:checked").val(),
+				$("input[name='communications3']:checked").val(),
+				$("input[name='humanResourcesCommunications1']:checked").val()
+				];
+
+				let _projectIntegrationManagement = [
+				$("input[name='projectIntegrationManagement1']:checked").val(),
+				$("input[name='projectIntegrationManagement2']:checked").val()
+				];
+
+				let _time = [
+				projectTotalQuaterNumber,
+				$("input[name='time1']:checked").val(),
+				$("input[name='time2']:checked").val(),
+				$("input[name='time3']:checked").val(),
+				$("input[name='time4']:checked").val(),
+				$("input[name='time5']:checked").val(),
+				$("input[name='time6']:checked").val()
+				];
+
+				let _investmentPortfolioManagement = [
+				$("input[name='investmentPortfolioManagement1']:checked").val(),
+				$("input[name='investmentPortfolioManagement2']:checked").val(),
+				$("input[name='investmentPortfolioManagement3']:checked").val()
+				];
+
+				let _procurement = [
+				$("input[name='procurement1']:checked").val(),
+				$("input[name='procurement2']:checked").val(),
+				$("input[name='procurement3']:checked").val()
+				];
+
+				let _humanResources = [
+				$("input[name='humanResources1']:checked").val(),
+				$("input[name='humanResources2']:checked").val(),
+				$("input[name='humanResources3']:checked").val(),
+				$("input[name='humanResourcesCommunications1']:checked").val()
+				];
+
+				projects[current_project].complexityRisk._cost = _cost;
+				projects[current_project].complexityRisk._scope = _scope;
+				projects[current_project].complexityRisk._communications = _communications;
+				projects[current_project].complexityRisk._projectIntegrationManagement = _projectIntegrationManagement;
+				projects[current_project].complexityRisk._time = _time;
+				projects[current_project].complexityRisk._investmentPortfolioManagement = _investmentPortfolioManagement;
+				projects[current_project].complexityRisk._procurement = _procurement;
+				projects[current_project].complexityRisk._humanResources = _humanResources;
 
 				window.localStorage.setItem("projects", JSON.stringify(projects));
 				window.localStorage.setItem("visual_project1", current_project);
@@ -380,7 +558,7 @@ var FormProject = function () {
 				}
 				window.localStorage.setItem("visual_project1", visual_project1);
 				window.localStorage.setItem("visual_project2", visual_project2);
-				window.location.replace("/FRST");
+				window.location.replace("/FRST/");
 			}
 
 		});

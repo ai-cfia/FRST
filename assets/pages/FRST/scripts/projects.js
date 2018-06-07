@@ -7,7 +7,7 @@ var Projects = function () {
 				let projects = JSON.parse(window.localStorage.getItem("projects"));
 				if (projects.length > 0 
 					&& (projects[projects.length - 1].costRelease.quaterNumberPhase1 == null
-					|| projects[projects.length - 1].complexityRisk.cost == null)) {
+					|| projects[projects.length - 1].complexityRisk._cost == null)) {
 					alert("Please first fill out the project " + projects[projects.length - 1].title);
 				} else if (projects.length >= 10) {
 					alert("Add 10 projects at most!");
@@ -31,15 +31,14 @@ var Projects = function () {
 							"operatingMoneyReleasePhase3": null
 						},
 						"complexityRisk": {
-							"cost": null,
-							"novelty": null,
-							"duration": null,
-							"reach": null,
-							"agencyExperience": null,
-							"dependence": null,
-							"procurement": null,
-							"peakHR": null,
-							"HRAvailability": null
+							"_cost": [],
+							"_scope": [],
+							"_communications": [],
+							"_projectIntegrationManagement": [],
+							"_time": [],
+							"_investmentPortfolioManagement": [],
+							"_procurement": [],
+							"_humanResources": []
 						}
 					};
 
@@ -96,50 +95,87 @@ var Projects = function () {
 			let current_project = window.localStorage.getItem("current_project");
 
 			$("#startDatePhase1").val(projects[current_project].costRelease.startDatePhase1);
-			$("#quaterNumberPhase1").val(projects[current_project].costRelease.quaterNumberPhase1);
-			$("#fteNumberCostPhase1").val(projects[current_project].costRelease.fteNumberCostPhase1);
-			$("#operatingMoneyCostPhase1").val(projects[current_project].costRelease.operatingMoneyCostPhase1);
+			$("#quaterNumberPhase1").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.quaterNumberPhase1
+			});
+			$("#fteNumberCostPhase1").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.fteNumberCostPhase1
+			});
+			$("#operatingMoneyCostPhase1").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.operatingMoneyCostPhase1
+			});
 
 			$("#startDatePhase2").val(projects[current_project].costRelease.startDatePhase2);
-			$("#quaterNumberPhase2").val(projects[current_project].costRelease.quaterNumberPhase2);
-			$("#fteNumberCostPhase2").val(projects[current_project].costRelease.fteNumberCostPhase2);
-			$("#operatingMoneyCostPhase2").val(projects[current_project].costRelease.operatingMoneyCostPhase2);
-			$("#fteNumberReleasePhase2").val(projects[current_project].costRelease.fteNumberReleasePhase2);
-			$("#operatingMoneyReleasePhase2").val(projects[current_project].costRelease.operatingMoneyReleasePhase2);
+			$("#quaterNumberPhase2").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.quaterNumberPhase2
+			});
+			$("#fteNumberCostPhase2").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.fteNumberCostPhase2
+			});
+			$("#operatingMoneyCostPhase2").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.operatingMoneyCostPhase2
+			});
+			$("#fteNumberReleasePhase2").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.fteNumberReleasePhase2
+			});
+			$("#operatingMoneyReleasePhase2").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.operatingMoneyReleasePhase2
+			});
 
 			$("#startDatePhase3").val(projects[current_project].costRelease.startDatePhase3);
-			$("#quaterNumberPhase3").val(projects[current_project].costRelease.quaterNumberPhase3);
-			$("#fteNumberCostPhase3").val(projects[current_project].costRelease.fteNumberCostPhase3);
-			$("#operatingMoneyCostPhase3").val(projects[current_project].costRelease.operatingMoneyCostPhase3);
-			$("#fteNumberReleasePhase3").val(projects[current_project].costRelease.fteNumberReleasePhase3);
-			$("#operatingMoneyReleasePhase3").val(projects[current_project].costRelease.operatingMoneyReleasePhase3);
+			$("#quaterNumberPhase3").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.quaterNumberPhase3
+			});
+			$("#fteNumberCostPhase3").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.fteNumberCostPhase3
+			});
+			$("#operatingMoneyCostPhase3").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.operatingMoneyCostPhase3
+			});
+			$("#fteNumberReleasePhase3").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.fteNumberReleasePhase3
+			});
+			$("#operatingMoneyReleasePhase3").data("ionRangeSlider").update({
+				from: projects[current_project].costRelease.operatingMoneyReleasePhase3
+			});
 
-			$("input[name='cost'][value='" + projects[current_project].complexityRisk.cost + "']").attr("checked", true);
-			$("input[name='cost'][value='" + projects[current_project].complexityRisk.cost + "']").parent().addClass("checked");
+			$("input[name='cost1'][value='" + projects[current_project].complexityRisk._cost[1] + "']").attr("checked", true);
+			$("input[name='cost2'][value='" + projects[current_project].complexityRisk._cost[2] + "']").attr("checked", true);
+			$("input[name='cost3'][value='" + projects[current_project].complexityRisk._cost[3] + "']").attr("checked", true);
 
-			$("input[name='novelty'][value='" + projects[current_project].complexityRisk.novelty + "']").attr("checked", true);
-			$("input[name='novelty'][value='" + projects[current_project].complexityRisk.novelty + "']").parent().addClass("checked");
+			$("input[name='scope1'][value='" + projects[current_project].complexityRisk._scope[0] + "']").attr("checked", true);
+			$("input[name='scope2'][value='" + projects[current_project].complexityRisk._scope[1] + "']").attr("checked", true);
+			$("input[name='scope3'][value='" + projects[current_project].complexityRisk._scope[2] + "']").attr("checked", true);
+			$("input[name='scope4'][value='" + projects[current_project].complexityRisk._scope[3] + "']").attr("checked", true);
+			$("input[name='scope5'][value='" + projects[current_project].complexityRisk._scope[4] + "']").attr("checked", true);
+			$("input[name='scope6'][value='" + projects[current_project].complexityRisk._scope[5] + "']").attr("checked", true);
 
-			$("input[name='duration'][value='" + projects[current_project].complexityRisk.duration + "']").attr("checked", true);
-			$("input[name='duration'][value='" + projects[current_project].complexityRisk.duration + "']").parent().addClass("checked");
+			$("input[name='communications1'][value='" + projects[current_project].complexityRisk._communications[0] + "']").attr("checked", true);
+			$("input[name='communications2'][value='" + projects[current_project].complexityRisk._communications[1] + "']").attr("checked", true);
+			$("input[name='communications3'][value='" + projects[current_project].complexityRisk._communications[2] + "']").attr("checked", true);
+			$("input[name='humanResourcesCommunications1'][value='" + projects[current_project].complexityRisk._communications[3] + "']").attr("checked", true);
 
-			$("input[name='reach'][value='" + projects[current_project].complexityRisk.reach + "']").attr("checked", true);
-			$("input[name='reach'][value='" + projects[current_project].complexityRisk.reach + "']").parent().addClass("checked");
+			$("input[name='projectIntegrationManagement1'][value='" + projects[current_project].complexityRisk._projectIntegrationManagement[0] + "']").attr("checked", true);
+			$("input[name='projectIntegrationManagement2'][value='" + projects[current_project].complexityRisk._projectIntegrationManagement[1] + "']").attr("checked", true);
 
-			$("input[name='agencyExperience'][value='" + projects[current_project].complexityRisk.agencyExperience + "']").attr("checked", true);
-			$("input[name='agencyExperience'][value='" + projects[current_project].complexityRisk.agencyExperience + "']").parent().addClass("checked");
+			$("input[name='time1'][value='" + projects[current_project].complexityRisk._time[1] + "']").attr("checked", true);
+			$("input[name='time2'][value='" + projects[current_project].complexityRisk._time[2] + "']").attr("checked", true);
+			$("input[name='time3'][value='" + projects[current_project].complexityRisk._time[3] + "']").attr("checked", true);
+			$("input[name='time4'][value='" + projects[current_project].complexityRisk._time[4] + "']").attr("checked", true);
+			$("input[name='time5'][value='" + projects[current_project].complexityRisk._time[5] + "']").attr("checked", true);
+			$("input[name='time6'][value='" + projects[current_project].complexityRisk._time[6] + "']").attr("checked", true);
 
-			$("input[name='dependence'][value='" + projects[current_project].complexityRisk.dependence + "']").attr("checked", true);
-			$("input[name='dependence'][value='" + projects[current_project].complexityRisk.dependence + "']").parent().addClass("checked");
+			$("input[name='investmentPortfolioManagement1'][value='" + projects[current_project].complexityRisk._investmentPortfolioManagement[0] + "']").attr("checked", true);
+			$("input[name='investmentPortfolioManagement2'][value='" + projects[current_project].complexityRisk._investmentPortfolioManagement[1] + "']").attr("checked", true);
+			$("input[name='investmentPortfolioManagement3'][value='" + projects[current_project].complexityRisk._investmentPortfolioManagement[2] + "']").attr("checked", true);
 
-			$("input[name='procurement'][value='" + projects[current_project].complexityRisk.procurement + "']").attr("checked", true);
-			$("input[name='procurement'][value='" + projects[current_project].complexityRisk.procurement + "']").parent().addClass("checked");
+			$("input[name='procurement1'][value='" + projects[current_project].complexityRisk._procurement[0] + "']").attr("checked", true);
+			$("input[name='procurement2'][value='" + projects[current_project].complexityRisk._procurement[1] + "']").attr("checked", true);
+			$("input[name='procurement3'][value='" + projects[current_project].complexityRisk._procurement[2] + "']").attr("checked", true);
 
-			$("input[name='peakHR'][value='" + projects[current_project].complexityRisk.peakHR + "']").attr("checked", true);
-			$("input[name='peakHR'][value='" + projects[current_project].complexityRisk.peakHR + "']").parent().addClass("checked");
-
-			$("input[name='HRAvailability'][value='" + projects[current_project].complexityRisk.HRAvailability + "']").attr("checked", true);
-			$("input[name='HRAvailability'][value='" + projects[current_project].complexityRisk.HRAvailability + "']").parent().addClass("checked");
+			$("input[name='humanResources1'][value='" + projects[current_project].complexityRisk._humanResources[0] + "']").attr("checked", true);
+			$("input[name='humanResources2'][value='" + projects[current_project].complexityRisk._humanResources[1] + "']").attr("checked", true);
+			$("input[name='humanResources3'][value='" + projects[current_project].complexityRisk._humanResources[2] + "']").attr("checked", true);
 		},
 
 		updateProjectsDropDownLists: function() {
