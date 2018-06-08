@@ -130,9 +130,9 @@ var FormProject = function () {
 
 		$("input[name='cost1']").change(function() {
 			if ($("input[name='cost1']:checked").val() == "1") {
-				$("input[name='procurement1'][value='1']").attr("checked", true);
-				$("input[name='procurement2'][value='1']").attr("checked", true);
-				$("input[name='procurement3'][value='1']").attr("checked", true);
+				$("input[name='procurement1'][value=1]").trigger('click');
+				$("input[name='procurement2'][value=1]").trigger('click');
+				$("input[name='procurement3'][value=1]").trigger('click');
 
 				for(let i = 0; i < $("input[name='procurement1']").length; i++) {
 					$("input[name='procurement1']")[i].disabled = true;
@@ -144,10 +144,6 @@ var FormProject = function () {
 					$("input[name='procurement3']")[i].disabled = true;
 				}
 			} else {
-				$("input[name='procurement1'][value='1']").attr("checked", false);
-				$("input[name='procurement2'][value='1']").attr("checked", false);
-				$("input[name='procurement3'][value='1']").attr("checked", false);
-
 				for(let i = 0; i < $("input[name='procurement1']").length; i++) {
 					$("input[name='procurement1']")[i].disabled = false;
 				}
