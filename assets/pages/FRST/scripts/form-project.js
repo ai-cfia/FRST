@@ -384,15 +384,15 @@ var FormProject = function () {
 
 				let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
 
-				if (projectTotalCost <= 5000000) {
+				if (projectTotalCost <= 1250000) {
 					projectTotalCost = "1";
-				} else if (projectTotalCost > 5000000 && projectTotalCost <= 10000000) {
+				} else if (projectTotalCost > 1250000 && projectTotalCost <= 2500000) {
 					projectTotalCost = "2";
-				} else if (projectTotalCost > 10000000 && projectTotalCost <= 25000000) {
+				} else if (projectTotalCost > 2500000 && projectTotalCost <= 6250000) {
 					projectTotalCost = "3";
-				} else if (projectTotalCost > 25000000 && projectTotalCost <= 100000000) {
+				} else if (projectTotalCost > 6250000 && projectTotalCost <= 25000000) {
 					projectTotalCost = "4";
-				} else if (projectTotalCost > 100000000) {
+				} else if (projectTotalCost > 25000000) {
 					projectTotalCost = "5";
 				}
 
