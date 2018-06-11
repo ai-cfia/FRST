@@ -70,6 +70,135 @@ var FormProject = function () {
 			}
 		}
 
+		function tripleConstraint() {
+			let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseInt($("#fteNumberCostPhase1").val()) * 100000 + parseInt($("#operatingMoneyCostPhase1").val()))
+			+ parseInt($("#quaterNumberPhase2").val()) * (parseInt($("#fteNumberCostPhase2").val()) * 100000 + parseInt($("#operatingMoneyCostPhase2").val()))
+			+ parseInt($("#quaterNumberPhase3").val()) * (parseInt($("#fteNumberCostPhase3").val()) * 100000 + parseInt($("#operatingMoneyCostPhase3").val()));
+
+			let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
+
+			if (projectTotalCost <= 1250000) {
+				projectTotalCost = "1";
+			} else if (projectTotalCost > 1250000 && projectTotalCost <= 2500000) {
+				projectTotalCost = "2";
+			} else if (projectTotalCost > 2500000 && projectTotalCost <= 6250000) {
+				projectTotalCost = "3";
+			} else if (projectTotalCost > 6250000 && projectTotalCost <= 25000000) {
+				projectTotalCost = "4";
+			} else if (projectTotalCost > 25000000) {
+				projectTotalCost = "5";
+			}
+
+			if (projectTotalQuaterNumber <= 4) {
+				projectTotalQuaterNumber = "1";
+			} else if (projectTotalQuaterNumber > 4 && projectTotalQuaterNumber <= 8) {
+				projectTotalQuaterNumber = "2";
+			} else if (projectTotalQuaterNumber > 8 && projectTotalQuaterNumber <= 12) {
+				projectTotalQuaterNumber = "3";
+			} else if (projectTotalQuaterNumber > 12 && projectTotalQuaterNumber <= 16) {
+				projectTotalQuaterNumber = "4";
+			} else if (projectTotalQuaterNumber > 16) {
+				projectTotalQuaterNumber = "5";
+			}
+
+			if ($("input[name='investmentPortfolioManagement1']:checked").val() == "5"
+			&& projectTotalCost == "5" && projectTotalQuaterNumber == "5") {
+				$("input[name='cost1'][value=5]").trigger('click');
+				$("input[name='scope1'][value=5]").trigger('click');
+				$("input[name='communications1'][value=5]").trigger('click');
+				$("input[name='projectIntegrationManagement1'][value=5]").trigger('click');
+				$("input[name='cost2'][value=5]").trigger('click');
+				$("input[name='cost3'][value=5]").trigger('click');
+				$("input[name='time1'][value=5]").trigger('click');
+				$("input[name='time2'][value=5]").trigger('click');
+				$("input[name='time3'][value=5]").trigger('click');
+				$("input[name='time4'][value=5]").trigger('click');
+				$("input[name='time5'][value=5]").trigger('click');
+				$("input[name='time6'][value=5]").trigger('click');
+				$("input[name='time7'][value=5]").trigger('click');
+
+				for (let i = 0; i < $("input[name='cost1']").length; i++) {
+					$("input[name='cost1']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='scope1']").length; i++) {
+					$("input[name='scope1']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='communications1']").length; i++) {
+					$("input[name='communications1']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='projectIntegrationManagement1']").length; i++) {
+					$("input[name='projectIntegrationManagement1']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='cost2']").length; i++) {
+					$("input[name='cost2']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='cost3']").length; i++) {
+					$("input[name='cost3']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='time1']").length; i++) {
+					$("input[name='time1']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='time2']").length; i++) {
+					$("input[name='time2']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='time3']").length; i++) {
+					$("input[name='time3']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='time4']").length; i++) {
+					$("input[name='time4']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='time5']").length; i++) {
+					$("input[name='time5']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='time6']").length; i++) {
+					$("input[name='time6']")[i].disabled = true;
+				}
+				for (let i = 0; i < $("input[name='time7']").length; i++) {
+					$("input[name='time7']")[i].disabled = true;
+				}
+			} else {
+				for (let i = 0; i < $("input[name='cost1']").length; i++) {
+					$("input[name='cost1']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='scope1']").length; i++) {
+					$("input[name='scope1']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='communications1']").length; i++) {
+					$("input[name='communications1']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='projectIntegrationManagement1']").length; i++) {
+					$("input[name='projectIntegrationManagement1']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='cost2']").length; i++) {
+					$("input[name='cost2']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='cost3']").length; i++) {
+					$("input[name='cost3']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='time1']").length; i++) {
+					$("input[name='time1']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='time2']").length; i++) {
+					$("input[name='time2']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='time3']").length; i++) {
+					$("input[name='time3']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='time4']").length; i++) {
+					$("input[name='time4']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='time5']").length; i++) {
+					$("input[name='time5']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='time6']").length; i++) {
+					$("input[name='time6']")[i].disabled = false;
+				}
+				for (let i = 0; i < $("input[name='time7']").length; i++) {
+					$("input[name='time7']")[i].disabled = false;
+				}
+			}
+		}
+
 		handleDatePickers();
 
 		if ($("#quaterNumberPhase1").val() != null) {
@@ -122,10 +251,44 @@ var FormProject = function () {
 		$("#quaterNumberPhase1").change(function() {
 			updateStartDatePhase2();
 			updateStartDatePhase3();
+			tripleConstraint();
 		});
 
 		$("#quaterNumberPhase2").change(function() {
 			updateStartDatePhase3();
+			tripleConstraint();
+		});
+
+		$("#quaterNumberPhase3").change(function() {
+			tripleConstraint();
+		});
+
+		$("#fteNumberCostPhase1").change(function() {
+			tripleConstraint();
+		});
+
+		$("#fteNumberCostPhase2").change(function() {
+			tripleConstraint();
+		});
+
+		$("#fteNumberCostPhase3").change(function() {
+			tripleConstraint();
+		});
+
+		$("#operatingMoneyCostPhase1").change(function() {
+			tripleConstraint();
+		});
+
+		$("#operatingMoneyCostPhase2").change(function() {
+			tripleConstraint();
+		});
+
+		$("#operatingMoneyCostPhase3").change(function() {
+			tripleConstraint();
+		});
+
+		$("input[name='investmentPortfolioManagement1']").change(function() {
+			tripleConstraint();
 		});
 
 		$("input[name='cost1']").change(function() {
@@ -134,23 +297,23 @@ var FormProject = function () {
 				$("input[name='procurement2'][value=1]").trigger('click');
 				$("input[name='procurement3'][value=1]").trigger('click');
 
-				for(let i = 0; i < $("input[name='procurement1']").length; i++) {
+				for (let i = 0; i < $("input[name='procurement1']").length; i++) {
 					$("input[name='procurement1']")[i].disabled = true;
 				}
-				for(let i = 0; i < $("input[name='procurement2']").length; i++) {
+				for (let i = 0; i < $("input[name='procurement2']").length; i++) {
 					$("input[name='procurement2']")[i].disabled = true;
 				}
-				for(let i = 0; i < $("input[name='procurement3']").length; i++) {
+				for (let i = 0; i < $("input[name='procurement3']").length; i++) {
 					$("input[name='procurement3']")[i].disabled = true;
 				}
 			} else {
-				for(let i = 0; i < $("input[name='procurement1']").length; i++) {
+				for (let i = 0; i < $("input[name='procurement1']").length; i++) {
 					$("input[name='procurement1']")[i].disabled = false;
 				}
-				for(let i = 0; i < $("input[name='procurement2']").length; i++) {
+				for (let i = 0; i < $("input[name='procurement2']").length; i++) {
 					$("input[name='procurement2']")[i].disabled = false;
 				}
-				for(let i = 0; i < $("input[name='procurement3']").length; i++) {
+				for (let i = 0; i < $("input[name='procurement3']").length; i++) {
 					$("input[name='procurement3']")[i].disabled = false;
 				}
 			}
@@ -261,6 +424,12 @@ var FormProject = function () {
 				scope6: {
 					required: true
 				},
+				scope7: {
+					required: true
+				},
+				scope8: {
+					required: true
+				},
 				communications1: {
 					required: true
 				},
@@ -294,6 +463,9 @@ var FormProject = function () {
 				time6: {
 					required: true
 				},
+				time7: {
+					required: true
+				},
 				investmentPortfolioManagement1: {
 					required: true
 				},
@@ -301,6 +473,9 @@ var FormProject = function () {
 					required: true
 				},
 				investmentPortfolioManagement3: {
+					required: true
+				},
+				investmentPortfolioManagement4: {
 					required: true
 				},
 				procurement1: {
@@ -323,12 +498,17 @@ var FormProject = function () {
 				},
 				humanResourcesCommunications1: {
 					required: true
-				}				
+				},
+				humanResourcesCommunications2: {
+					required: true
+				}			
 			},
 
 			errorPlacement: function (error, element) {
 				if (element.parents(".mt-radio-list").size() > 0) {
 					error.appendTo(element.parents(".mt-radio-list")[0]);
+				} else if (element.parent(".input-group").size() > 0) {
+					error.insertAfter(element.parent(".input-group"));
 				} else {
 					error.insertAfter(element);
 				}
@@ -337,7 +517,10 @@ var FormProject = function () {
 			invalidHandler: function (event, validator) {
 				success1.hide();
 				error1.show();
-				App.scrollTo(error1, -200);
+				$("html, body").animate({
+					scrollTop: $(validator.errorList[0].element).offset().top-200
+				}, 1000);
+				//App.scrollTo(error1, -200);
 			},
 
 			highlight: function (element) {
@@ -421,14 +604,17 @@ var FormProject = function () {
 				$("input[name='scope3']:checked").val(),
 				$("input[name='scope4']:checked").val(),
 				$("input[name='scope5']:checked").val(),
-				$("input[name='scope6']:checked").val()
+				$("input[name='scope6']:checked").val(),
+				$("input[name='scope7']:checked").val(),
+				$("input[name='scope8']:checked").val()
 				];
 
 				let _communications = [
 				$("input[name='communications1']:checked").val(),
 				$("input[name='communications2']:checked").val(),
 				$("input[name='communications3']:checked").val(),
-				$("input[name='humanResourcesCommunications1']:checked").val()
+				$("input[name='humanResourcesCommunications1']:checked").val(),
+				$("input[name='humanResourcesCommunications2']:checked").val()
 				];
 
 				let _projectIntegrationManagement = [
@@ -443,13 +629,15 @@ var FormProject = function () {
 				$("input[name='time3']:checked").val(),
 				$("input[name='time4']:checked").val(),
 				$("input[name='time5']:checked").val(),
-				$("input[name='time6']:checked").val()
+				$("input[name='time6']:checked").val(),
+				$("input[name='time7']:checked").val()
 				];
 
 				let _investmentPortfolioManagement = [
 				$("input[name='investmentPortfolioManagement1']:checked").val(),
 				$("input[name='investmentPortfolioManagement2']:checked").val(),
-				$("input[name='investmentPortfolioManagement3']:checked").val()
+				$("input[name='investmentPortfolioManagement3']:checked").val(),
+				$("input[name='investmentPortfolioManagement4']:checked").val()
 				];
 
 				let _procurement = [
@@ -462,7 +650,8 @@ var FormProject = function () {
 				$("input[name='humanResources1']:checked").val(),
 				$("input[name='humanResources2']:checked").val(),
 				$("input[name='humanResources3']:checked").val(),
-				$("input[name='humanResourcesCommunications1']:checked").val()
+				$("input[name='humanResourcesCommunications1']:checked").val(),
+				$("input[name='humanResourcesCommunications2']:checked").val()
 				];
 
 				projects[current_project].complexityRisk._cost = _cost;
@@ -473,6 +662,70 @@ var FormProject = function () {
 				projects[current_project].complexityRisk._investmentPortfolioManagement = _investmentPortfolioManagement;
 				projects[current_project].complexityRisk._procurement = _procurement;
 				projects[current_project].complexityRisk._humanResources = _humanResources;
+
+				let section1 = [
+				$("input[name='investmentPortfolioManagement1']:checked").val(),
+				$("input[name='cost1']:checked").val(),
+				$("input[name='scope1']:checked").val(),
+				$("input[name='communications1']:checked").val(),
+				$("input[name='projectIntegrationManagement1']:checked").val(),
+				$("input[name='cost2']:checked").val(),
+				$("input[name='cost3']:checked").val(),
+				$("input[name='time1']:checked").val(),
+				$("input[name='time2']:checked").val(),
+				$("input[name='time3']:checked").val(),
+				$("input[name='time4']:checked").val(),
+				$("input[name='time5']:checked").val(),
+				$("input[name='time6']:checked").val(),
+				$("input[name='time7']:checked").val()
+				];
+
+				let section2 = [
+				$("input[name='investmentPortfolioManagement2']:checked").val(),
+				$("input[name='investmentPortfolioManagement3']:checked").val(),
+				$("input[name='communications2']:checked").val(),
+				$("input[name='projectIntegrationManagement2']:checked").val()
+				];
+
+				let section3 = [
+				$("input[name='procurement1']:checked").val(),
+				$("input[name='procurement2']:checked").val(),
+				$("input[name='procurement3']:checked").val()
+				];
+
+				let section4 = [
+				$("input[name='humanResources1']:checked").val(),
+				$("input[name='humanResources2']:checked").val(),
+				$("input[name='humanResources3']:checked").val()
+				];
+
+				let section5 = [
+				$("input[name='humanResourcesCommunications1']:checked").val(),
+				$("input[name='humanResourcesCommunications2']:checked").val()
+				];
+
+				let section6 = [
+				$("input[name='communications3']:checked").val()
+				];
+
+				let section7 = [
+				$("input[name='scope2']:checked").val(),
+				$("input[name='scope3']:checked").val(),
+				$("input[name='scope4']:checked").val(),
+				$("input[name='investmentPortfolioManagement4']:checked").val(),
+				$("input[name='scope5']:checked").val(),
+				$("input[name='scope6']:checked").val(),
+				$("input[name='scope7']:checked").val(),
+				$("input[name='scope8']:checked").val()
+				];
+
+				projects[current_project].complexityRisk.section1 = section1;
+				projects[current_project].complexityRisk.section2 = section2;
+				projects[current_project].complexityRisk.section3 = section3;
+				projects[current_project].complexityRisk.section4 = section4;
+				projects[current_project].complexityRisk.section5 = section5;
+				projects[current_project].complexityRisk.section6 = section6;
+				projects[current_project].complexityRisk.section7 = section7;
 
 				window.localStorage.setItem("projects", JSON.stringify(projects));
 				window.localStorage.setItem("visual_project1", current_project);
@@ -548,10 +801,18 @@ var FormProject = function () {
 				let visual_project2 = parseInt(window.localStorage.getItem("visual_project2"));
 				if (current_project == visual_project1) {
 					visual_project1 = -1;
-				}
-				if (current_project == visual_project2) {
+					if (current_project < visual_project2) {
+						visual_project2 = visual_project2 - 1;
+					}
+					current_project = -1;
+				} else if (current_project == visual_project2) {
 					visual_project2 = -1;
+					if (current_project < visual_project1) {
+						visual_project1 = visual_project1 - 1;
+					}
+					current_project = -1;
 				}
+				window.localStorage.setItem("current_project", current_project);
 				window.localStorage.setItem("visual_project1", visual_project1);
 				window.localStorage.setItem("visual_project2", visual_project2);
 				window.location.replace("/FRST/");

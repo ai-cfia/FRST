@@ -48,6 +48,7 @@ var Charts = function () {
 				type: "radar",
 				data: {
 					labels: [
+						/*
 						"Cost",
 						"Scope",
 						"Communications",
@@ -56,6 +57,14 @@ var Charts = function () {
 						"Investment Portfolio Management",
 						"Procurement",
 						"Human Resources"
+						*/
+						"Projet Characteristics",
+						"Strategic Management Risks",
+						"Procurement Risks",
+						"Human Resources Risks",
+						"Business Risks",
+						"Project Management Risks",
+						"Project Requirement Management"
 					],
 					datasets: []
 				},
@@ -131,6 +140,7 @@ var Charts = function () {
 						let project1StartDatePhase2 = new Date(project1.costRelease.startDatePhase2);
 						let project1StartDatePhase3 = new Date(project1.costRelease.startDatePhase3);
 
+						/*
 						let project1Factor1 = 0;
 						for (let i = 0; i < project1.complexityRisk._cost.length; i++) {
 							project1Factor1 += parseInt(project1.complexityRisk._cost[i]);
@@ -178,10 +188,52 @@ var Charts = function () {
 							project1Factor8 += parseInt(project1.complexityRisk._humanResources[i]);
 						}
 						project1Factor8 = project1Factor8 / project1.complexityRisk._humanResources.length;
+						*/
+
+						let project1Factor1 = 0;
+						for (let i = 0; i < project1.complexityRisk.section1.length; i++) {
+							project1Factor1 += parseInt(project1.complexityRisk.section1[i]);
+						}
+						let project1Factor1Uniformed = project1Factor1 / project1.complexityRisk.section1.length;
+
+						let project1Factor2 = 0;
+						for (let i = 0; i < project1.complexityRisk.section2.length; i++) {
+							project1Factor2 += parseInt(project1.complexityRisk.section2[i]);
+						}
+						let project1Factor2Uniformed = project1Factor2 / project1.complexityRisk.section2.length;
+
+						let project1Factor3 = 0;
+						for (let i = 0; i < project1.complexityRisk.section3.length; i++) {
+							project1Factor3 += parseInt(project1.complexityRisk.section3[i]);
+						}
+						let project1Factor3Uniformed = project1Factor3 / project1.complexityRisk.section3.length;
+
+						let project1Factor4 = 0;
+						for (let i = 0; i < project1.complexityRisk.section4.length; i++) {
+							project1Factor4 += parseInt(project1.complexityRisk.section4[i]);
+						}
+						let project1Factor4Uniformed = project1Factor4 / project1.complexityRisk.section4.length;
+
+						let project1Factor5 = 0;
+						for (let i = 0; i < project1.complexityRisk.section5.length; i++) {
+							project1Factor5 += parseInt(project1.complexityRisk.section5[i]);
+						}
+						let project1Factor5Uniformed = project1Factor5 / project1.complexityRisk.section5.length;
+
+						let project1Factor6 = 0;
+						for (let i = 0; i < project1.complexityRisk.section6.length; i++) {
+							project1Factor6 += parseInt(project1.complexityRisk.section6[i]);
+						}
+						let project1Factor6Uniformed = project1Factor6 / project1.complexityRisk.section6.length;
+
+						let project1Factor7 = 0;
+						for (let i = 0; i < project1.complexityRisk.section7.length; i++) {
+							project1Factor7 += parseInt(project1.complexityRisk.section7[i]);
+						}
+						let project1Factor7Uniformed = project1Factor7 / project1.complexityRisk.section7.length;
 
 						project1Uncertainty = project1Factor1 + project1Factor2 + project1Factor3
-						+ project1Factor4 + project1Factor5 + project1Factor6 + project1Factor7
-						+ project1Factor8;
+						+ project1Factor4 + project1Factor5 + project1Factor6 + project1Factor7;
 
 						//let project1CostPhase1 = -(parseInt(project1.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase1));
 						let project1CostPhase1 = parseInt(project1.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase1);
@@ -207,7 +259,7 @@ var Charts = function () {
 						//let project1CostPhase2 = -(parseInt(project1.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase2));
 						let project1CostPhase2 = parseInt(project1.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase2);
 						let project1ReleasePhase2 = parseInt(project1.costRelease.fteNumberReleasePhase2) * 100000 + parseInt(project1.costRelease.operatingMoneyReleasePhase2);
-						let project1ErrorPhase2 = project1Uncertainty / 40 * project1ReleasePhase2;
+						let project1ErrorPhase2 = project1Uncertainty / 170 * project1ReleasePhase2;
 
 						for (let i = 1; i <= project1QuaterNumberPhase2; i++) {
 							project1CostData.push(project1CostPhase2);
@@ -228,7 +280,7 @@ var Charts = function () {
 						//let project1CostPhase3 = -(parseInt(project1.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase3));
 						let project1CostPhase3 = parseInt(project1.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase3);
 						let project1ReleasePhase3 = parseInt(project1.costRelease.fteNumberReleasePhase3) * 100000 + parseInt(project1.costRelease.operatingMoneyReleasePhase3);
-						let project1ErrorPhase3 = project1Uncertainty / 40 * project1ReleasePhase3;
+						let project1ErrorPhase3 = project1Uncertainty / 170 * project1ReleasePhase3;
 
 						for (let i = 1; i <= project1QuaterNumberPhase3; i++) {
 							project1CostData.push(project1CostPhase3);
@@ -284,18 +336,17 @@ var Charts = function () {
 						*/
 						project1Factors = {
 							data: [
-							project1Factor1,
-							project1Factor2,
-							project1Factor3,
-							project1Factor4,
-							project1Factor5,
-							project1Factor6,
-							project1Factor7,
-							project1Factor8
+							project1Factor1Uniformed,
+							project1Factor2Uniformed,
+							project1Factor3Uniformed,
+							project1Factor4Uniformed,
+							project1Factor5Uniformed,
+							project1Factor6Uniformed,
+							project1Factor7Uniformed
 							],
 							backgroundColor: "rgba(238, 59, 59, 0.2)",
 							borderColor: "rgba(238, 59, 59, 0.8)",
-							label: "Uncertainty of " + project1.title + ", Total Score: " + project1Uncertainty.toFixed(2)
+							label: "Uncertainty of " + project1.title + ", Total Score: " + project1Uncertainty
 						};
 
 					}
@@ -312,6 +363,7 @@ var Charts = function () {
 						let project2StartDatePhase2 = new Date(project2.costRelease.startDatePhase2);
 						let project2StartDatePhase3 = new Date(project2.costRelease.startDatePhase3);
 
+						/*
 						let project2Factor1 = 0;
 						for (let i = 0; i < project2.complexityRisk._cost.length; i++) {
 							project2Factor1 += parseInt(project2.complexityRisk._cost[i]);
@@ -359,10 +411,52 @@ var Charts = function () {
 							project2Factor8 += parseInt(project2.complexityRisk._humanResources[i]);
 						}
 						project2Factor8 = project2Factor8 / project2.complexityRisk._humanResources.length;
+						*/
+
+						let project2Factor1 = 0;
+						for (let i = 0; i < project2.complexityRisk.section1.length; i++) {
+							project2Factor1 += parseInt(project2.complexityRisk.section1[i]);
+						}
+						let project2Factor1Uniformed = project2Factor1 / project2.complexityRisk.section1.length;
+
+						let project2Factor2 = 0;
+						for (let i = 0; i < project2.complexityRisk.section2.length; i++) {
+							project2Factor2 += parseInt(project2.complexityRisk.section2[i]);
+						}
+						let project2Factor2Uniformed = project2Factor2 / project2.complexityRisk.section2.length;
+
+						let project2Factor3 = 0;
+						for (let i = 0; i < project2.complexityRisk.section3.length; i++) {
+							project2Factor3 += parseInt(project2.complexityRisk.section3[i]);
+						}
+						let project2Factor3Uniformed = project2Factor3 / project2.complexityRisk.section3.length;
+
+						let project2Factor4 = 0;
+						for (let i = 0; i < project2.complexityRisk.section4.length; i++) {
+							project2Factor4 += parseInt(project2.complexityRisk.section4[i]);
+						}
+						let project2Factor4Uniformed = project2Factor4 / project2.complexityRisk.section4.length;
+
+						let project2Factor5 = 0;
+						for (let i = 0; i < project2.complexityRisk.section5.length; i++) {
+							project2Factor5 += parseInt(project2.complexityRisk.section5[i]);
+						}
+						let project2Factor5Uniformed = project2Factor5 / project2.complexityRisk.section5.length;
+
+						let project2Factor6 = 0;
+						for (let i = 0; i < project2.complexityRisk.section6.length; i++) {
+							project2Factor6 += parseInt(project2.complexityRisk.section6[i]);
+						}
+						let project2Factor6Uniformed = project2Factor6 / project2.complexityRisk.section6.length;
+
+						let project2Factor7 = 0;
+						for (let i = 0; i < project2.complexityRisk.section7.length; i++) {
+							project2Factor7 += parseInt(project2.complexityRisk.section7[i]);
+						}
+						let project2Factor7Uniformed = project2Factor7 / project2.complexityRisk.section7.length;
 
 						project2Uncertainty = project2Factor1 + project2Factor2 + project2Factor3
-						+ project2Factor4 + project2Factor5 + project2Factor6 + project2Factor7
-						+ project2Factor8;
+						+ project2Factor4 + project2Factor5 + project2Factor6 + project2Factor7;
 
 						//let project2CostPhase1 = -(parseInt(project2.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase1));
 						let project2CostPhase1 = parseInt(project2.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase1);
@@ -388,7 +482,7 @@ var Charts = function () {
 						//let project2CostPhase2 = -(parseInt(project2.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase2));
 						let project2CostPhase2 = parseInt(project2.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase2);
 						let project2ReleasePhase2 = parseInt(project2.costRelease.fteNumberReleasePhase2) * 100000 + parseInt(project2.costRelease.operatingMoneyReleasePhase2);
-						let project2ErrorPhase2 = project2Uncertainty / 40 * project2ReleasePhase2;
+						let project2ErrorPhase2 = project2Uncertainty / 170 * project2ReleasePhase2;
 
 						for (let i = 1; i <= project2QuaterNumberPhase2; i++) {
 							project2CostData.push(project2CostPhase2);
@@ -409,7 +503,7 @@ var Charts = function () {
 						//let project2CostPhase3 = -(parseInt(project2.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase3));
 						let project2CostPhase3 = parseInt(project2.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase3);
 						let project2ReleasePhase3 = parseInt(project2.costRelease.fteNumberReleasePhase3) * 100000 + parseInt(project2.costRelease.operatingMoneyReleasePhase3);
-						let project2ErrorPhase3 = project2Uncertainty / 40 * project2ReleasePhase3;
+						let project2ErrorPhase3 = project2Uncertainty / 170 * project2ReleasePhase3;
 
 						for (let i = 1; i <= project2QuaterNumberPhase3; i++) {
 							project2CostData.push(project2CostPhase3);
@@ -465,18 +559,17 @@ var Charts = function () {
 						*/
 						project2Factors = {
 							data: [
-							project2Factor1,
-							project2Factor2,
-							project2Factor3,
-							project2Factor4,
-							project2Factor5,
-							project2Factor6,
-							project2Factor7,
-							project2Factor8
+							project2Factor1Uniformed,
+							project2Factor2Uniformed,
+							project2Factor3Uniformed,
+							project2Factor4Uniformed,
+							project2Factor5Uniformed,
+							project2Factor6Uniformed,
+							project2Factor7Uniformed
 							],
 							backgroundColor: "rgba(30, 144, 255, 0.2)",
 							borderColor: "rgba(30, 144, 255, 0.8)",
-							label: "Uncertainty of " + project2.title + ", Total Score: " + project2Uncertainty.toFixed(2)
+							label: "Uncertainty of " + project2.title + ", Total Score: " + project2Uncertainty
 						};
 
 					}
