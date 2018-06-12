@@ -10,6 +10,14 @@ var FormProject = function () {
 			}
 		}
 
+		function handleCheckedRadios() {
+			$("input[type=radio]").each(function() {
+				if ($(this).is(":checked")) {
+					$(this).closest(".form-group").addClass("has-success");
+				}
+			});
+		}
+
 		function leftPad(number, targetLength) {
 			var output = number + "";
 			while (output.length < targetLength) {
@@ -158,48 +166,116 @@ var FormProject = function () {
 				}
 			} else {
 				for (let i = 0; i < $("input[name='cost1']").length; i++) {
-					$("input[name='cost1']")[i].disabled = false;
+					if ($("input[name='cost1']")[i].disabled == true) {
+						$("input[name='cost1']")[i].disabled = false;
+						$("input[name='cost1']")[i].checked = false;
+					}
 				}
+				$("input[name='cost1']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='scope1']").length; i++) {
-					$("input[name='scope1']")[i].disabled = false;
+					if ($("input[name='scope1']")[i].disabled == true) {
+						$("input[name='scope1']")[i].disabled = false;
+						$("input[name='scope1']")[i].checked = false;
+					}
 				}
+				$("input[name='scope1']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='communications1']").length; i++) {
-					$("input[name='communications1']")[i].disabled = false;
+					if ($("input[name='communications1']")[i].disabled == true) {
+						$("input[name='communications1']")[i].disabled = false;
+						$("input[name='communications1']")[i].checked = false;
+					}
 				}
+				$("input[name='communications1']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='projectIntegrationManagement1']").length; i++) {
-					$("input[name='projectIntegrationManagement1']")[i].disabled = false;
+					if ($("input[name='projectIntegrationManagement1']")[i].disabled == true) {
+						$("input[name='projectIntegrationManagement1']")[i].disabled = false;
+						$("input[name='projectIntegrationManagement1']")[i].checked = false;
+					}
 				}
+				$("input[name='projectIntegrationManagement1']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='cost2']").length; i++) {
-					$("input[name='cost2']")[i].disabled = false;
+					if ($("input[name='cost2']")[i].disabled == true) {
+						$("input[name='cost2']")[i].disabled = false;
+						$("input[name='cost2']")[i].checked = false;
+					}
 				}
+				$("input[name='cost2']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='cost3']").length; i++) {
-					$("input[name='cost3']")[i].disabled = false;
+					if ($("input[name='cost3']")[i].disabled == true) {
+						$("input[name='cost3']")[i].disabled = false;
+						$("input[name='cost3']")[i].checked = false;
+					}
 				}
+				$("input[name='cost3']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='time1']").length; i++) {
-					$("input[name='time1']")[i].disabled = false;
+					if ($("input[name='time1']")[i].disabled == true) {
+						$("input[name='time1']")[i].disabled = false;
+						$("input[name='time1']")[i].checked = false;
+					}
 				}
+				$("input[name='time1']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='time2']").length; i++) {
-					$("input[name='time2']")[i].disabled = false;
+					if ($("input[name='time2']")[i].disabled == true) {
+						$("input[name='time2']")[i].disabled = false;
+						$("input[name='time2']")[i].checked = false;
+					}
 				}
+				$("input[name='time2']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='time3']").length; i++) {
-					$("input[name='time3']")[i].disabled = false;
+					if ($("input[name='time3']")[i].disabled == true) {
+						$("input[name='time3']")[i].disabled = false;
+						$("input[name='time3']")[i].checked = false;
+					}
 				}
+				$("input[name='time3']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='time4']").length; i++) {
-					$("input[name='time4']")[i].disabled = false;
+					if ($("input[name='time4']")[i].disabled == true) {
+						$("input[name='time4']")[i].disabled = false;
+						$("input[name='time4']")[i].checked = false;
+					}
 				}
+				$("input[name='time4']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='time5']").length; i++) {
-					$("input[name='time5']")[i].disabled = false;
+					if ($("input[name='time5']")[i].disabled == true) {
+						$("input[name='time5']")[i].disabled = false;
+						$("input[name='time5']")[i].checked = false;
+					}
 				}
+				$("input[name='time5']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='time6']").length; i++) {
-					$("input[name='time6']")[i].disabled = false;
+					if ($("input[name='time6']")[i].disabled == true) {
+						$("input[name='time6']")[i].disabled = false;
+						$("input[name='time6']")[i].checked = false;
+					}
 				}
+				$("input[name='time6']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='time7']").length; i++) {
-					$("input[name='time7']")[i].disabled = false;
+					if ($("input[name='time7']")[i].disabled == true) {
+						$("input[name='time7']")[i].disabled = false;
+						$("input[name='time7']")[i].checked = false;
+					}
 				}
+				$("input[name='time7']").closest(".form-group").removeClass("has-success");
+
 			}
+
+			handleCheckedRadios();
 		}
 
 		handleDatePickers();
+		handleCheckedRadios();
 
 		if ($("#quaterNumberPhase1").val() != null) {
 			let quaterNumberPhase1 = parseInt($("#quaterNumberPhase1").val());
@@ -308,15 +384,36 @@ var FormProject = function () {
 				}
 			} else {
 				for (let i = 0; i < $("input[name='procurement1']").length; i++) {
-					$("input[name='procurement1']")[i].disabled = false;
+					if ($("input[name='procurement1']")[i].disabled == true) {
+						$("input[name='procurement1']")[i].disabled = false;
+						$("input[name='procurement1']")[i].checked = false;
+					}
 				}
+				$("input[name='procurement1']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='procurement2']").length; i++) {
-					$("input[name='procurement2']")[i].disabled = false;
+					if ($("input[name='procurement2']")[i].disabled == true) {
+						$("input[name='procurement2']")[i].disabled = false;
+						$("input[name='procurement2']")[i].checked = false;
+					}
 				}
+				$("input[name='procurement2']").closest(".form-group").removeClass("has-success");
+
 				for (let i = 0; i < $("input[name='procurement3']").length; i++) {
-					$("input[name='procurement3']")[i].disabled = false;
+					if ($("input[name='procurement3']")[i].disabled == true) {
+						$("input[name='procurement3']")[i].disabled = false;
+						$("input[name='procurement3']")[i].checked = false;
+					}
 				}
+				$("input[name='procurement3']").closest(".form-group").removeClass("has-success");
+				
 			}
+
+			handleCheckedRadios();
+		});
+
+		$("input[type=radio]").change(function() {
+			handleCheckedRadios();
 		});
 
 		var form1 = $("#form_submit");

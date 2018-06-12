@@ -7914,7 +7914,7 @@ module.exports = function(Chart) {
 				bottom = vm.yBottom,
 				middle = (top + bottom) / 2;
 
-			ctx.strokeStyle = "#EE3B3B";
+			ctx.strokeStyle = "rgba(238, 59, 59, 0.5)";
 			ctx.lineWidth = vm.strokeWidth;
 
 			//draw upper error bar
