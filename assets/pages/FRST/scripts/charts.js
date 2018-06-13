@@ -45,7 +45,14 @@ var Charts = function () {
 						}]
 					},
 					tooltips: {
-						enabled: true
+						enabled: true,
+						callbacks: {
+							title: function(tooltipItems, data) {
+								let tooltipItem = tooltipItems[0];
+								title = "Quater " + data.labels[tooltipItem.index];
+								return title;
+							}
+						}
 					}
 				},
 			});
@@ -98,7 +105,12 @@ var Charts = function () {
 						}
 					},
 					tooltips: {
-						enabled: false
+						enabled: true,
+						callbacks: {
+							label: function(tooltipItem, data) {
+								return parseFloat(Math.round(tooltipItem.yLabel * 100) / 100).toFixed(2);
+							}
+						}
 					}
 				}
 			});
