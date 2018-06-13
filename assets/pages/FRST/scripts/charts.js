@@ -27,10 +27,16 @@ var Charts = function () {
 						position: "bottom"
 					},
 					scales: {
+						xAxes: [{
+							scaleLabel: {
+								display: true,
+								labelString: "Number of Quaters"
+							}
+						}],
 						yAxes: [{
 							ticks: {
 								userCallback: function(value, index, values) {
-									return value.toLocaleString();
+									return "$" + value.toLocaleString();
 								},
 								min: 0,
 								suggestedMax: 100000,
@@ -77,12 +83,18 @@ var Charts = function () {
 						fontSize: 19
 					},
 					legend: {
+						labels: {
+							defaultFontSize: 15
+						},
 						position: "bottom"
 					},
 					scale: {
 						ticks: {
 							max: 5.0,
 							min: 0.0
+						},
+						pointLabels: {
+							fontSize: 12
 						}
 					},
 					tooltips: {
@@ -115,6 +127,7 @@ var Charts = function () {
 
 					let project1TotalCost = 0;
 					let project1TotalRelease = 0;
+					let project1TotalError = 0;
 
 					let project2Cost = {};
 					let project2Release ={};
@@ -122,6 +135,7 @@ var Charts = function () {
 
 					let project2TotalCost = 0;
 					let project2TotalRelease = 0;
+					let project2TotalError = 0;
 
 					let project1Uncertainty = 0;
 					let project2Uncertainty = 0;
@@ -306,6 +320,7 @@ var Charts = function () {
 
 						project1TotalCost = project1CostData.reduce(function(acc, val) { return acc + val; });
 						project1TotalRelease = project1ReleaseData.reduce(function(acc, val) { return acc + val; });
+						project1TotalError = project1Error.reduce(function(acc, val) { return acc + val; });
 
 						// generate data for complexity and risk graph
 						/*
@@ -529,6 +544,7 @@ var Charts = function () {
 
 						project2TotalCost = project2CostData.reduce(function(acc, val) { return acc + val; });
 						project2TotalRelease = project2ReleaseData.reduce(function(acc, val) { return acc + val; });
+						project2TotalError = project2Error.reduce(function(acc, val) { return acc + val; });
 						
 						// generate data for complexity and risk graph
 						/*
@@ -605,11 +621,11 @@ var Charts = function () {
 					projectTotalQuaterNumber = project1TotalQuaterNumber >= project2TotalQuaterNumber ? project1TotalQuaterNumber : project2TotalQuaterNumber;
 
 					// give title and labels to cost and release graph
-					costReleaseChart.options.title.text = "Cost & Release Time Horizon";
+					costReleaseChart.options.title.text = "Cost & Release";
 
 					let projectQuaters = [];
 					for (let i = 1; i <=  projectTotalQuaterNumber; i++) {
-						projectQuaters.push("Quater " + i);
+						projectQuaters.push(i);
 					}
 					costReleaseChart.data.labels = projectQuaters;
 
@@ -631,7 +647,8 @@ var Charts = function () {
 
 						$("#totalCostProject1").text("Total cost: " + project1TotalCost.toLocaleString());
 						$("#totalReleaseProject1").text("Total release: " + project1TotalRelease.toLocaleString());
-						$("#netReleaseProject1").text("Net release: " + (project1TotalRelease - project1TotalCost).toLocaleString());
+						$("#maximumNetReleaseProject1").text("Max net release: " + (project1TotalRelease - project1TotalCost).toLocaleString());
+						$("#minimumNetReleaseProject1").text("Min net release: " + parseInt(project1TotalRelease - project1TotalCost - project1TotalError).toLocaleString());
 					}
 
 					if (project2 != null) {
@@ -651,7 +668,8 @@ var Charts = function () {
 
 						$("#totalCostProject2").text("Total cost: " + project2TotalCost.toLocaleString());
 						$("#totalReleaseProject2").text("Total release: " + project2TotalRelease.toLocaleString());
-						$("#netReleaseProject2").text("Net release: " + (project2TotalRelease - project2TotalCost).toLocaleString());
+						$("#maximumNetReleaseProject2").text("Max net release: " + (project2TotalRelease - project2TotalCost).toLocaleString());
+						$("#minimumNetReleaseProject2").text("Min net release: " + parseInt(project2TotalRelease - project2TotalCost - project2TotalError).toLocaleString());
 					}
 				}
 
