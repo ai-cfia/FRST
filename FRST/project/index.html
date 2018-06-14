@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if IE 8]> <html class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html>
 	<!--<![endif]-->
 	<!-- BEGIN HEAD -->
 	<head>
@@ -10,8 +10,6 @@
 		<title>FRST | Project</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
-		<meta content="Preview page of Metronic Admin Theme #1 for bootstrap form validation demos using jquery validation plugin" name="description" />
-		<meta content="" name="author" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
 		<link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -22,7 +20,7 @@
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
 		<link href="../../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
 		<link href="../../assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" />
-        <link href="../../assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css" />
+		<link href="../../assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css" />
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL STYLES -->
 		<link href="../../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
@@ -55,6 +53,29 @@
 						<span></span>
 					</a>
 					<!-- END RESPONSIVE MENU TOGGLER -->
+					<!-- BEGIN LANGUAGE BAR -->
+					<div class="top-menu">
+						<ul class="nav navbar-nav pull-right">
+							<li class="dropdown dropdown-language">
+								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
+									<span class="langname">
+										<span lang="en">English</span>
+										<span lang="fr">Français</span>
+									</span>
+									<i class="fa fa-angle-down"></i>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-default">
+									<li>
+										<a id="switchLang" href="javascript:;">
+											<span lang="en">French</span>
+											<span lang="fr">Anglais</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- END LANGUAGE BAR -->
 				</div>
 				<!-- END HEADER INNER -->
 			</div>
@@ -89,20 +110,23 @@
 							<li class="nav-item">
 								<a href="/FRST/charts" class="nav-link nav-toggle">
 									<i class="icon-bar-chart"></i>
-									<span class="title">Charts</span>
+									<span lang="en" class="title">Charts</span>
+									<span lang="fr" class="title">Graphiques</span>
 								</a>
 							</li>
 							<li class="nav-item active open" name="Projects">
 								<a href="javascript:;" class="nav-link nav-toggle" name="Projects">
 									<i class="icon-briefcase"></i>
-									<span class="title">Projects</span>
+									<span lang="en" class="title">Projects</span>
+									<span lang="fr" class="title">Projets</span>
 									<span class="selected"></span>
 									<span class="arrow open"></span>
 								</a>
 								<ul class="sub-menu">
 									<li class="nav-item" name="newProject">
 										<a href="javascript:;" class="nav-link" name="newProject">
-											<span class="title">New Project</span>
+											<span lang="en" class="title">New Project</span>
+											<span lang="fr" class="title">Nouveau projet</span>
 										</a>
 									</li>
 								</ul>
@@ -123,27 +147,40 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-										<h4 class="modal-title">Edit This Project</h4>
+										<h4 class="modal-title">
+											<span lang="en">Edit This Project</span>
+											<span lang="fr">Modifier ce projet</span>
+										</h4>
 									</div>
 									<form action="#" class="horizontal-form" id="form_edit">
 										<div class="modal-body">
 											<div class="alert alert-danger display-hide">
-												<button class="close" data-close="alert"></button> You have some form errors. Please check below.
+												<button class="close" data-close="alert"></button>
+												<span lang="en">You have some form errors. Please check below.</span>
+												<span lang="fr">Vous avez fait quelque erreurs. Veuillez vérifier ci dessous.</span>
 											</div>
 											<div class="alert alert-success display-hide">
-												<button class="close" data-close="alert"></button> Your form validation is successful!
+												<button class="close" data-close="alert"></button>
+												<span lang="en">Your form validation is successful!</span>
+												<span lang="fr">Validation est réussie!</span>
 											</div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<input class="form-control" name="newTitle" id="newTitle" placeholder="Rename the project with a maximum of 20 characters" type="text">
+														<input class="form-control" name="newTitle" id="newTitle" placeholder="" type="text">
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="modal-footer">
-											<button name="delete" type="button" class="btn red btn-outline" data-dismiss="modal">Delete This Project</button>
-											<button name="submit" type="submit" class="btn green">Rename</button>
+											<button name="delete" type="button" class="btn red btn-outline" data-dismiss="modal">
+												<span lang="en">Delete This Project</span>
+												<span lang="fr">Supprimer ce projet</span>
+											</button>
+											<button name="submit" type="submit" class="btn green">
+												<span lang="en">Rename</span>
+												<span lang="fr">Renommer</span>
+											</button>
 										</div>
 									</form>
 								</div>
@@ -157,7 +194,10 @@
 						<div class="page-bar">
 							<ul class="page-breadcrumb">
 								<li>
-									<a href="javascript:;">Projects</a>
+									<a href="javascript:;">
+										<span lang="en">Projects</span>
+										<span lang="fr">Projets</span>
+									</a>
 									<i class="fa fa-circle"></i>
 								</li>
 								<li>
@@ -166,7 +206,9 @@
 							</ul>
 							<div class="page-toolbar">
 								<div class="btn-group pull-right">
-									<button href="#editProject" type="button" class="btn red btn-sm btn-outline" data-toggle="modal"> Edit Project
+									<button href="#editProject" type="button" class="btn red btn-sm btn-outline" data-toggle="modal">
+										<span lang="en">Edit Project</span>
+										<span lang="fr">Modifier le projet</span>
 									</button>
 								</div>
 							</div>
@@ -174,7 +216,10 @@
 						<!-- END PAGE BAR -->
 						<!-- BEGIN PAGE TITLE-->
 						<h1 class="page-title">
-							<small>please fill out the following project profile</small>
+							<small>
+								<span lang="en">please fill out the following project profile</span>
+								<span lang="fr">veuillez remplir le profil de projet suivant</span>
+							</small>
 						</h1>
 						<!-- END PAGE TITLE-->
 						<!-- END PAGE HEADER-->
@@ -184,7 +229,9 @@
 								<div class="portlet box green">
 									<div class="portlet-title">
 										<div class="caption">
-											<i class="fa fa-briefcase"></i> Project Characteristics
+											<i class="fa fa-briefcase"></i>
+											<span lang="en">Project Profile</span>
+											<span lang="fr">Profil du projet</span>
 										</div>
 										<div class="tools">
 											<a href="javascript:;" class="fullscreen"></a>
@@ -195,14 +242,21 @@
 										<form action="#" class="horizontal-form" id="form_submit">
 											<div class="form-body">
 												<div class="alert alert-danger display-hide">
-													<button class="close" data-close="alert"></button> You have some form errors. Please check below.
+													<button class="close" data-close="alert"></button>
+													<span lang="en">You have some form errors. Please check below.</span>
+													<span lang="fr">Vous avez fait quelque erreurs. Veuillez vérifier ci dessous.</span>
 												</div>
 												<div class="alert alert-success display-hide">
-													<button class="close" data-close="alert"></button> Your form validation is successful!
+													<button class="close" data-close="alert"></button>
+													<span lang="en">Your form validation is successful!</span>
+													<span lang="fr">Validation est réussie!</span>
 												</div>
 												<div class="portlet">
 													<div class="portlet-title">
-														<div class="caption">Cost & Release Assessment</div>
+														<div class="caption">
+															<span lang="en">Cost & Benefit Assessment</span>
+															<span lang="fr">Évaluation coût-bénéfice</span>
+														</div>
 														<div class="tools">
 															<a href="javascript:;" class="collapse"></a>
 														</div>
@@ -210,13 +264,17 @@
 													<div class="portlet-body">
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Planning Phase</div>
+																<div class="caption">
+																	<span lang="en">Planning Phase</span>
+																	<span lang="fr">Phase de planification</span>
+																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Starting Date</label>
+																			<label lang="en" class="control-label">Starting Date</label>
+																			<label lang="fr" class="control-label">Date de début</label>
 																			<div class="input-group date date-picker" id="datePickerStartDatePhase1">
 																				<input class="form-control" name="startDatePhase1" id="startDatePhase1" placeholder="MM/DD/YYYY" readonly type="text" value="">
 																				<span class="input-group-btn">
@@ -230,7 +288,8 @@
 																	<!--/span-->
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Phase Length <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of quarters"></i></label>
+																			<label lang="en" class="control-label">Phase Length <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of quarters"></i></label>
+																			<label lang="fr" class="control-label">Longueur de la phase <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre de trimestres"></i></label>
 																			<input class="form-control" name="quaterNumberPhase1" id="quaterNumberPhase1" type="text">
 																		</div>
 																	</div>
@@ -240,14 +299,16 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Number of FTEs to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="fr" class="control-label">Nombre d'ETP à dépenser <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à dépenser par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberCostPhase1" id="fteNumberCostPhase1" type="text">
 																		</div>
 																	</div>
 																	<!--/span-->
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Operating Expense to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Operating Expense to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to cost per quarter"></i></label>
+																			<label lang="fr" class="control-label">Dépenses d'exploitation <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer les dépenses d'exploitation par trimestre"></i></label>
 																			<input class="form-control" name="operatingMoneyCostPhase1" id="operatingMoneyCostPhase1" type="text">
 																		</div>
 																	</div>
@@ -258,13 +319,17 @@
 														</div>
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Pilot Phase</div>
+																<div class="caption">
+																	<span lang="en">Pilot Phase</span>
+																	<span lang="fr">Phase pilote</span>
+																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Starting Date</label>
+																			<label lang="en" class="control-label">Starting Date</label>
+																			<label lang="fr" class="control-label">Date de début</label>
 																			<div class="input-group date date-picker" id="datePickerStartDatePhase2">
 																				<input class="form-control" name="startDatePhase2" id="startDatePhase2" placeholder="MM/DD/YYYY" readonly type="text" value="">
 																				<span class="input-group-btn">
@@ -278,7 +343,8 @@
 																	<!--/span-->
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Phase Length <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of quarters"></i></label>
+																			<label lang="en" class="control-label">Phase Length <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of quarters"></i></label>
+																			<label lang="fr" class="control-label">Longueur de la phase <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre de trimestres"></i></label>
 																			<input class="form-control" name="quaterNumberPhase2" id="quaterNumberPhase2" type="text">
 																		</div>
 																	</div>
@@ -288,14 +354,16 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Number of FTEs to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="fr" class="control-label">Nombre d'ETP à dépenser <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à dépenser par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberCostPhase2" id="fteNumberCostPhase2" type="text">
 																		</div>
 																	</div>
 																	<!--/span-->
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Operating Expense to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Operating Expense to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to cost per quarter"></i></label>
+																			<label lang="fr" class="control-label">Dépenses d'exploitation <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer les dépenses d'exploitation par trimestre"></i></label>
 																			<input class="form-control" name="operatingMoneyCostPhase2" id="operatingMoneyCostPhase2" type="text">
 																		</div>
 																	</div>
@@ -305,14 +373,16 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Number of FTEs to Release <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTE to release per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to Release <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTE to release per quarter"></i></label>
+																			<label lang="fr" class="control-label">Nombre d'ETP à libérer <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à libérer par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberReleasePhase2" id="fteNumberReleasePhase2" type="text">
 																		</div>
 																	</div>
 																	<!--/span-->
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Operating Expense to Release <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to release per quarter"></i></label>
+																			<label lang="en" class="control-label">Operating Expense to Release <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to release per quarter"></i></label>
+																			<label lang="fr" class="control-label">Dépenses à libérer <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer les dépenses à libérer par trimestre"></i></label>
 																			<input class="form-control" name="operatingMoneyReleasePhase2" id="operatingMoneyReleasePhase2" type="text">
 																		</div>
 																	</div>
@@ -323,13 +393,17 @@
 														</div>
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Implementation Phase</div>
+																<div class="caption">
+																	<span lang="en">Implementation Phase</span>
+																	<span lang="fr">Phase de mise en oeuvre</span>
+																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Starting Date</label>
+																			<label lang="en" class="control-label">Starting Date</label>
+																			<label lang="fr" class="control-label">Date de début</label>
 																			<div class="input-group date date-picker" id="datePickerStartDatePhase3">
 																				<input class="form-control" name="startDatePhase3" id="startDatePhase3" placeholder="MM/DD/YYYY" readonly type="text" value="">
 																				<span class="input-group-btn">
@@ -343,7 +417,8 @@
 																	<!--/span-->
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Phase Length <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of quarters"></i></label>
+																			<label lang="en" class="control-label">Phase Length <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of quarters"></i></label>
+																			<label lang="fr" class="control-label">Longueur de la phase <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre de trimestres"></i></label>
 																			<input class="form-control" name="quaterNumberPhase3" id="quaterNumberPhase3" type="text">
 																		</div>
 																	</div>
@@ -353,14 +428,16 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Number of FTEs to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="fr" class="control-label">Nombre d'ETP à dépenser <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à dépenser par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberCostPhase3" id="fteNumberCostPhase3" type="text">
 																		</div>
 																	</div>
 																	<!--/span-->
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Operating Expense to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Operating Expense to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to cost per quarter"></i></label>
+																			<label lang="fr" class="control-label">Dépenses d'exploitation <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer les dépenses d'exploitation par trimestre"></i></label>
 																			<input class="form-control" name="operatingMoneyCostPhase3" id="operatingMoneyCostPhase3" type="text">
 																		</div>
 																	</div>
@@ -370,14 +447,16 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Number of FTEs to Release <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTE to release per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to Release <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTE to release per quarter"></i></label>
+																			<label lang="fr" class="control-label">Nombre d'ETP à libérer <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à libérer par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberReleasePhase3" id="fteNumberReleasePhase3" type="text">
 																		</div>
 																	</div>
 																	<!--/span-->
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label class="control-label">Operating Expense to Release <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to release per quarter"></i></label>
+																			<label lang="en" class="control-label">Operating Expense to Release <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the operating expense to release per quarter"></i></label>
+																			<label lang="fr" class="control-label">Dépenses à libérer <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer les dépenses à libérer par trimestre"></i></label>
 																			<input class="form-control" name="operatingMoneyReleasePhase3" id="operatingMoneyReleasePhase3" type="text">
 																		</div>
 																	</div>
@@ -390,7 +469,10 @@
 												</div>
 												<div class="portlet">
 													<div class="portlet-title">
-														<div class="caption">Complexity & Risk Assessment</div>
+														<div class="caption">
+															<span lang="en">Complexity & Risk Assessment</span>
+															<span lang="fr">Évaluation de la complexité et des risques</span>
+														</div>
 														<div class="tools">
 															<a href="javascript:;" class="collapse"></a>
 														</div>
@@ -398,39 +480,48 @@
 													<div class="portlet-body">
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Project Characteristics</div>
+																<div class="caption">
+																	<span lang="en">Project Characteristics</span>
+																	<span lang="fr">Caractéristiques du projet</span>
+																</div>
 																<div class="tools">
 																	<a href="javascript:;" class="collapse"></a>
 																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="form-group">
-																	<label class="control-label">1. Relative to the average project in your organization, which of the following adjectives describes the total project cost estimate?</label>
+																	<label lang="en" class="control-label">1. Relative to the average project in your organization, which of the following adjectives describes the total project cost estimate?</label>
+																	<label lang="fr" class="control-label">1. Par rapport au projet typique dans votre organisme, lequel des adjectifs suivants décrit le mieux le coût estimatif total de ce projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement1" value="1"/>
-																			Small
+																			<p style="margin:0" lang="en">Small</p>
+																			<p style="margin:0" lang="fr">Petit</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement1" value="3"/>
-																			Medium
+																			<p style="margin:0" lang="en">Medium</p>
+																			<p style="margin:0" lang="fr">Moyen</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement1" value="5"/>
-																			Large
+																			<p style="margin:0" lang="en">Large</p>
+																			<p style="margin:0" lang="fr">Grand</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">2. What percentage of the total project cost estimate is for procurement?</label>
+																	<label lang="en" class="control-label">2. What percentage of the total project cost estimate is for procurement?</label>
+																	<label lang="fr" class="control-label">2. Quel est le pourcentage du coût estimatif total du projet consacré à l'approvisionnement ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="cost1" value="1"/>
-																			No procurement is required
+																			<p style="margin:0" lang="en">No procurement is required</p>
+																			<p style="margin:0" lang="fr">Aucun approvisionnement n'est requis</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
@@ -457,277 +548,357 @@
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">3. How many sponsoring or funding departments or agencies are involved?</label>
+																	<label lang="en" class="control-label">3. How many sponsoring or funding departments or agencies are involved?</label>
+																	<label lang="fr" class="control-label">3. Combien de ministères ou organismes parrainent ou financent le projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="scope1" value="1"/>
-																			The project involves only one department or agency.
+																			<p style="margin:0" lang="en">The project involves only one department or agency.</p>
+																			<p style="margin:0" lang="fr">Le projet ne concerne qu'un seul ministère ou organisme.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope1" value="2"/>
-																			The project involves another department or agency.
+																			<p style="margin:0" lang="en">The project involves another department or agency.</p>
+																			<p style="margin:0" lang="fr">Le projet concerne un autre ministère ou organisme.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope1" value="3"/>
-																			The project involves two other departments or agencies.
+																			<p style="margin:0" lang="en">The project involves two other departments or agencies.</p>
+																			<p style="margin:0" lang="fr">Le projet concerne deux autres ministères ou organismes.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope1" value="4"/>
-																			The project involves three other departments or agencies.
+																			<p style="margin:0" lang="en">The project involves three other departments or agencies.</p>
+																			<p style="margin:0" lang="fr">Le projet concerne trois autres ministères ou organismes.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope1" value="5"/>
-																			The project involves at least four other departments or agencies.
+																			<p style="margin:0" lang="en">The project involves at least four other departments or agencies.</p>
+																			<p style="margin:0" lang="fr">Le projet concerne au moins quatre autres ministères ou organismes.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">4. How will the outcome of this project change or directly affect business processes, sectors, branches and other departments and agencies?</label>
+																	<label lang="en" class="control-label">4. How will the outcome of this project change or directly affect business processes, sectors, branches and other departments and agencies?</label>
+																	<label lang="fr" class="control-label">4. De quelle façon les résultats du projet modifient ou influencent directement les procédés opérationnels, les secteurs, les directions et les autres ministères et organismes ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="communications1" value="1"/>
-																			The outcome of this project will affect one business process within a sector.
+																			<p style="margin:0" lang="en">The outcome of this project will affect one business process within a sector.</p>
+																			<p style="margin:0" lang="fr">Le résultat du projet affectera un procédé opérationnel d'un secteur.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="communications1" value="2"/>
-																			The outcome of this project will affect multiple business processes within a sector.
+																			<p style="margin:0" lang="en">The outcome of this project will affect multiple business processes within a sector.</p>
+																			<p style="margin:0" lang="fr">Le résultat du projet affectera de nombreux procédés opérationnels d'un secteur.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="communications1" value="3"/>
-																			The outcome of this project will affect multiple sectors.
+																			<p style="margin:0" lang="en">The outcome of this project will affect multiple sectors.</p>
+																			<p style="margin:0" lang="fr">Le résultat du projet affectera de nombreux secteurs.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="communications1" value="4"/>
-																			The outcome of this project will affect multiple branches.
+																			<p style="margin:0" lang="en">The outcome of this project will affect multiple branches.</p>
+																			<p style="margin:0" lang="fr">Le résultat du projet affectera de nombreuses directions.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="communications1" value="5"/>
-																			The outcome of this project will affect multiple departments or agencies.
+																			<p style="margin:0" lang="en">The outcome of this project will affect multiple departments or agencies.</p>
+																			<p style="margin:0" lang="fr">Le résultat du projet affectera de nombreux ministères ou organismes.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">5. The proposed or established project governance structure demonstrates adequate support for how many of the following project factors?</label><br/>
-																	<label class="control-label">a. Appropriate representation of stakeholders and executive management;</label><br/>
-																	<label class="control-label">b. Documented decision-making processes;</label><br/>
-																	<label class="control-label">c. Documented roles, responsibilities, and authorities within the governance structure;</label><br/>
-																	<label class="control-label">d. Documented information requirements.</label>
+																	<label lang="en" class="control-label">5. The proposed or established project governance structure demonstrates adequate support for how many of the following project factors?</label>
+																	<label lang="fr" class="control-label">5. La structure de gouvernance proposée ou établie pour le projet démontre un soutien adéquat pour combien des facteurs suivants ?</label>
+																	<br/>
+																	<label lang="en" class="control-label">a. Appropriate representation of stakeholders and executive management;</label>
+																	<label lang="fr" class="control-label">a. Représentation appropriée des intervenants et des cadres supérieurs ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">b. Documented decision-making processes;</label>
+																	<label lang="fr" class="control-label">b. Processus décisionnels documentés ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">c. Documented roles, responsibilities, and authorities within the governance structure;</label>
+																	<label lang="fr" class="control-label">c. Rôle, responsabilités et pouvoirs au sein de la structure de gouvernance documentés ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">d. Documented information requirements.</label>
+																	<label lang="fr" class="control-label">d. Exigences en matière d'information documentées.</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement1" value="1"/>
-																			Support for all factors is demonstrated.
+																			<p style="margin:0" lang="en">Support for all factors is demonstrated.</p>
+																			<p style="margin:0" lang="fr">Soutien pour tous les facteurs est démontré.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement1" value="2"/>
-																			Support for three of the factors is demonstrated.
+																			<p style="margin:0" lang="en">Support for three of the factors is demonstrated.</p>
+																			<p style="margin:0" lang="fr">Soutien pour trois des facteurs est démontré.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement1" value="3"/>
-																			Support for two of the factors is demonstrated.
+																			<p style="margin:0" lang="en">Support for two of the factors is demonstrated.</p>
+																			<p style="margin:0" lang="fr">Soutien pour deux des facteurs est démontré.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement1" value="4"/>
-																			Support for one of the factors is demonstrated.
+																			<p style="margin:0" lang="en">Support for one of the factors is demonstrated.</p>
+																			<p style="margin:0" lang="fr">Soutien pour un des facteurs est démontré.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement1" value="5"/>
-																			Support is not demonstrated for any of the factors.
+																			<p style="margin:0" lang="en">Support is not demonstrated for any of the factors.</p>
+																			<p style="margin:0" lang="fr">Aucun soutien n'est démontré pour aucun des facteurs.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">6. In supporting the achievement of the expected outcomes, how many of the following criteria apply to the total project cost estimate (either indicative cost estimate or substantive cost estimate)?</label><br/>
-																	<label class="control-label">a. Cost estimates are generated at the work-package level;</label><br/>
-																	<label class="control-label">b. Cost estimates are based on historical data or industry benchmarks.</label>
+																	<label lang="en" class="control-label">6. In supporting the achievement of the expected outcomes, how many of the following criteria apply to the total project cost estimate (either indicative cost estimate or substantive cost estimate)?</label>
+																	<label lang="fr" class="control-label">6. Le coût estimatif total (coût estimatif fourni à titre indicatif ou coût estimatif fondé) satisfait à combien des critères suivants pour obtenir les résultats attendus ?</label>
+																	<br/>
+																	<label lang="en" class="control-label">a. Cost estimates are generated at the work-package level;</label>
+																	<label lang="fr" class="control-label">a. L'évaluation des coûts est établie au niveau des blocs de tâches ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">b. Cost estimates are based on historical data or industry benchmarks.</label>
+																	<label lang="fr" class="control-label">b. Les coûts estimatifs se fondent sur des données historiques ou les standards de l'industrie.</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="cost2" value="1"/>
-																			Both criteria are met.
+																			<p style="margin:0" lang="en">Both criteria are met.</p>
+																			<p style="margin:0" lang="fr">Satisfait aux deux critères.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="cost2" value="3"/>
-																			One of the two criteria is met.
+																			<p style="margin:0" lang="en">One of the two criteria is met.</p>
+																			<p style="margin:0" lang="fr">Satisfait à l'un des deux critères.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="cost2" value="5"/>
-																			None of the criteria are met.
+																			<p style="margin:0" lang="en">None of the criteria are met.</p>
+																			<p style="margin:0" lang="fr">Ne satisfait à aucun des critères.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">7. In supporting the achievement of the expected outcomes, how many of the following criteria apply to the costing model?</label><br/>
-																	<label class="control-label">a. The source of funds has been identified within departmental reference levels;</label><br/>
-																	<label class="control-label">b. The funds have been internally committed.</label>
+																	<label lang="en" class="control-label">7. In supporting the achievement of the expected outcomes, how many of the following criteria apply to the costing model?</label>
+																	<label lang="fr" class="control-label">7. À l'appui de la réalisation des résultats attendus, combien des critères suivants de financement ont été atteints ?</label>
+																	<br/>
+																	<label lang="en" class="control-label">a. The source of funds has been identified within departmental reference levels;</label>
+																	<label lang="fr" class="control-label">a. La source de financement provient des niveaux de référence du ministère ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">b. The funds have been internally committed.</label>
+																	<label lang="fr" class="control-label">b. Les fonds sont engagés à l'interne.</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="cost3" value="1"/>
-																			Both criteria are met.
+																			<p style="margin:0" lang="en">Both criteria are met.</p>
+																			<p style="margin:0" lang="fr">Satisfait aux deux critères.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="cost3" value="3"/>
-																			One of the two criteria is met.
+																			<p style="margin:0" lang="en">One of the two criteria is met.</p>
+																			<p style="margin:0" lang="fr">Satisfait à l'un des deux critères.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="cost3" value="5"/>
-																			None of the criteria are met.
+																			<p style="margin:0" lang="en">None of the criteria are met.</p>
+																			<p style="margin:0" lang="fr">Ne satisfait à aucun des critères.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">8. Is the project susceptible to time delays? Time delays can have a number of causes, such as the following:</label><br/>
-																	<label class="control-label">a. Changes in technology;</label><br/>
-																	<label class="control-label">b. Requirements of participating organizations;</label><br/>
-																	<label class="control-label">c. Seasonal considerations;</label><br/>
-																	<label class="control-label">d. The need for policy approvals;</label><br/>
-																	<label class="control-label">e. External influences.</label>
+																	<label lang="en" class="control-label">8. Is the project susceptible to time delays? Time delays can have a number of causes, such as the following:</label>
+																	<label lang="fr" class="control-label">8. Est-il possible que le projet accuse des retards? De nombreuses causes peuvent occasionner des retards, par exemple :</label>
+																	<br/>
+																	<label lang="en" class="control-label">a. Changes in technology;</label>
+																	<label lang="fr" class="control-label">a. Changements dans les technologies ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">b. Requirements of participating organizations;</label>
+																	<label lang="fr" class="control-label">b. Exigences des organismes participants ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">c. Seasonal considerations;</label>
+																	<label lang="fr" class="control-label">c. Facteurs saisonniers ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">d. The need for policy approvals;</label>
+																	<label lang="fr" class="control-label">d. Besoin d'approbations de politiques ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">e. External influences.</label>
+																	<label lang="fr" class="control-label">e. Influences externes.</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="time1" value="1"/>
-																			No, the project is not susceptible.
+																			<p style="margin:0" lang="en">No, the project is not susceptible.</p>
+																			<p style="margin:0" lang="fr">Non, c'est impossible.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time1" value="3"/>
-																			Yes, the project is moderately susceptible; time delays will have minor effects on the schedule.
+																			<p style="margin:0" lang="en">Yes, the project is moderately susceptible; time delays will have minor effects on the schedule.</p>
+																			<p style="margin:0" lang="fr">Faible possibilité ; incidences mineures sur le calendrier.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time1" value="5"/>
-																			Yes, the project is highly susceptible; time delays will have major effects on the schedule.
+																			<p style="margin:0" lang="en">Yes, the project is highly susceptible; time delays will have major effects on the schedule.</p>
+																			<p style="margin:0" lang="fr">Forte possibilité ; incidences majeures sur le calendrier.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">9. Do geographical considerations influence the manner in which the project is conducted? Consider the following statements:</label><br/>
-																	<label class="control-label">a. Project activities or team members are distributed across a wide geographical area;</label><br/>
-																	<label class="control-label">b. The project will be conducted in a remote or difficult location.</label>
+																	<label lang="en" class="control-label">9. Do geographical considerations influence the manner in which the project is conducted? Consider the following statements:</label>
+																	<label lang="fr" class="control-label">9. Les facteurs géographiques ont-il un effet sur le déroulement du projet? Examinez les énoncés suivants :</label>
+																	<br/>
+																	<label lang="en" class="control-label">a. Project activities or team members are distributed across a wide geographical area;</label>
+																	<label lang="fr" class="control-label">a. Les activités du projet ou les membres de l'équipe sont répartis sur un territoire vaste ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">b. The project will be conducted in a remote or difficult location.</label>
+																	<label lang="fr" class="control-label">b. Le projet sera réalisé dans un endroit éloigné ou difficile d'accès.</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="time2" value="1"/>
-																			Neither statement applies.
+																			<p style="margin:0" lang="en">Neither statement applies.</p>
+																			<p style="margin:0" lang="fr">Aucun des énoncés n'est vrai.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time2" value="3"/>
-																			One statement is true.
+																			<p style="margin:0" lang="en">One statement is true.</p>
+																			<p style="margin:0" lang="fr">L'un des énoncés est vrai.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time2" value="5"/>
-																			Both statements are true.
+																			<p style="margin:0" lang="en">Both statements are true.</p>
+																			<p style="margin:0" lang="fr">Les deux énoncés sont vrais.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">10. Do environmental considerations influence the manner in which the project is conducted?</label>
+																	<label lang="en" class="control-label">10. Do environmental considerations influence the manner in which the project is conducted?</label>
+																	<label lang="fr" class="control-label">10. Des facteurs environnementaux influent-ils sur la manière dont le projet est mené ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="time3" value="1"/>
-																			No
+																			<p style="margin:0" lang="en">No</p>
+																			<p style="margin:0" lang="fr">Non</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time3" value="5"/>
-																			Yes
+																			<p style="margin:0" lang="en">Yes</p>
+																			<p style="margin:0" lang="fr">Oui</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">11. Are there any socio-economic considerations that must be taken into account?</label>
+																	<label lang="en" class="control-label">11. Are there any socio-economic considerations that must be taken into account?</label>
+																	<label lang="fr" class="control-label">11. Faut-il prendre certains facteurs socioéconomiques en considération ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="time4" value="1"/>
-																			No
+																			<p style="margin:0" lang="en">No</p>
+																			<p style="margin:0" lang="fr">Non</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time4" value="5"/>
-																			Yes
+																			<p style="margin:0" lang="en">Yes</p>
+																			<p style="margin:0" lang="fr">Oui</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">12. Consider how the availability of facilities will influence the manner in which the project is conducted:</label>
+																	<label lang="en" class="control-label">12. Consider how the availability of facilities will influence the manner in which the project is conducted:</label>
+																	<label lang="fr" class="control-label">12. Prenez en compte comment la disponibilité des installations influencera la façon dont le projet sera mené :</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="time5" value="1"/>
-																			Appropriate facilities are available to conduct the project.
+																			<p style="margin:0" lang="en">Appropriate facilities are available to conduct the project.</p>
+																			<p style="margin:0" lang="fr">Des installations appropriées sont disponibles pour mener à bien le projet.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time5" value="3"/>
-																			Facilities available to the project are inadequate.
+																			<p style="margin:0" lang="en">Facilities available to the project are inadequate.</p>
+																			<p style="margin:0" lang="fr">Les installations disponibles ne conviennent pas.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time5" value="5"/>
-																			Facilities are unavailable for the project.
+																			<p style="margin:0" lang="en">Facilities are unavailable for the project.</p>
+																			<p style="margin:0" lang="fr">Il n'ya pas d'installations disponibles pour le projet.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">13. Do considerations relating to Aboriginal people (including land claims and Aboriginal consultation obligations) influence the manner in which the project is conducted?</label>
+																	<label lang="en" class="control-label">13. Do considerations relating to Aboriginal people (including land claims and Aboriginal consultation obligations) influence the manner in which the project is conducted?</label>
+																	<label lang="fr" class="control-label">13. Des facteurs relatifs aux Autochtones (notamment les revendications territoriales et l'obligation de consulter les Autochtones) influencent-ils le déroulement du projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="time6" value="1"/>
-																			No
+																			<p style="margin:0" lang="en">No</p>
+																			<p style="margin:0" lang="fr">Non</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time6" value="5"/>
-																			Yes
+																			<p style="margin:0" lang="en">Yes</p>
+																			<p style="margin:0" lang="fr">Oui</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">14. Do health and safety requirements add significant complexity to the requirements for this project?</label>
+																	<label lang="en" class="control-label">14. Do health and safety requirements add significant complexity to the requirements for this project?</label>
+																	<label lang="fr" class="control-label">14. Les exigences en matière de santé et de sécurité augmentent-elles beaucoup la complexité des exigences liées au projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="time7" value="1"/>
-																			No
+																			<p style="margin:0" lang="en">No</p>
+																			<p style="margin:0" lang="fr">Non</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="time7" value="5"/>
-																			Yes
+																			<p style="margin:0" lang="en">Yes</p>
+																			<p style="margin:0" lang="fr">Oui</p>
 																			<span></span>
 																		</label>
 																	</div>
@@ -737,100 +908,128 @@
 														</div>
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Strategic Management Risks</div>
+																<div class="caption">
+																	<span lang="en">Strategic Management Risks</span>
+																	<span lang="fr">Risques liés à la gestion stratégique</span>
+																</div>
 																<div class="tools">
 																	<a href="javascript:;" class="collapse"></a>
 																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="form-group">
-																	<label class="control-label">15. How well and how clearly does the project align with the organization's mandate and strategic outcomes?</label>
+																	<label lang="en" class="control-label">15. How well and how clearly does the project align with the organization's mandate and strategic outcomes?</label>
+																	<label lang="fr" class="control-label">15. À quel point et avec quelle clareté le projet s'harmonise-t-il avec le mandat et les résultats stratégiques de l'organisation ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement2" value="1"/>
-																			The project is directly aligned and it explicity contributes to the strategic outcomes of the organization or program.
+																			<p style="margin:0" lang="en">The project is directly aligned and it explicity contributes to the strategic outcomes of the organization or program.</p>
+																			<p style="margin:0" lang="fr">Il y a harmonisation directe avec les résultats stratégiques et il y a une contribution directe aux résultats stratégiques de l'organisation ou du programme.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement2" value="3"/>
-																			There is good alignment with the strategic outcome and there is an indirect contribution to the strategic outcomes of the organization or program.
+																			<p style="margin:0" lang="en">There is good alignment with the strategic outcome and there is an indirect contribution to the strategic outcomes of the organization or program.</p>
+																			<p style="margin:0" lang="fr">Il y a harmonisation avec le résultat stratégique et il y a une contribution indirecte aux résultats stratégiques de l'organisation ou du programme.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement2" value="5"/>
-																			There is a weak alignment with the strategic outcomes, or the strategic outcomes have not been established.
+																			<p style="margin:0" lang="en">There is a weak alignment with the strategic outcomes, or the strategic outcomes have not been established.</p>
+																			<p style="margin:0" lang="fr">Il y a peu d'harmonisation avec le résultat stratégique, ou les résultats stratégiques n'ont pas été établis.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">16. What level of priority is the project to the organization?</label>
+																	<label lang="en" class="control-label">16. What level of priority is the project to the organization?</label>
+																	<label lang="fr" class="control-label">16. Le projet, il est à quel niveau de priorité pour l'organisation ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement3" value="1"/>
-																			The project is a critical priority: all resources necessary will be allocated to it.
+																			<p style="margin:0" lang="en">The project is a critical priority: all resources necessary will be allocated to it.</p>
+																			<p style="margin:0" lang="fr">Le projet est de priorité jugée essentielle ; toutes les ressources nécessaires y seront affectées.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement3" value="5"/>
-																			The project is a normal priority: resources may be shared with a project of equal or higher priority.
+																			<p style="margin:0" lang="en">The project is a normal priority: resources may be shared with a project of equal or higher priority.</p>
+																			<p style="margin:0" lang="fr">Le projet est de priorité jugée normale ; les ressources pourraient être partagées avec d'autres projets dont la priorité est égale ou plus élevée.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">17. Does the project have a communications plan?</label>
+																	<label lang="en" class="control-label">17. Does the project have a communications plan?</label>
+																	<label lang="fr" class="control-label">17. A-t-on prévu un plan de communication pour le projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="communications2" value="1"/>
-																			Yes, there is a project communications plan.
+																			<p style="margin:0" lang="en">Yes, there is a project communications plan.</p>
+																			<p style="margin:0" lang="fr">Oui, il existe un plan de communication pour le projet.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="communications2" value="3"/>
-																			The project communications plan has not yet been completed.
+																			<p style="margin:0" lang="en">The project communications plan has not yet been completed.</p>
+																			<p style="margin:0" lang="fr">Le plan de projet n'est pas encore terminé.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="communications2" value="5"/>
-																			No, a project communications plan does not exist.
+																			<p style="margin:0" lang="en">No, a project communications plan does not exist.</p>
+																			<p style="margin:0" lang="fr">Non, il n'existe pas de plan de communication pour le projet.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">18. How extensive is the commitment of the organization's senior executive management, stakeholders, partners, and project sponsors to the timely and successful completion of this project? Consider the following criteria:</label><br/>
-																	<label class="control-label">a. A senior project sponsor or management champion is engaged;</label><br/>
-																	<label class="control-label">b. Stakeholders and partners are willing to reallocate resources if necessary;</label><br/>
-																	<label class="control-label">c. Senior executive management oversight is in place;</label><br/>
-																	<label class="control-label">d. Commitment from all stakeholders is confirmed.</label>
+																	<label lang="en" class="control-label">18. How extensive is the commitment of the organization's senior executive management, stakeholders, partners, and project sponsors to the timely and successful completion of this project? Consider the following criteria:</label>
+																	<label lang="fr" class="control-label">18. Quelle est la force de l'engagement de la haute direction, des intervenants, des partenaires et des parrains du projet de l'organisation à l'égard de la réussite du projet et de sa réalisation en temps opportun? Examinez les critères suivants :</label>
+																	<br/>
+																	<label lang="en" class="control-label">a. A senior project sponsor or management champion is engaged;</label>
+																	<label lang="fr" class="control-label">a. Un parrain du projet ou un champion de la haute direction joue un rôle actif ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">b. Stakeholders and partners are willing to reallocate resources if necessary;</label>
+																	<label lang="fr" class="control-label">b. Les intervenants et les partenaires sont prêts à réaffecter des ressources au besoin ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">c. Senior executive management oversight is in place;</label>
+																	<label lang="fr" class="control-label">c. La haute direction assure une surveillance ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">d. Commitment from all stakeholders is confirmed.</label>
+																	<label lang="fr" class="control-label">d. Les intervenants ont tous confirmé leur engagement.</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement2" value="1"/>
-																			All four criteria are met.
+																			<p style="margin:0" lang="en">All four criteria are met.</p>
+																			<p style="margin:0" lang="fr">Les quatre critères sont remplis.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement2" value="2"/>
-																			Three of the four criteria are met.
+																			<p style="margin:0" lang="en">Three of the four criteria are met.</p>
+																			<p style="margin:0" lang="fr">Trois des quatre critères sont remplis.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement2" value="3"/>
-																			Two of the four criteria are met.
+																			<p style="margin:0" lang="en">Two of the four criteria are met.</p>
+																			<p style="margin:0" lang="fr">Deux des quatre critères sont remplis.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement2" value="4"/>
-																			One of the four criteria is met.
+																			<p style="margin:0" lang="en">One of the four criteria is met.</p>
+																			<p style="margin:0" lang="fr">Un des quatre critères est rempli.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="projectIntegrationManagement2" value="5"/>
-																			None of the four criteria are met.
+																			<p style="margin:0" lang="en">None of the four criteria are met.</p>
+																			<p style="margin:0" lang="fr">Aucun critère n'est rempli.</p>
 																			<span></span>
 																		</label>
 																	</div>
@@ -840,80 +1039,97 @@
 														</div>
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Procurement Risks</div>
+																<div class="caption">
+																	<span lang="en">Procurement Risks</span>
+																	<span lang="fr">Risques liés à l'approvisionnement</span>
+																</div>
 																<div class="tools">
 																	<a href="javascript:;" class="collapse"></a>
 																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="form-group">
-																	<label class="control-label">19. What is the supplier availability and willingness?</label>
+																	<label lang="en" class="control-label">19. What is the supplier availability and willingness?</label>
+																	<label lang="fr" class="control-label">19. Quelle est la disponibilité des fournisseurs et leur volonté à participer à ce projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement1" value="1"/>
-																			There are qualified suppliers in the market willing to work with the Government of Canada.
+																			<p style="margin:0" lang="en">There are qualified suppliers in the market willing to work with the Government of Canada.</p>
+																			<p style="margin:0" lang="fr">Il existe un certain nombre de fournisseurs qualifiés sur le marché, prêts à travailler pour le gouvernement du Canada.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement1" value="3"/>
-																			There is a limited number of qualified suppliers in the market or some suppliers are reluctant to work with the Government of Canada.
+																			<p style="margin:0" lang="en">There is a limited number of qualified suppliers in the market or some suppliers are reluctant to work with the Government of Canada.</p>
+																			<p style="margin:0" lang="fr">Il y a peu de fournisseurs qualifiés sur le marché ou certains d'entre eux hésitent à travailler pour le gouvernement du Canada.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement1" value="5"/>
-																			There is only one supplier or there are no qualified suppliers that can meet the requirements.
+																			<p style="margin:0" lang="en">There is only one supplier or there are no qualified suppliers that can meet the requirements.</p>
+																			<p style="margin:0" lang="fr">Il n'y a qu'une seule ou aucune fournisseur qualifié qui peut satisfaire aux exigences.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">20. Will the appropriate products, goods, or services be supplied in a timely manner (according to specified contract delivery dates or required delivery dates) within the expected cost envelope by a qualified supplier?</label>
+																	<label lang="en" class="control-label">20. Will the appropriate products, goods, or services be supplied in a timely manner (according to specified contract delivery dates or required delivery dates) within the expected cost envelope by a qualified supplier?</label>
+																	<label lang="fr" class="control-label">20. Un fournisseur compétent sera-t-il en mesure de fournir les produits, les biens ou les services requis par le projet en temps opportun (conformément aux dates de livraison mentionnées dans le marché ou aux dates de livraison établies) et en respectant l'enveloppe budgétaire prévue ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement2" value="1"/>
-																			There is no potential for products, goods, or services not being readily supplied.
+																			<p style="margin:0" lang="en">There is no potential for products, goods, or services not being readily supplied.</p>
+																			<p style="margin:0" lang="fr">Il n'y a aucun risque que les produits, biens ou services ne soient pas aisément fournis.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement2" value="3"/>
-																			There is a slight potential for slippage of project schedule due to procurement complexity or vendor challenges.
+																			<p style="margin:0" lang="en">There is a slight potential for slippage of project schedule due to procurement complexity or vendor challenges.</p>
+																			<p style="margin:0" lang="fr">Il existe un faible risque de décalage du calendrier de projet en raison de la complexité de l'approvisionnement ou des difficultés des fournisseurs.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement2" value="5"/>
-																			There is a potential that the project deliverables, schedule, or budget may be seriously affected by limited qualified bidders, significant request-for-proposal process delays, or extended challenges.
+																			<p style="margin:0" lang="en">There is a potential that the project deliverables, schedule, or budget may be seriously affected by limited qualified bidders, significant request-for-proposal process delays, or extended challenges.</p>
+																			<p style="margin:0" lang="fr">Il y a un risque que le faible nombre d'entreprises concurrentes qualifiées ait un effet important sur les éléments livrables, le calendrier ou le budget.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">21. How many separate contracts associated with key deliverables are planned for this project?</label>
+																	<label lang="en" class="control-label">21. How many separate contracts associated with key deliverables are planned for this project?</label>
+																	<label lang="fr" class="control-label">21. Combien de marchés distincts associés aux principaux éléments livrables prévoit-on pour ce projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement3" value="1"/>
-																			One contract
+																			<p style="margin:0" lang="en">One contract</p>
+																			<p style="margin:0" lang="fr">Un marché</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement3" value="2"/>
-																			Two contracts
+																			<p style="margin:0" lang="en">Two contracts</p>
+																			<p style="margin:0" lang="fr">Deux marchés</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement3" value="3"/>
-																			Three contracts
+																			<p style="margin:0" lang="en">Three contracts</p>
+																			<p style="margin:0" lang="fr">Trois marchés</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement3" value="4"/>
-																			Four contracts
+																			<p style="margin:0" lang="en">Four contracts</p>
+																			<p style="margin:0" lang="fr">Quatre marchés</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="procurement3" value="5"/>
-																			Five or more contracts
+																			<p style="margin:0" lang="en">Five or more contracts</p>
+																			<p style="margin:0" lang="fr">Cinq marchés ou plus</p>
 																			<span></span>
 																		</label>
 																	</div>
@@ -923,30 +1139,37 @@
 														</div>
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Human Resources Risks</div>
+																<div class="caption">
+																	<span lang="en">Human Resources Risks</span>
+																	<span lang="fr">Risques liés aux ressources humaines</span>
+																</div>
 																<div class="tools">
 																	<a href="javascript:;" class="collapse"></a>
 																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="form-group">
-																	<label class="control-label">22. Does the organization anticipate a shortage of available personnel with appropriate skills during a significant period of the project?</label>
+																	<label lang="en" class="control-label">22. Does the organization anticipate a shortage of available personnel with appropriate skills during a significant period of the project?</label>
+																	<label lang="fr" class="control-label">22. L'organisation prévoit-elle une pénurie de personnel ayant les compétences requises pendant une période importante du projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResources1" value="1"/>
-																			No
+																			<p style="margin:0" lang="en">No</p>
+																			<p style="margin:0" lang="fr">Non</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResources1" value="5"/>
-																			Yes
+																			<p style="margin:0" lang="en">Yes</p>
+																			<p style="margin:0" lang="fr">Oui</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">23. What percentage of the project team is assigned full-time to the project?</label>
+																	<label lang="en" class="control-label">23. What percentage of the project team is assigned full-time to the project?</label>
+																	<label lang="fr" class="control-label">23. Quel pourcentage des membres de l'équipe est affecté au projet à temps plein ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResources2" value="1"/>
@@ -977,29 +1200,40 @@
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">24. Consider the following criteria regarding knowledge and experience:</label><br/>
-																	<label class="control-label">a. The project will use a proven approach;</label><br/>
-																	<label class="control-label">b. This type of project has been done before in the Government of Canada;</label><br/>
-																	<label class="control-label">c. The project will use resources that have been applied to this type of project before.</label>
+																	<label lang="en" class="control-label">24. Consider the following criteria regarding knowledge and experience:</label>
+																	<label lang="fr" class="control-label">24. Examinez les critères suivants en matière de connaissances et d'expérience :</label>
+																	<br/>
+																	<label lang="en" class="control-label">a. The project will use a proven approach;</label>
+																	<label lang="fr" class="control-label">a. Une approche éprouvée sera utilisée pour ce projet ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">b. This type of project has been done before in the Government of Canada;</label>
+																	<label lang="fr" class="control-label">b. On a déjà accompli ce type de projet au sein du gouvernement du Canada ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">c. The project will use resources that have been applied to this type of project before.</label>
+																	<label lang="fr" class="control-label">c. Le projet utilisera des ressources qui ont déjà été utilisées pour ce type de projet auparavant.</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResources3" value="1"/>
-																			 All three criteria are met.
+																			<p style="margin:0" lang="en">All three criteria are met.</p>
+																			<p style="margin:0" lang="fr">Les trois critères sont remplis.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResources3" value="2"/>
-																			Two of the three criteria are met.
+																			<p style="margin:0" lang="en">Two of the three criteria are met.</p>
+																			<p style="margin:0" lang="fr">Deux des trois critères sont remplis.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResources3" value="4"/>
-																			One of the three criteria is met.
+																			<p style="margin:0" lang="en">One of the three criteria is met.</p>
+																			<p style="margin:0" lang="fr">Un des trois critères est rempli.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResources3" value="5"/>
-																			None of the three criteria are met.
+																			<p style="margin:0" lang="en">None of the three criteria are met.</p>
+																			<p style="margin:0" lang="fr">Aucun des critères n'est rempli.</p>
 																			<span></span>
 																		</label>
 																	</div>
@@ -1009,49 +1243,60 @@
 														</div>
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Business Risks</div>
+																<div class="caption">
+																	<span lang="en">Business Risks</span>
+																	<span lang="fr">Risques liés aux activités</span>
+																</div>
 																<div class="tools">
 																	<a href="javascript:;" class="collapse"></a>
 																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="form-group">
-																	<label class="control-label">25. Describe the overall effect of this project on the organization:</label>
+																	<label lang="en" class="control-label">25. Describe the overall effect of this project on the organization:</label>
+																	<label lang="fr" class="control-label">25. Décrivez les effets globaux du projet sur l'organisme :</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResourcesCommunications1" value="1"/>
-																			Project will fit with the organization's current processes, use existing workforce and skills, and not require substantial changes to technology and other infrastructure.
+																			<p style="margin:0" lang="en">Project will fit with the organization's current processes, use existing workforce and skills, and not require substantial changes to technology and other infrastructure.</p>
+																			<p style="margin:0" lang="fr">Le projet sera compatible avec les processus actuels de l'organisation; il emploiera l'effectif et les compétences disponibles et n'exigera aucun changement majeur à la technologie ou aux autres infrastructures.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResourcesCommunications1" value="3"/>
-																			Some changes to processes, staffing models, or technology will be required.
+																			<p style="margin:0" lang="en">Some changes to processes, staffing models, or technology will be required.</p>
+																			<p style="margin:0" lang="fr">Il faudra apporter quelques changements aux processus, aux modèles de dotation ou à la technologie.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResourcesCommunications1" value="5"/>
-																			Significant restructuring of business processes, staffing requirements, partner relationships, and infrastructure will be required.
+																			<p style="margin:0" lang="en">Significant restructuring of business processes, staffing requirements, partner relationships, and infrastructure will be required.</p>
+																			<p style="margin:0" lang="fr">Une restructuration importante des processus opérationnels, des besoins en dotation, des relations avec les partenaires et de l'infrastructure sera nécessaire.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">26. Does the project have a change management plan?</label>
+																	<label lang="en" class="control-label">26. Does the project have a change management plan?</label>
+																	<label lang="fr" class="control-label">26. Existe-t-il un plan de gestion du changement pour le projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResourcesCommunications2" value="1"/>
-																			Change management will be required and a change management plan has been prepared. Alternatively, there are no significant change management requirements.
+																			<p style="margin:0" lang="en">Change management will be required and a change management plan has been prepared. Alternatively, there are no significant change management requirements.</p>
+																			<p style="margin:0" lang="fr">Il faudra gérer le changement, et un plan de gestion du changement a été préparé. Autrement, il n'existe pas de besoins importants en matière de gestion du changement.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResourcesCommunications2" value="3"/>
-																			Change management will be required and preparation of a change management plan is incorporated or included in the project management plan.
+																			<p style="margin:0" lang="en">Change management will be required and preparation of a change management plan is incorporated or included in the project management plan.</p>
+																			<p style="margin:0" lang="fr">Il faudra gérer le changement, et la préparation d'un plan de gestion du changement est incorporée ou incluse dans le plan de gestion du projet.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="humanResourcesCommunications2" value="5"/>
-																			Change management will be required but there are no plans to establish a change management plan.
+																			<p style="margin:0" lang="en">Change management will be required but there are no plans to establish a change management plan.</p>
+																			<p style="margin:0" lang="fr">Il faudra gérer le changement, mais il n'est pas prévu d'établir un plan de gestion du changement.</p>
 																			<span></span>
 																		</label>
 																	</div>
@@ -1061,28 +1306,35 @@
 														</div>
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Project Management Integration Risks</div>
+																<div class="caption">
+																	<span lang="en">Project Management Integration Risks</span>
+																	<span lang="fr">Risques liés à l'intégration de la gestion de projet</span>
+																</div>
 																<div class="tools">
 																	<a href="javascript:;" class="collapse"></a>
 																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="form-group">
-																	<label class="control-label">27. Is an appropriate information management (IM) process planned or in place to collect, distribute, and protect relevant and important project information, such as designs, project plans, baseline, and registers?</label>
+																	<label lang="en" class="control-label">27. Is an appropriate information management (IM) process planned or in place to collect, distribute, and protect relevant and important project information, such as designs, project plans, baseline, and registers?</label>
+																	<label lang="fr" class="control-label">27. Un processus de gestion de l'information (GI) de niveau approprié est-il prévu ou en place afin de recueillir, de distribuer et de protéger les données pertinentes et importantes sur le projet, notamment les études, les plans de projet, les données de référence et les registres ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="communications3" value="1"/>
-																			 Comprehensive information management practices are in place or planned to support the project throughout its life cycle.
+																			<p style="margin:0" lang="en">Comprehensive information management practices are in place or planned to support the project throughout its life cycle.</p>
+																			<p style="margin:0" lang="fr">Des pratiques de gestion de l'information complètes sont en place ou prévues afin d'appuyer le projet tout au long de sa durée.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="communications3" value="3"/>
-																			Standard IM practices are planned or in place and resourced.
+																			<p style="margin:0" lang="en">Standard IM practices are planned or in place and resourced.</p>
+																			<p style="margin:0" lang="fr">Des pratiques de GI standard sont prévues ou en place et des ressources y sont affectées.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="communications3" value="5"/>
-																			Minimal IM practices are in place or planned within the project.
+																			<p style="margin:0" lang="en">Minimal IM practices are in place or planned within the project.</p>
+																			<p style="margin:0" lang="fr">Des pratiques de GI minimales sont prévues ou en place dans le cadre du projet.</p>
 																			<span></span>
 																		</label>
 																	</div>
@@ -1092,219 +1344,258 @@
 														</div>
 														<div class="portlet">
 															<div class="portlet-title" style="border-bottom: 0">
-																<div class="caption">Project Requirements Risks</div>
+																<div class="caption">
+																	<span lang="en">Project Requirements Risks</span>
+																	<span lang="fr">Risques liés aux exigences du projet</span>
+																</div>
 																<div class="tools">
 																	<a href="javascript:;" class="collapse"></a>
 																</div>
 															</div>
 															<div class="portlet-body">
 																<div class="form-group">
-																	<label class="control-label">28. In defining project requirements, how many of the following statements are true?</label><br/>
-																	<label class="control-label">a. The requirements can be defined with very few people;</label><br/>
-																	<label class="control-label">b. The requirements can be defined in a short period of time;</label><br/>
-																	<label class="control-label">c. There are a small number of individual requirements to define;</label><br/>
-																	<label class="control-label">d. The requirements do not require a high degree of detail.</label>
+																	<label lang="en" class="control-label">28. In defining project requirements, how many of the following statements are true?</label>
+																	<label lang="fr" class="control-label">28. En ce qui concerne la définition des exigences du projet, combien des énoncés suivants sont-ils vrais ?</label>
+																	<br/>
+																	<label lang="en" class="control-label">a. The requirements can be defined with very few people;</label>
+																	<label lang="fr" class="control-label">a. Il est possible de définir les exigences en faisant appel à très peu de personnes ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">b. The requirements can be defined in a short period of time;</label>
+																	<label lang="fr" class="control-label">b. Il est possible de définir les exigences dans un court laps de temps ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">c. There are a small number of individual requirements to define;</label>
+																	<label lang="fr" class="control-label">c. Il n'y a que quelques exigences individuelles à définir ;</label>
+																	<br/>
+																	<label lang="en" class="control-label">d. The requirements do not require a high degree of detail.</label>
+																	<label lang="fr" class="control-label">d. Il n'est pas nécessaire de fournir beaucoup de détails sur les exigences.</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="scope2" value="1"/>
-																			Four of the statements are true.
+																			<p style="margin:0" lang="en">Four of the statements are true.</p>
+																			<p style="margin:0" lang="fr">Quatre de ces énoncés sont vrais.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope2" value="2"/>
-																			Three of the statements are true.
+																			<p style="margin:0" lang="en">Three of the statements are true.</p>
+																			<p style="margin:0" lang="fr">Trois de ces énoncés sont vrais.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope2" value="3"/>
-																			Two of the statements are true.
+																			<p style="margin:0" lang="en">Two of the statements are true.</p>
+																			<p style="margin:0" lang="fr">Deux de ces énoncés sont vrais.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope2" value="4"/>
-																			One of the statements is true.
+																			<p style="margin:0" lang="en">One of the statements is true.</p>
+																			<p style="margin:0" lang="fr">Un de ces énoncés est vrai.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope2" value="5"/>
-																			None of the statements are true.
+																			<p style="margin:0" lang="en">None of the statements are true.</p>
+																			<p style="margin:0" lang="fr">Aucun de ces énoncés n'est vrai.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">29. To what extent have available sources/methods been employed and verified to provide information for this project as applicable (e.g. research, consultations, workshops, surveys, and existing documentation)?</label>
+																	<label lang="en" class="control-label">29. To what extent have available sources/methods been employed and verified to provide information for this project as applicable (e.g. research, consultations, workshops, surveys, and existing documentation)?</label>
+																	<label lang="fr" class="control-label">29. Dans quelle mesure les sources et méthodes disponibles ont-elles été employées et vérifiées, en vue d'obtenir de l'information pour ce projet (p. ex. recherches, consultations, ateliers, enquêtes, et documents existants) ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="scope3" value="1"/>
-																			All sources/methods have been employed and verified.
+																			<p style="margin:0" lang="en">All sources/methods have been employed and verified.</p>
+																			<p style="margin:0" lang="fr">Toutes les sources et méthodes ont été employées et vérifiées.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope3" value="2"/>
-																			All sources/methods have been employed but have not been verified.
+																			<p style="margin:0" lang="en">All sources/methods have been employed but have not been verified.</p>
+																			<p style="margin:0" lang="fr">Toutes les sources et méthodes ont été employées, mais elles n'ont pas été vérifiées.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope3" value="3"/>
-																			Some sources/methods have been employed.
+																			<p style="margin:0" lang="en">Some sources/methods have been employed.</p>
+																			<p style="margin:0" lang="fr">Quelques sources et méthodes ont été employées.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope3" value="4"/>
-																			Few sources/methods have been employed.
+																			<p style="margin:0" lang="en">Few sources/methods have been employed.</p>
+																			<p style="margin:0" lang="fr">Peu de sources et méthodes ont été employées.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope3" value="5"/>
-																			No information has been gathered or is available.
+																			<p style="margin:0" lang="en">No information has been gathered or is available.</p>
+																			<p style="margin:0" lang="fr">Aucune information n'a été recueillie ou n'est disponible.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">30. Have feasibility studies been conducted, and is there confidence in the assumptions made in the feasibility studies?</label>
+																	<label lang="en" class="control-label">30. Have feasibility studies been conducted, and is there confidence in the assumptions made in the feasibility studies?</label>
+																	<label lang="fr" class="control-label">30. A-t-on effectué des études de faisabilité et a-t-on confiance dans les hypothèses présentes dans ces études ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="scope4" value="1"/>
-																			Feasibility studies are not required, because none of the requirements are technically difficult to implement.
+																			<p style="margin:0" lang="en">Feasibility studies are not required, because none of the requirements are technically difficult to implement.</p>
+																			<p style="margin:0" lang="fr">Des études de faisabilité ne sont pas requises, car aucune des exigences n'est difficile à mettre en œuvre sur le plan technique.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope4" value="2"/>
-																			Feasibility studies were conducted and there is confidence in the assumptions made.
+																			<p style="margin:0" lang="en">Feasibility studies were conducted and there is confidence in the assumptions made.</p>
+																			<p style="margin:0" lang="fr">Des études de faisabilité ont été effectuées et les hypothèses formulées sont estimées fiables.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope4" value="4"/>
-																			Feasibility studies were conducted, but there is not complete confidence in the assumptions made.
+																			<p style="margin:0" lang="en">Feasibility studies were conducted, but there is not complete confidence in the assumptions made.</p>
+																			<p style="margin:0" lang="fr">Des études de faisabilité ont été effectuées, mais les hypothèses formulées ne sont pas estimées totalement fiables.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope4" value="5"/>
-																			Feasibility studies were necessary but not conducted.
+																			<p style="margin:0" lang="en">Feasibility studies were necessary but not conducted.</p>
+																			<p style="margin:0" lang="fr">Des études de faisabilité s'imposaient, mais aucune n'a été effectuée.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">31. Are outcomes of this project dependent on the outputs and/or outcomes of any other projects?</label>
+																	<label lang="en" class="control-label">31. Are outcomes of this project dependent on the outputs and/or outcomes of any other projects?</label>
+																	<label lang="fr" class="control-label">31. Les résultats de ce projet dépendent-ils des extrants ou des résultats d'autres projets ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement4" value="1"/>
-																			No
+																			<p style="margin:0" lang="en">No</p>
+																			<p style="margin:0" lang="fr">Non</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="investmentPortfolioManagement4" value="5"/>
-																			Yes
+																			<p style="margin:0" lang="en">Yes</p>
+																			<p style="margin:0" lang="fr">Oui</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">30. What degree of integration with externalities, such as other projects, systems, infrastructure, or organizations, is required?</label>
+																	<label lang="en" class="control-label">32. What degree of integration with externalities, such as other projects, systems, infrastructure, or organizations, is required?</label>
+																	<label lang="fr" class="control-label">32. Dans quelle mesure le projet doit-il s'intégrer à des externalités, comme d'autres projets, systèmes, infrastructures ou organismes externes ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="scope5" value="1"/>
-																			There are few complex integration requirements; activities to specify integration are included in the project management plan.
+																			<p style="margin:0" lang="en">There are few complex integration requirements; activities to specify integration are included in the project management plan.</p>
+																			<p style="margin:0" lang="fr">Peu d'exigences complexes en matière d'intégration ; des activités visant à préciser le niveau d'intégration sont incluses dans le plan de gestion du projet.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope5" value="3"/>
-																			There is adequate understanding and planning for integration.
+																			<p style="margin:0" lang="en">There is adequate understanding and planning for integration.</p>
+																			<p style="margin:0" lang="fr">Bonne compréhension et bonne planification de l'intégration.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope5" value="5"/>
-																			There are highly complex or numerous integration requirements and insufficient planning of required activities.
+																			<p style="margin:0" lang="en">There are highly complex or numerous integration requirements and insufficient planning of required activities.</p>
+																			<p style="margin:0" lang="fr">Exigences complexes ou nombreuses en matière d'intégration et planification insuffisante des activités requises.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">32. What degree of integration is required within the project?</label>
+																	<label lang="en" class="control-label">33. What degree of integration is required within the project?</label>
+																	<label lang="fr" class="control-label">33. Quel niveau d'intégration faut-il atteindre dans le projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="scope6" value="1"/>
-																			There are few complex integration requirements; activities to specify integration are included in the project management plan.
-																			<span></span>
-																		</label>
-																		<label class="mt-radio">
-																			<input type="radio" name="scope6" value="2"/>
-																			There is adequate understanding and planning for integration.
+																			<p style="margin:0" lang="en">There are few complex integration requirements; activities to specify integration are included in the project management plan.</p>
+																			<p style="margin:0" lang="fr">Peu d'exigences complexes en matière d'intégration; des activités visant à préciser le niveau d'intégration sont incluses dans le plan de gestion du projet.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope6" value="3"/>
-																			There are highly complex or numerous integration requirements and insufficient planning of required activities.
-																			<span></span>
-																		</label>
-																		<label class="mt-radio">
-																			<input type="radio" name="scope6" value="4"/>
-																			The project will incur significant delays or significant cost overruns due to scarcity of resources and must return to Treasury Board for revised approval.
+																			<p style="margin:0" lang="en">There is adequate understanding and planning for integration.</p>
+																			<p style="margin:0" lang="fr">Bonne compréhension et bonne planification de l'intégration.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope6" value="5"/>
-																			The success of the project is critically dependent on scarce resources.
+																			<p style="margin:0" lang="en">There are highly complex or numerous integration requirements and insufficient planning of required activities.</p>
+																			<p style="margin:0" lang="fr">Exigences complexes ou nombreuses en matière d'intégration et planification insuffisante des activités requises.</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">33. Relative to the average (typical) project in your organization, which of the following adjectives describes the number of tasks, elements, or deliverables in the work breakdown structure?</label>
+																	<label lang="en" class="control-label">34. Relative to the average (typical) project in your organization, which of the following adjectives describes the number of tasks, elements, or deliverables in the work breakdown structure?</label>
+																	<label lang="fr" class="control-label">34. En comparaison avec un projet typique mené dans votre organisme, quel adjectif décrit le nombre de tâches, d'éléments ou de produits livrables compris dans la structure de répartition du travail ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="scope7" value="1"/>
-																			Small
+																			<p style="margin:0" lang="en">Small</p>
+																			<p style="margin:0" lang="fr">Petit</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope7" value="3"/>
-																			Medium
+																			<p style="margin:0" lang="en">Medium</p>
+																			<p style="margin:0" lang="fr">Moyen</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope7" value="5"/>
-																			Large
+																			<p style="margin:0" lang="en">Large</p>
+																			<p style="margin:0" lang="fr">Grand</p>
 																			<span></span>
 																		</label>
 																	</div>
 																	<div></div>
 																</div>
 																<div class="form-group">
-																	<label class="control-label">34. What is the effect on the project of the requirement for scarce resources or resources that are in very high demand?</label>
+																	<label lang="en" class="control-label">35. What is the effect on the project of the requirement for scarce resources or resources that are in very high demand?</label>
+																	<label lang="fr" class="control-label">35.Quelle incidence le besoin de ressources limitées ou en grande demande a-t-il sur le projet ?</label>
 																	<div class="mt-radio-list">
 																		<label class="mt-radio">
 																			<input type="radio" name="scope8" value="1"/>
-																			No scarce resources are required OR not applicable.
+																			<p style="margin:0" lang="en">No scarce resources are required OR not applicable.</p>
+																			<p style="margin:0" lang="fr">Aucune ressource limitée n'est requise OU la question est sans objet.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope8" value="2"/>
-																			The project will incur minor delays or minor cost overruns due to scarcity of resources.
+																			<p style="margin:0" lang="en">The project will incur minor delays or minor cost overruns due to scarcity of resources.</p>
+																			<p style="margin:0" lang="fr">Le projet enregistrera de légers retards ou de légers dépassements de coûts en raison de la rareté des ressources.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope8" value="3"/>
-																			The project will incur moderate delays or moderate cost overruns due to scarcity of resources.
+																			<p style="margin:0" lang="en">The project will incur moderate delays or moderate cost overruns due to scarcity of resources.</p>
+																			<p style="margin:0" lang="fr">Le projet enregistrera des retards modérés ou des dépassements de coûts modérés en raison de la rareté des ressources.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope8" value="4"/>
-																			The project will incur significant delays or significant cost overruns due to scarcity of resources and must return to Treasury Board for revised approval.
+																			<p style="margin:0" lang="en">The project will incur significant delays or significant cost overruns due to scarcity of resources and must return to Treasury Board for revised approval.</p>
+																			<p style="margin:0" lang="fr">Le projet enregistrera d'importants retards ou d'importants dépassements de coûts en raison de la rareté des ressources, et il faudra retourner au Conseil du Trésor pour obtenir une nouvelle approbation.</p>
 																			<span></span>
 																		</label>
 																		<label class="mt-radio">
 																			<input type="radio" name="scope8" value="5"/>
-																			The success of the project is critically dependent on scarce resources.
+																			<p style="margin:0" lang="en">The success of the project is critically dependent on scarce resources.</p>
+																			<p style="margin:0" lang="fr">Le succès du projet repose essentiellement sur des ressources limitées.</p>
 																			<span></span>
 																		</label>
 																	</div>
@@ -1314,10 +1605,12 @@
 														</div>
 													</div>
 												</div>
-												
 											</div>
 											<div class="form-actions">
-												<button type="submit" class="btn green">Submit</button>
+												<button type="submit" class="btn green">
+													<span lang="en">Submit</span>
+													<span lang="fr">Soumettre</span>
+												</button>
 											</div>
 										</form>
 										<!-- END FORM-->
@@ -1334,9 +1627,11 @@
 			<!-- END CONTAINER -->
 			<!-- BEGIN FOOTER -->
 			<div class="page-footer">
-				<div class="page-footer-inner"> 2018 &copy; FRST By
-					<a target="_blank" href="https://isaacguan.github.io/">Yanran Guan</a> @
-					<a href="http://www.inspection.gc.ca/" target="_blank">CFIA</a>
+				<div class="page-footer-inner"> 2018 &copy; FRST @
+					<a href="http://www.inspection.gc.ca/" target="_blank">
+						<span lang="en">CFIA</span>
+						<span lang="fr">ACIA</span>
+					</a>
 				</div>
 				<div class="scroll-to-top">
 					<i class="icon-arrow-up"></i>
@@ -1394,6 +1689,30 @@
 				if (window.localStorage.getItem("projects") == null) {
 					window.location.href = "/FRST";
 				}
+
+				if (Cookies.get("lang") == null) {
+					window.location.href = "/FRST";
+				}
+
+				if (Cookies.get("lang") === "en") {
+					$("[lang='fr']").hide();
+					$("#newTitle").attr("placeholder", "Rename the project with a maximum of 20 characters");
+				} else {
+					$("[lang='en']").hide();
+					$("#newTitle").attr("placeholder", "Renommez le projet au maximum 20 caractères");
+				}
+
+				$("#switchLang").click(function() {
+					$("[lang='fr']").toggle();
+					$("[lang='en']").toggle();
+					if (Cookies.get("lang") === "en") {
+						Cookies.set("lang", "fr");
+						$("#newTitle").attr("placeholder", "Renommez le projet au maximum 20 caractères");
+					} else {
+						Cookies.set("lang", "en");
+						$("#newTitle").attr("placeholder", "Rename the project with a maximum of 20 characters");
+					}
+				});
 
 				$("#editProject").draggable({
 					handle: ".modal-header"

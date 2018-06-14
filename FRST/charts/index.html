@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if IE 8]> <html class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
+<html>
 	<!--<![endif]-->
 	<!-- BEGIN HEAD -->
 	<head>
@@ -10,8 +10,6 @@
 		<title>FRST | Charts</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
-		<meta content="Preview page of Metronic Admin Theme #1 for echart demos" name="description" />
-		<meta content="" name="author" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
 		<link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -52,6 +50,29 @@
 						<span></span>
 					</a>
 					<!-- END RESPONSIVE MENU TOGGLER -->
+					<!-- BEGIN LANGUAGE BAR -->
+					<div class="top-menu">
+						<ul class="nav navbar-nav pull-right">
+							<li class="dropdown dropdown-language">
+								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
+									<span class="langname">
+										<span lang="en">English</span>
+										<span lang="fr">Français</span>
+									</span>
+									<i class="fa fa-angle-down"></i>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-default">
+									<li>
+										<a id="switchLang" href="javascript:;">
+											<span lang="en">French</span>
+											<span lang="fr">Anglais</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- END LANGUAGE BAR -->
 				</div>
 				<!-- END HEADER INNER -->
 			</div>
@@ -86,20 +107,23 @@
 							<li class="nav-item active">
 								<a href="javascript:;" class="nav-link nav-toggle">
 									<i class="icon-bar-chart"></i>
-									<span class="title">Charts</span>
+									<span lang="en" class="title">Charts</span>
+									<span lang="fr" class="title">Graphiques</span>
 									<span class="selected"></span>
 								</a>
 							</li>
 							<li class="nav-item" name="Projects">
 								<a href="javascript:;" class="nav-link nav-toggle" name="Projects">
 									<i class="icon-briefcase"></i>
-									<span class="title">Projects</span>
+									<span lang="en" class="title">Projects</span>
+									<span lang="fr" class="title">Projets</span>
 									<span class="arrow"></span>
 								</a>
 								<ul class="sub-menu">
 									<li class="nav-item" name="newProject">
 										<a href="javascript:;" class="nav-link" name="newProject">
-											<span class="title">New Project</span>
+											<span lang="en" class="title">New Project</span>
+											<span lang="fr" class="title">Nouveau projet</span>
 										</a>
 									</li>
 								</ul>
@@ -116,18 +140,26 @@
 					<div class="page-content">
 						<!-- BEGIN PAGE HEADER-->
 						<!-- BEGIN PAGE TITLE-->
-						<h1 class="page-title" style="margin: 5px 0 25px 0;"> Charts
-							<small>visualize your projects</small>
+						<h1 class="page-title" style="margin: 5px 0 25px 0;">
+							<span lang="en">Charts</span>
+							<span lang="fr">Graphiques</span>
+							<small>
+								<span lang="en">visualize your projects</span>
+								<span lang="fr">Visualisez vos projets</span>
+							</small>
 						</h1>
 						<!-- END PAGE TITLE-->
 						<!-- END PAGE HEADER-->
 						<div class="row-fluid" style="padding-bottom: 25px">
 							<form class="form-search" action="#">
 								<div class="chat-form">
-									Select projects to visualize: #1 &nbsp;
+									<span lang="en">Select projects to visualize: </span>
+									<span lang="fr">Visualisez les projets : </span>#1 &nbsp;
 									<select id="selectProject1" class="input-medium" tabindex="1" style="padding: 6px 12px; border: 0">
 									</select>
-									&nbsp; and #2 &nbsp;
+									&nbsp;
+									<span lang="en">and </span>
+									<span lang="fr">et </span>#2 &nbsp;
 									<select id="selectProject2" class="input-medium" tabindex="1" style="padding: 6px 12px; border: 0">
 									</select>
 									<button name="select" type="button" class="btn green" style="padding: 6px 12px; margin: 0 0 5px 10px">OK</button>
@@ -141,27 +173,60 @@
 									<div class="portlet-title">
 										<div class="caption">
 											<i class="icon-layers font-green"></i>
-											<span class="caption-subject font-green bold uppercase">Cost & Release</span>
+											<span lang="en" class="caption-subject font-green bold uppercase">Cost & Benefit</span>
+											<span lang="fr" class="caption-subject font-green bold uppercase">Coût et bénéfice</span>
 										</div>
 									</div>
 									<div class="portlet-body" style="height:500px;">
-										<div id="costReleaseValues" style="position:absolute; width:200px; top:132px; left:125px; z-inden:1" hidden>
+										<div id="costReleaseValues" style="position:absolute; width:fit-content; top:132px; left:125px; z-inden:1" hidden>
 											<ul style="margin:0 0 0 0" class="nav nav-tabs">
 												<li id="tabNavProject1" style="display: none"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">Project 1</a></li>
 												<li id="tabNavProject2" style="display: none"><a style="padding: 0 5px 0 5px" href="#tabProject2" data-toggle="tab">Project 2</a></li>
 											</ul>
 											<div class="tab-content" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; background-color: white">
 												<div class="tab-pane" id="tabProject1">
-													<p id="totalCostProject1" style="margin:0 0 0 5px; color: #555">Total cost:</p>
-													<p id="totalReleaseProject1" style="margin:0 0 0 5px; color: #555">Total release:</p>
-													<p id="maximumNetReleaseProject1" style="margin:0 0 0 5px; color: #555">Max net release:</p>
-													<p id="minimumNetReleaseProject1" style="margin:0 0 0 5px; color: #555">Min net release:</p>
+													<p style="margin:0 5px 0 5px; color: #555">
+														<span lang="en">Total cost: </span>
+														<span lang="fr">Coût total : </span>
+														<span id="totalCostProject1"></span>
+													</p>
+													<p style="margin:0 5px 0 5px; color: #555">
+														<span lang="en">Gross profit: </span>
+														<span lang="fr">Bénéfice brut : </span>
+														<span id="totalReleaseProject1"></span>
+													</p>
+													<p style="margin:0 5px 0 5px; color: #555">
+														<span lang="en">Maximum net benefit: </span>
+														<span lang="fr">Bénéfice net maximal : </span>
+														<span id="maximumNetReleaseProject1"></span>
+													</p>
+													<p style="margin:0 5px 0 5px; color: #555">
+														<span lang="en">Minimum net benefit: </span>
+														<span lang="fr">Bénéfice net minimal : </span>
+														<span id="minimumNetReleaseProject1"></span>
+													</p>
 												</div>
 												<div class="tab-pane" id="tabProject2">
-													<p id="totalCostProject2" style="margin:0 0 0 5px; color: #555">Total cost:</p>
-													<p id="totalReleaseProject2" style="margin:0 0 0 5px; color: #555">Total release:</p>
-													<p id="maximumNetReleaseProject2" style="margin:0 0 0 5px; color: #555">Maximum net release:</p>
-													<p id="minimumNetReleaseProject2" style="margin:0 0 0 5px; color: #555">Minimum net release:</p>
+													<p style="margin:0 5px 0 5px; color: #555">
+														<span lang="en">Total cost: </span>
+														<span lang="fr">Coût total : </span>
+														<span id="totalCostProject2"></span>
+													</p>
+													<p style="margin:0 5px 0 5px; color: #555">
+														<span lang="en">Gross profit: </span>
+														<span lang="fr">Bénéfice brut : </span>
+														<span id="totalReleaseProject2"></span>
+													</p>
+													<p style="margin:0 5px 0 5px; color: #555">
+														<span lang="en">Maximum net benefit: </span>
+														<span lang="fr">Bénéfice net maximal : </span>
+														<span id="maximumNetReleaseProject2"></span>
+													</p>
+													<p style="margin:0 5px 0 5px; color: #555">
+														<span lang="en">Minimum net benefit: </span>
+														<span lang="fr">Bénéfice net minimal : </span>
+														<span id="minimumNetReleaseProject2"></span>
+													</p>
 												</div>
 											</div>
 										</div>
@@ -176,7 +241,8 @@
 									<div class="portlet-title">
 										<div class="caption">
 											<i class="icon-layers font-green"></i>
-											<span class="caption-subject font-green bold uppercase">Complexity & Risk</span>
+											<span lang="en" class="caption-subject font-green bold uppercase">Complexity & Risk</span>
+											<span lang="fr" class="caption-subject font-green bold uppercase">Complexité et risque</span>
 										</div>
 									</div>
 									<div class="portlet-body" style="height:500px;">
@@ -194,9 +260,11 @@
 			<!-- END CONTAINER -->
 			<!-- BEGIN FOOTER -->
 			<div class="page-footer">
-				<div class="page-footer-inner"> 2018 &copy; FRST By
-					<a target="_blank" href="https://isaacguan.github.io/">Yanran Guan</a> @
-					<a href="http://www.inspection.gc.ca/" target="_blank">CFIA</a>
+				<div class="page-footer-inner"> 2018 &copy; FRST @
+					<a href="http://www.inspection.gc.ca/" target="_blank">
+						<span lang="en">CFIA</span>
+						<span lang="fr">ACIA</span>
+					</a>
 				</div>
 				<div class="scroll-to-top">
 					<i class="icon-arrow-up"></i>
@@ -250,6 +318,28 @@
 				if (window.localStorage.getItem("projects") == null) {
 					window.location.href = "/FRST";
 				}
+
+				if (Cookies.get("lang") == null) {
+					window.location.href = "/FRST";
+				}
+
+				if (Cookies.get("lang") === "en") {
+					$("[lang='fr']").hide();
+				} else {
+					$("[lang='en']").hide();
+				}
+
+				$("#switchLang").click(function() {
+					$("[lang='fr']").toggle();
+					$("[lang='en']").toggle();
+					if (Cookies.get("lang") === "en") {
+						Cookies.set("lang", "fr");
+						$("#newTitle").attr("placeholder", "Renommez le projet au maximum 20 caractères");
+					} else {
+						Cookies.set("lang", "en");
+						$("#newTitle").attr("placeholder", "Rename the project with a maximum of 20 characters");
+					}
+				});
 
 				Projects.loadProjects();
 				Projects.addProject();

@@ -633,7 +633,7 @@ var Charts = function () {
 					projectTotalQuaterNumber = project1TotalQuaterNumber >= project2TotalQuaterNumber ? project1TotalQuaterNumber : project2TotalQuaterNumber;
 
 					// give title and labels to cost and release graph
-					costReleaseChart.options.title.text = "Cost & Release";
+					costReleaseChart.options.title.text = "Cost & Released Benefit";
 
 					let projectQuaters = [];
 					for (let i = 1; i <=  projectTotalQuaterNumber; i++) {
@@ -657,10 +657,10 @@ var Charts = function () {
 						$("#tabNavProject1").addClass("active");
 						$("#tabProject1").addClass("active");
 
-						$("#totalCostProject1").text("Total cost: " + project1TotalCost.toLocaleString());
-						$("#totalReleaseProject1").text("Total release: " + project1TotalRelease.toLocaleString());
-						$("#maximumNetReleaseProject1").text("Max net release: " + (project1TotalRelease - project1TotalCost).toLocaleString());
-						$("#minimumNetReleaseProject1").text("Min net release: " + parseInt(project1TotalRelease - project1TotalCost - project1TotalError).toLocaleString());
+						$("#totalCostProject1").text(project1TotalCost.toLocaleString());
+						$("#totalReleaseProject1").text(project1TotalRelease.toLocaleString());
+						$("#maximumNetReleaseProject1").text((project1TotalRelease - project1TotalCost).toLocaleString());
+						$("#minimumNetReleaseProject1").text(parseInt(project1TotalRelease - project1TotalCost - project1TotalError).toLocaleString());
 					}
 
 					if (project2 != null) {
@@ -678,10 +678,10 @@ var Charts = function () {
 							$("#tabProject2").addClass("active");
 						}
 
-						$("#totalCostProject2").text("Total cost: " + project2TotalCost.toLocaleString());
-						$("#totalReleaseProject2").text("Total release: " + project2TotalRelease.toLocaleString());
-						$("#maximumNetReleaseProject2").text("Max net release: " + (project2TotalRelease - project2TotalCost).toLocaleString());
-						$("#minimumNetReleaseProject2").text("Min net release: " + parseInt(project2TotalRelease - project2TotalCost - project2TotalError).toLocaleString());
+						$("#totalCostProject2").text(project2TotalCost.toLocaleString());
+						$("#totalReleaseProject2").text(project2TotalRelease.toLocaleString());
+						$("#maximumNetReleaseProject2").text((project2TotalRelease - project2TotalCost).toLocaleString());
+						$("#minimumNetReleaseProject2").text(parseInt(project2TotalRelease - project2TotalCost - project2TotalError).toLocaleString());
 					}
 				}
 

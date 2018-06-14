@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<title>FRST</title>
@@ -38,6 +38,10 @@
 		if (window.localStorage.getItem("projects") == null) {
 			var projects = [];
 			window.localStorage.setItem("projects", JSON.stringify(projects));
+		}
+
+		if (Cookies.get("lang") == null) {
+			Cookies.set("lang", "en");
 		}
 
 		window.location.href = "/FRST/charts";
