@@ -7,7 +7,7 @@
 	<!-- BEGIN HEAD -->
 	<head>
 		<meta charset="utf-8" />
-		<title>FRST | Charts</title>
+		<title>FRST | About</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -18,6 +18,7 @@
 		<link href="../../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
 		<!-- END GLOBAL MANDATORY STYLES -->
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
+		<link href="../../assets/pages/css/about.min.css" rel="stylesheet" type="text/css" />
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL STYLES -->
 		<link href="../../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
@@ -28,9 +29,9 @@
 		<link href="../../assets/layout/css/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
 		<link href="../../assets/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
 		<!-- END THEME LAYOUT STYLES -->
-    </head>
+	</head>
 	<!-- END HEAD -->
-	<body class="page-header-fixed page-footer-fixed page-sidebar-closed-hide-logo page-content-white">
+	<body class="page-header-fixed page-footer-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">
 		<div class="page-wrapper">
 			<!-- BEGIN HEADER -->
 			<div class="page-header navbar navbar-fixed-top">
@@ -104,19 +105,19 @@
 								</div>
 							</li>
 							<!-- END SIDEBAR TOGGLER BUTTON -->
-							<li class="nav-item">
-								<a href="/FRST/about" class="nav-link nav-toggle">
+							<li class="nav-item active">
+								<a href="javascript:;" class="nav-link nav-toggle">
 									<i class="icon-info"></i>
 									<span lang="en" class="title">About</span>
 									<span lang="fr" class="title">À propos</span>
+									<span class="selected"></span>
 								</a>
 							</li>
-							<li class="nav-item active">
-								<a href="javascript:;" class="nav-link nav-toggle">
+							<li class="nav-item">
+								<a href="/FRST/charts" class="nav-link nav-toggle">
 									<i class="icon-bar-chart"></i>
 									<span lang="en" class="title">Charts</span>
 									<span lang="fr" class="title">Graphiques</span>
-									<span class="selected"></span>
 								</a>
 							</li>
 							<li class="nav-item" name="Projects">
@@ -148,117 +149,142 @@
 						<!-- BEGIN PAGE HEADER-->
 						<!-- BEGIN PAGE TITLE-->
 						<h1 class="page-title" style="margin: 5px 0 25px 0;">
-							<span lang="en">Charts</span>
-							<span lang="fr">Graphiques</span>
-							<small>
-								<span lang="en">visualize your projects</span>
-								<span lang="fr">Visualisez vos projets</span>
-							</small>
+							<span lang="en">About</span>
+							<span lang="fr">À propos</span>
 						</h1>
 						<!-- END PAGE TITLE-->
 						<!-- END PAGE HEADER-->
-						<div class="row-fluid" style="padding-bottom: 25px">
-							<form class="form-search" action="#">
-								<div class="chat-form">
-									<span lang="en">Select projects to visualize: </span>
-									<span lang="fr">Visualisez les projets : </span>#1 &nbsp;
-									<select id="selectProject1" class="input-medium" tabindex="1" style="padding: 6px 12px; border: 0">
-									</select>
-									&nbsp;
-									<span lang="en">and </span>
-									<span lang="fr">et </span>#2 &nbsp;
-									<select id="selectProject2" class="input-medium" tabindex="1" style="padding: 6px 12px; border: 0">
-									</select>
-									<button name="select" type="button" class="btn green" style="padding: 6px 12px; margin: 0 0 5px 10px">OK</button>
-								</div>
-							</form>
-						</div>
-						<!-- BEGIN : CHARTS -->
-						<div class="row">
+						<!-- BEGIN CONTENT HEADER -->
+						<div class="row margin-bottom-40 about-header">
 							<div class="col-md-12">
-								<div class="portlet light portlet-fit bordered">
-									<div class="portlet-title">
-										<div class="caption">
-											<i class="icon-layers font-green"></i>
-											<span lang="en" class="caption-subject font-green bold uppercase">Cost & Benefit</span>
-											<span lang="fr" class="caption-subject font-green bold uppercase">Coût et bénéfice</span>
-										</div>
-									</div>
-									<div class="portlet-body" style="height:500px;">
-										<div id="costReleaseValues" style="position:absolute; width:fit-content; top:132px; left:125px; z-inden:1" hidden>
-											<ul style="margin:0 0 0 0" class="nav nav-tabs">
-												<li id="tabNavProject1" style="display: none"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">Project 1</a></li>
-												<li id="tabNavProject2" style="display: none"><a style="padding: 0 5px 0 5px" href="#tabProject2" data-toggle="tab">Project 2</a></li>
-											</ul>
-											<div class="tab-content" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; background-color: white">
-												<div class="tab-pane" id="tabProject1">
-													<p style="margin:0 5px 0 5px; color: #555">
-														<span lang="en">Total cost: </span>
-														<span lang="fr">Coût total : </span>
-														<span id="totalCostProject1"></span>
-													</p>
-													<p style="margin:0 5px 0 5px; color: #555">
-														<span lang="en">Gross profit: </span>
-														<span lang="fr">Bénéfice brut : </span>
-														<span id="totalReleaseProject1"></span>
-													</p>
-													<p style="margin:0 5px 0 5px; color: #555">
-														<span lang="en">Maximum net benefit: </span>
-														<span lang="fr">Bénéfice net maximal : </span>
-														<span id="maximumNetReleaseProject1"></span>
-													</p>
-													<p style="margin:0 5px 0 5px; color: #555">
-														<span lang="en">Minimum net benefit: </span>
-														<span lang="fr">Bénéfice net minimal : </span>
-														<span id="minimumNetReleaseProject1"></span>
-													</p>
-												</div>
-												<div class="tab-pane" id="tabProject2">
-													<p style="margin:0 5px 0 5px; color: #555">
-														<span lang="en">Total cost: </span>
-														<span lang="fr">Coût total : </span>
-														<span id="totalCostProject2"></span>
-													</p>
-													<p style="margin:0 5px 0 5px; color: #555">
-														<span lang="en">Gross profit: </span>
-														<span lang="fr">Bénéfice brut : </span>
-														<span id="totalReleaseProject2"></span>
-													</p>
-													<p style="margin:0 5px 0 5px; color: #555">
-														<span lang="en">Maximum net benefit: </span>
-														<span lang="fr">Bénéfice net maximal : </span>
-														<span id="maximumNetReleaseProject2"></span>
-													</p>
-													<p style="margin:0 5px 0 5px; color: #555">
-														<span lang="en">Minimum net benefit: </span>
-														<span lang="fr">Bénéfice net minimal : </span>
-														<span id="minimumNetReleaseProject2"></span>
-													</p>
-												</div>
-											</div>
-										</div>
-										<canvas name="costReleaseChart" ></canvas>
-									</div>
+								<h1>About FRST</h1>
+								<h2>Welcome to the Functional Realignment Scenario Tool (FRST)</h2>
+							</div>
+						</div>
+						<!-- END CONTENT HEADER -->
+						<div class="row margin-bottom-15">
+							<div class="col-lg-6">
+								<div class="portlet light">
+									<p class="margin-top-20 margin-left-10 margin-right-10" style="font-size:20px">
+										FRST is a web-based application that supports the analysis and visualization of the expected costs, benefits, and uncertainty of a project, project scenarios, or portfolio of projects.
+									</p>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="portlet light">
+									<p class="margin-top-20 margin-left-10 margin-right-10" style="font-size:20px">
+										FRST was built to assess projects that aim to re-align resources that are currently dedicated to an existing function, to a function that is deemed higher priority by the organization.
+									</p>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="portlet light portlet-fit bordered">
-									<div class="portlet-title">
-										<div class="caption">
-											<i class="icon-layers font-green"></i>
-											<span lang="en" class="caption-subject font-green bold uppercase">Complexity & Risk</span>
-											<span lang="fr" class="caption-subject font-green bold uppercase">Complexité et risque</span>
-										</div>
-									</div>
-									<div class="portlet-body" style="height:500px;">
-										<canvas name="complexityRiskChart"></canvas>
-									</div>
+						<div class="row margin-bottom-15">
+							<div class="col-lg-12">
+								<div class="portlet light about-text">
+									<h4>
+										<i class="fa fa-check icon-info"></i> How it Works
+									</h4>
+									<p class="margin-top-20" style="font-size: 16px">
+										There are three interfaces associated with the FRST: “About”, “Charts”, and “Projects”.
+									</p>
+									<p class="margin-left-20 margin-right-20" style="font-size: 16px; margin-bottom: 5px">
+										<i class="fa fa-check"></i>
+										<b>The “About” Tab: </b>
+										You are currently on the “About” tab. It provides an explanation of the features of FRST and provides examples of how to use the tool.
+									</p>
+									<p class="margin-left-20 margin-right-20" style="font-size: 16px; margin-bottom: 5px; margin-top: 5px">
+										<i class="fa fa-check"></i>
+										<b>The “Charts” Tab: </b>
+										The “Charts” Tab illustrates projects cost and released benefit time horizon, project indicators, and project complexity and risk. You can change the project being displayed by selecting from the drop down list. You can also compare projects and project scenarios, as well as build a project portfolio.
+									</p>
+									<p class="margin-left-20 margin-right-20" style="font-size: 16px; margin-top: 5px">
+										<i class="fa fa-check"></i>
+										<b>The “Projects” Tab: </b>
+										The application allows users to input new projects and project details through the “Projects” tab.
+									</p>
+									<p style="font-size: 18px; margin-bottom: 5px">
+										<b>What are “releases”?</b>
+									</p>
+									<p style="font-size: 16px; margin-top: 5px">
+										The release is the amount of resources no longer dedicated to the implementation of a specific program as a result of a modernization initiative.
+									</p>
+									<p style="font-size: 18px; margin-bottom: 5px">
+										<b>What are “costs”?</b>
+									</p>
+									<p style="font-size: 16px; margin-top: 5px">
+										The cost is the amount of resources required to implement a modernization initiative from planning through to implementation that will result in a release.
+									</p>
+									<p style="font-size: 18px; margin-bottom: 5px">
+										<b>What is an “FTE”s?</b>
+									</p>
+									<p style="font-size: 16px; margin-top: 5px">
+										FTE is an abbreviation of “full-time equivalent”. For the purposes of FRST, an FTE is equal to $100,000 annually.
+									</p>
+									<p style="font-size: 16px">
+										When creating your scenario, please input the estimated amount of full-time employees that will be required for this particular phase of the project or that will be freed from their dedication to a function and available for re-alignment. If there are employees partially dedicated (i.e. 4 employees dedicated 25%) add up the fractions and include only whole numbers. 
+									</p>
+									<p style="font-size: 18px; margin-bottom: 5px">
+										<b>What are “operating expenses”?</b>
+									</p>
+									<p style="font-size: 16px; margin-top: 5px">
+										These are operating costs or releases that are incurred to conduct the existing activity, or in order to complete the realignment project. For example, this could be the purchase of supplies and equipment, or professional services.
+									</p>
+									<p style="font-size: 18px; margin-bottom: 5px">
+										<b>What is “Risk and Complexity”?</b>
+									</p>
+									<p style="font-size: 16px; margin-top: 5px">
+										Risk and complexity are the factors that will contribute to the uncertainty in the project achieving the estimated for cost and releases.
+									</p>
+									<p style="font-size: 18px; margin-bottom: 5px">
+										<b>How is the cost of complexity and risk calculated?</b>
+									</p>
+									<p style="font-size: 16px; margin-top: 5px; margin-bottom: 0"">
+										The complexity and risk is based on the weighting of Treasury Board Secretariat’s “Project and Complexity Risk Assessment” and an inflation factor in order to translate into the same unit of measure.
+									</p>
 								</div>
 							</div>
 						</div>
-						<!-- END : CHARTS -->
+						<div class="row margin-bottom-15">
+							<div class="col-lg-12">
+								<div class="portlet light about-text">
+									<h4>
+										<i class="fa fa-check icon-info"></i> What can FRST do
+									</h4>
+									<p style="font-size: 18px; margin-bottom: 5px">
+										<b>Project Analysis</b>
+									</p>
+									<p style="font-size: 16px; margin-top: 5px">
+										Once the user has input all project details, FRST provides some illustrative and analytical features in the “Charts” tab.
+									</p>
+									<p class="margin-left-20 margin-right-20" style="font-size: 16px; margin-bottom: 5px">
+										<i class="fa fa-check"></i>
+										<b>Cost / Release Time Horizon: </b>
+										Once the user has input all project details, FRST provides some illustrative and analytical features in the “Charts” tab.
+									</p>
+									<p class="margin-left-20 margin-right-20" style="font-size: 16px; margin-bottom: 5px; margin-top: 5px">
+										<i class="fa fa-check"></i>
+										<b>Risk and Complexity: </b>
+										The Risk and Complexity chart illustrates where the areas of higher relative risk are according to the project.
+									</p>
+									<p class="margin-left-20 margin-right-20" style="font-size: 16px; margin-bottom: 5px; margin-top: 5px">
+										<i class="fa fa-check"></i>
+										<b>Maximum Net Release: </b>
+										The maximum net release is the result of subtracting the estimated costs from the release without factoring in costs and releases.
+									</p>
+									<p class="margin-left-20 margin-right-20" style="font-size: 16px; margin-top: 5px">
+										<i class="fa fa-check"></i>
+										<b>Minimum Net Release: </b>
+										The minimum net release is the result of subtracting the estimated costs and releases while factoring in the impact of potential uncertainty.
+									</p>
+									<p style="font-size: 18px; margin-bottom: 5px">
+										<b>Project Scenario Analysis</b>
+									</p>
+									<p style="font-size: 16px; margin-top: 5px; margin-bottom: 0">
+										Users can input different iterations of a similar project (i.e. higher resource levels, or different risk contexts) and compare the two projects using the drop down menu.
+									</p>
+								</div>
+							</div>
+						</div>
 					</div>
 					<!-- END CONTENT BODY -->
 				</div>
@@ -293,13 +319,11 @@
 		<script src="../../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 		<!-- END CORE PLUGINS -->
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
-		<script src="../../assets/global/plugins/Chart.js" type="text/javascript" ></script>
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL SCRIPTS -->
 		<script src="../../assets/global/scripts/app.min.js" type="text/javascript"></script>
 		<!-- END THEME GLOBAL SCRIPTS -->
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
-		<script src="../../assets/pages/scripts/FRST/charts.js" type="text/javascript"></script>
 		<script src="../../assets/pages/scripts/FRST/projects.js" type="text/javascript"></script>
 		<!-- END PAGE LEVEL SCRIPTS -->
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
@@ -351,10 +375,6 @@
 				Projects.loadProjects();
 				Projects.addProject();
 				Projects.selectProject();
-				
-				Projects.updateProjectsDropDownLists();
-
-				Charts.initCharts();
 			});
 		</script>
 	</body>

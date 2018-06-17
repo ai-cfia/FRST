@@ -108,6 +108,13 @@
 							</li>
 							<!-- END SIDEBAR TOGGLER BUTTON -->
 							<li class="nav-item">
+								<a href="/FRST/about" class="nav-link nav-toggle">
+									<i class="icon-info"></i>
+									<span lang="en" class="title">About</span>
+									<span lang="fr" class="title">À propos</span>
+								</a>
+							</li>
+							<li class="nav-item">
 								<a href="/FRST/charts" class="nav-link nav-toggle">
 									<i class="icon-bar-chart"></i>
 									<span lang="en" class="title">Charts</span>
@@ -1663,8 +1670,8 @@
 		<script src="../../assets/global/scripts/app.min.js" type="text/javascript"></script>
 		<!-- END THEME GLOBAL SCRIPTS -->
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
-		<script src="../../assets/pages/FRST/scripts/projects.js" type="text/javascript"></script>
-		<script src="../../assets/pages/FRST/scripts/form-project.js" type="text/javascript"></script>
+		<script src="../../assets/pages/scripts/FRST/projects.js" type="text/javascript"></script>
+		<script src="../../assets/pages/scripts/FRST/form-project.js" type="text/javascript"></script>
 		<!-- END PAGE LEVEL SCRIPTS -->
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
 		<script src="../../assets/layout/scripts/layout.min.js" type="text/javascript"></script>
@@ -1695,20 +1702,22 @@
 				}
 
 				if (Cookies.get("lang") === "en") {
-					$("[lang='fr']").hide();
+					$("[lang='fr']").attr("style", "display:none !important");
 					$("#newTitle").attr("placeholder", "Rename the project with a maximum of 20 characters");
 				} else {
-					$("[lang='en']").hide();
+					$("[lang='en']").attr("style", "display:none !important");
 					$("#newTitle").attr("placeholder", "Renommez le projet au maximum 20 caractères");
 				}
 
 				$("#switchLang").click(function() {
-					$("[lang='fr']").toggle();
-					$("[lang='en']").toggle();
 					if (Cookies.get("lang") === "en") {
+						$("[lang='fr']").attr("style", "display");
+						$("[lang='en']").attr("style", "display:none !important");
 						Cookies.set("lang", "fr");
 						$("#newTitle").attr("placeholder", "Renommez le projet au maximum 20 caractères");
 					} else {
+						$("[lang='en']").attr("style", "display");
+						$("[lang='fr']").attr("style", "display:none !important");
 						Cookies.set("lang", "en");
 						$("#newTitle").attr("placeholder", "Rename the project with a maximum of 20 characters");
 					}
