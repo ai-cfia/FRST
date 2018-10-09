@@ -79,9 +79,9 @@ var FormProject = function () {
 		}
 
 		function tripleConstraint() {
-			let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseInt($("#fteNumberCostPhase1").val()) * 100000 + parseInt($("#operatingMoneyCostPhase1").val()))
-			+ parseInt($("#quaterNumberPhase2").val()) * (parseInt($("#fteNumberCostPhase2").val()) * 100000 + parseInt($("#operatingMoneyCostPhase2").val()))
-			+ parseInt($("#quaterNumberPhase3").val()) * (parseInt($("#fteNumberCostPhase3").val()) * 100000 + parseInt($("#operatingMoneyCostPhase3").val()));
+			let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseInt($("#fteNumberCostPhase1").val()) * 25000 + parseInt($("#operatingMoneyCostPhase1").val()))
+			+ parseInt($("#quaterNumberPhase2").val()) * (parseInt($("#fteNumberCostPhase2").val()) * 25000 + parseInt($("#operatingMoneyCostPhase2").val()))
+			+ parseInt($("#quaterNumberPhase3").val()) * (parseInt($("#fteNumberCostPhase3").val()) * 25000 + parseInt($("#operatingMoneyCostPhase3").val()));
 
 			let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
 
@@ -658,9 +658,9 @@ var FormProject = function () {
 				projects[current_project].costRelease.fteNumberReleasePhase3 = $("#fteNumberReleasePhase3").val();
 				projects[current_project].costRelease.operatingMoneyReleasePhase3 = $("#operatingMoneyReleasePhase3").val();
 
-				let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseInt($("#fteNumberCostPhase1").val()) * 100000 + parseInt($("#operatingMoneyCostPhase1").val()))
-				+ parseInt($("#quaterNumberPhase2").val()) * (parseInt($("#fteNumberCostPhase2").val()) * 100000 + parseInt($("#operatingMoneyCostPhase2").val()))
-				+ parseInt($("#quaterNumberPhase3").val()) * (parseInt($("#fteNumberCostPhase3").val()) * 100000 + parseInt($("#operatingMoneyCostPhase3").val()));
+				let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseInt($("#fteNumberCostPhase1").val()) * 25000 + parseInt($("#operatingMoneyCostPhase1").val()))
+				+ parseInt($("#quaterNumberPhase2").val()) * (parseInt($("#fteNumberCostPhase2").val()) * 25000 + parseInt($("#operatingMoneyCostPhase2").val()))
+				+ parseInt($("#quaterNumberPhase3").val()) * (parseInt($("#fteNumberCostPhase3").val()) * 25000 + parseInt($("#operatingMoneyCostPhase3").val()));
 
 				let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
 
