@@ -1688,23 +1688,18 @@
 				if (window.localStorage.getItem("current_project") == null) {
 					window.location.href = "/FRST";
 				}
-
 				if (window.localStorage.getItem("visual_project1") == null) {
 					window.location.href = "/FRST";
 				}
-
 				if (window.localStorage.getItem("visual_project2") == null) {
 					window.location.href = "/FRST";
 				}
-
 				if (window.localStorage.getItem("projects") == null) {
 					window.location.href = "/FRST";
 				}
-
 				if (Cookies.get("lang") == null) {
 					window.location.href = "/FRST";
 				}
-
 				if (Cookies.get("lang") === "en") {
 					$("[lang='fr']").attr("style", "display:none !important");
 					$("#newTitle").attr("placeholder", "Rename the project with a maximum of 20 characters");
@@ -1712,7 +1707,6 @@
 					$("[lang='en']").attr("style", "display:none !important");
 					$("#newTitle").attr("placeholder", "Renommez le projet au maximum 20 caractères");
 				}
-
 				$("#switchLang").click(function() {
 					if (Cookies.get("lang") === "en") {
 						$("[lang='fr']").attr("style", "display");
@@ -1726,92 +1720,77 @@
 						$("#newTitle").attr("placeholder", "Rename the project with a maximum of 20 characters");
 					}
 				});
-
 				$("#editProject").draggable({
 					handle: ".modal-header"
 				});
-
 				$("#quaterNumberPhase1").ionRangeSlider({
 					min: 1,
 					max: 8
 				});
-
 				$("#quaterNumberPhase2").ionRangeSlider({
 					min: 1,
 					max: 8
 				});
-
 				$("#quaterNumberPhase3").ionRangeSlider({
 					min: 1,
 					max: 8
 				});
-
 				$("#fteNumberCostPhase1").ionRangeSlider({
 					min: 0,
 					max: 30,
-					step: 0.01
+					step: 0.01,
+					grid: true,
 				});
-
 				$("#fteNumberCostPhase2").ionRangeSlider({
 					min: 0,
 					max: 30,
-					step: 0.01
+					step: 0.01,
+					grid_snap: true
 				});
-
 				$("#fteNumberCostPhase3").ionRangeSlider({
 					min: 0,
 					max: 30,
-					step: 0.01
+					step: 0.01,
+					grid_snap: true
 				});
-
 				$("#operatingMoneyCostPhase1").ionRangeSlider({
 					min: 0,
-					max: 1000000
+					max: 1000000,
 					step: 1000
 				});
-
 				$("#operatingMoneyCostPhase2").ionRangeSlider({
 					min: 0,
 					max: 1000000,
 					step: 1000
 				});
-
 				$("#operatingMoneyCostPhase3").ionRangeSlider({
 					min: 0,
 					max: 1000000,
 					step: 1000
 				});
-
 				$("#fteNumberReleasePhase2").ionRangeSlider({
 					min: 0,
 					max: 30
 				});
-
 				$("#fteNumberReleasePhase3").ionRangeSlider({
 					min: 0,
 					max: 30
 				});
-
 				$("#operatingMoneyReleasePhase2").ionRangeSlider({
 					min: 0,
 					max: 1000000,
 					step: 1000
 				});
-
 				$("#operatingMoneyReleasePhase3").ionRangeSlider({
 					min: 0,
 					max: 1000000,
 					step: 1000
 				});
-
 				Projects.loadProjects();
 				Projects.setupCurrentProject();
-
 				Projects.addProject();
 				Projects.selectProject();
-
 				Projects.showProjectCharacteristics();
-
 				FormProject.init();
 			});
 		</script>
