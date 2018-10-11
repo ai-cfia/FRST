@@ -83,7 +83,7 @@ var Projects = function () {
 				if (window.localStorage.getItem("current_project") != null) {
 					window.localStorage.setItem("current_project", current_project);
 				}
-				window.location.replace("/FRST/project");
+				window.location.replace("/IRR/FRST/project");
 			});
 
 		},
