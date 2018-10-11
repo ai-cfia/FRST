@@ -262,7 +262,7 @@ var Charts = function () {
 						+ project1Factor4 + project1Factor5 + project1Factor6 + project1Factor7;
 
 						//let project1CostPhase1 = -(parseInt(project1.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase1));
-						let project1CostPhase1 = parseInt(project1.costRelease.fteNumberCostPhase1) * 25000 + parseInt(project1.costRelease.operatingMoneyCostPhase1);
+						let project1CostPhase1 = parseFloat(project1.costRelease.fteNumberCostPhase1) * 25000 + parseFloat(project1.costRelease.operatingMoneyCostPhase1);
 						let project1ReleasePhase1 = 0;
 						let project1ErrorPhase1 = null;
 
@@ -283,8 +283,8 @@ var Charts = function () {
 						}
 
 						//let project1CostPhase2 = -(parseInt(project1.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase2));
-						let project1CostPhase2 = parseInt(project1.costRelease.fteNumberCostPhase2) * 25000 + parseInt(project1.costRelease.operatingMoneyCostPhase2);
-						let project1ReleasePhase2 = parseInt(project1.costRelease.fteNumberReleasePhase2) * 25000 + parseInt(project1.costRelease.operatingMoneyReleasePhase2);
+						let project1CostPhase2 = parseFloat(project1.costRelease.fteNumberCostPhase2) * 25000 + parseFloat(project1.costRelease.operatingMoneyCostPhase2);
+						let project1ReleasePhase2 = parseFloat(project1.costRelease.fteNumberReleasePhase2) * 25000 + parseFloat(project1.costRelease.operatingMoneyReleasePhase2);
 						let project1ErrorPhase2 = project1Uncertainty / 170 * project1ReleasePhase2;
 
 						for (let i = 1; i <= project1QuaterNumberPhase2; i++) {
@@ -304,8 +304,8 @@ var Charts = function () {
 						}
 
 						//let project1CostPhase3 = -(parseInt(project1.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase3));
-						let project1CostPhase3 = parseInt(project1.costRelease.fteNumberCostPhase3) * 25000 + parseInt(project1.costRelease.operatingMoneyCostPhase3);
-						let project1ReleasePhase3 = parseInt(project1.costRelease.fteNumberReleasePhase3) * 25000 + parseInt(project1.costRelease.operatingMoneyReleasePhase3);
+						let project1CostPhase3 = parseFloat(project1.costRelease.fteNumberCostPhase3) * 25000 + parseFloat(project1.costRelease.operatingMoneyCostPhase3);
+						let project1ReleasePhase3 = parseFloat(project1.costRelease.fteNumberReleasePhase3) * 25000 + parseFloat(project1.costRelease.operatingMoneyReleasePhase3);
 						let project1ErrorPhase3 = project1Uncertainty / 170 * project1ReleasePhase3;
 
 						for (let i = 1; i <= project1QuaterNumberPhase3; i++) {
@@ -486,7 +486,7 @@ var Charts = function () {
 						+ project2Factor4 + project2Factor5 + project2Factor6 + project2Factor7;
 
 						//let project2CostPhase1 = -(parseInt(project2.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase1));
-						let project2CostPhase1 = parseInt(project2.costRelease.fteNumberCostPhase1) * 25000 + parseInt(project2.costRelease.operatingMoneyCostPhase1);
+						let project2CostPhase1 = parseFloat(project2.costRelease.fteNumberCostPhase1) * 25000 + parseFloat(project2.costRelease.operatingMoneyCostPhase1);
 						let project2ReleasePhase1 = 0;
 						let project2ErrorPhase1 = null;
 
@@ -507,8 +507,8 @@ var Charts = function () {
 						}
 
 						//let project2CostPhase2 = -(parseInt(project2.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase2));
-						let project2CostPhase2 = parseInt(project2.costRelease.fteNumberCostPhase2) * 25000 + parseInt(project2.costRelease.operatingMoneyCostPhase2);
-						let project2ReleasePhase2 = parseInt(project2.costRelease.fteNumberReleasePhase2) * 25000 + parseInt(project2.costRelease.operatingMoneyReleasePhase2);
+						let project2CostPhase2 = parseFloat(project2.costRelease.fteNumberCostPhase2) * 25000 + parseFloat(project2.costRelease.operatingMoneyCostPhase2);
+						let project2ReleasePhase2 = parseFloat(project2.costRelease.fteNumberReleasePhase2) * 25000 + parseFloat(project2.costRelease.operatingMoneyReleasePhase2);
 						let project2ErrorPhase2 = project2Uncertainty / 170 * project2ReleasePhase2;
 
 						for (let i = 1; i <= project2QuaterNumberPhase2; i++) {
@@ -528,8 +528,8 @@ var Charts = function () {
 						}
 
 						//let project2CostPhase3 = -(parseInt(project2.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase3));
-						let project2CostPhase3 = parseInt(project2.costRelease.fteNumberCostPhase3) * 25000 + parseInt(project2.costRelease.operatingMoneyCostPhase3);
-						let project2ReleasePhase3 = parseInt(project2.costRelease.fteNumberReleasePhase3) * 25000 + parseInt(project2.costRelease.operatingMoneyReleasePhase3);
+						let project2CostPhase3 = parseFloat(project2.costRelease.fteNumberCostPhase3) * 25000 + parseFloat(project2.costRelease.operatingMoneyCostPhase3);
+						let project2ReleasePhase3 = parseFloat(project2.costRelease.fteNumberReleasePhase3) * 25000 + parseFloat(project2.costRelease.operatingMoneyReleasePhase3);
 						let project2ErrorPhase3 = project2Uncertainty / 170 * project2ReleasePhase3;
 
 						for (let i = 1; i <= project2QuaterNumberPhase3; i++) {
@@ -660,7 +660,7 @@ var Charts = function () {
 						$("#totalCostProject1").text(project1TotalCost.toLocaleString());
 						$("#totalReleaseProject1").text(project1TotalRelease.toLocaleString());
 						$("#maximumNetReleaseProject1").text((project1TotalRelease - project1TotalCost).toLocaleString());
-						$("#minimumNetReleaseProject1").text(parseInt(project1TotalRelease - project1TotalCost - project1TotalError).toLocaleString());
+						$("#minimumNetReleaseProject1").text(parseFloat(project1TotalRelease - project1TotalCost - project1TotalError).toLocaleString());
 					}
 
 					if (project2 != null) {
@@ -681,7 +681,7 @@ var Charts = function () {
 						$("#totalCostProject2").text(project2TotalCost.toLocaleString());
 						$("#totalReleaseProject2").text(project2TotalRelease.toLocaleString());
 						$("#maximumNetReleaseProject2").text((project2TotalRelease - project2TotalCost).toLocaleString());
-						$("#minimumNetReleaseProject2").text(parseInt(project2TotalRelease - project2TotalCost - project2TotalError).toLocaleString());
+						$("#minimumNetReleaseProject2").text(parseFloat(project2TotalRelease - project2TotalCost - project2TotalError).toLocaleString());
 					}
 				}
 
