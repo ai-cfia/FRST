@@ -637,7 +637,7 @@ var FormProject = function () {
 				error1.hide();
 
 				let projects = JSON.parse(window.localStorage.getItem("projects"));
-				let current_project = parseInt(window.localStorage.getItem("current_project"));
+				let current_project = parseFloat(window.localStorage.getItem("current_project"));
 
 				projects[current_project].costRelease.startDatePhase1 = $("#startDatePhase1").val();
 				projects[current_project].costRelease.quaterNumberPhase1 = $("#quaterNumberPhase1").val();
@@ -878,7 +878,7 @@ var FormProject = function () {
 				error2.hide();
 
 				let projects = JSON.parse(window.localStorage.getItem("projects"));
-				let current_project = parseInt(window.localStorage.getItem("current_project"));
+				let current_project = parseFloat(window.localStorage.getItem("current_project"));
 
 				projects[current_project].title = $("#newTitle").val();
 				window.localStorage.setItem("projects", JSON.stringify(projects));
@@ -891,11 +891,11 @@ var FormProject = function () {
 		$("#form_edit button[name='delete']").click(function () {
 			if (confirm("Please click OK to confirm deletion")) {
 				let projects = JSON.parse(window.localStorage.getItem("projects"));
-				let current_project = parseInt(window.localStorage.getItem("current_project"));
+				let current_project = parseFloat(window.localStorage.getItem("current_project"));
 				projects.splice(current_project, 1);
 				window.localStorage.setItem("projects", JSON.stringify(projects));
-				let visual_project1 = parseInt(window.localStorage.getItem("visual_project1"));
-				let visual_project2 = parseInt(window.localStorage.getItem("visual_project2"));
+				let visual_project1 = parseFloat(window.localStorage.getItem("visual_project1"));
+				let visual_project2 = parseFloat(window.localStorage.getItem("visual_project2"));
 				if (current_project == visual_project1) {
 					visual_project1 = -1;
 					if (current_project < visual_project2) {

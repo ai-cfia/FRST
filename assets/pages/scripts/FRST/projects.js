@@ -79,7 +79,7 @@ var Projects = function () {
 		selectProject: function () {
 			$("a[name='project']").click(function() {
 				let current_id = $(this).attr("id");
-				let current_project = parseInt(current_id.charAt(current_id.length - 1));
+				let current_project = parseFloat(current_id.charAt(current_id.length - 1));
 				if (window.localStorage.getItem("current_project") != null) {
 					window.localStorage.setItem("current_project", current_project);
 				}
@@ -192,8 +192,8 @@ var Projects = function () {
 
 		updateProjectsDropDownLists: function() {
 			let projects = JSON.parse(window.localStorage.getItem("projects"));
-			let visual_project1 = parseInt(window.localStorage.getItem("visual_project1"));
-			let visual_project2 = parseInt(window.localStorage.getItem("visual_project2"));
+			let visual_project1 = parseFloat(window.localStorage.getItem("visual_project1"));
+			let visual_project2 = parseFloat(window.localStorage.getItem("visual_project2"));
 
 			let options = [];
 			options.push("<option value='-1'>Not Selected</option>");
