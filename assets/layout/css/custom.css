@@ -17,4 +17,12 @@
 	background-color: #26a1ab
 }
 
+.adjust-btn:focus{
+	outline:0;
+}
+
+.adjust-btn:active{
+	background-color:#1e8087
+}
+
 
