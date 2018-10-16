@@ -1,7 +1,23 @@
 /* here you can put your own css to customize and override the theme */
 
 .btn.green.plus{
-	position: relative;
-	left: 727px;
-	top: 1px;
+    font-size: 25px;
+    width: 35px;
+    height: 35px;
+    position: relative;
+    left: 742.5px;
+    top: 1px;
+    padding: 0px 10px;
+    padding-bottom: 34px;
 }
+
+.btn.green.minus{
+    font-size: 25px;
+    width: 35px;
+    height: 35px;
+    position: relative;
+    top: 1px;
+    padding: 0px 10px;
+    padding-bottom: 34px;
+}
+
