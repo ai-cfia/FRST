@@ -14,7 +14,8 @@
 }
 
 .adjust-btn:hover {
-	background-color: #26a1ab
+	transition: 0.2s ease all;
+	background-color: #26a1ab;
 }
 
 .adjust-btn:focus{
@@ -22,7 +23,7 @@
 }
 
 .adjust-btn:active{
-	background-color:#1e8087
+	background-color:#1e8087;
 }
 
 
