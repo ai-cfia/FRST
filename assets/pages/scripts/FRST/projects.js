@@ -241,9 +241,7 @@ var Projects = function () {
 		updateRange: function (direction, currVal) {
 			var $range = $("#fteNumberCostPhase1")
 			var range_instance = $range.data("ionRangeSlider");
-			currVal += step * direction;
-			console.log(currVal);
-		   
+			currVal += step * direction;		   
 			if (currVal < 0) {
 				currVal = 0;
 			} else if (currVal > 30) {
