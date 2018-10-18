@@ -310,7 +310,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label lang="en" class="control-label">Number of FTEs to COST <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
 																			<label lang="fr" class="control-label">Nombre d'ETP à dépenser <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à dépenser par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberCostPhase1" id="fteNumberCostPhase1" type="text">
 																			<button type = "button" class = "adjust-btn" id = "minus-1">																				
@@ -1716,9 +1716,7 @@
 		<script>
 		let projects = JSON.parse(window.localStorage.getItem("projects"));
 		let current_project = window.localStorage.getItem("current_project");
-			var $btn_plus = $("#plus-1"),
-				$btn_minus = $("#minus-1"),
-				step = 0.01,
+			var step = 0.01,
 				from = [0,0,0,0,0];
 			jQuery(document).ready(function() {
 				if (window.localStorage.getItem("current_project") == null) {
@@ -1841,40 +1839,55 @@
 					max: 1000000,
 					step: 1000
 				});
+				from[0] = Number(projects[current_project].costRelease.fteNumberCostPhase1)
+				from[1] = Number(projects[current_project].costRelease.fteNumberCostPhase2)
+				from[2] = Number(projects[current_project].costRelease.fteNumberReleasePhase2)
+				from[3] = Number(projects[current_project].costRelease.fteNumberCostPhase3)
+				from[4] = Number(projects[current_project].costRelease.fteNumberReleasePhase3)
 				Projects.loadProjects();
 				Projects.setupCurrentProject();
 				Projects.addProject();
 				Projects.selectProject();
 				Projects.showProjectCharacteristics();
-				FormProject.init();				
-				from[0] = Number(projects[current_project].costRelease.fteNumberCostPhase1)
-				from[1] = Number(projects[current_project].costRelease.fteNumberCostPhase2)
-				from[2] = Number(projects[current_project].costRelease.fteNumberCostPhase3)
-				from[3] = Number(projects[current_project].costRelease.fteNumberReleasePhase2)
-				from[4] = Number(projects[current_project].costRelease.fteNumberReleasePhase3)
-				var updateRange = function (direction, currVal) {
-					var $range = $("#fteNumberCostPhase1")
-					var range_instance = $range.data("ionRangeSlider");
-					currVal += step * direction;
-				   
-					if (currVal < 0) {
-						currVal = 0;
-					} else if (currVal > 30) {
-						currVal = 30;
-					}
-					
-					range_instance.update({
-						from: currVal
-					});
-					return currVal
-				};
-
-				$btn_minus.on('mousedown',function () {
+				FormProject.init();								
+				$("#plus-1").on('mousedown',function () {
 					from[0] = Projects.updateRange(-1, from[0]);
 				});
 
-				$btn_plus.on('mousedown', function () {
-					from[0] = updateRange(1, from[0]);
+				$("#minus-1").on('mousedown', function () {
+					from[0] = Projects.updateRange(1, from[0]);
+				});
+				
+				$("#plus-2").on('mousedown',function () {
+					from[1] = Projects.updateRange(-1, from[0]);
+				});
+
+				$("#minus-2").on('mousedown', function () {
+					from[1] = Projects.updateRange(1, from[0]);
+				});
+				
+				$("#plus-3").on('mousedown',function () {
+					from[2] = Projects.updateRange(-1, from[0]);
+				});
+
+				$("#minus-3").on('mousedown', function () {
+					from[2] = Projects.updateRange(1, from[0]);
+				});
+				
+				$("#plus-4").on('mousedown',function () {
+					from[3] = Projects.updateRange(-1, from[0]);
+				});
+
+				$("#minus-4").on('mousedown', function () {
+					from[3] = Projects.updateRange(1, from[0]);
+				});
+				
+				$("#plus-5").on('mousedown',function () {
+					from[4] = Projects.updateRange(-1, from[0]);
+				});
+
+				$("#minus-5").on('mousedown', function () {
+					from[4] = Projects.updateRange(1, from[0]);
 				});
 			});
 				
