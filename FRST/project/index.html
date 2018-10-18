@@ -310,7 +310,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label lang="en" class="control-label">Number of FTEs to CST <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to COST <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
 																			<label lang="fr" class="control-label">Nombre d'ETP à dépenser <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à dépenser par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberCostPhase1" id="fteNumberCostPhase1" type="text">
 																			<button type = "button" class = "adjust-btn" id = "minus-1">																				
@@ -1854,27 +1854,28 @@
 				from[2] = Number(projects[current_project].costRelease.fteNumberCostPhase3)
 				from[3] = Number(projects[current_project].costRelease.fteNumberReleasePhase2)
 				from[4] = Number(projects[current_project].costRelease.fteNumberReleasePhase3)
-				var updateRange = function (direction, button) {
-					from[button] += step * direction;
-					console.log(from[button]);
+				var updateRange = function (direction, currVal) {
+					currVal += step * direction;
+					console.log(currVal);
 				   
-					if (from[button] < 0) {
-						from[button] = 0;
-					} else if (from[button] > 30) {
-						from[button] = 30;
+					if (currVal < 0) {
+						currVal = 0;
+					} else if (currVal > 30) {
+						currVal = 30;
 					}
 					
 					range_instance.update({
-						from: from[button]
+						from: currVal
 					});
+					return currVal
 				};
 
 				$btn_minus.on('mousedown',function () {
-					updateRange(-1, 0);
+					from[0] = updateRange(-1, from[0]);
 				});
 
 				$btn_plus.on('mousedown', function () {
-					updateRange(1, 0);
+					from[0] = updateRange(1, from[0]);
 				});
 			});
 				
