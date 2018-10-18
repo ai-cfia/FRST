@@ -1835,7 +1835,7 @@
 			var range_instance = $range.data("ionRangeSlider");
 
 			var updateRange = function (direction) {
-				alert("called")
+				console.log($range)
 				from[0] += step * direction;
 			   
 				if (from[0] < 0) {
