@@ -310,7 +310,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label lang="en" class="control-label">Number of FTEs to CoST <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to COST <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
 																			<label lang="fr" class="control-label">Nombre d'ETP à dépenser <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à dépenser par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberCostPhase1" id="fteNumberCostPhase1" type="text">
 																			<button type = "button" class = "adjust-btn" id = "minus-1">																				
@@ -1784,12 +1784,20 @@
 				$("#fteNumberCostPhase2").ionRangeSlider({
 					min: 0,
 					max: 30,
-					step: 0.01
+					step: 0.01,
+					from: from[1],
+					onFinish: function (data) {
+						from[1] = data.from;
+					}
 				});
 				$("#fteNumberCostPhase3").ionRangeSlider({
 					min: 0,
 					max: 30,
-					step: 0.01
+					step: 0.01,
+					from: from[2],
+					onFinish: function (data) {
+						from[2] = data.from;
+					}
 				});
 				$("#operatingMoneyCostPhase1").ionRangeSlider({
 					min: 0,
@@ -1809,12 +1817,20 @@
 				$("#fteNumberReleasePhase2").ionRangeSlider({
 					min: 0,
 					max: 30,
-					step: 0.01
+					step: 0.01,
+					from: from[3],
+					onFinish: function (data) {
+						from[3] = data.from;
+					}
 				});
 				$("#fteNumberReleasePhase3").ionRangeSlider({
 					min: 0,
 					max: 30,
-					step: 0.01
+					step: 0.01,
+					from: from[4],
+					onFinish: function (data) {
+						from[4] = data.from;
+					}
 				});
 				$("#operatingMoneyReleasePhase2").ionRangeSlider({
 					min: 0,
@@ -1831,31 +1847,32 @@
 				Projects.addProject();
 				Projects.selectProject();
 				Projects.showProjectCharacteristics();
-				FormProject.init();
-				var $range = $("#fteNumberCostPhase1")
-				var range_instance = $range.data("ionRangeSlider");
+				FormProject.init();				
 				from[0] = Number(projects[current_project].costRelease.fteNumberCostPhase1)
-				var updateRange = function (direction) {
-					from[0] += step * direction;
+				from[1] = Number(projects[current_project].costRelease.fteNumberCostPhase2)
+				from[2] = Number(projects[current_project].costRelease.fteNumberCostPhase3)
+				from[3] = Number(projects[current_project].costRelease.fteNumberReleasePhase2)
+				from[4] = Number(projects[current_project].costRelease.fteNumberReleasePhase3)
+				var updateRange = function (direction, button) {
+					from[button] += step * direction;
 				   
-					if (from[0] < 0) {
-						from[0] = 0;
-					} else if (from[0] > 30) {
-						from[0] = 30;
+					if (from[button] < 0) {
+						from[button] = 0;
+					} else if (from[button] > 30) {
+						from[button] = 30;
 					}
 					
 					range_instance.update({
-						from: from[0]
+						from: from[button]
 					});
 				};
 
 				$btn_minus.on('mousedown',function () {
-					console.log(from[0])
-					updateRange(-1);
+					updateRange(-1, 0);
 				});
 
 				$btn_plus.on('mousedown', function () {
-					updateRange(1);
+					updateRange(1, 0);
 				});
 			});
 				
