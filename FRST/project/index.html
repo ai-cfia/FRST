@@ -1830,8 +1830,7 @@
 				Projects.selectProject();
 				Projects.showProjectCharacteristics();
 				FormProject.init();
-			});
-			var $range = $("#fteNumberCostPhase1")
+				var $range = $("#fteNumberCostPhase1")
 			var range_instance = $range.data("ionRangeSlider");
 
 			var updateRange = function (direction) {
@@ -1855,7 +1854,9 @@
 
 			$btn_plus.on("click", function () {
 				updateRange(1);
-			});	
+			});
+			});
+				
 		</script>
 	</body>
 </html>
