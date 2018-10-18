@@ -310,15 +310,15 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label lang="en" class="control-label">Number of FTEs to COST <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
 																			<label lang="fr" class="control-label">Nombre d'ETP à dépenser <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à dépenser par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberCostPhase1" id="fteNumberCostPhase1" type="text">
-																			<button type = "button" class = "adjust-btn" id = "plus-1>																				
+																			<!--<button type = "button" class = "adjust-btn" id = "plus-1>																				
 																					<span>-</span>																				
-																			</button>
+																			</button> 
 																			<button type = "button" class = "adjust-btn" id = "minus-1>
 																					<span>+</span>
-																			</button>
+																			</button>-->
 																		</div>
 																	</div>
 																	<!--/span-->
@@ -371,7 +371,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<label lang="en" class="control-label">Number of FTEs to Cost <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
+																			<label lang="en" class="control-label">Number of FTEs to CosT <i class="fa fa-info-circle tooltips font-green" data-original-title="Provide the number of FTEs to cost per quarter"></i></label>
 																			<label lang="fr" class="control-label">Nombre d'ETP à dépenser <i class="fa fa-info-circle tooltips font-green" data-original-title="Veuillez indiquer le nombre d'ETP à dépenser par trimestre"></i></label>
 																			<input class="form-control" name="fteNumberCostPhase2" id="fteNumberCostPhase2" type="text">
 																			<button type = "button" class = "adjust-btn" id = "plus-2">																				
@@ -1715,8 +1715,8 @@
 		<!-- END THEME LAYOUT SCRIPTS -->
 		<script>
 			var $range = $("#fteNumberCostPhase1"),
-				$btn_plus = $("#plus-1"),
-				$btn_minus = $("#minus-1"),
+				$btn_plus = $("#plus-2"),
+				$btn_minus = $("#minus-2"),
 				step = 0.01,
 				from = [0,0,0,0,0];
 			jQuery(document).ready(function() {
@@ -1773,16 +1773,16 @@
 				$("#fteNumberCostPhase1").ionRangeSlider({
 					min: 0,
 					max: 30,
+					step: 0.01
+				});
+				$("#fteNumberCostPhase2").ionRangeSlider({
+					min: 0,
+					max: 30,
 					step: 0.01,
 					from: from[0],
 					onFinish: function (data) {
 						from[0] = data.from;
 					}
-				});
-				$("#fteNumberCostPhase2").ionRangeSlider({
-					min: 0,
-					max: 30,
-					step: 0.01
 				});
 				$("#fteNumberCostPhase3").ionRangeSlider({
 					min: 0,
