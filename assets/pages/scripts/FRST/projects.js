@@ -236,6 +236,24 @@ var Projects = function () {
 				}
 				$(this).attr("old", currentvalue);
 			});
+		},
+		
+		updateRange: function (direction, currVal) {
+			var $range = $("#fteNumberCostPhase1")
+			var range_instance = $range.data("ionRangeSlider");
+			currVal += step * direction;
+			console.log(currVal);
+		   
+			if (currVal < 0) {
+				currVal = 0;
+			} else if (currVal > 30) {
+				currVal = 30;
+			}
+			
+			range_instance.update({
+				from: currVal
+			});
+			return currVal
 		}
 
 	};
