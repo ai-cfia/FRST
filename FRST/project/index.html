@@ -1855,7 +1855,8 @@
 					from[fromIndex] = Projects.updateRange(direction , from[fromIndex], selector);
 				}
 				$("#plus-1").on('mousedown',function () {
-					clickInterval = setInterval(function() {updateClick(0, 1, $("#fteNumberCostPhase1"))}, 143);
+					updateClick(0, 1, $("#fteNumberCostPhase1"));
+					clickInterval = setInterval(function() {updateClick(0, 1, $("#fteNumberCostPhase1"))}, 100);
 				});
 				
 				$("#plus-1").on('mouseup',function () {
