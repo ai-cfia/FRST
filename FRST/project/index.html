@@ -1855,12 +1855,11 @@
 					from[fromIndex] = Projects.updateRange(direction , from[fromIndex], selector);
 				}
 				$("#plus-1").on('mousedown',function () {
-					updateClick(0, 1, $("#fteNumberCostPhase1"))
-					clickInterval = setInterval(updateClick(0, 1, $("#fteNumberCostPhase1")), 1000/7);
+					clickInterval = setInterval(updateClick(0, 1, $("#fteNumberCostPhase1")), 143);
 				});
 				
 				$("#plus-1").on('mouseup',function () {
-					clearInterval(fireInterval);
+					clearInterval(clickInterval);
 				});
 
 				$("#minus-1").on('mousedown', function () {
