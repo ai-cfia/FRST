@@ -238,9 +238,8 @@ var Projects = function () {
 			});
 		},
 		
-		updateRange: function (direction, currVal) {
-			var $range = $("#fteNumberCostPhase1")
-			var range_instance = $range.data("ionRangeSlider");
+		updateRange: function (direction, currVa, slider) {
+			var range_instance = slider.data("ionRangeSlider");
 			currVal += step * direction;		   
 			if (currVal < 0) {
 				currVal = 0;
