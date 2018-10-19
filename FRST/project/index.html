@@ -1714,8 +1714,8 @@
 		<script src="../../assets/layout/scripts/quick-nav.min.js" type="text/javascript"></script>
 		<!-- END THEME LAYOUT SCRIPTS -->
 		<script>
-		let projects = JSON.parse(window.localStorage.getItem("projects"));
-		let current_project = window.localStorage.getItem("current_project");
+			let projects = JSON.parse(window.localStorage.getItem("projects"));
+			let current_project = window.localStorage.getItem("current_project");
 			var step = 0.01,
 				from = [0,0,0,0,0];
 			jQuery(document).ready(function() {
@@ -1859,35 +1859,35 @@
 				});
 				
 				$("#plus-2").on('mousedown',function () {
-					from[1] = Projects.updateRange(-1, from[1]);
+					from[1] = Projects.updateRange(1, from[1], $("#fteNumberCostPhase2"));
 				});
 
 				$("#minus-2").on('mousedown', function () {
-					from[1] = Projects.updateRange(1, from[1]);
+					from[1] = Projects.updateRange(-1, from[1], $("#fteNumberCostPhase2"));
 				});
 				
 				$("#plus-3").on('mousedown',function () {
-					from[2] = Projects.updateRange(-1, from[2]);
+					from[2] = Projects.updateRange(1, from[2], $("fteNumberReleasePhase2"));
 				});
 
 				$("#minus-3").on('mousedown', function () {
-					from[2] = Projects.updateRange(1, from[2]);
+					from[2] = Projects.updateRange(-1, from[2], $("fteNumberReleasePhase2"));
 				});
 				
 				$("#plus-4").on('mousedown',function () {
-					from[3] = Projects.updateRange(-1, from[3]);
+					from[3] = Projects.updateRange(1, from[3], $("#fteNumberCostPhase3"));
 				});
 
 				$("#minus-4").on('mousedown', function () {
-					from[3] = Projects.updateRange(1, from[3]);
+					from[3] = Projects.updateRange(-1, from[3], $("#fteNumberCostPhase3"));
 				});
 				
 				$("#plus-5").on('mousedown',function () {
-					from[4] = Projects.updateRange(-1, from[4]);
+					from[4] = Projects.updateRange(1, from[4], $("fteNumberReleasePhase3"));
 				});
 
 				$("#minus-5").on('mousedown', function () {
-					from[4] = Projects.updateRange(1, from[4]);
+					from[4] = Projects.updateRange(-1, from[4], $("fteNumberReleasePhase3"));
 				});
 			});
 				
