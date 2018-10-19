@@ -1854,7 +1854,7 @@
 				var updateClick = function(fromIndex, direction, selector){
 					from[fromIndex] = Projects.updateRange(direction , from[fromIndex], selector);
 				}
-				$("#plus-1").on('mosuedown',function () {
+				$("#plus-1").on('mousedown',function () {
 					clickInterval = setInterval(updateClick(0, 1, $("#fteNumberCostPhase1")), 143);
 				});
 				
@@ -1862,7 +1862,6 @@
 					console.log("a")
 					
 				});
-
 				$("#minus-1").on('mousedown', function () {
 					from[0] = Projects.updateRange(-1, from[0], $("#fteNumberCostPhase1"));
 				});
@@ -1870,7 +1869,6 @@
 				$("#plus-2").on('mousedown',function () {
 					from[1] = Projects.updateRange(1, from[1], $("#fteNumberCostPhase2"));
 				});
-
 				$("#minus-2").on('mousedown', function () {
 					from[1] = Projects.updateRange(-1, from[1], $("#fteNumberCostPhase2"));
 				});
@@ -1878,7 +1876,6 @@
 				$("#plus-3").on('mousedown',function () {
 					from[2] = Projects.updateRange(1, from[2], $("#fteNumberReleasePhase2"));
 				});
-
 				$("#minus-3").on('mousedown', function () {
 					from[2] = Projects.updateRange(-1, from[2], $("#fteNumberReleasePhase2"));
 				});
@@ -1886,7 +1883,6 @@
 				$("#plus-4").on('mousedown',function () {
 					from[3] = Projects.updateRange(1, from[3], $("#fteNumberCostPhase3"));
 				});
-
 				$("#minus-4").on('mousedown', function () {
 					from[3] = Projects.updateRange(-1, from[3], $("#fteNumberCostPhase3"));
 				});
@@ -1894,7 +1890,6 @@
 				$("#plus-5").on('mousedown',function () {
 					from[4] = Projects.updateRange(1, from[4], $("#fteNumberReleasePhase3"));
 				});
-
 				$("#minus-5").on('mousedown', function () {
 					from[4] = Projects.updateRange(-1, from[4], $("#fteNumberReleasePhase3"));
 				});
