@@ -1851,7 +1851,7 @@
 				Projects.showProjectCharacteristics();
 				FormProject.init();
 				var clickInterval;
-				function updateClick(fromIndex, direction, selector){
+				var updateClick = function(fromIndex, direction, selector){
 					from[fromIndex] = Projects.updateRange(direction , from[fromIndex], selector);
 				}
 				$("#plus-1").on('mosuedown',function () {
