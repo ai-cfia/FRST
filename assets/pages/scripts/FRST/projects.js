@@ -238,7 +238,7 @@ var Projects = function () {
 			});
 		},
 		
-		updateRange: function (direction, currVa, slider) {
+		updateRange: function (direction, currVal, slider) {
 			var range_instance = slider.data("ionRangeSlider");
 			currVal += step * direction;		   
 			if (currVal < 0) {
