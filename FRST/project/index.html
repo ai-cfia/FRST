@@ -1854,12 +1854,15 @@
 				var updateClick = function(fromIndex, direction, selector){
 					from[fromIndex] = Projects.updateRange(direction , from[fromIndex], selector);
 				}
+				var clickAndHold = function(fromIndex, direction, selector){
+					updateClick(fromIndex, direction, selector);
+					clickInterval = setInterval(function() {updateClick(fromIndex, direction, selector)}, 90);
+				}
 				$("#plus-1").on('mousedown',function () {
-					updateClick(0, 1, $("#fteNumberCostPhase1"));
-					clickInterval = setInterval(function() {updateClick(0, 1, $("#fteNumberCostPhase1"))}, 90);
+					clickAndHold(0, 1, $("#fteNumberCostPhase1"));
 				});
 				
-				$("#plus-1").on('mouseup',function () {
+				$(".adjust-btn").on('mouseup',function () {
 					clearInterval(clickInterval);
 					
 				});
