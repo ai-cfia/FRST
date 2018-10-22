@@ -253,14 +253,14 @@ var Projects = function () {
 			return currVal
 		},
 		
-		var clickInterval;
 		updateClick: function(fromIndex, direction, selector){
 			from[fromIndex] = Projects.updateRange(direction , from[fromIndex], selector);
 		},
 				
 		clickAndHold: function(fromIndex, direction, selector){
 			updateClick(fromIndex, direction, selector);
-			clickInterval = setInterval(function() {updateClick(fromIndex, direction, selector)}, 90);
+			var clickInterval = setInterval(function() {this.updateClick(fromIndex, direction, selector)}, 90);
+			return clickInterval;
 		}
 
 	};
