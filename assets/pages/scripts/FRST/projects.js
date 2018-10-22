@@ -83,7 +83,7 @@ var Projects = function () {
 				if (window.localStorage.getItem("current_project") != null) {
 					window.localStorage.setItem("current_project", current_project);
 				}
-				window.location.replace("/FRST/project");
+				window.location.replace("/IRR/FRST/project");
 			});
 
 		},
@@ -251,16 +251,6 @@ var Projects = function () {
 				from: currVal
 			});
 			return currVal
-		},
-		
-		updateClick: function(fromIndex, direction, selector){
-			from[fromIndex] = Projects.updateRange(direction , from[fromIndex], selector);
-		},
-				
-		clickAndHold: function(fromIndex, direction, selector){
-			updateClick(fromIndex, direction, selector);
-			var clickInterval = setInterval(function() {this.updateClick(fromIndex, direction, selector)}, 90);
-			return clickInterval;
 		}
 
 	};
