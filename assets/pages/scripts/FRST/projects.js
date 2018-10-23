@@ -272,7 +272,48 @@ var Projects = function() {
             }, 90);
         },
 
+        detectButtonPress: function() {
+            // event listener for each button to detect when theres mousedown
+            // each button adjusts its own slider either positively or negatively by one step value
+            $("#plus-1").on('mousedown', function() {
+                Projects.clickAndHold(0, 1, $("#fteNumberCostPhase1"));
+            });
+
+            $("#minus-1").on('mousedown', function() {
+                Projects.clickAndHold(0, -1, $("#fteNumberCostPhase1"));
+            });
+
+            $("#plus-2").on('mousedown', function() {
+                Projects.clickAndHold(1, 1, $("#fteNumberCostPhase2"));
+            });
+            $("#minus-2").on('mousedown', function() {
+                Projects.clickAndHold(1, -1, $("#fteNumberCostPhase2"));
+            });
+
+            $("#plus-3").on('mousedown', function() {
+                Projects.clickAndHold(2, 1, $("#fteNumberReleasePhase2"));
+            });
+            $("#minus-3").on('mousedown', function() {
+                Projects.clickAndHold(2, -1, $("#fteNumberReleasePhase2"));
+            });
+
+            $("#plus-4").on('mousedown', function() {
+                Projects.clickAndHold(3, 1, $("#fteNumberCostPhase3"));
+            });
+            $("#minus-4").on('mousedown', function() {
+                Projects.clickAndHold(3, -1, $("#fteNumberCostPhase3"));
+            });
+
+            $("#plus-5").on('mousedown', function() {
+                Projects.clickAndHold(4, 1, $("#fteNumberReleasePhase3"));
+            });
+            $("#minus-5").on('mousedown', function() {
+                Projects.clickAndHold(4, -1, $("#fteNumberReleasePhase3"));
+            });
+        },
+
         stopButtonHold: function() {
+            // detect when mouse is up on the button or when mouse out and kill the interval
             $(".adjust-btn").on('mouseup', function() {
                 clearInterval(clickInterval);
 
