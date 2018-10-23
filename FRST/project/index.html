@@ -1854,8 +1854,13 @@
             Projects.showProjectCharacteristics();
             FormProject.init();
 
-            //event listener to detect mouse up on any button and to clear the intervale
+            //event listener to detect mouse up or mouse out on any button and to clear the intervale
             $(".adjust-btn").on('mouseup', function () {
+                clearInterval(clickInterval);
+
+            });
+
+            $(".adjust-btn").on('mouseout', function () {
                 clearInterval(clickInterval);
 
             });
