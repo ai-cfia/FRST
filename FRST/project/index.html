@@ -1852,6 +1852,7 @@
             Projects.addProject();
             Projects.selectProject();
             Projects.showProjectCharacteristics();
+			Projects.stopButtonHold();
             FormProject.init();
 
             //event listener to detect mouse up or mouse out on any button and to clear the intervale
@@ -1864,7 +1865,8 @@
                 clearInterval(clickInterval);
 
             });*/
-
+			
+			
             // event listener for each button to detect when theres mousedown
             // each button adjusts its own slider either positively or negatively by one step value
             $("#plus-1").on('mousedown', function () {
