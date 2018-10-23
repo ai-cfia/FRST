@@ -238,20 +238,37 @@ var Projects = function () {
 			});
 		},
 		
-		updateRange: function (direction, currVal, slider) {
-			var range_instance = slider.data("ionRangeSlider");
+        updateRange: function (direction, currVal, slider) {
+            // update the current value on the slider based on the direction and original value
+            var range_instance = slider.data("ionRangeSlider");
+            // add the value change to the original value
 			currVal += step * direction;		   
-			if (currVal < 0) {
+            if (currVal < 0) {
+                // if the current value is less than the minimum then set it to the minimum
 				currVal = 0;
-			} else if (currVal > 30) {
+            } else if (currVal > 30) {
+                // set to max value if the opposite is true
 				currVal = 30;
 			}
-			
+
+            // update the value on the slider
 			range_instance.update({
 				from: currVal
 			});
 			return currVal
-		}
+        },
+
+       updateClick: function (fromIndex, direction, selector) {
+            // accounts for the functionality of a single click of the button
+            from[fromIndex] = Projects.updateRange(direction, from[fromIndex], selector);
+        },
+
+        clickAndHold: function (fromIndex, direction, selector) {
+            // clicks the button once and sets an intervale to repeat that click every 90 milliseconds
+            //this simulates a click and hold
+            updateClick(fromIndex, direction, selector);
+            clickInterval = setInterval(function () { updateClick(fromIndex, direction, selector) }, 90);
+        }
 
 	};
 
