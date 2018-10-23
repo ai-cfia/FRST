@@ -268,7 +268,19 @@ var Projects = function () {
             //this simulates a click and hold
             Projects.updateClick(fromIndex, direction, selector);
             clickInterval = setInterval(function () { Projects.updateClick(fromIndex, direction, selector) }, 90);
-        }
+        },
+		
+		stopButtonHold: function (){
+			$(".adjust-btn").on('mouseup', function () {
+                clearInterval(clickInterval);
+
+            });
+
+            $(".adjust-btn").on('mouseout', function () {
+                clearInterval(clickInterval);
+
+            });
+		}
 
 	};
 
