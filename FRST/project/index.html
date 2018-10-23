@@ -1720,6 +1720,7 @@
         let current_project = window.localStorage.getItem("current_project");
         var step = 0.01,
             from = [0, 0, 0, 0, 0];
+        var clickInterval;
         jQuery(document).ready(function () {
             if (window.localStorage.getItem("current_project") == null) {
                 window.location.href = "/FRST";
@@ -1852,7 +1853,6 @@
             Projects.selectProject();
             Projects.showProjectCharacteristics();
             FormProject.init();
-            var clickInterval;
 
             var updateClick = function (fromIndex, direction, selector) {
                 // accounts for the functionality of a single click of the button

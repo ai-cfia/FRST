@@ -266,8 +266,8 @@ var Projects = function () {
         clickAndHold: function (fromIndex, direction, selector) {
             // clicks the button once and sets an intervale to repeat that click every 90 milliseconds
             //this simulates a click and hold
-            updateClick(fromIndex, direction, selector);
-            clickInterval = setInterval(function () { updateClick(fromIndex, direction, selector) }, 90);
+            Projects.updateClick(fromIndex, direction, selector);
+            clickInterval = setInterval(function () { Projects.updateClick(fromIndex, direction, selector) }, 90);
         }
 
 	};
