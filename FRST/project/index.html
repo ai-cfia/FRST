@@ -1854,18 +1854,6 @@
             Projects.showProjectCharacteristics();
             FormProject.init();
 
-            var updateClick = function (fromIndex, direction, selector) {
-                // accounts for the functionality of a single click of the button
-                from[fromIndex] = Projects.updateRange(direction, from[fromIndex], selector);
-            }
-
-            var clickAndHold = function (fromIndex, direction, selector) {
-                // clicks the button once and sets an intervale to repeat that click every 90 milliseconds
-                //this simulates a click and hold
-                updateClick(fromIndex, direction, selector);
-                clickInterval = setInterval(function () { updateClick(fromIndex, direction, selector) }, 90);
-            }
-
             //event listener to detect mouse up on any button and to clear the intervale
             $(".adjust-btn").on('mouseup', function () {
                 clearInterval(clickInterval);
@@ -1879,35 +1867,35 @@
             });
 
             $("#minus-1").on('mousedown', function () {
-                clickAndHold(0, -1, $("#fteNumberCostPhase1"));
+                Projects.clickAndHold(0, -1, $("#fteNumberCostPhase1"));
             });
 
             $("#plus-2").on('mousedown', function () {
-                clickAndHold(1, 1, $("#fteNumberCostPhase2"));
+                Projects.clickAndHold(1, 1, $("#fteNumberCostPhase2"));
             });
             $("#minus-2").on('mousedown', function () {
-                clickAndHold(1, -1, $("#fteNumberCostPhase2"));
+                Projects.clickAndHold(1, -1, $("#fteNumberCostPhase2"));
             });
 
             $("#plus-3").on('mousedown', function () {
-                clickAndHold(2, 1, $("#fteNumberReleasePhase2"));
+                Projects.clickAndHold(2, 1, $("#fteNumberReleasePhase2"));
             });
             $("#minus-3").on('mousedown', function () {
-                clickAndHold(2, -1, $("#fteNumberReleasePhase2"));
+                Projects.clickAndHold(2, -1, $("#fteNumberReleasePhase2"));
             });
 
             $("#plus-4").on('mousedown', function () {
-                clickAndHold(3, 1, $("#fteNumberCostPhase3"));
+                Projects.clickAndHold(3, 1, $("#fteNumberCostPhase3"));
             });
             $("#minus-4").on('mousedown', function () {
-                clickAndHold(3, -1, $("#fteNumberCostPhase3"));
+                Projects.clickAndHold(3, -1, $("#fteNumberCostPhase3"));
             });
 
             $("#plus-5").on('mousedown', function () {
-                clickAndHold(4, 1, $("#fteNumberReleasePhase3"));
+                Projects.clickAndHold(4, 1, $("#fteNumberReleasePhase3"));
             });
             $("#minus-5").on('mousedown', function () {
-                clickAndHold(4, -1, $("#fteNumberReleasePhase3"));
+                Projects.clickAndHold(4, -1, $("#fteNumberReleasePhase3"));
             });
         });
 
