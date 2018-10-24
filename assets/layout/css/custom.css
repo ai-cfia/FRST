@@ -1,138 +1,209 @@
 /* here you can put your own css to customize and override the theme */
-
 /* style precise adjustment buttons for FTE sliders */
-.adjust-btn {
-    border: none;
-    background-color: #32c5d2;
-    color: #fff;
-    height: 30px;
-    width: 30px;
-	font-size:16pt;
-    text-align: center;
-    line-height: 1;
-    margin: 1px;
-	margin-left:0px;
+ .adjust-btn {
+     border: none;
+     background-color: #32c5d2;
+     color: #fff;
+     height: 30px;
+     width: 30px;
+     font-size:16pt;
+     text-align: center;
+     line-height: 1;
+     margin: 1px;
+     margin-left:0px;
 }
-
 /* change button color on hover */
-.adjust-btn:hover {
-	transition: 0.2s ease all;
-	background-color: #26a1ab;
+ .adjust-btn:hover {
+     transition: 0.2s ease all;
+     background-color: #26a1ab;
 }
-
 /* styling for when buttons pressed */
-.adjust-btn:focus{
-	outline:0;
+ .adjust-btn:focus{
+     outline:0;
 }
-
-.adjust-btn:active{
-	background-color:#1e8087;
+ .adjust-btn:active{
+     background-color:#1e8087;
 }
-
-/* The container */
-.container {
-    display: block;
-    position: relative;
-    padding-left: 44px;
-    padding-top: 2px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 14px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+/* The chart-list-item */
+ .chart-list-item {
+     display: block;
+     position: relative;
+     padding-left: 44px;
+     padding-top: 2px;
+     margin-bottom: 12px;
+     cursor: pointer;
+     font-size: 14px;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
 }
-
-    /* Hide the browser's default checkbox */
-    .container input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-    }
-
+/* Hide the browser's default checkbox */
+ .chart-list-item input {
+     position: absolute;
+     opacity: 0;
+     cursor: pointer;
+     height: 0;
+     width: 0;
+}
 /* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 22px;
-    width: 22px;
-    margin-left: 15px;
-    background-color: #eee;
+ .checkmark {
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 22px;
+     width: 22px;
+     margin-left: 15px;
+     background-color: #eee;
 }
-
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-    background-color: #ccc;
+ .chart-list-item:hover input ~ .checkmark {
+     background-color: #ccc;
 }
-
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-    background-color: #3fd5c0;
+ .chart-list-item input:checked ~ .checkmark {
+     background-color: #3fd5c0;
 }
-
 /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
+ .checkmark:after {
+     content: "";
+     position: absolute;
+     display: none;
 }
-
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-    display: block;
+ .chart-list-item input:checked ~ .checkmark:after {
+     display: block;
 }
-
 /* Style the checkmark/indicator */
-.container .checkmark:after {
-    left: 8px;
-    top: 4px;
-    width: 6px;
-    height: 12px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+ .chart-list-item .checkmark:after {
+     left: 8px;
+     top: 4px;
+     width: 6px;
+     height: 12px;
+     border: solid white;
+     border-width: 0 3px 3px 0;
+     -webkit-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     transform: rotate(45deg);
 }
-
 /* style list item that contains the sub menu title */
-.items-title {
-	background-color: #35c3af! important;
-    margin-bottom: 6px! important;
-    padding-top: 3px! important;
+ .items-title {
+     background-color: #35c3af! important;
+     margin-bottom: 6px! important;
+     padding-top: 3px! important;
 }
-
 /* specific styling for chart title */
-#chart-title {
-	margin-left: 54.5px;
-    color: #fff;
-    font-size: 11pt;
+ #chart-title {
+     margin-left: 54.5px;
+     color: #fff;
+     font-size: 11pt;
 }
-
 /* change left margin for french title due to larger character count */
-#chart-title>span[lang = "fr"] {
-    margin-left: -22.5px;
+ #chart-title>span[lang = "fr"] {
+     margin-left: -22.5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* here you can put your own css to customize and override the theme */
+/* style precise adjustment buttons for FTE sliders */
+ .adjust-btn {
+     border: none;
+     background-color: #32c5d2;
+     color: #fff;
+     height: 30px;
+     width: 30px;
+     font-size:16pt;
+     text-align: center;
+     line-height: 1;
+     margin: 1px;
+     margin-left:0px;
+}
+/* change button color on hover */
+ .adjust-btn:hover {
+     transition: 0.2s ease all;
+     background-color: #26a1ab;
+}
+/* styling for when buttons pressed */
+ .adjust-btn:focus{
+     outline:0;
+}
+ .adjust-btn:active{
+     background-color:#1e8087;
+}
+/* The chart-list-item */
+ .chart-list-item {
+     display: block;
+     position: relative;
+     padding-left: 44px;
+     padding-top: 2px;
+     margin-bottom: 12px;
+     cursor: pointer;
+     font-size: 14px;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+}
+/* Hide the browser's default checkbox */
+ .chart-list-item input {
+     position: absolute;
+     opacity: 0;
+     cursor: pointer;
+     height: 0;
+     width: 0;
+}
+/* Create a custom checkbox */
+ .checkmark {
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 22px;
+     width: 22px;
+     margin-left: 15px;
+     background-color: #eee;
+}
+/* On mouse-over, add a grey background color */
+ .chart-list-item:hover input ~ .checkmark {
+     background-color: #ccc;
+}
+/* When the checkbox is checked, add a blue background */
+ .chart-list-item input:checked ~ .checkmark {
+     background-color: #3fd5c0;
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+ .checkmark:after {
+     content: "";
+     position: absolute;
+     display: none;
+}
+/* Show the checkmark when checked */
+ .chart-list-item input:checked ~ .checkmark:after {
+     display: block;
+}
+/* Style the checkmark/indicator */
+ .chart-list-item .checkmark:after {
+     left: 8px;
+     top: 4px;
+     width: 6px;
+     height: 12px;
+     border: solid white;
+     border-width: 0 3px 3px 0;
+     -webkit-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     transform: rotate(45deg);
+}
+/* style list item that contains the sub menu title */
+ .items-title {
+     background-color: #35c3af! important;
+     margin-bottom: 6px! important;
+     padding-top: 3px! important;
+}
+/* specific styling for chart title */
+ #chart-title {
+     margin-left: 54.5px;
+     color: #fff;
+     font-size: 11pt;
+}
+/* change left margin for french title due to larger character count */
+ #chart-title>span[lang = "fr"] {
+     margin-left: -22.5px;
+}
+ 
