@@ -113,6 +113,10 @@
     font-size: 11pt;
 }
 
+/* change left margin for french title due to larger character count
+#chart-title>span[lang = "fr"] {
+    margin-left: -22.5px;
+}
 
 
 
