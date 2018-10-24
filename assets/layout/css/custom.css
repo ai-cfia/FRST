@@ -101,9 +101,9 @@
 
 /* style list item that contains the sub menu title */
 .items-title {
-	background-color: #35c3af;
-    margin-bottom: 6px;
-    padding-top: 3px;
+	background-color: #35c3af! important;
+    margin-bottom: 6px! important;
+    padding-top: 3px! important;
 }
 
 /* specific styling for chart title */
