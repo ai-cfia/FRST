@@ -1,5 +1,6 @@
 /* here you can put your own css to customize and override the theme */
 
+/* style precise adjustment buttons for FTE sliders */
 .adjust-btn {
     border: none;
     background-color: #32c5d2;
@@ -13,11 +14,13 @@
 	margin-left:0px;
 }
 
+/* change button color on hover */
 .adjust-btn:hover {
 	transition: 0.2s ease all;
 	background-color: #26a1ab;
 }
 
+/* styling for when buttons pressed */
 .adjust-btn:focus{
 	outline:0;
 }
@@ -95,3 +98,37 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+/* style list item that contains the sub menu title */
+.items-title {
+	background-color: #35c3af;
+    margin-bottom: 6px;
+    padding-top: 3px;
+}
+
+/* specific styling for chart title */
+#chart-title {
+	margin-left: 54.5px;
+    color: #fff;
+    font-size: 11pt;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
