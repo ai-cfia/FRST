@@ -30,8 +30,8 @@
 .container {
     display: block;
     position: relative;
-    padding-left: 35px;
-    padding-top: 3px;
+    padding-left: 44px;
+    padding-top: 2px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 14px;
@@ -55,9 +55,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
-    margin-left: 9px;
+    height: 22px;
+    width: 22px;
+    margin-left: 15px;
     background-color: #eee;
 }
 
@@ -68,7 +68,7 @@
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-    background-color: #2196F3;
+    background-color: #3fd5c0;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -85,10 +85,10 @@
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
+    left: 8px;
+    top: 4px;
+    width: 6px;
+    height: 112px;
     border: solid white;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
