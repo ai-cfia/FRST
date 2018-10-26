@@ -657,10 +657,10 @@ var Charts = function () {
 						$("#tabNavProject1").addClass("active");
 						$("#tabProject1").addClass("active");
 
-						$("#totalCostProject1").text(project1TotalCost.toLocaleString());
-						$("#totalReleaseProject1").text(project1TotalRelease.toLocaleString());
-						$("#maximumNetReleaseProject1").text((project1TotalRelease - project1TotalCost).toLocaleString());
-						$("#minimumNetReleaseProject1").text(parseFloat(project1TotalRelease - project1TotalCost - project1TotalError).toLocaleString());
+                        $("#totalCostProject1").text(project1TotalCost.toFixed(2).toLocaleString());
+                        $("#totalReleaseProject1").text(project1TotalRelease.toFixed(2).toLocaleString());
+                        $("#maximumNetReleaseProject1").text((project1TotalRelease - project1TotalCost).toFixed(2).toLocaleString());
+                        $("#minimumNetReleaseProject1").text(parseFloat(project1TotalRelease - project1TotalCost - project1TotalError).toFixed(2).toLocaleString());
 					}
 
 					if (project2 != null) {
@@ -678,10 +678,10 @@ var Charts = function () {
 							$("#tabProject2").addClass("active");
 						}
 
-						$("#totalCostProject2").text(project2TotalCost.toLocaleString());
-						$("#totalReleaseProject2").text(project2TotalRelease.toLocaleString());
-						$("#maximumNetReleaseProject2").text((project2TotalRelease - project2TotalCost).toLocaleString());
-						$("#minimumNetReleaseProject2").text(parseFloat(project2TotalRelease - project2TotalCost - project2TotalError).toLocaleString());
+                        $("#totalCostProject2").text(project2TotalCost.toFixed(2).toLocaleString());
+                        $("#totalReleaseProject2").text(project2TotalRelease.toFixed(2).toLocaleString());
+                        $("#maximumNetReleaseProject2").text((project2TotalRelease - project2TotalCost).toFixed(2).toLocaleString());
+                        $("#minimumNetReleaseProject2").text(parseFloat(project2TotalRelease - project2TotalCost - project2TotalError).toFixed(2).toLocaleString());
 					}
 				}
 
