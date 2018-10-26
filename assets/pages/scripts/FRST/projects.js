@@ -323,27 +323,6 @@ var Projects = function() {
                 clearInterval(clickInterval);
 
             });
-        },
-
-        loadCharts: function() {
-            // first obtain and store the list of projects from the browser
-            let projects = JSON.parse(window.localStorage.getItem("projects"));
-            // create a fore loop to loop through each variable in the array
-            var currChart = "";
-            for (var i = 0; i < projects.length; i++) {
-                // add the html for each list item in the drop down list
-                if (!(projects[i].costRelease.quaterNumberPhase1 == null ||
-                        projects[i].complexityRisk._cost == null)) {
-
-                    currChart += '<li class = "nav-item">';
-                    currChart += '<label class="chart-list-item">' + projects[i].title;
-                    currChart += '<input type="checkbox" id=chart' + i + '>';
-                    currChart += '<span class="checkmark"></span></label></li>';
-                }
-            }
-            // append the html code to the actual list
-            $(currChart).insertAfter("li.items-title");
-
         }
 
     };
