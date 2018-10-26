@@ -207,3 +207,7 @@
      margin-left: -22.5px;
 }
  
+/* add a top margin to the cost release chart */
+ canavas[name="costReleaseChart"] {
+	 margin-top:15px;
+ }
