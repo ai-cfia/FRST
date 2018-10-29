@@ -1,20 +1,30 @@
 var Projects = function() {
 
     return {
-
-        addProject: function() {
+		
+		/* add a new project */
+        addProject: function() {	
+			// set up event listener to check if a new project wants to be made
             $("a[name='newProject']").click(function() {
+				// obtain the project from the local storage
                 let projects = JSON.parse(window.localStorage.getItem("projects"));
+				// check if the last project added has been filled out
                 if (projects.length > 0 &&
                     (projects[projects.length - 1].costRelease.quaterNumberPhase1 == null ||
                         projects[projects.length - 1].complexityRisk._cost == null)) {
+					// alert if the project has not been completed
                     alert("Please first fill out the project " + projects[projects.length - 1].title);
                 } else if (projects.length >= 10) {
+					// warn user if there are already ten projects
                     alert("Add 10 projects at most!");
                 } else {
+					// if there are less than ten projects define a project object
                     let project_placeholder = {
+						// define a temp project title
                         "title": "Project " + (projects.length + 1),
+						// define properties for cost release chart values for the project
                         "costRelease": {
+							// define all as null until defined later when the project form is submitted
                             "startDatePhase1": null,
                             "quaterNumberPhase1": null,
                             "fteNumberCostPhase1": null,
@@ -30,7 +40,9 @@ var Projects = function() {
                             "fteNumberReleasePhase3": null,
                             "operatingMoneyReleasePhase3": null
                         },
+						// define the properties corresponding to the complexity risk assessment
                         "complexityRisk": {
+							// state all as empty arrays until later defined when form is submitted
                             "_cost": [],
                             "_scope": [],
                             "_communications": [],
@@ -49,103 +61,147 @@ var Projects = function() {
                         }
                     };
 
+					// add the new undefined project to the project array
                     projects.push(project_placeholder)
+					// push the updated projects array to the localStorage
                     window.localStorage.setItem("projects", JSON.stringify(projects));
-
-                    let text = "";
-                    text += '<li class="nav-item" name="project' + projects.length + '">';
-                    text += '<a href="javascript:;" class="nav-link" name="project" id="project' + projects.length + '"><span class="title">' + projects[projects.length - 1].title + '</span></a>';
-                    text += '</li>';
-
-                    $("li[name='newProject']").before(text);
+					// reload the page to update the list
                     location.reload();
                 }
             });
         },
-
-        loadProjects: function() {
+		/* load projects drop down menu*/
+        loadProjects: function() {			
+			// obtain project array from local storage
             let projects = JSON.parse(window.localStorage.getItem("projects"));
-
+			// intialize variable to store html code
             let text = "";
+			// generate HTML text for all the drop down elements
             for (let i = 0; i < projects.length; i++) {
                 text += '<li class="nav-item" name="project' + i + '">';
                 text += '<a href="javascript:;" class="nav-link" name="project" id="project' + i + '"><span class="title">' + projects[i].title + '</span></a>';
                 text += '</li>';
             }
-
+			// insert text into the DOM 
             $("li[name='newProject']").before(text);
         },
-
-        selectProject: function() {
+		
+		
+		/*select project from dropdown menu*/
+        selectProject: function() {			
+			// setup event listener to detect click
             $("a[name='project']").click(function() {
+				// get id of the button that has been clicked
                 let current_id = $(this).attr("id");
+				// obtain the project number from the end of the id set current project to said number
                 let current_project = parseFloat(current_id.charAt(current_id.length - 1));
+				// check if there is any project already set as the current project
                 if (window.localStorage.getItem("current_project") != null) {
                     window.localStorage.setItem("current_project", current_project);
                 }
+				//redirect to the project page
                 window.location.replace("/IRR/FRST/project");
             });
 
         },
 
+		/* sets up the current project on the project page */
         setupCurrentProject: function() {
+			// obtain the array of all projects
             let projects = JSON.parse(window.localStorage.getItem("projects"));
+			// obtain the current project index
             let current_project = window.localStorage.getItem("current_project");
+			// add the current projects title to the page
             $(".page-title").prepend(projects[current_project].title);
             $("a[name='projectTitle']").prepend(projects[current_project].title);
+			// change the current projects status in drop down menu to active for aesthetic purposes
             $("li[name='project" + current_project + "']").addClass("active");
+			// Finally display the current project form
             $("#project" + current_project).append("<span class='selected'></span>");
         },
 
+		/* display current set project characteristics to the project form */
         showProjectCharacteristics: function() {
+			// obtain project array and current project from localStorage
             let projects = JSON.parse(window.localStorage.getItem("projects"));
             let current_project = window.localStorage.getItem("current_project");
-
+			// set phase 1 values
+			// set date
             $("#startDatePhase1").val(projects[current_project].costRelease.startDatePhase1);
+			// set quarter number slider
             $("#quaterNumberPhase1").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.quaterNumberPhase1
             });
+			// set FTE cost slider 
             $("#fteNumberCostPhase1").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.fteNumberCostPhase1
             });
+			// set operating cost slider
             $("#operatingMoneyCostPhase1").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.operatingMoneyCostPhase1
             });
-
+			
+			// set phase 2 values
             $("#startDatePhase2").val(projects[current_project].costRelease.startDatePhase2);
+			
+			// set quarter number slider
             $("#quaterNumberPhase2").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.quaterNumberPhase2
             });
+			
+			// set FTE cost slider
             $("#fteNumberCostPhase2").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.fteNumberCostPhase2
             });
+			
+			// set operating cost slider
             $("#operatingMoneyCostPhase2").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.operatingMoneyCostPhase2
             });
+			
+			// set FTE release slider 
             $("#fteNumberReleasePhase2").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.fteNumberReleasePhase2
             });
+			
+			// set operating release slider
             $("#operatingMoneyReleasePhase2").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.operatingMoneyReleasePhase2
             });
 
+			// set phase 3 values
+			// set start date
             $("#startDatePhase3").val(projects[current_project].costRelease.startDatePhase3);
+			// set quarter number slider
             $("#quaterNumberPhase3").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.quaterNumberPhase3
             });
+			
+			// set FTE cost slider
             $("#fteNumberCostPhase3").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.fteNumberCostPhase3
             });
+			
+			// set operating cost slider
             $("#operatingMoneyCostPhase3").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.operatingMoneyCostPhase3
             });
+			
+			// set FTE release slider
             $("#fteNumberReleasePhase3").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.fteNumberReleasePhase3
             });
+			
+			// set operating release slider
             $("#operatingMoneyReleasePhase3").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.operatingMoneyReleasePhase3
             });
 
+			
+			// setting currently checked radio buttons for the complexity risk questionaire
+			// obtain the current value for each question from the current project object
+			// each value is associated to one of the options for each question on the questionaire
+			// use value obtained to select the correct button using jQuery and set its checked attribute to true
             $("input[name='cost1'][value='" + projects[current_project].complexityRisk._cost[1] + "']").attr("checked", true);
             $("input[name='cost2'][value='" + projects[current_project].complexityRisk._cost[2] + "']").attr("checked", true);
             $("input[name='cost3'][value='" + projects[current_project].complexityRisk._cost[3] + "']").attr("checked", true);
