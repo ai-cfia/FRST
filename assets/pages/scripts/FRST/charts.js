@@ -4,11 +4,14 @@ var Charts = function() {
 
         initCharts: function() {
 
+			// setting some basic defualt for chart texts
             Chart.defaults.global.defaultFontFamily = "Arial";
             Chart.defaults.global.defaultFontSize = 12;
             Chart.defaults.global.defaultFontColor = "#777";
 
+			// define Chart object for the cost release bar chart
             let costReleaseChart = new Chart($("canvas[name='costReleaseChart']"), {
+				// type is a custom type defined in the Chart.js plugin
                 type: "barError",
                 data: {
                     labels: [],
@@ -61,7 +64,7 @@ var Charts = function() {
                 type: "radar",
                 data: {
                     labels: [
-                        "Projet Characteristics",
+                        "Project Characteristics",
                         "Strategic Management Risks",
                         "Procurement Risks",
                         "Human Resources Risks",
