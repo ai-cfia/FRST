@@ -198,9 +198,9 @@ var Projects = function() {
             });
 
 
-            // setting currently checked radio buttons for the complexity risk questionaire
+            // setting currently checked radio buttons for the complexity risk questionnaire
             // obtain the current value for each question from the current project object
-            // each value is associated to one of the options for each question on the questionaire
+            // each value is associated to one of the options for each question on the questionnaire
             // use value obtained to select the correct button using jQuery and set its checked attribute to true
             $("input[name='cost1'][value='" + projects[current_project].complexityRisk._cost[1] + "']").attr("checked", true);
             $("input[name='cost2'][value='" + projects[current_project].complexityRisk._cost[2] + "']").attr("checked", true);
