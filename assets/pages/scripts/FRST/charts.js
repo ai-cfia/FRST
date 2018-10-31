@@ -179,6 +179,7 @@ var Charts = function() {
 						project1Release = testArray[1];
 						project1Factors = testArray[2];
 						project1TotalQuaterNumber = testArray[3];
+						project1 = projects[$("#selectProject1").val()];
                     }
 
                     if ($("#selectProject2").val() != "-1") {
