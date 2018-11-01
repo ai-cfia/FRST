@@ -169,6 +169,8 @@ var Charts = function() {
                     let project1Uncertainty = 0;
                     let project2Uncertainty = 0;
 
+
+
 					// show the cost release values
                     $("#costReleaseValues").removeAttr("hidden");
 					
@@ -177,8 +179,14 @@ var Charts = function() {
 						
 						// store the relevant project from the array 
                         project1 = projects[$("#selectProject1").val()];
+                        var data = Charts.generateData(project1, "rgba(238, 59, 59, 0.8)", "rgba(30, 144, 255, 0.8)");
+                        console.log(data);
+                        project1Cost = data[0];
+                        project1Release = data[1];
+                        project1Factors = data[2];
+                        project1TotalQuaterNumber = data[3];
 
-                        // fetch data from project1
+                       /* // fetch data from project1
 						
 						// first obtain the amount of quarters for the project
                         let project1QuaterNumberPhase1 = parseFloat(project1.costRelease.quaterNumberPhase1);
@@ -350,20 +358,6 @@ var Charts = function() {
                             backgroundColor: "rgba(30, 144, 255, 0.8)"
                         };
 
-						// calculate the sum total cost from all quarters 
-                        project1TotalCost = project1CostData.reduce(function(acc, val) {
-                            return acc + val;
-                        });
-						// calculate the maximum total release
-                        project1TotalRelease = project1ReleaseData.reduce(function(acc, val) {
-                            return acc + val;
-                        });
-						
-						// calculate the minimum total release
-                        project1TotalError = project1Error.reduce(function(acc, val) {
-                            return acc + val;
-                        });
-
                         // generate data for complexity and risk graph
                         project1Factors = {
 							// input each averaged out risk score as the data
@@ -380,14 +374,35 @@ var Charts = function() {
                             backgroundColor: "rgba(238, 59, 59, 0.2)",
                             borderColor: "rgba(238, 59, 59, 0.8)",
                             label: "Uncertainty of " + project1.title + ", Total Score: " + project1Uncertainty
-                        };
+                        };*/
+
+                        // calculate the sum total cost from all quarters 
+                        project1TotalCost = project1Cost.data.reduce(function (acc, val) {
+                            return acc + val;
+                        });
+                        // calculate the maximum total release
+                        project1TotalRelease = project1Release.data.reduce(function (acc, val) {
+                            return acc + val;
+                        });
+
+                        // calculate the minimum total release
+                        project1TotalError = project1Release.error.reduce(function (acc, val) {
+                            return acc + val;
+                        });
+
+                        
 
                     }
 
                     if ($("#selectProject2").val() != "-1") {
                         project2 = projects[$("#selectProject2").val()];
+                        var data2 = Charts.generateData(project2, "rgba(238, 59, 59, 0.4)", "rgba(30, 144, 255, 0.4)");
+                        project2Cost = data2[0];
+                        project2Release = data2[1];
+                        project2Factors = data2[2];
+                        project2TotalQuaterNumber = data2[3];
 
-                        // fetch data from project2
+                        /*// fetch data from project2
                         let project2QuaterNumberPhase1 = parseFloat(project2.costRelease.quaterNumberPhase1);
                         let project2QuaterNumberPhase2 = parseFloat(project2.costRelease.quaterNumberPhase2);
                         let project2QuaterNumberPhase3 = parseFloat(project2.costRelease.quaterNumberPhase3);
@@ -506,15 +521,7 @@ var Charts = function() {
                             backgroundColor: "rgba(30, 144, 255, 0.4)"
                         };
 
-                        project2TotalCost = project2CostData.reduce(function(acc, val) {
-                            return acc + val;
-                        });
-                        project2TotalRelease = project2ReleaseData.reduce(function(acc, val) {
-                            return acc + val;
-                        });
-                        project2TotalError = project2Error.reduce(function(acc, val) {
-                            return acc + val;
-                        });
+                        
 
                         // generate data for complexity and risk graph
                         project2Factors = {
@@ -530,7 +537,17 @@ var Charts = function() {
                             backgroundColor: "rgba(30, 144, 255, 0.2)",
                             borderColor: "rgba(30, 144, 255, 0.8)",
                             label: "Uncertainty of " + project2.title + ", Total Score: " + project2Uncertainty
-                        };
+                        };*/
+
+                        project2TotalCost = project2Cost.data.reduce(function (acc, val) {
+                            return acc + val;
+                        });
+                        project2TotalRelease = project2Release.data.reduce(function (acc, val) {
+                            return acc + val;
+                        });
+                        project2TotalError = project2Release.error.reduce(function (acc, val) {
+                            return acc + val;
+                        });
 
                     }
 					
@@ -555,8 +572,8 @@ var Charts = function() {
 							// for every quarter difference loop through project1
                             for (let i = 0; i < difference; i++) {
 								// add blank data to account for the difference in the start time
-                                project1CostData.unshift(0);
-                                project1ReleaseData.unshift(0);
+                                project1Cost.data.unshift(0);
+                                project1Release.data.unshift(0);
                                 project1Error.unshift(null);
                             }
                         } else {
@@ -687,240 +704,218 @@ var Charts = function() {
             $(currChart).insertAfter("li.items-title");
 
         },
-		
+        
 		/* generate the correct data sets based on a given project 
-		   @param {int} projectIndex - the index in the projects array for the given project
+		   @param {Project} project - the current project object to generate data for
 		   @param {string} costRiskColour -  the colour for the cost bar and the complexityRisk chart
 		   @param {string} releaseColour - the colour for the release bar	
 		*/
-		generateDataSet: function(projectIndex, costRiskColour, releaseColour){
-			// first store the project array
-			// define some variables for later use
-			let projects = JSON.parse(window.localStorage.getItem("projects"));
-			let project1TotalQuaterNumber = 0;
-			let project1 = null;
-			let project1CostData = [];
-			let project1ReleaseData = [];
-			let project1Error = [];
-			let project1Cost = {};
-			let project1Release = {};
-			let project1Factors = {};
-			let project1TotalCost = 0;
-			let project1TotalRelease = 0;
-			let project1TotalError = 0;
-			let project1Uncertainty = 0;
-			// store the relevant project from the array 
-			project1 = projects[projectIndex];
-			// first obtain the amount of quarters for the project
-			let project1QuaterNumberPhase1 = parseFloat(project1.costRelease.quaterNumberPhase1);
-			let project1QuaterNumberPhase2 = parseFloat(project1.costRelease.quaterNumberPhase2);
-			let project1QuaterNumberPhase3 = parseFloat(project1.costRelease.quaterNumberPhase3);
+        generateData: function (project, costRiskColour, releaseColour) {
+            console.log(project);
+            // degfine some variables for later use
+            let projectTotalQuaterNumber = 0;
+            let projectCostData = [];
+            let projectReleaseData = [];
+            let projectError = [];
+            let projectCost = {};
+            let projectRelease = {};
+            let projectFactors = {};
+            let projectTotalCost = 0;
+            let projectTotalRelease = 0;
+            let projectTotalError = 0;
+            let projectUncertainty = 0;
 
-			// obtain all the start dates
-			let project1StartDatePhase1 = new Date(project1.costRelease.startDatePhase1);
-			let project1StartDatePhase2 = new Date(project1.costRelease.startDatePhase2);
-			let project1StartDatePhase3 = new Date(project1.costRelease.startDatePhase3);
-			
-			// define a return variable
-			let finalData = [];
+            // first obtain the amount of quarters for the project
+            let projectQuaterNumberPhase1 = parseFloat(project.costRelease.quaterNumberPhase1);
+            let projectQuaterNumberPhase2 = parseFloat(project.costRelease.quaterNumberPhase2);
+            let projectQuaterNumberPhase3 = parseFloat(project.costRelease.quaterNumberPhase3);
+
+            // obtain all the start dates
+            let projectStartDatePhase1 = new Date(project.costRelease.startDatePhase1);
+            let projectStartDatePhase2 = new Date(project.costRelease.startDatePhase2);
+            let projectStartDatePhase3 = new Date(project.costRelease.startDatePhase3);
+
+            // define and calculate all 7 seven factors based on the complexity risk secttion answers
+            // used to calculate the overall uncertainty for the project
+            let projectFactor1 = 0;
+            // loop through every element in section1 array
+            for (let i = 0; i < project.complexityRisk.section1.length; i++) {
+                // sum all the values together 
+                projectFactor1 += parseFloat(project.complexityRisk.section1[i]);
+            }
+            // divide the sum by the length of the array to calculate the average risk
+            let projectFactor1Uniformed = projectFactor1 / project.complexityRisk.section1.length;
+
+            let projectFactor2 = 0;
+            // loop through every element in section2 array
+            for (let i = 0; i < project.complexityRisk.section2.length; i++) {
+                // sum all the values together
+                projectFactor2 += parseFloat(project.complexityRisk.section2[i]);
+            }
+            // divide the sum by the length of the array to calculate the average risk
+            let projectFactor2Uniformed = projectFactor2 / project.complexityRisk.section2.length;
+
+            let projectFactor3 = 0;
+            // loop through every element in section3 array
+            for (let i = 0; i < project.complexityRisk.section3.length; i++) {
+                // sum all the values together
+                projectFactor3 += parseFloat(project.complexityRisk.section3[i]);
+            }
+            // divide the sum by the length of the array to calculate the average risk
+            let projectFactor3Uniformed = projectFactor3 / project.complexityRisk.section3.length;
+
+            let projectFactor4 = 0;
+            // loop through every element in section4 array
+            for (let i = 0; i < project.complexityRisk.section4.length; i++) {
+                // sum all the values together
+                projectFactor4 += parseFloat(project.complexityRisk.section4[i]);
+            }
+            // divide the sum by the length of the array to calculate the average risk
+            let projectFactor4Uniformed = projectFactor4 / project.complexityRisk.section4.length;
+
+            let projectFactor5 = 0;
+            // loop through every element in section5 array
+            for (let i = 0; i < project.complexityRisk.section5.length; i++) {
+                // sum all the values together
+                projectFactor5 += parseFloat(project.complexityRisk.section5[i]);
+            }
+            // divide the sum by the length of the array to calculate the average risk
+            let projectFactor5Uniformed = projectFactor5 / project.complexityRisk.section5.length;
+
+            let projectFactor6 = 0;
+            // loop through every element in section6 array
+            for (let i = 0; i < project.complexityRisk.section6.length; i++) {
+                // sum all the values together
+                projectFactor6 += parseFloat(project.complexityRisk.section6[i]);
+            }
+            // divide the sum by the length of the array to calculate the average risk
+            let projectFactor6Uniformed = projectFactor6 / project.complexityRisk.section6.length;
+
+            let projectFactor7 = 0;
+            // loop through every element in section7 array
+            for (let i = 0; i < project.complexityRisk.section7.length; i++) {
+                // sum all the values together
+                projectFactor7 += parseFloat(project.complexityRisk.section7[i]);
+            }
+            // divide the sum by the length of the array to calculate the average risk
+            let projectFactor7Uniformed = projectFactor7 / project.complexityRisk.section7.length;
+
+            // sum together all the factor values to calculate the total uncertainty
+            projectUncertainty = projectFactor1 + projectFactor2 + projectFactor3 +
+                projectFactor4 + projectFactor5 + projectFactor6 + projectFactor7;
+
+            // calculate the cost per quarter of phase one by multiplying the number of FTE's per quarter by 25000 and adding the total operating cost
+            // also we need to parse the values because the input from sliders are text
+            let projectCostPhase1 = parseFloat(project.costRelease.fteNumberCostPhase1) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase1);
+            // set release and error values to 0 and null respectively since there is no release for the first phase
+            let projectReleasePhase1 = 0;
+            let projectErrorPhase1 = null;
+
+            // loop for each quarter in the phase
+            for (let i = 1; i <= projectQuaterNumberPhase1; i++) {
+                // push the cost, release and error data into the data arrays for the project for each quarter in the current phase
+                projectCostData.push(projectCostPhase1);
+                projectReleaseData.push(projectReleasePhase1);
+                projectError.push(projectErrorPhase1);
+            }
+
+            // calculate the gap between phase 1 and phase 2
+            let projectDifferenceP1P2 = parseFloat((projectStartDatePhase2.getTime() -
+                (projectStartDatePhase1.getTime() + projectQuaterNumberPhase1 * (1000 * 60 * 60 * 24 * 30 * 3))) /
+                (1000 * 60 * 60 * 24 * 30 * 3));
+
+            for (let i = 0; i < projectDifferenceP1P2; i++) {
+                // for each additional quarter push empty data into the arrays, this is to account for projects that will have a gap between phases
+                projectCostData.push(0);
+                projectReleaseData.push(0);
+                projectError.push(null);
+            }
+
+            // calculate the phase 2 cost
+            let projectCostPhase2 = parseFloat(project.costRelease.fteNumberCostPhase2) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase2);
+            // calculate the release by following the same process followed to calculate the cost
+            let projectReleasePhase2 = parseFloat(project.costRelease.fteNumberReleasePhase2) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase2);
+
+            // calculate the lowest possible release based on the error
+            // multiply the release by a calculated factor to obtain this value
+            let projectErrorPhase2 = projectUncertainty / 170 * projectReleasePhase2;
+
+            // loop for every quarter in the phase
+            for (let i = 1; i <= projectQuaterNumberPhase2; i++) {
+                // push the cost, release and uncertainty for every quarter
+                projectCostData.push(projectCostPhase2);
+                projectReleaseData.push(projectReleasePhase2);
+                projectError.push(projectErrorPhase2);
+            }
+
+            // calculate the gap between phase2 and phase 3
+            let projectDifferenceP2P3 = parseFloat((projectStartDatePhase3.getTime() -
+                (projectStartDatePhase2.getTime() + projectQuaterNumberPhase2 * (1000 * 60 * 60 * 24 * 30 * 3))) /
+                (1000 * 60 * 60 * 24 * 30 * 3));
+
+            // push blank info in for each quarter difference
+            for (let i = 0; i < projectDifferenceP2P3; i++) {
+                projectCostData.push(0);
+                projectReleaseData.push(0);
+                projectError.push(null);
+            }
 
 
-			// define and calculate all 7 seven factors based on the complexity risk secttion answers
-			// used to calculate the overall uncertainty for the project
-			let project1Factor1 = 0;
-			// loop through every element in section1 array
-			for (let i = 0; i < project1.complexityRisk.section1.length; i++) {
-				// sum all the values together 
-				project1Factor1 += parseFloat(project1.complexityRisk.section1[i]);
-			}
-			// divide the sum by the length of the array to calculate the average risk
-			let project1Factor1Uniformed = project1Factor1 / project1.complexityRisk.section1.length;
+            // calculate phase3 cost, release and lowest possible release value
+            let projectCostPhase3 = parseFloat(project.costRelease.fteNumberCostPhase3) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase3);
+            let projectReleasePhase3 = parseFloat(project.costRelease.fteNumberReleasePhase3) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase3);
+            let projectErrorPhase3 = projectUncertainty / 170 * projectReleasePhase3;
 
-			let project1Factor2 = 0;
-			// loop through every element in section2 array
-			for (let i = 0; i < project1.complexityRisk.section2.length; i++) {
-				// sum all the values together
-				project1Factor2 += parseFloat(project1.complexityRisk.section2[i]);
-			}
-			// divide the sum by the length of the array to calculate the average risk
-			let project1Factor2Uniformed = project1Factor2 / project1.complexityRisk.section2.length;
+            // loop for each quarter and push data into the data arrays for each
+            for (let i = 1; i <= projectQuaterNumberPhase3; i++) {
+                projectCostData.push(projectCostPhase3);
+                projectReleaseData.push(projectReleasePhase3);
+                projectError.push(projectErrorPhase3);
+            }
 
-			let project1Factor3 = 0;
-			// loop through every element in section3 array
-			for (let i = 0; i < project1.complexityRisk.section3.length; i++) {
-				// sum all the values together
-				project1Factor3 += parseFloat(project1.complexityRisk.section3[i]);
-			}
-			// divide the sum by the length of the array to calculate the average risk
-			let project1Factor3Uniformed = project1Factor3 / project1.complexityRisk.section3.length;
+            // calculate the total amount of quarters including the gaps calculated
+            projectTotalQuaterNumber = projectQuaterNumberPhase1 + projectDifferenceP1P2 + projectQuaterNumberPhase2 + projectDifferenceP2P3 + projectQuaterNumberPhase3;
 
-			let project1Factor4 = 0;
-			// loop through every element in section4 array
-			for (let i = 0; i < project1.complexityRisk.section4.length; i++) {
-				// sum all the values together
-				project1Factor4 += parseFloat(project1.complexityRisk.section4[i]);
-			}
-			// divide the sum by the length of the array to calculate the average risk
-			let project1Factor4Uniformed = project1Factor4 / project1.complexityRisk.section4.length;
+            // generate data for cost and release graph
+            projectCost = {
+                label: "Cost of " + project.title,
+                // set the data array to be the final cost array generated
+                data: projectCostData,
+                // set bar colour
+                backgroundColor: costRiskColour
+            };
 
-			let project1Factor5 = 0;
-			// loop through every element in section5 array
-			for (let i = 0; i < project1.complexityRisk.section5.length; i++) {
-				// sum all the values together
-				project1Factor5 += parseFloat(project1.complexityRisk.section5[i]);
-			}
-			// divide the sum by the length of the array to calculate the average risk
-			let project1Factor5Uniformed = project1Factor5 / project1.complexityRisk.section5.length;
+            projectRelease = {
+                label: "Release of " + project.title,
+                // set the data of this chart to be release array generated
+                data: projectReleaseData,
+                // the error array becomes the error for this chart
+                error: projectError,
+                // set bar colour
+                backgroundColor: releaseColour
+            };
 
-			let project1Factor6 = 0;
-			// loop through every element in section6 array
-			for (let i = 0; i < project1.complexityRisk.section6.length; i++) {
-				// sum all the values together
-				project1Factor6 += parseFloat(project1.complexityRisk.section6[i]);
-			}
-			// divide the sum by the length of the array to calculate the average risk
-			let project1Factor6Uniformed = project1Factor6 / project1.complexityRisk.section6.length;
+            // generate data for complexity and risk graph
+            projectFactors = {
+                // input each averaged out risk score as the data
+                data: [
+                    projectFactor1Uniformed,
+                    projectFactor2Uniformed,
+                    projectFactor3Uniformed,
+                    projectFactor4Uniformed,
+                    projectFactor5Uniformed,
+                    projectFactor6Uniformed,
+                    projectFactor7Uniformed
+                ],
+                // set the background and border colour for the radar
+                backgroundColor: "rgba(238, 59, 59, 0.2)",
+                borderColor: "rgba(238, 59, 59, 0.8)",
+                label: "Uncertainty of " + project.title + ", Total Score: " + projectUncertainty
+            };
 
-			let project1Factor7 = 0;
-			// loop through every element in section7 array
-			for (let i = 0; i < project1.complexityRisk.section7.length; i++) {
-				// sum all the values together
-				project1Factor7 += parseFloat(project1.complexityRisk.section7[i]);
-			}
-			// divide the sum by the length of the array to calculate the average risk
-			let project1Factor7Uniformed = project1Factor7 / project1.complexityRisk.section7.length;
+            return [projectCost, projectRelease, projectFactors, projectTotalQuaterNumber];
 
-			// sum together all the factor values to calculate the total uncertainty
-			project1Uncertainty = project1Factor1 + project1Factor2 + project1Factor3 +
-				project1Factor4 + project1Factor5 + project1Factor6 + project1Factor7;
-
-			// calculate the cost per quarter of phase one by multiplying the number of FTE's per quarter by 25000 and adding the total operating cost
-			// also we need to parse the values because the input from sliders are text
-			let project1CostPhase1 = parseFloat(project1.costRelease.fteNumberCostPhase1) * 25000 + parseFloat(project1.costRelease.operatingMoneyCostPhase1);
-			// set release and error values to 0 and null respectively since there is no release for the first phase
-			let project1ReleasePhase1 = 0;
-			let project1ErrorPhase1 = null;
-
-			// loop for each quarter in the phase
-			for (let i = 1; i <= project1QuaterNumberPhase1; i++) {
-				// push the cost, release and error data into the data arrays for the project for each quarter in the current phase
-				project1CostData.push(project1CostPhase1);
-				project1ReleaseData.push(project1ReleasePhase1);
-				project1Error.push(project1ErrorPhase1);
-			}
-
-			// calculate the gap between phase 1 and phase 2
-			let project1DifferenceP1P2 = parseFloat((project1StartDatePhase2.getTime() -
-					(project1StartDatePhase1.getTime() + project1QuaterNumberPhase1 * (1000 * 60 * 60 * 24 * 30 * 3))) /
-				(1000 * 60 * 60 * 24 * 30 * 3));
-
-			for (let i = 0; i < project1DifferenceP1P2; i++) {
-				// for each additional quarter push empty data into the arrays, this is to account for projects that will have a gap between phases
-				project1CostData.push(0);
-				project1ReleaseData.push(0);
-				project1Error.push(null);
-			}
-
-			// calculate the phase 2 cost
-			let project1CostPhase2 = parseFloat(project1.costRelease.fteNumberCostPhase2) * 25000 + parseFloat(project1.costRelease.operatingMoneyCostPhase2);
-			// calculate the release by following the same process followed to calculate the cost
-			let project1ReleasePhase2 = parseFloat(project1.costRelease.fteNumberReleasePhase2) * 25000 + parseFloat(project1.costRelease.operatingMoneyReleasePhase2);
-
-			// calculate the lowest possible release based on the error
-			// multiply the release by a calculated factor to obtain this value
-			let project1ErrorPhase2 = project1Uncertainty / 170 * project1ReleasePhase2;
-
-			// loop for every quarter in the phase
-			for (let i = 1; i <= project1QuaterNumberPhase2; i++) {
-				// push the cost, release and uncertainty for every quarter
-				project1CostData.push(project1CostPhase2);
-				project1ReleaseData.push(project1ReleasePhase2);
-				project1Error.push(project1ErrorPhase2);
-			}
-
-			// calculate the gap between phase2 and phase 3
-			let project1DifferenceP2P3 = parseFloat((project1StartDatePhase3.getTime() -
-					(project1StartDatePhase2.getTime() + project1QuaterNumberPhase2 * (1000 * 60 * 60 * 24 * 30 * 3))) /
-				(1000 * 60 * 60 * 24 * 30 * 3));
-
-			// push blank info in for each quarter difference
-			for (let i = 0; i < project1DifferenceP2P3; i++) {
-				project1CostData.push(0);
-				project1ReleaseData.push(0);
-				project1Error.push(null);
-			}
-
-			// calculate phase3 cost, release and lowest possible release value
-			let project1CostPhase3 = parseFloat(project1.costRelease.fteNumberCostPhase3) * 25000 + parseFloat(project1.costRelease.operatingMoneyCostPhase3);
-			let project1ReleasePhase3 = parseFloat(project1.costRelease.fteNumberReleasePhase3) * 25000 + parseFloat(project1.costRelease.operatingMoneyReleasePhase3);
-			let project1ErrorPhase3 = project1Uncertainty / 170 * project1ReleasePhase3;
-
-			// loop for each quarter and push data into the data arrays for each
-			for (let i = 1; i <= project1QuaterNumberPhase3; i++) {
-				project1CostData.push(project1CostPhase3);
-				project1ReleaseData.push(project1ReleasePhase3);
-				project1Error.push(project1ErrorPhase3);
-			}
-
-			// calculate the total amount of quarters including the gaps calculated
-			project1TotalQuaterNumber = project1QuaterNumberPhase1 + project1DifferenceP1P2 + project1QuaterNumberPhase2 + project1DifferenceP2P3 + project1QuaterNumberPhase3;
-
-			// generate data for cost and release graph
-			project1Cost = {
-				label: "Cost of " + project1.title,
-				// set the data array to be the final cost array generated
-				data: project1CostData,
-				// set bar colour
-				backgroundColor: "rgba(238, 59, 59, 0.8)"
-			};
-
-			project1Release = {
-				label: "Release of " + project1.title,
-				// set the data of this chart to be release array generated
-				data: project1ReleaseData,
-				// the error array becomes the error for this chart
-				error: project1Error,
-				// set bar colour
-				backgroundColor: "rgba(30, 144, 255, 0.8)"
-			};
-
-			// calculate the sum total cost from all quarters 
-			project1TotalCost = project1CostData.reduce(function(acc, val) {
-				return acc + val;
-			});
-			// calculate the maximum total release
-			project1TotalRelease = project1ReleaseData.reduce(function(acc, val) {
-				return acc + val;
-			});
-
-			// calculate the minimum total release
-			project1TotalError = project1Error.reduce(function(acc, val) {
-				return acc + val;
-			});
-
-			// generate data for complexity and risk graph
-			project1Factors = {
-				// input each averaged out risk score as the data
-				data: [
-					project1Factor1Uniformed,
-					project1Factor2Uniformed,
-					project1Factor3Uniformed,
-					project1Factor4Uniformed,
-					project1Factor5Uniformed,
-					project1Factor6Uniformed,
-					project1Factor7Uniformed
-				],
-				// set the background and border colour for the radar
-				backgroundColor: "rgba(238, 59, 59, 0.2)",
-				borderColor: "rgba(238, 59, 59, 0.8)",
-				label: "Uncertainty of " + project1.title + ", Total Score: " + project1Uncertainty
-			};
-			finalData.push(project1CostData);
-			finalData.push(project1ReleaseData);
-			finalData.push(project1Factors);
-			finalData.push(project1TotalQuaterNumber);
-			return(finalData);
-		}
+        }
 
     };
 

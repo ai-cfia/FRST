@@ -100,7 +100,7 @@ var Projects = function() {
                     window.localStorage.setItem("current_project", current_project);
                 }
                 //redirect to the project page
-                window.location.replace("/IRR/FRST/project");
+                window.location.replace("/FRST/project");
             });
 
         },
