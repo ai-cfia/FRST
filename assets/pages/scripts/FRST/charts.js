@@ -184,7 +184,8 @@ var Charts = function() {
                         project1Cost = data[0];
                         project1Release = data[1];
                         project1Factors = data[2];
-                        project1TotalQuaterNumber = data[3];
+                        project1TotalQuaterNumber = Math.ceil(data[3]);
+                        console.log();
 
                         // calculate totals and benefits
                         project1TotalData = Charts.calculateTotals(project1Cost.data, project1Release.data, project1Release.error);
