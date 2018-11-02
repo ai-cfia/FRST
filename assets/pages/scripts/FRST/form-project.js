@@ -28,12 +28,12 @@ var FormProject = function () {
 
 		function updateStartDatePhase2() {
 			if ($("#quaterNumberPhase1").val() != null) {
-				let quaterNumberPhase1 = parseFloat($("#quaterNumberPhase1").val());
+				let quaterNumberPhase1 = parseInt($("#quaterNumberPhase1").val());
 
 				if (Date.parse($("#startDatePhase1").val())) {
-					let startDatePhase1Month = parseFloat($("#startDatePhase1").val().split("/")[0]);
-					let startDatePhase1Day = parseFloat($("#startDatePhase1").val().split("/")[1]);
-					let startDatePhase1Year = parseFloat($("#startDatePhase1").val().split("/")[2]);
+					let startDatePhase1Month = parseInt($("#startDatePhase1").val().split("/")[0]);
+					let startDatePhase1Day = parseInt($("#startDatePhase1").val().split("/")[1]);
+					let startDatePhase1Year = parseInt($("#startDatePhase1").val().split("/")[2]);
 
 					let startDatePhase1 = new Date(startDatePhase1Year, startDatePhase1Month - 1, startDatePhase1Day);
 					let startDatePhase1Time = startDatePhase1.getTime();
@@ -54,12 +54,12 @@ var FormProject = function () {
 
 		function updateStartDatePhase3() {
 			if ($("#quaterNumberPhase2").val() != null) {
-				let quaterNumberPhase2 = parseFloat($("#quaterNumberPhase2").val());
+				let quaterNumberPhase2 = parseInt($("#quaterNumberPhase2").val());
 
 				if (Date.parse($("#startDatePhase2").val())) {
-					let startDatePhase2Month = parseFloat($("#startDatePhase2").val().split("/")[0]);
-					let startDatePhase2Day = parseFloat($("#startDatePhase2").val().split("/")[1]);
-					let startDatePhase2Year = parseFloat($("#startDatePhase2").val().split("/")[2]);
+					let startDatePhase2Month = parseInt($("#startDatePhase2").val().split("/")[0]);
+					let startDatePhase2Day = parseInt($("#startDatePhase2").val().split("/")[1]);
+					let startDatePhase2Year = parseInt($("#startDatePhase2").val().split("/")[2]);
 
 					let startDatePhase2 = new Date(startDatePhase2Year, startDatePhase2Month - 1, startDatePhase2Day);
 					let startDatePhase2Time = startDatePhase2.getTime();
@@ -79,11 +79,11 @@ var FormProject = function () {
 		}
 
 		function tripleConstraint() {
-			let projectTotalCost = parseFloat($("#quaterNumberPhase1").val()) * (parseFloat($("#fteNumberCostPhase1").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase1").val()))
-			+ parseFloat($("#quaterNumberPhase2").val()) * (parseFloat($("#fteNumberCostPhase2").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase2").val()))
-			+ parseFloat($("#quaterNumberPhase3").val()) * (parseFloat($("#fteNumberCostPhase3").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase3").val()));
+			let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseFloat($("#fteNumberCostPhase1").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase1").val()))
+			+ parseInt($("#quaterNumberPhase2").val()) * (parseFloat($("#fteNumberCostPhase2").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase2").val()))
+			+ parseInt($("#quaterNumberPhase3").val()) * (parseFloat($("#fteNumberCostPhase3").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase3").val()));
 
-			let projectTotalQuaterNumber = parseFloat($("#quaterNumberPhase1").val()) + parseFloat($("#quaterNumberPhase2").val()) + parseFloat($("#quaterNumberPhase3").val());
+			let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
 
 			if (projectTotalCost <= 1250000) {
 				projectTotalCost = "1";
@@ -278,12 +278,12 @@ var FormProject = function () {
 		handleCheckedRadios();
 
 		if ($("#quaterNumberPhase1").val() != null) {
-			let quaterNumberPhase1 = parseFloat($("#quaterNumberPhase1").val());
+			let quaterNumberPhase1 = parseInt($("#quaterNumberPhase1").val());
 
 			if (Date.parse($("#startDatePhase1").val())) {
-				let startDatePhase1Month = parseFloat($("#startDatePhase1").val().split("/")[0]);
-				let startDatePhase1Day = parseFloat($("#startDatePhase1").val().split("/")[1]);
-				let startDatePhase1Year = parseFloat($("#startDatePhase1").val().split("/")[2]);
+				let startDatePhase1Month = parseInt($("#startDatePhase1").val().split("/")[0]);
+				let startDatePhase1Day = parseInt($("#startDatePhase1").val().split("/")[1]);
+				let startDatePhase1Year = parseInt($("#startDatePhase1").val().split("/")[2]);
 
 				let startDatePhase1 = new Date(startDatePhase1Year, startDatePhase1Month - 1, startDatePhase1Day);
 				let startDatePhase1Time = startDatePhase1.getTime();
@@ -297,12 +297,12 @@ var FormProject = function () {
 		}
 
 		if ($("#quaterNumberPhase2").val() != null) {
-			let quaterNumberPhase2 = parseFloat($("#quaterNumberPhase2").val());
+			let quaterNumberPhase2 = parseInt($("#quaterNumberPhase2").val());
 
 			if (Date.parse($("#startDatePhase2").val())) {
-				let startDatePhase2Month = parseFloat($("#startDatePhase2").val().split("/")[0]);
-				let startDatePhase2Day = parseFloat($("#startDatePhase2").val().split("/")[1]);
-				let startDatePhase2Year = parseFloat($("#startDatePhase2").val().split("/")[2]);
+				let startDatePhase2Month = parseInt($("#startDatePhase2").val().split("/")[0]);
+				let startDatePhase2Day = parseInt($("#startDatePhase2").val().split("/")[1]);
+				let startDatePhase2Year = parseInt($("#startDatePhase2").val().split("/")[2]);
 
 				let startDatePhase2 = new Date(startDatePhase2Year, startDatePhase2Month - 1, startDatePhase2Day);
 				let startDatePhase2Time = startDatePhase2.getTime();
@@ -406,7 +406,7 @@ var FormProject = function () {
 					}
 				}
 				$("input[name='procurement3']").closest(".form-group").removeClass("has-success");
-				
+
 			}
 
 			handleCheckedRadios();
@@ -598,7 +598,7 @@ var FormProject = function () {
 				},
 				humanResourcesCommunications2: {
 					required: true
-				}			
+				}
 			},
 
 			errorPlacement: function (error, element) {
@@ -637,7 +637,7 @@ var FormProject = function () {
 				error1.hide();
 
 				let projects = JSON.parse(window.localStorage.getItem("projects"));
-				let current_project = parseFloat(window.localStorage.getItem("current_project"));
+				let current_project = parseInt(window.localStorage.getItem("current_project"));
 
 				projects[current_project].costRelease.startDatePhase1 = $("#startDatePhase1").val();
 				projects[current_project].costRelease.quaterNumberPhase1 = $("#quaterNumberPhase1").val();
@@ -658,11 +658,11 @@ var FormProject = function () {
 				projects[current_project].costRelease.fteNumberReleasePhase3 = $("#fteNumberReleasePhase3").val();
 				projects[current_project].costRelease.operatingMoneyReleasePhase3 = $("#operatingMoneyReleasePhase3").val();
 
-				let projectTotalCost = parseFloat($("#quaterNumberPhase1").val()) * (parseFloat($("#fteNumberCostPhase1").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase1").val()))
-				+ parseFloat($("#quaterNumberPhase2").val()) * (parseFloat($("#fteNumberCostPhase2").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase2").val()))
-				+ parseFloat($("#quaterNumberPhase3").val()) * (parseFloat($("#fteNumberCostPhase3").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase3").val()));
+				let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseFloat($("#fteNumberCostPhase1").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase1").val()))
+				+ parseInt($("#quaterNumberPhase2").val()) * (parseFloat($("#fteNumberCostPhase2").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase2").val()))
+				+ parseInt($("#quaterNumberPhase3").val()) * (parseFloat($("#fteNumberCostPhase3").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase3").val()));
 
-				let projectTotalQuaterNumber = parseFloat($("#quaterNumberPhase1").val()) + parseFloat($("#quaterNumberPhase2").val()) + parseFloat($("#quaterNumberPhase3").val());
+				let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
 
 				if (projectTotalCost <= 1250000) {
 					projectTotalCost = "1";
@@ -878,11 +878,11 @@ var FormProject = function () {
 				error2.hide();
 
 				let projects = JSON.parse(window.localStorage.getItem("projects"));
-				let current_project = parseFloat(window.localStorage.getItem("current_project"));
+				let current_project = parseInt(window.localStorage.getItem("current_project"));
 
 				projects[current_project].title = $("#newTitle").val();
 				window.localStorage.setItem("projects", JSON.stringify(projects));
-					
+
 				window.reload();
 			}
 
@@ -891,11 +891,11 @@ var FormProject = function () {
 		$("#form_edit button[name='delete']").click(function () {
 			if (confirm("Please click OK to confirm deletion")) {
 				let projects = JSON.parse(window.localStorage.getItem("projects"));
-				let current_project = parseFloat(window.localStorage.getItem("current_project"));
+				let current_project = parseInt(window.localStorage.getItem("current_project"));
 				projects.splice(current_project, 1);
 				window.localStorage.setItem("projects", JSON.stringify(projects));
-				let visual_project1 = parseFloat(window.localStorage.getItem("visual_project1"));
-				let visual_project2 = parseFloat(window.localStorage.getItem("visual_project2"));
+				let visual_project1 = parseInt(window.localStorage.getItem("visual_project1"));
+				let visual_project2 = parseInt(window.localStorage.getItem("visual_project2"));
 				if (current_project == visual_project1) {
 					visual_project1 = -1;
 					if (current_project < visual_project2) {

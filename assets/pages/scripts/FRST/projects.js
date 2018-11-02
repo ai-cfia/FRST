@@ -82,7 +82,7 @@ var Projects = function() {
                 text += '<a href="javascript:;" class="nav-link" name="project" id="project' + i + '"><span class="title">' + projects[i].title + '</span></a>';
                 text += '</li>';
             }
-            // insert text into the DOM 
+            // insert text into the DOM
             $("li[name='newProject']").before(text);
         },
 
@@ -94,7 +94,7 @@ var Projects = function() {
                 // get id of the button that has been clicked
                 let current_id = $(this).attr("id");
                 // obtain the project number from the end of the id set current project to said number
-                let current_project = parseFloat(current_id.charAt(current_id.length - 1));
+                let current_project = parseInt(current_id.charAt(current_id.length - 1));
                 // check if there is any project already set as the current project
                 if (window.localStorage.getItem("current_project") != null) {
                     window.localStorage.setItem("current_project", current_project);
@@ -132,7 +132,7 @@ var Projects = function() {
             $("#quaterNumberPhase1").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.quaterNumberPhase1
             });
-            // set FTE cost slider 
+            // set FTE cost slider
             $("#fteNumberCostPhase1").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.fteNumberCostPhase1
             });
@@ -159,7 +159,7 @@ var Projects = function() {
                 from: projects[current_project].costRelease.operatingMoneyCostPhase2
             });
 
-            // set FTE release slider 
+            // set FTE release slider
             $("#fteNumberReleasePhase2").data("ionRangeSlider").update({
                 from: projects[current_project].costRelease.fteNumberReleasePhase2
             });
@@ -248,8 +248,8 @@ var Projects = function() {
 
         updateProjectsDropDownLists: function() {
             let projects = JSON.parse(window.localStorage.getItem("projects"));
-            let visual_project1 = parseFloat(window.localStorage.getItem("visual_project1"));
-            let visual_project2 = parseFloat(window.localStorage.getItem("visual_project2"));
+            let visual_project1 = parseInt(window.localStorage.getItem("visual_project1"));
+            let visual_project2 = parseInt(window.localStorage.getItem("visual_project2"));
 
             let options = [];
             options.push("<option value='-1'>Not Selected</option>");

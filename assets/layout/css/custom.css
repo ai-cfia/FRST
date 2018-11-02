@@ -60,7 +60,7 @@
  .chart-list-item:hover input ~ .checkmark {
      background-color: #ccc;
 }
-/* When the checkbox is checked, add a blue background */
+/* When the checkbox is checked, add a teal background */
  .chart-list-item input:checked ~ .checkmark {
      background-color: #3fd5c0;
 }
@@ -206,7 +206,7 @@
  #chart-title>span[lang = "fr"] {
      margin-left: -22.5px;
 }
- 
+
  canvas[name="costReleaseChart"] {
     margin-top: 15px;
 }
