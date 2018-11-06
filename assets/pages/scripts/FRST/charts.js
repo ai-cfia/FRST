@@ -288,7 +288,7 @@ var Charts = function() {
                         complexityRiskChart.data.datasets.push(project1Factors);
 
                         //append the tab item to the nav-tabs list
-                        $(".nav-tabs").append('<li id="tabNavProject1" class = "active"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">Project 1</a></li>')
+                        $(".nav-tabs").append('<li id="tabNavProject1" class = "tab-element active"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">Project 1</a></li>')
 
                         var text = '<div class="tab-pane active" id="tabProject1">' +
                             '<p style="margin:0 5px 0 5px; color: #555">' +
@@ -326,7 +326,7 @@ var Charts = function() {
                         complexityRiskChart.data.datasets.push(project2Factors);
 
                         //append the tab item to the nav-tabs list
-                        $(".nav-tabs").append('<li id="tabNavProject2"><a style="padding: 0 5px 0 5px" href="#tabProject2" data-toggle="tab">Project 2</a></li>')
+                        $(".nav-tabs").append('<li id="tabNavProject2"  class = "tab-element"><a style="padding: 0 5px 0 5px" href="#tabProject2" data-toggle="tab">Project 2</a></li>')
 
                         var text = '<div class="tab-pane" id="tabProject2">' +
                             '<p style="margin:0 5px 0 5px; color: #555">' +
@@ -360,16 +360,7 @@ var Charts = function() {
                 complexityRiskChart.update();
                 complexityRiskChart.render();
 
-                //disable correct span elements
-                if (Cookies.get("lang") === "en") {
-                    $("[lang='fr']").attr("style", "display");
-                    $("[lang='en']").attr("style", "display:none !important");
-                    Cookies.set("lang", "fr");
-                } else {
-                    $("[lang='en']").attr("style", "display");
-                    $("[lang='fr']").attr("style", "display:none !important");
-                    Cookies.set("lang", "en");
-                }
+
 
             }
 
@@ -678,11 +669,31 @@ var Charts = function() {
             // define variable to ensure the function only executes on the after click
             var clicks = $(this).data('clicks');
             if (clicks) {
+              // delete all present tabs and data
+              $(".tab-element").remove();
+              $(".tab-pane").remove();
               // obtain all checked elements
               var checkedElements = $(".chart-list-item input:checked");
               //loop through every clicked element
               for (var i = 0; i < checkedElements.length; i++){
-                //
+                projectNumber = parseInt(checkedElements[i].id.charAt(checkedElements[i].id.length - 1))
+                if(i == 0){
+                  var tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], true);
+                }else {
+                  var tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], false);
+                }
+                $(".nav-tabs").append(tabHTML[0]);
+                $(".tab-content").append(tabHTML[1]);
+
+              }
+              if (Cookies.get("lang") === "en") {
+                  $("[lang='fr']").attr("style", "display");
+                  $("[lang='en']").attr("style", "display:none !important");
+                  Cookies.set("lang", "fr");
+              } else {
+                  $("[lang='en']").attr("style", "display");
+                  $("[lang='fr']").attr("style", "display:none !important");
+                  Cookies.set("lang", "en");
               }
             }
             $(this).data("clicks", !clicks);
@@ -694,7 +705,7 @@ var Charts = function() {
 
         generateDataTabText: function(projectNumber, currProject, active) {
           // create data for the current project
-          var data = Charts.generateData(currProject, costColours[0], releaseColours[0], riskBorderColour[0], riskFillColour[0]);
+          var data = Charts.generateData(currProject, Charts.costColours[0], Charts.releaseColours[0], Charts.riskBorderColour[0], Charts.riskFillColour[0]);
           console.log(data);
           projectCost = data[0];
           projectRelease = data[1];
@@ -704,11 +715,11 @@ var Charts = function() {
           // calculate totals and benefits
           projectTotalData = Charts.calculateTotals(projectCost.data, projectRelease.data, projectRelease.error);
           if (active){
-            var tabText = '<li id="tabNavProject"' + projectNumber + ' class = "active"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">' + currProject.title + '</a></li>'
+            var tabText = '<li id="tabNavProject"' + projectNumber + ' class = "tab-element active"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">' + currProject.title + '</a></li>'
             var dataText = '<div class="tab-pane active" id="tabProject">';
           }else{
-            var tabText = '<li id="tabNavProject"' + projectNumber + '><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">' + currProject.title + '</a></li>'
-            var dataText = '<div class="tab-pane" id="tabProject">';
+            var tabText = '<li id="tabNavProject"' + projectNumber + ' class = "tab-element"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">' + currProject.title + '</a></li>'
+            var dataText = '<div class="tab-pane" id="tabProject"' + projectNumber + '>';
           }
           dataText += '<p style="margin:0 5px 0 5px; color: #555">' +
                   '<span lang="en">Total cost: </span>' +
