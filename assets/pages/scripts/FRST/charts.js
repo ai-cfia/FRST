@@ -2,17 +2,21 @@ var Charts = function() {
 
     return {
 
-        costColours: (["rgba(238, 59, 59, 0.8)", "rgba(231, 019, 99, 0.8)", "rgba(250, 128, 114, 0.8)", "rgba(250, 0, 0, 0.8)" , "rgba(255, 165, 0, 0.8)",
-       "rgba(238, 59, 59, 0.4)", "rgba(231, 019, 99, 0.4)", "rgba(250, 128, 114, 0.4)", "rgba(250, 0, 0, 0.4)" , "rgba(255, 165, 0, 0.4)"]),
+        costColours: (["rgba(238, 59, 59, 0.8)", "rgba(231, 019, 99, 0.8)", "rgba(250, 128, 114, 0.8)", "rgba(250, 0, 0, 0.8)", "rgba(255, 165, 0, 0.8)",
+            "rgba(238, 59, 59, 0.4)", "rgba(231, 019, 99, 0.4)", "rgba(250, 128, 114, 0.4)", "rgba(250, 0, 0, 0.4)", "rgba(255, 165, 0, 0.4)"
+        ]),
 
-       releaseColours: (["rgba(30,144,255,0.8)","rgba(0,255,255,0.8)","rgba(134,206,235,0.8)","rgba(50,205,50,0.8)","rgba(66,105,225,0.8)",
-       "rgba(30,144,255,0.4)","rgba(0,255,255,0.4)","rgba(134,206,235,0.8)","rgba(50,205,50,0.8)","rgba(66,105,225,0.8)"]),
+        releaseColours: (["rgba(30,144,255,0.8)", "rgba(0,255,255,0.8)", "rgba(134,206,235,0.8)", "rgba(50,205,50,0.8)", "rgba(66,105,225,0.8)",
+            "rgba(30,144,255,0.4)", "rgba(0,255,255,0.4)", "rgba(134,206,235,0.8)", "rgba(50,205,50,0.8)", "rgba(66,105,225,0.8)"
+        ]),
 
-       riskFillColour: (["rgba(238, 59, 59, 0.2)", "rgba(30,144,255,0.2)", "rgba(231, 019, 99, 0.2)", "rgba(0,255,255,0.2)", "rgba(250, 128, 114, 0.2)",
-       "rgba(134,206,235,0.2)", "rgba(250, 0, 0, 0.2)", "rgba(50,205,50,0.2)", "rgba(255, 165, 0, 0.2)", "rgba(66,105,225,0.2)"]),
+        riskFillColour: (["rgba(238, 59, 59, 0.2)", "rgba(30,144,255,0.2)", "rgba(231, 019, 99, 0.2)", "rgba(0,255,255,0.2)", "rgba(250, 128, 114, 0.2)",
+            "rgba(134,206,235,0.2)", "rgba(250, 0, 0, 0.2)", "rgba(50,205,50,0.2)", "rgba(255, 165, 0, 0.2)", "rgba(66,105,225,0.2)"
+        ]),
 
-       riskBorderColour: (["rgba(238, 59, 59, 0.8)", "rgba(30,144,255,0.8)", "rgba(231, 019, 99, 0.8)", "rgba(0,255,255,0.8)", "rgba(250, 128, 114, 0.8)",
-       "rgba(134,206,235,0.8)", "rgba(250, 0, 0, 0.8)", "rgba(50,205,50,0.8)", "rgba(255, 165, 0, 0.8)", "rgba(66,105,225,0.8)"]),
+        riskBorderColour: (["rgba(238, 59, 59, 0.8)", "rgba(30,144,255,0.8)", "rgba(231, 019, 99, 0.8)", "rgba(0,255,255,0.8)", "rgba(250, 128, 114, 0.8)",
+            "rgba(134,206,235,0.8)", "rgba(250, 0, 0, 0.8)", "rgba(50,205,50,0.8)", "rgba(255, 165, 0, 0.8)", "rgba(66,105,225,0.8)"
+        ]),
 
 
         initCharts: function() {
@@ -141,253 +145,10 @@ var Charts = function() {
                 }
             });
 
-            // define an array that stores all that stores all the colours for the cost bars
 
-            /* Function to display the the complexity risk and cost release chart */
-            function displayCharts() {
-                // ensure that either project 1 or 2 has been selected
-                if ($("#selectProject1").val() != "-1" || $("#selectProject2").val() != "-1") {
-                    // obtain projects array from local storage
-                    let projects = JSON.parse(window.localStorage.getItem("projects"));
-
-                    // degfine some variables for later use
-                    let project1TotalQuaterNumber = 0;
-                    let project2TotalQuaterNumber = 0;
-
-                    let project1 = null;
-                    let project2 = null;
-
-                    let project1CostData = [];
-                    let project1ReleaseData = [];
-                    let project1Error = [];
-
-                    let project2CostData = [];
-                    let project2ReleaseData = [];
-                    let project2Error = [];
-
-                    let project1Cost = {};
-                    let project1Release = {};
-                    let project1Factors = {};
-
-                    let project1TotalCost = 0;
-                    let project1TotalRelease = 0;
-                    let project1TotalError = 0;
-
-                    let project2Cost = {};
-                    let project2Release = {};
-                    let project2Factors = {};
-
-                    let project2TotalCost = 0;
-                    let project2TotalRelease = 0;
-                    let project2TotalError = 0;
-
-                    let project1Uncertainty = 0;
-                    let project2Uncertainty = 0;
-
-
-
-                    // show the cost release values
-                    $("#costReleaseValues").removeAttr("hidden");
-
-                    // check if Project 1 has been selected
-                    if ($("#selectProject1").val() != "-1") {
-
-                        // store the relevant project from the array
-                        project1 = projects[$("#selectProject1").val()];
-                        var data = Charts.generateData(project1, Charts.costColours[0], Charts.releaseColours[0], Charts.riskBorderColour[0], Charts.riskFillColour[0]);
-                        console.log(data);
-                        project1Cost = data[0];
-                        project1Release = data[1];
-                        project1Factors = data[2];
-                        project1TotalQuaterNumber = (data[3]);
-                        console.log();
-
-                        // calculate totals and benefits
-                        project1TotalData = Charts.calculateTotals(project1Cost.data, project1Release.data, project1Release.error);
-
-
-
-                    }
-
-                    if ($("#selectProject2").val() != "-1") {
-                        project2 = projects[$("#selectProject2").val()];
-                        var data2 = Charts.generateData(project2, Charts.costColours[1], Charts.releaseColours[1], Charts.riskBorderColour[1], Charts.riskFillColour[1]);
-                        project2Cost = data2[0];
-                        project2Release = data2[1];
-                        project2Factors = data2[2];
-                        project2TotalQuaterNumber = data2[3];
-
-                        // calculate totals and benefits
-                        project2TotalData = Charts.calculateTotals(project2Cost.data, project2Release.data, project2Release.error);
-                    }
-
-                    // check if both projects are enabled
-                    if (($("#selectProject1").val() != "-1") && ($("#selectProject2").val() != "-1")) {
-                        // if they are obtain the start dates for both
-                        let project1StartDate = new Date(project1.costRelease.startDatePhase1);
-                        let project2StartDate = new Date(project2.costRelease.startDatePhase1);
-
-                        // get the exact start time from the date
-                        let project1StartTime = project1StartDate.getTime();
-                        let project2StartTime = project2StartDate.getTime();
-
-                        // check which time is higher
-                        if (project1StartTime >= project2StartTime) {
-                            // if project1 start time is higher
-                            // calculate the difference and convert to quarters
-                            let difference = parseInt((project1StartTime - project2StartTime) / (1000 * 60 * 60 * 24 * 30 * 3));
-                            // add the difference to project 1s total quarter number
-                            // this is to have to total number of quarters that project 1 accounts for including all the blank quarters
-                            project1TotalQuaterNumber += difference;
-                            // for every quarter difference loop through project1
-                            for (let i = 0; i < difference; i++) {
-                                // add blank data to account for the difference in the start time
-                                project1Cost.data.unshift(0);
-                                project1Release.data.unshift(0);
-                                project1Error.unshift(null);
-                            }
-                        } else {
-                            // if project 2 has a higher start time
-                            // calculate difference in terms of quarters
-                            let difference = parseInt((project2StartTime - project1StartTime) / (1000 * 60 * 60 * 24 * 30 * 3));
-                            // add the difference project2 total quarter number
-                            // this is to have to total number of quarters that project 2 accounts for including all the blank quarters
-                            project2TotalQuaterNumber += difference;
-                            for (let i = 0; i < difference; i++) {
-                                // push blank data in for each quarter difference
-                                project2CostData.unshift(0);
-                                project2ReleaseData.unshift(0);
-                                project2Error.unshift(null);
-                            }
-                        }
-
-                    }
-
-                    // use the larger quarter number of the two projects to account for the full range
-                    projectTotalQuaterNumber = project1TotalQuaterNumber >= project2TotalQuaterNumber ? project1TotalQuaterNumber : project2TotalQuaterNumber;
-
-                    // give title and labels to cost and release graph
-                    costReleaseChart.options.title.text = "Cost & Released Benefit";
-
-                    // define the label for the x-axes of cost release graph to be the quarter number
-                    let projectQuaters = [];
-                    for (let i = 1; i <= projectTotalQuaterNumber; i++) {
-                        projectQuaters.push(i);
-                    }
-                    costReleaseChart.data.labels = projectQuaters;
-
-                    // give title to complexity and risk graph
-                    complexityRiskChart.options.title.text = "Complexity & Risk Factors";
-
-                    if (project1 != null) {
-                        // write data from project1 to cost and release graph
-                        costReleaseChart.data.datasets.push(project1Cost);
-                        costReleaseChart.data.datasets.push(project1Release);
-
-                        // write data from project1 to complexity and risk graph
-                        complexityRiskChart.data.datasets.push(project1Factors);
-
-                        //append the tab item to the nav-tabs list
-                        $(".nav-tabs").append('<li id="tabNavProject1" class = "tab-element active"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">Project 1</a></li>')
-
-                        var text = '<div class="tab-pane active" id="tabProject1">' +
-                            '<p style="margin:0 5px 0 5px; color: #555">' +
-                                '<span lang="en">Total cost: </span>' +
-                                '<span lang="fr">Coût total : </span>' +
-                                '<span id="totalCostProject1">' + project1TotalData[0].toFixed(2).toLocaleString() +'</span>' +
-                            '</p>' +
-                            '<p style="margin:0 5px 0 5px; color: #555">' +
-                                '<span lang="en">Gross Revenue: </span>' +
-                                '<span lang="fr">Revenu brut : </span>' +
-                                '<span id="totalReleaseProject1">' + project1TotalData[1].toFixed(2).toLocaleString() + '</span>' +
-                            '</p>' +
-                            '<p style="margin:0 5px 0 5px; color: #555">' +
-                                '<span lang="en">Maximum net benefit: </span>' +
-                                '<span lang="fr">Bénéfice net maximal : </span>' +
-                                '<span id="maximumNetReleaseProject1">' + project1TotalData[2].toFixed(2).toLocaleString() + '</span>' +
-                            '</p>' +
-                            '<p style="margin:0 5px 0 5px; color: #555">' +
-                                '<span lang="en">Minimum net benefit: </span>' +
-                                '<span lang="fr">Bénéfice net minimal : </span>' +
-                                '<span id="minimumNetReleaseProject1">' + project1TotalData[3].toFixed(2).toLocaleString() + '</span>' +
-                            '</p>' +
-                        '</div>'
-
-                        $(".tab-content").append(text);
-
-                    }
-
-                    if (project2 != null) {
-                        // write data from project2 to cost and release graph
-                        costReleaseChart.data.datasets.push(project2Cost);
-                        costReleaseChart.data.datasets.push(project2Release);
-
-                        // write data from project2 to complexity and risk graph
-                        complexityRiskChart.data.datasets.push(project2Factors);
-
-                        //append the tab item to the nav-tabs list
-                        $(".nav-tabs").append('<li id="tabNavProject2"  class = "tab-element"><a style="padding: 0 5px 0 5px" href="#tabProject2" data-toggle="tab">Project 2</a></li>')
-
-                        var text = '<div class="tab-pane" id="tabProject2">' +
-                            '<p style="margin:0 5px 0 5px; color: #555">' +
-                                '<span lang="en">Total cost: </span>' +
-                                '<span lang="fr">Coût total : </span>' +
-                                '<span id="totalCostProject2">' + project2TotalData[0].toFixed(2).toLocaleString() +'</span>' +
-                            '</p>' +
-                            '<p style="margin:0 5px 0 5px; color: #555">' +
-                                '<span lang="en">Gross Revenue: </span>' +
-                                '<span lang="fr">Revenu brut : </span>' +
-                                '<span id="totalReleaseProject2">' + project2TotalData[2].toFixed(2).toLocaleString() + '</span>' +
-                            '</p>' +
-                            '<p style="margin:0 5px 0 5px; color: #555">' +
-                                '<span lang="en">Maximum net benefit: </span>' +
-                                '<span lang="fr">Bénéfice net maximal : </span>' +
-                                '<span id="maximumNetReleaseProject2">' + project2TotalData[2].toFixed(2).toLocaleString() + '</span>' +
-                            '</p>' +
-                            '<p style="margin:0 5px 0 5px; color: #555">' +
-                                '<span lang="en">Minimum net benefit: </span>' +
-                                '<span lang="fr">Bénéfice net minimal : </span>' +
-                                '<span id="minimumNetReleaseProject2">' + project2TotalData[3].toFixed(2).toLocaleString() + '</span>' +
-                            '</p>' +
-                        '</div>'
-
-                        $(".tab-content").append(text);
-                    }
-                }
-
-                costReleaseChart.update();
-                costReleaseChart.render();
-                complexityRiskChart.update();
-                complexityRiskChart.render();
-
-
-
-            }
-
-            $("button[name='select']").click(function() {
-                window.localStorage.setItem("visual_project1", $("#selectProject1").val());
-                window.localStorage.setItem("visual_project2", $("#selectProject2").val());
-
-                costReleaseChart.data.datasets = [];
-                complexityRiskChart.data.datasets = [];
-
-                costReleaseChart.options.title.text = "Nothing to show, please select a project";
-                complexityRiskChart.options.title.text = "Nothing to show, please select a project";
-
-                $("#costReleaseValues").attr("hidden", "");
-                $("#tabNavProject1").hide();
-                $("#tabNavProject2").hide();
-                $("#tabNavProject1").removeClass("active");
-                $("#tabProject1").removeClass("active");
-                $("#tabNavProject2").removeClass("active");
-                $("#tabProject2").removeClass("active");
-
-                displayCharts();
-
-            });
-
-            displayCharts();
-            Charts.displayDataTabs()
+            let projects = JSON.parse(window.localStorage.getItem("projects"));
+            Charts.displayDataTabs(projects);
+            Charts.displayCharts(projects, costReleaseChart, complexityRiskChart);
 
         },
 
@@ -421,7 +182,6 @@ var Charts = function() {
            @param {string} riskFill - the fill colour of the complexity risk chart
         */
         generateData: function(project, costColour, releaseColour, riskBorder, riskFill) {
-            console.log(project);
             // degfine some variables for later use
             let projectTotalQuaterNumber = 0;
             let projectCostData = [];
@@ -631,119 +391,243 @@ var Charts = function() {
            @param release - the release data
            @param error - the error data
         */
-        calculateTotals: function(cost, release, error){
-          let totalCost = 0;
-          let totalRelease = 0;
-          let totalError = 0;
-          let maxBenefit = 0;
-          let minBenefit = 0;
+        calculateTotals: function(cost, release, error) {
+            let totalCost = 0;
+            let totalRelease = 0;
+            let totalError = 0;
+            let maxBenefit = 0;
+            let minBenefit = 0;
 
-          // calculate the sum total cost from all quarters
-          totalCost = cost.reduce(function(acc, val) {
-              return acc + val;
-          });
-          // calculate the maximum total release
-          totalRelease = release.reduce(function(acc, val) {
-              return acc + val;
-          });
+            // calculate the sum total cost from all quarters
+            totalCost = cost.reduce(function(acc, val) {
+                return acc + val;
+            });
+            // calculate the maximum total release
+            totalRelease = release.reduce(function(acc, val) {
+                return acc + val;
+            });
 
-          // calculate the minimum total release
-          totalError = error.reduce(function(acc, val) {
-              return acc + val;
-          });
+            // calculate the minimum total release
+            totalError = error.reduce(function(acc, val) {
+                return acc + val;
+            });
 
-          // calculate the minimum and max benefits
-          maxBenefit = totalRelease - totalCost;
-          minBenefit = totalRelease - totalCost - totalError;
+            // calculate the minimum and max benefits
+            maxBenefit = totalRelease - totalCost;
+            minBenefit = totalRelease - totalCost - totalError;
 
-          // return cost, release and the benefits
-          return [totalCost, totalRelease, maxBenefit, minBenefit];
+            // return cost, release and the benefits
+            return [totalCost, totalRelease, maxBenefit, minBenefit];
 
         },
 
-        displayDataTabs: function() {
-          //obtain projects array from local storage
-          let projects = JSON.parse(window.localStorage.getItem("projects"));
-          // check if any of the check boxes have been clicked
-          $(".chart-dropdown").click(function() {
-            // define variable to ensure the function only executes on the after click
-            var clicks = $(this).data('clicks');
-            if (clicks) {
-              // delete all present tabs and data
-              $(".tab-element").remove();
-              $(".tab-pane").remove();
-              // obtain all checked elements
-              var checkedElements = $(".chart-list-item input:checked");
-              //loop through every clicked element
-              for (var i = 0; i < checkedElements.length; i++){
-                projectNumber = parseInt(checkedElements[i].id.charAt(checkedElements[i].id.length - 1))
-                if(i == 0){
-                  var tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], true);
-                }else {
-                  var tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], false);
+        /* This method will display the data tabs for each selected chart
+
+           @param projects - the project array that stores the information for
+                             all submitted projects
+        */
+        displayDataTabs: function(projects) {
+            // check if any of the check boxes have been clicked
+            $(".chart-dropdown").click(function() {
+                // define variable to ensure the function only executes on the after click
+                var clicks = $(this).data('clicks');
+                if (clicks) {
+                    // delete all present tabs and data
+                    $(".tab-element").remove();
+                    $(".tab-pane").remove();
+                    // obtain all checked elements
+                    var checkedElements = $(".chart-list-item input:checked");
+                    //loop through every clicked element
+                    for (var i = 0; i < checkedElements.length; i++) {
+                        projectNumber = parseInt(checkedElements[i].id.charAt(checkedElements[i].id.length - 1))
+                        if (i == 0) {
+                            var tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], true);
+                        } else {
+                            var tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], false);
+                        }
+                        $(".nav-tabs").append(tabHTML[0]);
+                        $(".tab-content").append(tabHTML[1]);
+
+                    }
+                    if (Cookies.get("lang") === "en") {
+                        $("[lang='fr']").attr("style", "display:none !important");
+                    } else {
+                        $("[lang='en']").attr("style", "display:none !important");
+                    }
                 }
-                $(".nav-tabs").append(tabHTML[0]);
-                $(".tab-content").append(tabHTML[1]);
+                $(this).data("clicks", !clicks);
 
-              }
-              if (Cookies.get("lang") === "en") {
-                  $("[lang='fr']").attr("style", "display");
-                  $("[lang='en']").attr("style", "display:none !important");
-                  Cookies.set("lang", "fr");
-              } else {
-                  $("[lang='en']").attr("style", "display");
-                  $("[lang='fr']").attr("style", "display:none !important");
-                  Cookies.set("lang", "en");
-              }
-            }
-            $(this).data("clicks", !clicks);
-
-          });
+            });
 
 
         },
 
+        /* This method will generate the HTML text for each data tab
+
+           @param projectNumber {int} - the index number of the project in the projects array
+           @param currProject - the actual project object for the current project
+           @param active {boolean} - a boolean indicating whether the current project tab is active or not
+        */
         generateDataTabText: function(projectNumber, currProject, active) {
-          // create data for the current project
-          var data = Charts.generateData(currProject, Charts.costColours[0], Charts.releaseColours[0], Charts.riskBorderColour[0], Charts.riskFillColour[0]);
-          console.log(data);
-          projectCost = data[0];
-          projectRelease = data[1];
-          projectFactors = data[2];
-          projectTotalQuaterNumber = (data[3]);
+            // create data for t
+            var data = Charts.generateData(currProject, Charts.costColours[0], Charts.releaseColours[0], Charts.riskBorderColour[0], Charts.riskFillColour[0]);
+            // store the data from the data array into its own variables
+            projectCost = data[0];
+            projectRelease = data[1];
+            projectFactors = data[2];
+            projectTotalQuaterNumber = (data[3]);
 
-          // calculate totals and benefits
-          projectTotalData = Charts.calculateTotals(projectCost.data, projectRelease.data, projectRelease.error);
-          if (active){
-            var tabText = '<li id="tabNavProject"' + projectNumber + ' class = "tab-element active"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">' + currProject.title + '</a></li>'
-            var dataText = '<div class="tab-pane active" id="tabProject">';
-          }else{
-            var tabText = '<li id="tabNavProject"' + projectNumber + ' class = "tab-element"><a style="padding: 0 5px 0 5px" href="#tabProject1" data-toggle="tab">' + currProject.title + '</a></li>'
-            var dataText = '<div class="tab-pane" id="tabProject"' + projectNumber + '>';
-          }
-          dataText += '<p style="margin:0 5px 0 5px; color: #555">' +
-                  '<span lang="en">Total cost: </span>' +
-                  '<span lang="fr">Coût total : </span>' +
-                  '<span id="totalCostProject1">' + projectTotalData[0].toFixed(2).toLocaleString() +'</span>' +
-              '</p>' +
-              '<p style="margin:0 5px 0 5px; color: #555">' +
-                  '<span lang="en">Gross Revenue: </span>' +
-                  '<span lang="fr">Revenu brut : </span>' +
-                  '<span id="totalReleaseProject1">' + projectTotalData[1].toFixed(2).toLocaleString() + '</span>' +
-              '</p>' +
-              '<p style="margin:0 5px 0 5px; color: #555">' +
-                  '<span lang="en">Maximum net benefit: </span>' +
-                  '<span lang="fr">Bénéfice net maximal : </span>' +
-                  '<span id="maximumNetReleaseProject1">' + projectTotalData[2].toFixed(2).toLocaleString() + '</span>' +
-              '</p>' +
-              '<p style="margin:0 5px 0 5px; color: #555">' +
-                  '<span lang="en">Minimum net benefit: </span>' +
-                  '<span lang="fr">Bénéfice net minimal : </span>' +
-                  '<span id="minimumNetReleaseProject1">' + projectTotalData[3].toFixed(2).toLocaleString() + '</span>' +
-              '</p>' +
-          '</div>';
+            // calculate totals and benefits
+            projectTotalData = Charts.calculateTotals(projectCost.data, projectRelease.data, projectRelease.error);
 
-          return [tabText, dataText];
+            // generate opening headers for the tab and the data pane including the project numbers in their IDs
+            // check if the currrent tab needs to be active
+            if (active) {
+
+                // if it is active add the active class to the relevant div tags
+                var tabText = '<li id="tabNavProject"' + projectNumber + ' class = "tab-element active"><a style="padding: 0 5px 0 5px" href="#tabProject' + projectNumber + '" data-toggle="tab">' + currProject.title + '</a></li>'
+                var dataText = '<div class="tab-pane active" id="tabProject' + projectNumber + '" >';
+            } else {
+
+                // if not active then no active class
+                var tabText = '<li id="tabNavProject ' + projectNumber + '" class = "tab-element"><a style="padding: 0 5px 0 5px" href="#tabProject' + projectNumber + '" data-toggle="tab">' + currProject.title + '</a></li>'
+                var dataText = '<div class="tab-pane" id="tabProject' + projectNumber + '" >';
+            }
+
+            // add the remaining text to the data pane which adds the labels and the relevant values for the current project
+            dataText += '<p style="margin:0 5px 0 5px; color: #555">' +
+                '<span lang="en">Total cost: </span>' +
+                '<span lang="fr">Coût total : </span>' +
+                '<span>' + projectTotalData[0].toFixed(2).toLocaleString() + '</span>' +
+                '</p>' +
+                '<p style="margin:0 5px 0 5px; color: #555">' +
+                '<span lang="en">Gross Revenue: </span>' +
+                '<span lang="fr">Revenu brut : </span>' +
+                '<span>' + projectTotalData[1].toFixed(2).toLocaleString() + '</span>' +
+                '</p>' +
+                '<p style="margin:0 5px 0 5px; color: #555">' +
+                '<span lang="en">Maximum net benefit: </span>' +
+                '<span lang="fr">Bénéfice net maximal : </span>' +
+                '<span>' + projectTotalData[2].toFixed(2).toLocaleString() + '</span>' +
+                '</p>' +
+                '<p style="margin:0 5px 0 5px; color: #555">' +
+                '<span lang="en">Minimum net benefit: </span>' +
+                '<span lang="fr">Bénéfice net minimal : </span>' +
+                '<span>' + projectTotalData[3].toFixed(2).toLocaleString() + '</span>' +
+                '</p>' +
+                '</div>';
+
+            // return the HTML for the tav and the data pane
+            return [tabText, dataText];
+        },
+
+        /* this method will display the the relevant charts for the selected projects
+
+           @param projects - the array of projects
+           @param costRelease - the costRelease chart to be rendered
+           @param complexityRisk - the complexity risk chart to be rendered
+        */
+        displayCharts: function(projects, costRelease, complexityRisk) {
+            $(".chart-dropdown").click(function() {
+                // define variable to ensure the function only executes on the after click
+                var clicks = $(this).data('clicks');
+                if (!clicks) {
+
+                    costRelease.data.datasets = []
+                    complexityRisk.data.datasets = []
+                    // obtain all checked elements
+                    var checkedElements = $(".chart-list-item input:checked");
+                    if (checkedElements.length != 0) {
+                    //loop through every clicked element obtain each projects data
+                    // store all the data in an array
+                    var projectData = [];
+
+                    // define variables to track the earliest start time
+                    var lowestTime = Number.MAX_SAFE_INTEGER;
+                    for (var i = 0; i < checkedElements.length; i++) {
+                        projectNumber = parseInt(checkedElements[i].id.charAt(checkedElements[i].id.length - 1));
+                        var data = Charts.generateData(projects[projectNumber],
+                            Charts.costColours[projectNumber],
+                            Charts.releaseColours[projectNumber],
+                            Charts.riskBorderColour[projectNumber],
+                            Charts.riskFillColour[projectNumber]);
+                        projectData.push(data);
+
+                        // check the startTime of the current project
+                        let projectStartDate = new Date(projects[projectNumber].costRelease.startDatePhase1);
+                        let projectStartTime = projectStartDate.getTime();
+                        if (projectStartTime < lowestTime) {
+                            lowestTime = projectStartTime;
+                        }
+
+                    }
+
+                    // now for each project from the selected projects compare the start times and add the difference in quarters
+                    // keep track of the highest
+                    var highestQuarters = 0;
+                    for (var i = 0; i < checkedElements.length; i++) {
+                        projectNumber = parseInt(checkedElements[i].id.charAt(checkedElements[i].id.length - 1))
+
+                        // obtain the start time of the current project
+                        let projectStartDate = new Date(projects[projectNumber].costRelease.startDatePhase1);
+                        let projectStartTime = projectStartDate.getTime();
+
+                        // calculate the difference and convert to quarters
+                        let difference = parseInt((projectStartTime - lowestTime) / (1000 * 60 * 60 * 24 * 30 * 3));
+
+                        // add the difference to project 1s total quarter number
+                        // this is to have to total number of quarters that project 1 accounts for including all the blank quarters
+                        projectData[i][3] += difference;
+                        if (projectData[i][3] > highestQuarters){highestQuarters = projectData[i][3]}
+                        // for every quarter difference loop through the project
+                        for (var j = 0; j < difference; j++) {
+                            // add blank data to account for the difference in the start time
+                            projectData[i][0].data.unshift(0);
+                            projectData[i][1].data.unshift(0);
+                            projectData[i][1].error.unshift(null);
+                        }
+                        // after adding the distance push the current projects data to the chart
+                        // write data from project1 to cost and release graph
+                        costRelease.data.datasets.push(projectData[i][0]);
+                        costRelease.data.datasets.push(projectData[i][1]);
+
+                        // write data from project1 to complexity and risk graph
+                        complexityRisk.data.datasets.push(projectData[i][2]);
+                    }
+
+                    // give title and labels to cost and release graph
+                    costRelease.options.title.text = "Cost & Released Benefit";
+
+                    // define the label for the x-axes of cost release graph to be the quarter number
+                    let projectQuaters = [];
+                    for (let i = 1; i <= highestQuarters; i++) {
+                        projectQuaters.push(i);
+                    }
+                    costRelease.data.labels = projectQuaters;
+
+                    // give title to complexity and risk graph
+                    complexityRisk.options.title.text = "Complexity & Risk Factors";
+                    console.log(costRelease);
+                    costRelease.update();
+                    costRelease.render();
+                    complexityRisk.update();
+                    complexityRisk.render();
+
+
+                  }else {
+                    costRelease.options.title.text = "Nothing to show, please select a project";
+                    complexityRisk.options.title.text = "Nothing to show, please select a project";
+                    costRelease.update();
+                    costRelease.render();
+                    complexityRisk.update();
+                    complexityRisk.render();
+
+
+                  }
+                }
+
+            });
+
         }
 
     };
