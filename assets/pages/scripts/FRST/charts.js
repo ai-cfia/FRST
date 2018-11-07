@@ -150,6 +150,16 @@ var Charts = function() {
             let projects = JSON.parse(window.localStorage.getItem("projects"));
             Charts.initalizeCharts(projects, costReleaseChart, complexityRiskChart);
             Charts.updateCharts(projects, costReleaseChart, complexityRiskChart);
+            
+            // ensure the correct span elements are present based on the set language
+            if (Cookies.get("lang") === "en") {
+                $("[lang='fr']").attr("style", "display:none !important");
+
+            } else {
+                $("[lang='en']").attr("style", "display:none !important");
+
+            }
+
 
         },
 
@@ -659,16 +669,6 @@ var Charts = function() {
 
                     // display the charts
                     Charts.displayCharts(projects, costRelease, complexityRisk, checkedIDs);
-
-                    // ensure the correct span elements are present based on the set language
-                    if (Cookies.get("lang") === "en") {
-                        $("[lang='fr']").attr("style", "display:none !important");
-
-                    } else {
-                        $("[lang='en']").attr("style", "display:none !important");
-
-                    }
-
                 }
                 $(this).data("clicks", !clicks);
 
