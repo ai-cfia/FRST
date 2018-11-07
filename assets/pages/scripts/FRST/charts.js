@@ -687,6 +687,8 @@ var Charts = function() {
         initalizeCharts: function(projects, costRelease, complexityRisk) {
             // obtain previously checked items and display the charts
             let checkedElements = JSON.parse(window.localStorage.getItem("checked"));
+
+            if (checkedElements != null){}
             // loop through each id and set the given element
             Charts.displayCharts(projects, costRelease, complexityRisk, checkedElements);
 
@@ -695,6 +697,8 @@ var Charts = function() {
                 // use jquery to obtain the relevant DOM element and set the class
                 $("#" + checkedElements[i]).prop('checked', true);
             }
+
+          }
 
         }
 
