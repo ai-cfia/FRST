@@ -688,7 +688,7 @@ var Charts = function() {
             // obtain previously checked items and display the charts
             let checkedElements = JSON.parse(window.localStorage.getItem("checked"));
 
-            if (checkedElements != null){}
+            if (checkedElements != null){
             // loop through each id and set the given element
             Charts.displayCharts(projects, costRelease, complexityRisk, checkedElements);
 
