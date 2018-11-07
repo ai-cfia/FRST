@@ -246,54 +246,6 @@ var Projects = function() {
             $("input[name='humanResources3'][value='" + projects[current_project].complexityRisk._humanResources[2] + "']").attr("checked", true);
         },
 
-        updateProjectsDropDownLists: function() {
-            let projects = JSON.parse(window.localStorage.getItem("projects"));
-            let visual_project1 = parseInt(window.localStorage.getItem("visual_project1"));
-            let visual_project2 = parseInt(window.localStorage.getItem("visual_project2"));
-
-            let options = [];
-            options.push("<option value='-1'>Not Selected</option>");
-            for (let i = 0; i < projects.length; i++) {
-                if (projects[i].costRelease.quaterNumberPhase1 != null ||
-                    projects[i].complexityRisk.cost != null) {
-                    options.push("<option value ='" + i + "'>" + projects[i].title + "</option>");
-                }
-            }
-
-            for (let i = 0; i < options.length; i++) {
-                $("#selectProject1").append(options[i]);
-                $("#selectProject2").append(options[i]);
-            }
-            $("#selectProject1").val(visual_project1);
-            $("#selectProject1").attr("old", visual_project1);
-            if (visual_project1 != "-1") {
-                $("#selectProject1 option[value='" + visual_project1 + "']").hide();
-            }
-            if (visual_project2 != "-1") {
-                $("#selectProject1 option[value='" + visual_project2 + "']").hide();
-            }
-            $("#selectProject2").val(visual_project2);
-            $("#selectProject2").attr("old", visual_project2);
-            if (visual_project1 != "-1") {
-                $("#selectProject2 option[value='" + visual_project1 + "']").hide();
-            }
-            if (visual_project2 != "-1") {
-                $("#selectProject2 option[value='" + visual_project2 + "']").hide();
-            }
-
-            $("select").change(function(e) {
-                var oldvalue = $(this).attr("old");
-                var currentvalue = $(this).val();
-                if (oldvalue) {
-                    $("select option[value='" + oldvalue + "']").show();
-                }
-                if (currentvalue != "-1") {
-                    $("select option[value='" + currentvalue + "']").hide();
-                }
-                $(this).attr("old", currentvalue);
-            });
-        },
-
         updateRange: function(direction, currVal, slider) {
             // update the current value on the slider based on the direction and original value
             var range_instance = slider.data("ionRangeSlider");

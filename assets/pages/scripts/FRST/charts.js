@@ -439,16 +439,23 @@ var Charts = function() {
                     var checkedElements = $(".chart-list-item input:checked");
                     //loop through every clicked element
                     for (var i = 0; i < checkedElements.length; i++) {
+                        // parse the current project number from the id
                         projectNumber = parseInt(checkedElements[i].id.charAt(checkedElements[i].id.length - 1))
+
+                        // generate the data for the tabs
                         if (i == 0) {
                             var tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], true);
                         } else {
                             var tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], false);
                         }
+
+                        // append the data to the DOM
                         $(".nav-tabs").append(tabHTML[0]);
                         $(".tab-content").append(tabHTML[1]);
 
                     }
+
+                    // ensure the correct span elements are present based on the set language
                     if (Cookies.get("lang") === "en") {
                         $("[lang='fr']").attr("style", "display:none !important");
                     } else {
@@ -533,8 +540,13 @@ var Charts = function() {
                 var clicks = $(this).data('clicks');
                 if (!clicks) {
 
-                    costRelease.data.datasets = []
-                    complexityRisk.data.datasets = []
+                    // initialize the costRelease and complexityRisk datasets
+                    // this is so there aren't duplicate bars and to account
+                    // for when no charts are selected
+                    costRelease.data.datasets = [];
+                    complexityRisk.data.datasets = [];
+                    costRelease.data.labels = [];
+
                     // obtain all checked elements
                     var checkedElements = $(".chart-list-item input:checked");
                     if (checkedElements.length != 0) {
@@ -544,19 +556,30 @@ var Charts = function() {
 
                     // define variables to track the earliest start time
                     var lowestTime = Number.MAX_SAFE_INTEGER;
+
+                    // loop through every element that is checked
                     for (var i = 0; i < checkedElements.length; i++) {
+
+                        // parse the project number from the elements ID
                         projectNumber = parseInt(checkedElements[i].id.charAt(checkedElements[i].id.length - 1));
+
+                        // generate the data for the current project
                         var data = Charts.generateData(projects[projectNumber],
                             Charts.costColours[projectNumber],
                             Charts.releaseColours[projectNumber],
                             Charts.riskBorderColour[projectNumber],
                             Charts.riskFillColour[projectNumber]);
+                        // add the current projects data to the projectData array
                         projectData.push(data);
 
                         // check the startTime of the current project
                         let projectStartDate = new Date(projects[projectNumber].costRelease.startDatePhase1);
                         let projectStartTime = projectStartDate.getTime();
+
+                        // check if the current projects time is less than the current lowest time
                         if (projectStartTime < lowestTime) {
+
+                            // set new lowest time if current time is lower
                             lowestTime = projectStartTime;
                         }
 
@@ -566,6 +589,8 @@ var Charts = function() {
                     // keep track of the highest
                     var highestQuarters = 0;
                     for (var i = 0; i < checkedElements.length; i++) {
+
+                        // parse the current project number from the element id
                         projectNumber = parseInt(checkedElements[i].id.charAt(checkedElements[i].id.length - 1))
 
                         // obtain the start time of the current project
@@ -579,13 +604,16 @@ var Charts = function() {
                         // this is to have to total number of quarters that project 1 accounts for including all the blank quarters
                         projectData[i][3] += difference;
                         if (projectData[i][3] > highestQuarters){highestQuarters = projectData[i][3]}
+
                         // for every quarter difference loop through the project
                         for (var j = 0; j < difference; j++) {
+
                             // add blank data to account for the difference in the start time
                             projectData[i][0].data.unshift(0);
                             projectData[i][1].data.unshift(0);
                             projectData[i][1].error.unshift(null);
                         }
+
                         // after adding the distance push the current projects data to the chart
                         // write data from project1 to cost and release graph
                         costRelease.data.datasets.push(projectData[i][0]);
@@ -603,27 +631,26 @@ var Charts = function() {
                     for (let i = 1; i <= highestQuarters; i++) {
                         projectQuaters.push(i);
                     }
+
+                    // push the labels to the chart
                     costRelease.data.labels = projectQuaters;
 
                     // give title to complexity and risk graph
                     complexityRisk.options.title.text = "Complexity & Risk Factors";
-                    console.log(costRelease);
-                    costRelease.update();
-                    costRelease.render();
-                    complexityRisk.update();
-                    complexityRisk.render();
-
 
                   }else {
+
+                    // set these to the titles if the list is blank
                     costRelease.options.title.text = "Nothing to show, please select a project";
                     complexityRisk.options.title.text = "Nothing to show, please select a project";
-                    costRelease.update();
-                    costRelease.render();
-                    complexityRisk.update();
-                    complexityRisk.render();
-
-
                   }
+
+                  // update and render the charts
+                  costRelease.update();
+                  costRelease.render();
+                  complexityRisk.update();
+                  complexityRisk.render();
+
                 }
 
             });
