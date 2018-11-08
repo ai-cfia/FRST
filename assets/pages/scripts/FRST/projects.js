@@ -70,6 +70,7 @@ var Projects = function() {
                 }
             });
         },
+        
         /* load projects drop down menu*/
         loadProjects: function() {
             // obtain project array from local storage

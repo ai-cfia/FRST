@@ -79,6 +79,15 @@ var Charts = function() {
                                 let tooltipItem = tooltipItems[0];
                                 title = "Quater " + data.labels[tooltipItem.index];
                                 return title;
+                            },
+
+                            label: function(tooltipItem, data){
+                              // store current dataset
+                              currSet = data.datasets[tooltipItem.datasetIndex];
+                              // retrieve the title of the dataset
+                              label = currSet.label +
+                              ": $" + tooltipItem.yLabel.toFixed(2);
+                              return(label);
                             }
                         }
                     }
@@ -144,17 +153,81 @@ var Charts = function() {
                     }
                 }
             });
+
+            // initialize the min and max benefit chart
+            let minMaxBenefitChart = new Chart($("canvas[name='minMaxBenefitChart']"), {
+                // type is a custom type defined in the Chart.js plugin
+                type: "bar",
+                // initialize the data arrays
+                data: {
+                    labels: [],
+                    datasets: []
+                },
+                // set options for the chart
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    title: {
+                        // show title and set default title to show when no complete project is selected
+                        display: true,
+                        text: "Nothing to show, please select a project",
+                        fontSize: 19
+                    },
+
+                    // set position of the legend
+                    legend: {
+                        position: "bottom"
+                    },
+                    // set labels for the x and y axes
+                    scales: {
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: "Project Name"
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                // define a function to add a dollar sign to the labels for y axes
+                                userCallback: function(value, index, values) {
+                                    return "$" + value.toLocaleString();
+                                },
+                                suggestedMax: 100000,
+                                beginAtZero: true
+                            },
+                        }]
+                    },
+
+                    tooltips: {
+                        // enable tooltipItems
+                        enabled: true,
+                        // set custom label for the tool tips
+                        callbacks: {
+                            label: function(tooltipItem, data){
+                              // store current dataset
+                              currSet = data.datasets[tooltipItem.datasetIndex];
+                              // retrieve the title of the dataset
+                              label = currSet.label +
+                              ": $" + tooltipItem.yLabel.toFixed(2);
+                              return(label);
+                            }
+                        }
+                    }
+                },
+            });
+
+
             // load the charts dropdown
-            Charts.loadCharts();
+            Charts.loadChartsDropdown();
             // obtain projects array
             let projects = JSON.parse(window.localStorage.getItem("projects"));
-            Charts.initalizeCharts(projects, costReleaseChart, complexityRiskChart);
-            Charts.updateCharts(projects, costReleaseChart, complexityRiskChart);
+            Charts.initalizeCharts(projects, costReleaseChart, complexityRiskChart, minMaxBenefitChart);
+            Charts.updateCharts(projects, costReleaseChart, complexityRiskChart, minMaxBenefitChart);
 
         },
 
         /* load the charts drop down list */
-        loadCharts: function() {
+        loadChartsDropdown: function() {
             // first obtain and store the list of projects from the browser
             let projects = JSON.parse(window.localStorage.getItem("projects"));
             // create a fore loop to loop through each variable in the array
@@ -505,14 +578,16 @@ var Charts = function() {
            @param complexityRisk - the complexity risk chart to be rendered
            @param checkedElements - an array containing the IDs of the cheked elements from the drop down
         */
-        displayCharts: function(projects, costRelease, complexityRisk, checkedElements) {
+        displayCharts: function(projects, costRelease, complexityRisk, minMaxBenefit, checkedElements) {
 
             // initialize the costRelease and complexityRisk datasets
             // this is so there aren't duplicate bars and to account
             // for when no charts are selected
             costRelease.data.datasets = [];
             complexityRisk.data.datasets = [];
+            minMaxBenefit.data.datasets = [];
             costRelease.data.labels = [];
+            minMaxBenefit.data.labels = [];
 
             // delete all present tabs and data
             $(".tab-element").remove();
@@ -614,18 +689,31 @@ var Charts = function() {
                 // give title to complexity and risk graph
                 complexityRisk.options.title.text = "Complexity & Risk Factors";
 
+                // generate minMaxBenefit data and update the chart
+                minMax = Charts.displayMinMax(projectData, checkedElements, projects);
+                minMaxBenefit.options.title.text = "Minimum & Maximum Benefits"
+                minMaxBenefit.data.datasets.push(minMax[0]);
+                minMaxBenefit.data.datasets.push(minMax[1]);
+                minMaxBenefit.data.labels = minMax[2];
+
             } else {
 
                 // set these to the titles if the list is blank
                 costRelease.options.title.text = "Nothing to show, please select a project";
                 complexityRisk.options.title.text = "Nothing to show, please select a project";
+                minMaxBenefit.options.title.text = "Nothing to show, please select a project";
             }
+
+
+
 
             // update and render the charts
             costRelease.update();
             costRelease.render();
             complexityRisk.update();
             complexityRisk.render();
+            minMaxBenefit.update();
+            minMaxBenefit.render();
 
         },
 
@@ -637,7 +725,7 @@ var Charts = function() {
            @param costRelease - the costRelease chart to be rendered
            @param complexityRisk - the complexity risk chart to be rendered
         */
-        updateCharts: function(projects, costRelease, complexityRisk) {
+        updateCharts: function(projects, costRelease, complexityRisk, minMaxBenefit) {
 
             // define the event listener
             $(".chart-dropdown").click(function() {
@@ -658,7 +746,7 @@ var Charts = function() {
                 if (clicks) {
 
                     // display the charts
-                    Charts.displayCharts(projects, costRelease, complexityRisk, checkedIDs);
+                    Charts.displayCharts(projects, costRelease, complexityRisk, minMaxBenefit, checkedIDs);
 
                     // set correct language
                     Charts.setLanguage();
@@ -678,13 +766,13 @@ var Charts = function() {
           @param complexityRisk - the complexity risk chart to be rendered
 
         */
-        initalizeCharts: function(projects, costRelease, complexityRisk) {
+        initalizeCharts: function(projects, costRelease, complexityRisk, minMaxBenefit) {
             // obtain previously checked items and display the charts
             let checkedElements = JSON.parse(window.localStorage.getItem("checked"));
 
             if (checkedElements != null) {
                 // loop through each id and set the given element
-                Charts.displayCharts(projects, costRelease, complexityRisk, checkedElements);
+                Charts.displayCharts(projects, costRelease, complexityRisk, minMaxBenefit, checkedElements);
 
                 // loop through each id in checkedElements and set those list items to checked
                 for (var i = 0; i < checkedElements.length; i++) {
@@ -709,6 +797,52 @@ var Charts = function() {
               $("[lang='en']").attr("style", "display:none !important");
 
           }
+        },
+
+        /* This function will display the Min and Max Benefit chart
+           @param projectData - an array containing all the data arrays for each selected project
+        */
+        displayMinMax: function(projectData, checkedElements, projects){
+
+          // define an array to store each projects name, max benefit and min benefit
+          let names = [], maxBenefits = [], minBenefits = [];
+
+          // loop through the data generating the totals and retrieving the project names
+          for (var i = 0; i < projectData.length; i++){
+            // first obtain the project number
+            projectNumber = parseInt(checkedElements[i].charAt(checkedElements[i].length - 1));
+
+            // obtain the name from the project and push it to the names array
+            names.push(projects[projectNumber].title);
+
+            // generate the data for the minimum and maximum maxBenefits
+            var totals = Charts.calculateTotals(projectData[i][0].data, projectData[i][1].data, projectData[i][1].error);
+            // push the min and max benefits to the arrays
+            maxBenefits.push(totals[2]);
+            minBenefits.push(totals[3]);
+
+          }
+
+          // define datasets for minimum and maximum
+          maxBen = {
+              label: "Maximum Benefit",
+              // set the data array to be the maximum benefit array
+              data: maxBenefits,
+              // set bar colour
+              backgroundColor: Charts.costColours[1]
+          };
+
+          minBen = {
+              label: "Minimum Benefit",
+              // set the data array to be the maximum benefit array
+              data: minBenefits,
+              // set bar colour
+              backgroundColor: Charts.releaseColours[1]
+          };
+
+          // return the data sets and the names array
+          return [maxBen, minBen, names];
+
         }
 
     };
