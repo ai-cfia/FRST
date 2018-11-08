@@ -151,16 +151,6 @@ var Charts = function() {
             Charts.initalizeCharts(projects, costReleaseChart, complexityRiskChart);
             Charts.updateCharts(projects, costReleaseChart, complexityRiskChart);
 
-            // ensure the correct span elements are present based on the set language
-            if (Cookies.get("lang") === "en") {
-                $("[lang='fr']").attr("style", "display:none !important");
-
-            } else {
-                $("[lang='en']").attr("style", "display:none !important");
-
-            }
-
-
         },
 
         /* load the charts drop down list */
@@ -669,10 +659,14 @@ var Charts = function() {
 
                     // display the charts
                     Charts.displayCharts(projects, costRelease, complexityRisk, checkedIDs);
+
+                    // set correct language
+                    Charts.setLanguage();
                 }
                 $(this).data("clicks", !clicks);
 
             });
+
         },
 
         /*
@@ -700,6 +694,21 @@ var Charts = function() {
 
             }
 
+            // set correct language
+            Charts.setLanguage();
+
+        },
+
+        /* This method ensures that the correct span elements are displayed based on the selected lang */
+        setLanguage: function(){
+          // ensure the correct span elements are present based on the set language
+          if (Cookies.get("lang") === "en") {
+              $("[lang='fr']").attr("style", "display:none !important");
+
+          } else {
+              $("[lang='en']").attr("style", "display:none !important");
+
+          }
         }
 
     };
