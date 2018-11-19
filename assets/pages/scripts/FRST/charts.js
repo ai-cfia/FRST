@@ -1,14 +1,17 @@
-var Charts = function() {
+let Charts = function() {
 
     return {
 
-        costColours: (["rgba(238, 59, 59, 0.8)", "rgba(231, 019, 99, 0.8)", "rgba(250, 128, 114, 0.8)", "rgba(250, 0, 0, 0.8)", "rgba(255, 165, 0, 0.8)",
-            "rgba(238, 59, 59, 0.4)", "rgba(231, 019, 99, 0.4)", "rgba(250, 128, 114, 0.4)", "rgba(250, 0, 0, 0.4)", "rgba(255, 165, 0, 0.4)"
+        costColours: (["rgba(238, 59, 59, 0.8)", "rgba(231, 019, 99, 0.8)", "rgba(250, 128, 114, 0.8)", "rgba(250, 0, 0, 0.8)", "rgba(165, 48, 48, 0.8)",
+            "rgba(238, 59, 59, 0.4)", "rgba(231, 019, 99, 0.4)", "rgba(250, 128, 114, 0.4)", "rgba(250, 0, 0, 0.4)", "rgba(165, 48, 48, 0.4)"
         ]),
 
-        releaseColours: (["rgba(30,144,255,0.8)", "rgba(0,255,255,0.8)", "rgba(134,206,235,0.8)", "rgba(50,205,50,0.8)", "rgba(66,105,225,0.8)",
-            "rgba(30,144,255,0.4)", "rgba(0,255,255,0.4)", "rgba(134,206,235,0.8)", "rgba(50,205,50,0.8)", "rgba(66,105,225,0.8)"
+        releaseColours: (["rgba(30,144,255,0.8)", "rgba(0,255,255,0.8)", "rgba(134,206,235,0.8)", "rgba(0,0,250,0.8)", "rgba(66,105,225,0.8)",
+            "rgba(30,144,255,0.4)", "rgba(0,255,255,0.4)", "rgba(134,206,235,0.4)", "rgba(0,0,250,0.4)", "rgba(66,105,225,0.4)"
         ]),
+
+        minReleaseColours: (["rgba(50,204,0,0.8)", "rgba(102,255,102, 0.8)", "rgba(51,255,153, 0.8)", "rgba(0,255,0,0.8)", "rgba(0,102,51, 0.8)",
+            "rgba(50,204,0,0.4)", "rgba(102,255,102, 0.4)", "rgbs(51,255,153, 0.4)", "rgba(0,255,0,0.4)", "rgba(0,102,51, 0.4)"]),
 
         riskFillColour: (["rgba(238, 59, 59, 0.2)", "rgba(30,144,255,0.2)", "rgba(231, 019, 99, 0.2)", "rgba(0,255,255,0.2)", "rgba(250, 128, 114, 0.2)",
             "rgba(134,206,235,0.2)", "rgba(250, 0, 0, 0.2)", "rgba(50,205,50,0.2)", "rgba(255, 165, 0, 0.2)", "rgba(66,105,225,0.2)"
@@ -29,7 +32,7 @@ var Charts = function() {
             // define Chart object for the cost release bar chart
             let costReleaseChart = new Chart($("canvas[name='costReleaseChart']"), {
                 // type is a custom type defined in the Chart.js plugin
-                type: "barError",
+                type: "bar",
                 // initialize the data arrays
                 data: {
                     labels: [],
@@ -231,8 +234,8 @@ var Charts = function() {
             // first obtain and store the list of projects from the browser
             let projects = JSON.parse(window.localStorage.getItem("projects"));
             // create a fore loop to loop through each variable in the array
-            var currChart = "";
-            for (var i = 0; i < projects.length; i++) {
+            let currChart = "";
+            for (let i = 0; i < projects.length; i++) {
                 // add the html for each list item in the drop down list
                 if (!(projects[i].costRelease.quaterNumberPhase1 == null ||
                         projects[i].complexityRisk._cost == null)) {
@@ -249,20 +252,20 @@ var Charts = function() {
         },
 
         /* generate the correct data sets based on a given project
-           @param {Project} project - the current project object to generate data for
-           @param {string} costColour -  the colour for the cost bar
-           @param {string} releaseColour - the colour for the release bar
-           @param {string} riskBorder - the colour of the complexity risk chart border
-           @param {string} riskFill - the fill colour of the complexity risk chart
+           @param  project - the current project object to generate data for
+           @param  projectNumber - the index of the project in the projects array
+           @returns an array that contains the data for the project cost,
+                    the project release, the complexity risk data and the total
+                    number or quarters in that order
         */
-        generateData: function(project, costColour, releaseColour, riskBorder, riskFill) {
+        generateData: function(project, projectNumber) {
             // degfine some variables for later use
             let projectTotalQuaterNumber = 0;
             let projectCostData = [];
-            let projectReleaseData = [];
-            let projectError = [];
+            let maxReleaseData = [];
+            let minReleaseData = [];
             let projectCost = {};
-            let projectRelease = {};
+            let maxRelease = {};
             let projectFactors = {};
             let projectUncertainty = 0;
 
@@ -349,15 +352,15 @@ var Charts = function() {
             // also we need to parse the values because the input from sliders are text
             let projectCostPhase1 = parseFloat(project.costRelease.fteNumberCostPhase1) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase1);
             // set release and error values to 0 and null respectively since there is no release for the first phase
-            let projectReleasePhase1 = 0;
-            let projectErrorPhase1 = null;
+            let maxReleasePhase1 = 0;
+            let minReleasePhase1 = null;
 
             // loop for each quarter in the phase
             for (let i = 1; i <= projectQuaterNumberPhase1; i++) {
                 // push the cost, release and error data into the data arrays for the project for each quarter in the current phase
                 projectCostData.push(projectCostPhase1);
-                projectReleaseData.push(projectReleasePhase1);
-                projectError.push(projectErrorPhase1);
+                maxReleaseData.push(maxReleasePhase1);
+                minReleaseData.push(minReleasePhase1);
             }
 
             // calculate the gap between phase 1 and phase 2
@@ -368,25 +371,25 @@ var Charts = function() {
             for (let i = 0; i < projectDifferenceP1P2; i++) {
                 // for each additional quarter push empty data into the arrays, this is to account for projects that will have a gap between phases
                 projectCostData.push(0);
-                projectReleaseData.push(0);
-                projectError.push(null);
+                maxReleaseData.push(0);
+                minReleaseData.push(0);
             }
 
             // calculate the phase 2 cost
             let projectCostPhase2 = parseFloat(project.costRelease.fteNumberCostPhase2) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase2);
             // calculate the release by following the same process followed to calculate the cost
-            let projectReleasePhase2 = parseFloat(project.costRelease.fteNumberReleasePhase2) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase2);
+            let maxReleasePhase2 = parseFloat(project.costRelease.fteNumberReleasePhase2) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase2);
 
             // calculate the lowest possible release based on the error
             // multiply the release by a calculated factor to obtain this value
-            let projectErrorPhase2 = projectUncertainty / 170 * projectReleasePhase2;
+            let minReleasePhase2 = projectUncertainty / 170 * maxReleasePhase2;
 
             // loop for every quarter in the phase
             for (let i = 1; i <= projectQuaterNumberPhase2; i++) {
                 // push the cost, release and uncertainty for every quarter
                 projectCostData.push(projectCostPhase2);
-                projectReleaseData.push(projectReleasePhase2);
-                projectError.push(projectErrorPhase2);
+                maxReleaseData.push(maxReleasePhase2);
+                minReleaseData.push(minReleasePhase2);
             }
 
             // calculate the gap between phase2 and phase 3
@@ -397,44 +400,55 @@ var Charts = function() {
             // push blank info in for each quarter difference
             for (let i = 0; i < projectDifferenceP2P3; i++) {
                 projectCostData.push(0);
-                projectReleaseData.push(0);
-                projectError.push(null);
+                maxReleaseData.push(0);
+                minReleaseData.push(0);
             }
 
 
             // calculate phase3 cost, release and lowest possible release value
             let projectCostPhase3 = parseFloat(project.costRelease.fteNumberCostPhase3) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase3);
-            let projectReleasePhase3 = parseFloat(project.costRelease.fteNumberReleasePhase3) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase3);
-            let projectErrorPhase3 = projectUncertainty / 170 * projectReleasePhase3;
+            let maxReleasePhase3 = parseFloat(project.costRelease.fteNumberReleasePhase3) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase3);
+            let minReleasePhase3 = projectUncertainty / 170 * maxReleasePhase3;
 
             // loop for each quarter and push data into the data arrays for each
             for (let i = 1; i <= projectQuaterNumberPhase3; i++) {
                 projectCostData.push(projectCostPhase3);
-                projectReleaseData.push(projectReleasePhase3);
-                projectError.push(projectErrorPhase3);
+                maxReleaseData.push(maxReleasePhase3);
+                minReleaseData.push(minReleasePhase3);
             }
 
             // calculate the total amount of quarters including the gaps calculated
             projectTotalQuaterNumber = projectQuaterNumberPhase1 + projectDifferenceP1P2 + projectQuaterNumberPhase2 + projectDifferenceP2P3 + projectQuaterNumberPhase3;
 
-            // generate data for cost and release graph
+            // generate a data object for project cost
             projectCost = {
                 label: "Cost of " + project.title,
                 // set the data array to be the final cost array generated
                 data: projectCostData,
                 // set bar colour
-                backgroundColor: costColour
+                backgroundColor: Charts.costColours[projectNumber]
             };
 
-            projectRelease = {
-                label: "Release of " + project.title,
-                // set the data of this chart to be release array generated
-                data: projectReleaseData,
+            // generate a data object for the maxRelease
+            maxRelease = {
+                label: "Max Release of " + project.title,
+                // set the data of this chart to be max release array generated
+                data: maxReleaseData,
                 // the error array becomes the error for this chart
-                error: projectError,
+                error: minReleaseData,
                 // set bar colour
-                backgroundColor: releaseColour
+                backgroundColor: Charts.releaseColours[projectNumber]
             };
+
+            // create a data object for the minRelease
+            minRelease = {
+              label: "Min Release of " + project.title,
+              // set the data to the be the min release error generated
+              data: minReleaseData,
+              // set the bar colour
+              backgroundColor: Charts.minReleaseColours[projectNumber]
+
+            }
 
             // generate data for complexity and risk graph
             projectFactors = {
@@ -449,21 +463,24 @@ var Charts = function() {
                     projectFactor7Uniformed
                 ],
                 // set the background and border colour for the radar
-                backgroundColor: riskFill,
-                borderColor: riskBorder,
+                backgroundColor: Charts.riskFillColour[projectNumber],
+                borderColor: Charts.riskBorderColour[projectNumber],
                 label: "Uncertainty of " + project.title + ", Total Score: " + projectUncertainty
             };
 
-            return [projectCost, projectRelease, projectFactors, projectTotalQuaterNumber];
+            return [projectCost, maxRelease, minRelease, projectFactors, projectTotalQuaterNumber];
 
         },
 
         /* This function will calculate the total cost, release in addition to
            the minimum and maximum benfits of a project
 
-           @param cost - the cost data2
+           @param cost - the cost data
            @param release - the release data
            @param error - the error data
+           @returns an array containing the total cost, total release,
+                    the minimum benefit and maximum benefit in that order all
+                    values are floats
         */
         calculateTotals: function(cost, release, error) {
             let totalCost = 0;
@@ -505,7 +522,7 @@ var Charts = function() {
         */
         displayDataTabs: function(projects, projectNumber, data, active) {
             // generate the data for the tabs
-            var tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], active, data);
+            let tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], active, data);
 
             // append the data to the DOM
             $(".nav-tabs").append(tabHTML[0]);
@@ -513,35 +530,38 @@ var Charts = function() {
 
         },
 
-        /* This method will generate the HTML text for each data tab
+        /* This method will generate the HTML text for each data tab on the cost release chart
 
-           @param projectNumber {int} - the index number of the project in the projects array
+           @param projectNumber - the index number of the project in the projects array
            @param currProject - the actual project object for the current project
-           @param active {boolean} - a boolean indicating whether the current project tab is active or not
+           @param active - a boolean indicating whether the current project tab is active or not
            @param data - an array that contains all the computed data for the project(generated by generateData())
+           @returns an array contianing the HTML text for the actual tab and the data pane in that order
         */
         generateDataTabText: function(projectNumber, currProject, active, data) {
             // store the data from the data array into its own variables
             projectCost = data[0];
-            projectRelease = data[1];
-            projectFactors = data[2];
-            projectTotalQuaterNumber = (data[3]);
+            maxRelease = data[1];
+            projectFactors = data[3];
+            projectTotalQuaterNumber = (data[4]);
 
             // calculate totals and benefits
-            projectTotalData = Charts.calculateTotals(projectCost.data, projectRelease.data, projectRelease.error);
+            projectTotalData = Charts.calculateTotals(projectCost.data, maxRelease.data, maxRelease.error);
 
             // generate opening headers for the tab and the data pane including the project numbers in their IDs
             // check if the currrent tab needs to be active
+            let tabText = '';
+            let dataText = '';
             if (active) {
 
                 // if it is active add the active class to the relevant div tags
-                var tabText = '<li id="tabNavProject"' + projectNumber + ' class = "tab-element active"><a style="padding: 0 5px 0 5px" href="#tabProject' + projectNumber + '" data-toggle="tab">' + currProject.title + '</a></li>'
-                var dataText = '<div class="tab-pane active" id="tabProject' + projectNumber + '" >';
+                tabText = '<li id="tabNavProject"' + projectNumber + ' class = "tab-element active"><a style="padding: 0 5px 0 5px" href="#tabProject' + projectNumber + '" data-toggle="tab">' + currProject.title + '</a></li>'
+                dataText = '<div class="tab-pane active" id="tabProject' + projectNumber + '" >';
             } else {
 
                 // if not active then no active class
-                var tabText = '<li id="tabNavProject ' + projectNumber + '" class = "tab-element"><a style="padding: 0 5px 0 5px" href="#tabProject' + projectNumber + '" data-toggle="tab">' + currProject.title + '</a></li>'
-                var dataText = '<div class="tab-pane" id="tabProject' + projectNumber + '" >';
+                tabText = '<li id="tabNavProject ' + projectNumber + '" class = "tab-element"><a style="padding: 0 5px 0 5px" href="#tabProject' + projectNumber + '" data-toggle="tab">' + currProject.title + '</a></li>'
+                dataText = '<div class="tab-pane" id="tabProject' + projectNumber + '" >';
             }
 
             // add the remaining text to the data pane which adds the labels and the relevant values for the current project
@@ -596,23 +616,23 @@ var Charts = function() {
             if (checkedElements.length != 0) {
                 //loop through every clicked element obtain each projects data
                 // store all the data in an array
-                var projectData = [];
+                let projectData = [];
 
                 // define variables to track the earliest start time
-                var lowestTime = Number.MAX_SAFE_INTEGER;
+                let lowestTime = Number.MAX_SAFE_INTEGER;
 
+                //TESTING only
+                if (!checkedElements){
+                  checkedElements = [];
+                }
                 // loop through every element that is checked
-                for (var i = 0; i < checkedElements.length; i++) {
+                for (let i = 0; i < checkedElements.length; i++) {
 
                     // parse the project number from the elements ID
                     projectNumber = parseInt(checkedElements[i].charAt(checkedElements[i].length - 1));
 
                     // generate the data for the current project
-                    var data = Charts.generateData(projects[projectNumber],
-                        Charts.costColours[projectNumber],
-                        Charts.releaseColours[projectNumber],
-                        Charts.riskBorderColour[projectNumber],
-                        Charts.riskFillColour[projectNumber]);
+                    let data = Charts.generateData(projects[projectNumber], projectNumber);
                     // add the current projects data to the projectData array
                     projectData.push(data);
 
@@ -630,56 +650,21 @@ var Charts = function() {
                         lowestTime = projectStartTime;
                     }
 
-
-
                 }
 
-                // now for each project from the selected projects compare the start times and add the difference in quarters
-                // keep track of the highest
-                var highestQuarters = 0;
-                for (var i = 0; i < checkedElements.length; i++) {
+                // generate the datasets for the cost release and complexity risk charts
+                let cr2Data = Charts.generateCR2(projectData, checkedElements, projects, lowestTime);
 
-                    // parse the current project number from the element id
-                    projectNumber = parseInt(checkedElements[i].charAt(checkedElements[i].length - 1))
-
-                    // obtain the start time of the current project
-                    let projectStartDate = new Date(projects[projectNumber].costRelease.startDatePhase1);
-                    let projectStartTime = projectStartDate.getTime();
-
-                    // calculate the difference and convert to quarters
-                    let difference = parseInt((projectStartTime - lowestTime) / (1000 * 60 * 60 * 24 * 30 * 3));
-
-                    // add the difference to project 1s total quarter number
-                    // this is to have to total number of quarters that project 1 accounts for including all the blank quarters
-                    projectData[i][3] += difference;
-                    if (projectData[i][3] > highestQuarters) {
-                        highestQuarters = projectData[i][3]
-                    }
-
-                    // for every quarter difference loop through the project
-                    for (var j = 0; j < difference; j++) {
-
-                        // add blank data to account for the difference in the start time
-                        projectData[i][0].data.unshift(0);
-                        projectData[i][1].data.unshift(0);
-                        projectData[i][1].error.unshift(null);
-                    }
-
-                    // after adding the distance push the current projects data to the chart
-                    // write data from project1 to cost and release graph
-                    costRelease.data.datasets.push(projectData[i][0]);
-                    costRelease.data.datasets.push(projectData[i][1]);
-
-                    // write data from project1 to complexity and risk graph
-                    complexityRisk.data.datasets.push(projectData[i][2]);
-                }
+                // set the data sets for the charts to the ones returned by the method
+                costRelease.data.datasets = cr2Data[0];
+                complexityRisk.data.datasets = cr2Data[1];
 
                 // give title and labels to cost and release graph
                 costRelease.options.title.text = "Cost & Released Benefit";
 
                 // define the label for the x-axes of cost release graph to be the quarter number
                 let projectQuaters = [];
-                for (let i = 1; i <= highestQuarters; i++) {
+                for (let i = 1; i <= cr2Data[2]; i++) {
                     projectQuaters.push(i);
                 }
 
@@ -690,7 +675,7 @@ var Charts = function() {
                 complexityRisk.options.title.text = "Complexity & Risk Factors";
 
                 // generate minMaxBenefit data and update the chart
-                minMax = Charts.displayMinMax(projectData, checkedElements, projects);
+                minMax = Charts.generateMinMax(projectData, checkedElements, projects);
                 minMaxBenefit.options.title.text = "Minimum & Maximum Benefits"
                 minMaxBenefit.data.datasets.push(minMax[0]);
                 minMaxBenefit.data.datasets.push(minMax[1]);
@@ -703,9 +688,6 @@ var Charts = function() {
                 complexityRisk.options.title.text = "Nothing to show, please select a project";
                 minMaxBenefit.options.title.text = "Nothing to show, please select a project";
             }
-
-
-
 
             // update and render the charts
             costRelease.update();
@@ -730,18 +712,18 @@ var Charts = function() {
             // define the event listener
             $(".chart-dropdown").click(function() {
                 // obtain all the checked elements
-                var checkedElements = $(".chart-list-item input:checked");
+                let checkedElements = $(".chart-list-item input:checked");
 
                 // store all checkedElements' IDs in an arrays
-                var checkedIDs = [];
-                for (var i = 0; i < checkedElements.length; i++) {
+                let checkedIDs = [];
+                for (let i = 0; i < checkedElements.length; i++) {
                     // store the id's in the array
                     checkedIDs.push(checkedElements[i].id);
                 }
                 // set the checkedElements in localStorage
                 window.localStorage.setItem("checked", JSON.stringify(checkedIDs));
                 // define variable to ensure the function only executes on the after click
-                var clicks = $(this).data('clicks');
+                let clicks = $(this).data('clicks');
 
                 if (clicks) {
 
@@ -757,13 +739,12 @@ var Charts = function() {
 
         },
 
-        /*
-          This method initalizes the charts and the dropdown list on start up
-          to display the charts selected last time the page was loaded
+        /* This method initalizes the charts and the dropdown list on start up
+           to display the charts selected last time the page was loaded
 
-          @param projects - the array of projects
-          @param costRelease - the costRelease chart to be rendered
-          @param complexityRisk - the complexity risk chart to be rendered
+           @param projects - the array of projects
+           @param costRelease - the costRelease chart to be rendered
+           @param complexityRisk - the complexity risk chart to be rendered
 
         */
         initalizeCharts: function(projects, costRelease, complexityRisk, minMaxBenefit) {
@@ -775,7 +756,7 @@ var Charts = function() {
                 Charts.displayCharts(projects, costRelease, complexityRisk, minMaxBenefit, checkedElements);
 
                 // loop through each id in checkedElements and set those list items to checked
-                for (var i = 0; i < checkedElements.length; i++) {
+                for (let i = 0; i < checkedElements.length; i++) {
                     // use jquery to obtain the relevant DOM element and set the class
                     $("#" + checkedElements[i]).prop('checked', true);
                 }
@@ -800,15 +781,20 @@ var Charts = function() {
         },
 
         /* This function will display the Min and Max Benefit chart
+
            @param projectData - an array containing all the data arrays for each selected project
+           @param checkedElements - an array containing the ID's of all the projects that have been selected
+           @param projects - an array containing all created projects
+           @returns an array containing the data for the maximum and minimum benefit and all project names
+
         */
-        displayMinMax: function(projectData, checkedElements, projects){
+        generateMinMax: function(projectData, checkedElements, projects){
 
           // define an array to store each projects name, max benefit and min benefit
           let names = [], maxBenefits = [], minBenefits = [];
 
           // loop through the data generating the totals and retrieving the project names
-          for (var i = 0; i < projectData.length; i++){
+          for (let i = 0; i < projectData.length; i++){
             // first obtain the project number
             projectNumber = parseInt(checkedElements[i].charAt(checkedElements[i].length - 1));
 
@@ -816,7 +802,7 @@ var Charts = function() {
             names.push(projects[projectNumber].title);
 
             // generate the data for the minimum and maximum maxBenefits
-            var totals = Charts.calculateTotals(projectData[i][0].data, projectData[i][1].data, projectData[i][1].error);
+            let totals = Charts.calculateTotals(projectData[i][0].data, projectData[i][1].data, projectData[i][1].error);
             // push the min and max benefits to the arrays
             maxBenefits.push(totals[2]);
             minBenefits.push(totals[3]);
@@ -842,6 +828,66 @@ var Charts = function() {
 
           // return the data sets and the names array
           return [maxBen, minBen, names];
+
+        },
+
+        /* This method will generate the datasets for the cost release and complexity risk charts
+
+           @param projectData - an array containing all the data arrays for each selected project
+           @param checkedElements - an array containing the ID's of all the projects that have been selected
+           @param projects - an array containing all created projects
+           @param lowestTime - an int indicating the lowest startTime between all selected projects
+           @param datasets - an array containing all the cost release and complexity risk datasets
+           @returns an array containing the datasets for the cost release and complexity risk charts
+                    the total amount of quarters to be generated
+
+        */
+        generateCR2: function(projectData, checkedElements, projects, lowestTime){
+
+          // keep track of the highest amount of quarters and the two new Datasets
+          let highestQuarters = 0, costReleaseSets = [], complexityRiskSets = [];
+
+
+          for (let i = 0; i < checkedElements.length; i++) {
+
+              // parse the current project number from the element id
+              projectNumber = parseInt(checkedElements[i].charAt(checkedElements[i].length - 1))
+
+              // obtain the start time of the current project
+              let projectStartDate = new Date(projects[projectNumber].costRelease.startDatePhase1);
+              let projectStartTime = projectStartDate.getTime();
+
+              // calculate the difference and convert to quarters
+              let difference = parseInt((projectStartTime - lowestTime) / (1000 * 60 * 60 * 24 * 30 * 3));
+
+              // add the difference to project 1s total quarter number
+              // this is to have to total number of quarters that project 1 accounts for including all the blank quarters
+              projectData[i][4] += difference;
+              if (projectData[i][4] > highestQuarters) {
+                  highestQuarters = projectData[i][4]
+              }
+
+              // for every quarter difference loop through the project
+              for (let j = 0; j < difference; j++) {
+
+                  // add blank data to account for the difference in the start time
+                  projectData[i][0].data.unshift(0);
+                  projectData[i][1].data.unshift(0);
+                  projectData[i][2].data.unshift(0);
+              }
+
+              // after adding the distance push the current projects data to the chart
+              // write data from project1 to cost and release graph
+              costReleaseSets.push(projectData[i][0]);
+              costReleaseSets.push(projectData[i][1]);
+              costReleaseSets.push(projectData[i][2]);
+
+              // write data from project1 to complexity and risk graph
+              complexityRiskSets.push(projectData[i][3]);
+          }
+
+          // return the both sets
+          return [costReleaseSets, complexityRiskSets, highestQuarters];
 
         }
 

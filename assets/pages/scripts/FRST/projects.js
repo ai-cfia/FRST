@@ -65,12 +65,17 @@ var Projects = function() {
                     projects.push(project_placeholder)
                     // push the updated projects array to the localStorage
                     window.localStorage.setItem("projects", JSON.stringify(projects));
-                    // reload the page to update the list
-                    location.reload();
+                    // check if the current project isn't null
+                    if (window.localStorage.getItem("current_project") != null) {
+                      // if it isn't set the current project to the newly created project
+                        window.localStorage.setItem("current_project", projects.length-1);
+                    }
+                    // change window location
+                    window.location.replace("/FRST/project")
                 }
             });
         },
-        
+
         /* load projects drop down menu*/
         loadProjects: function() {
             // obtain project array from local storage
@@ -284,54 +289,80 @@ var Projects = function() {
         detectButtonPress: function() {
             // event listener for each button to detect when theres mousedown
             // each button adjusts its own slider either positively or negatively by one step value
-            $("#plus-1").on('mousedown', function() {
-                Projects.clickAndHold(0, 1, $("#fteNumberCostPhase1"));
+            // ensure that a current click interval isn't already defined so that an inifinite
+            // interval isn't set
+            $("#plus-1").mousedown(function() {
+              console.log(clickInterval)
+              if (!clickInterval){
+                  Projects.clickAndHold(0, 1, $("#fteNumberCostPhase1"));
+                }
             });
 
-            $("#minus-1").on('mousedown', function() {
+            $("#minus-1").mousedown(function() {
+                if (!clickInterval){
                 Projects.clickAndHold(0, -1, $("#fteNumberCostPhase1"));
+              }
             });
 
-            $("#plus-2").on('mousedown', function() {
+            $("#plus-2").mousedown(function() {
+                if (!clickInterval){
                 Projects.clickAndHold(1, 1, $("#fteNumberCostPhase2"));
+              }
             });
-            $("#minus-2").on('mousedown', function() {
+            $("#minus-2").mousedown(function() {
+                if (!clickInterval){
                 Projects.clickAndHold(1, -1, $("#fteNumberCostPhase2"));
+              }
             });
 
-            $("#plus-3").on('mousedown', function() {
+            $("#plus-3").mousedown(function() {
+                if (!clickInterval){
                 Projects.clickAndHold(2, 1, $("#fteNumberReleasePhase2"));
+              }
             });
-            $("#minus-3").on('mousedown', function() {
+            $("#minus-3").mousedown(function() {
+                if (!clickInterval){
                 Projects.clickAndHold(2, -1, $("#fteNumberReleasePhase2"));
+              }
             });
 
-            $("#plus-4").on('mousedown', function() {
+            $("#plus-4").mousedown(function() {
+                if (!clickInterval){
                 Projects.clickAndHold(3, 1, $("#fteNumberCostPhase3"));
+              }
             });
-            $("#minus-4").on('mousedown', function() {
+            $("#minus-4").mousedown(function() {
+                if (!clickInterval){
                 Projects.clickAndHold(3, -1, $("#fteNumberCostPhase3"));
+              }
             });
 
-            $("#plus-5").on('mousedown', function() {
+            $("#plus-5").mousedown(function() {
+                if (!clickInterval){
                 Projects.clickAndHold(4, 1, $("#fteNumberReleasePhase3"));
+              }
             });
-            $("#minus-5").on('mousedown', function() {
+            $("#minus-5").mousedown(function() {
+                if (!clickInterval){
                 Projects.clickAndHold(4, -1, $("#fteNumberReleasePhase3"));
+              }
             });
         },
 
         stopButtonHold: function() {
             // detect when mouse is up on the button or when mouse out and kill the interval
-            $(".adjust-btn").on('mouseup', function() {
+            $(".adjust-btn").mouseup(function() {
                 clearInterval(clickInterval);
+                clickInterval = 0;
 
             });
 
-            $(".adjust-btn").on('mouseout', function() {
+            $(".adjust-btn").mouseout(function() {
                 clearInterval(clickInterval);
+                clickInterval = 0;
 
             });
+
         }
 
     };
