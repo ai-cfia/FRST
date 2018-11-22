@@ -12,7 +12,7 @@
 		<meta property="og:description" content="Functional Realignment Scenario Tool: a scenario building tool to support resource allocation decision-making with respect to planned initiatives" />
 		<meta property="og:url" content="//irmmodelling.github.io/FRST/" />
 		<title>FRST | About</title>
-		<link rel="icon" type="image/png" href="../../assets/layout/img/favicon.png">
+		<link rel="icon" type="image/png" href="../../assets/layout/img/favicon.PNG">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -46,7 +46,7 @@
 					<div class="page-logo">
 						<a href="/FRST">
 							<img src="../../assets/layout/img/logo.png" alt="logo" class="logo-default" /> </a>
-						<div class="menu-toggler sidebar-toggler">
+						<div class="menu-toggler sidebar-toggler" id="toggle" clicked="true">
 							<span></span>
 						</div>
 					</div>
@@ -243,7 +243,7 @@
 									<p style="font-size: 18px; margin-bottom: 5px">
 										<b>How is the Cost of Complexity and Risk Calculated?</b>
 									</p>
-									<p style="font-size: 16px; margin-top: 5px; margin-bottom: 0"">
+									<p style="font-size: 16px; margin-top: 5px; margin-bottom: 0">
 										The complexity and risk is based on the weighting of Treasury Board Secretariat’s “Project and Complexity Risk Assessment” and an inflation factor in order to translate into the same unit of measure.
 									</p>
 								</div>
@@ -336,6 +336,7 @@
 		<script src="../../assets/layout/scripts/demo.min.js" type="text/javascript"></script>
 		<script src="../../assets/layout/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 		<script src="../../assets/layout/scripts/quick-nav.min.js" type="text/javascript"></script>
+		<script src="../../assets/global/scripts/main.js" type="text/javascript"></script>
 		<!-- END THEME LAYOUT SCRIPTS -->
 		<script>
 			jQuery(document).ready(function() {
@@ -359,24 +360,9 @@
 					window.location.href = "/FRST";
 				}
 
-				if (Cookies.get("lang") === "en") {
-					$("[lang='fr']").attr("style", "display:none !important");
-				} else {
-					$("[lang='en']").attr("style", "display:none !important");
-				}
-
-				$("#switchLang").click(function() {
-					if (Cookies.get("lang") === "en") {
-						$("[lang='fr']").attr("style", "display");
-						$("[lang='en']").attr("style", "display:none !important");
-						Cookies.set("lang", "fr");
-					} else {
-						$("[lang='en']").attr("style", "display");
-						$("[lang='fr']").attr("style", "display:none !important");
-						Cookies.set("lang", "en");
-					}
-				});
-
+				setMenuToggleStatus();
+				setLang();
+				changeLang();
 				Projects.loadProjects();
 				Projects.addProject();
 				Projects.selectProject();

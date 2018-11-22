@@ -102,7 +102,7 @@
  #chart-title>span[lang = "fr"] {
      margin-left: -22.5px;
 }
-/* here you can put your own css to customize and override the theme */
+
 /* style precise adjustment buttons for FTE sliders */
  .adjust-btn {
      border: none;
@@ -210,3 +210,7 @@
  canvas[name="costReleaseChart"] {
     margin-top: 15px;
 }
+
+ #toggle[clicked="true"]{
+    opacity: 100;
+ }
