@@ -18,7 +18,9 @@
 
 .page-header.navbar .top-menu .navbar-nav>li.dropdown .dropdown-toggle:hover>i,
 .page-header.navbar .top-menu .navbar-nav>li.dropdown.open .dropdown-toggle>i {
-    color: #e5e7ea
+color: #d9534f;
+font-weight: 900;
+font-size:15px;
 }
 
 .page-header.navbar .top-menu .navbar-nav>li.dropdown-extended .dropdown-menu {
@@ -960,8 +962,30 @@ body {
 }
 
 .navText {
-    color: #fff
+    color: #fff;
 }
+
+.navbar-nav>li.dropdown>a>i.navArrow {
+    color: #bbc1c8;
+}
+
+.navbar-nav>li.dropdown>a:hover>i.navArrow {
+    color: #d9534f;
+    font-weight: 900;
+    font-size:15px;
+}
+
+.navbar-nav>li.dropdown>a:focus>i.navArrow {
+    color: #d9534f;
+    font-weight: 900;
+    font-size:15px;
+}
+
+.menu-toggler.responsive-toggler {
+    margin-top: 15.5px;
+}
+
+
 
 @media (max-width:991px) {
     .page-content {
