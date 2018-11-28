@@ -4713,7 +4713,9 @@ tbody.collapse.in {
     padding: 10px 15px
 }
 
-.nav>li>a:focus,
+.nav>li>a:focus{
+  text-decoration: none;
+}
 .nav>li>a:hover {
     text-decoration: none;
     background-color: #69737d

@@ -17,6 +17,10 @@
      transition: 0.2s ease all;
      background-color: #26a1ab;
 }
+
+.adjust-btn.plus {
+    float: right;
+}
 /* styling for when buttons pressed */
  .adjust-btn:focus{
      outline:0;
@@ -30,6 +34,7 @@
      position: relative;
      padding-left: 44px;
      padding-top: 2px;
+     margin-top:12px;
      margin-bottom: 12px;
      cursor: pointer;
      font-size: 14px;

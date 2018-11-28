@@ -247,7 +247,7 @@ let Charts = function() {
                 }
             }
             // append the html code to the actual list
-            $(currChart).insertAfter("li.items-title");
+            $("ul.sub-menu").append(currChart);
 
         },
 

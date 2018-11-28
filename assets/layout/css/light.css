@@ -434,7 +434,7 @@ font-size:15px;
 .page-sidebar .page-sidebar-menu>li.active>a,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active.open>a,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active>a {
-    background: #3FD5C0;
+    background: #35c3af;
     border-top-color: transparent;
     color: #fff
 }
@@ -443,7 +443,7 @@ font-size:15px;
 .page-sidebar .page-sidebar-menu>li.active>a:hover,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active.open>a:hover,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active>a:hover {
-    background: #3FD5C0
+    background: #35c3af
 }
 
 .page-sidebar .page-sidebar-menu>li.active.open>a>.arrow.open:before,
@@ -809,6 +809,14 @@ font-size:15px;
     }
 }
 
+@media (min-width:992px) {
+  .page-sidebar-menu{
+    position: fixed;
+    width: 235px;
+  }
+
+}
+
 @media (max-width:991px) {
     .page-sidebar {
         background-color: #fcfcfc
@@ -975,7 +983,7 @@ body {
     font-size:15px;
 }
 
-.navbar-nav>li.dropdown>a:focus>i.navArrow {
+.navbar-nav>li.dropdown.open>a>i.navArrow {
     color: #d9534f;
     font-weight: 900;
     font-size:15px;

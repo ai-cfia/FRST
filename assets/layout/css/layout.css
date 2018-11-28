@@ -56,10 +56,19 @@ Page Header
   .page-header.navbar .page-logo {
     float: left;
     display: block;
+    width: 84px;
+    height: 50px;
+    margin: 0 15px;
+  }
+  .page-header.navbar .charts.page-logo {
+    float: left;
+    display: block;
     width: 159px;
     height: 50px;
     padding-left: 15px;
-    padding-right: 20px; }
+    padding-right: 20px;
+    margin: 0;
+    }
     .page-sidebar-closed.page-sidebar-closed-hide-logo .page-header.navbar .page-logo {
       padding: 0; }
     .page-header.navbar .page-logo > .logo-image,
@@ -1616,11 +1625,14 @@ Page content
   .page-content-wrapper {
     float: left;
     width: 100%; }
-    .page-content-wrapper .page-content {
-      margin-left: 235px;
+    .page-content-wrapper .page-content{
+      margin-left: 0px;
       margin-top: 0px;
       min-height: 600px;
       padding: 25px 20px 10px 20px; }
+    .page-content-wrapper .page-content.charts{
+      margin-left: 235px
+    }
       .page-content-wrapper .page-content.no-min-height {
         min-height: auto; }
       .page-sidebar-fixed.page-sidebar-hover-on .page-content-wrapper .page-content {
