@@ -57,7 +57,7 @@
                 </div>
                 <!-- END LOGO -->
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-                <a  class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                <a  class="menu-toggler charts responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
                     <span></span>
                 </a>
                 <!-- END RESPONSIVE MENU TOGGLER -->
@@ -85,37 +85,40 @@
                 </div>
                 <!-- END LANGUAGE BAR -->
                 <!-- BEGIN PAGE LINKS -->
-                <ul class="nav navbar-nav">
-                   <li>
-                      <a href="/FRST/about">
-                      <i class="icon-info navText"></i>
-                      <span lang="en" class="title navText">About</span>
-                      <span lang="fr" class="title navText">À propos</span>
-                      </a>
-                   </li>
-                   <li class="active">
-                     <a href="/FRST/charts" class="nav-link nav-toggle">
-                     <i class="icon-bar-chart navText"></i>
-                     <span lang="en" class="title navText">Charts</span>
-                     <span lang="fr" class="title navText">Graphiques</span>
-                     </a>
-                   </li>
-                   <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      <i class="icon-briefcase navText"></i>
-                      <span lang="en" class="title navText">Projects</span>
-                      <span lang="fr" class="title navText">Projets</span>
-                      <i class="fa fa-angle-down navArrow"></i>
-                      </a>
-                      <ul class="dropdown-menu">
-                         <li class="nav-item project" name="newProject">
-                            <a href="javascript:;" class="nav-link" name="newProject">
-                            <span lang="en" class="title">New Project</span>
-                            <span lang="fr" class="title">Nouveau projet</span>
-                            </a>
-                         </li>
-                      </ul>
-                   </li>
+                <div class="charts page-links">
+                  <ul class="nav navbar-nav">
+                     <li>
+                        <a href="/FRST/about">
+                        <i class="icon-info navText"></i>
+                        <span lang="en" class="title navText">About</span>
+                        <span lang="fr" class="title navText">À propos</span>
+                        </a>
+                     </li>
+                     <li class="active">
+                       <a href="/FRST/charts" class="nav-link nav-toggle">
+                       <i class="icon-bar-chart navText"></i>
+                       <span lang="en" class="title navText">Charts</span>
+                       <span lang="fr" class="title navText">Graphiques</span>
+                       </a>
+                     </li>
+                     <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-briefcase navText"></i>
+                        <span lang="en" class="title navText">Projects</span>
+                        <span lang="fr" class="title navText">Projets</span>
+                        <i class="fa fa-angle-down navArrow"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                           <li class="nav-item project" name="newProject">
+                              <a href="javascript:;" class="nav-link" name="newProject">
+                              <span lang="en" class="title">New Project</span>
+                              <span lang="fr" class="title">Nouveau projet</span>
+                              </a>
+                           </li>
+                        </ul>
+                     </li>
+                   </ul>
+               </div>
                 <!-- END PAGE LINKS -->
             </div>
             <!-- END HEADER INNER -->
@@ -148,12 +151,42 @@
                             </div>
                         </li>
                         <!-- END SIDEBAR TOGGLER BUTTON -->
+                        <li class="charts nav-item">
+                           <a href="../about">
+                           <i class="icon-info "></i>
+                           <span lang="en" class="title ">About</span>
+                           <span lang="fr" class="title ">À propos</span>
+                           </a>
+                        </li>
+                        <li class="charts nav-item active">
+                           <a href="/FRST/charts" class="nav-link nav-toggle">
+                           <i class="icon-bar-chart"></i>
+                           <span lang="en" class="title">Charts</span>
+                           <span lang="fr" class="title">Graphiques</span>
+                           </a>
+                        </li>
+                        <li class="charts nav-item">
+                           <a href="javascript:;" class="nav-link nav-toggle" name="Projects">
+                           <i class="icon-briefcase"></i>
+                           <span lang="en" class="title">Projects</span>
+                           <span lang="fr" class="title">Projets</span>
+                           <span class="arrow"></span>
+                           </a>
+                           <ul class="sub-menu">
+                              <li class="nav-item" name="newProject">
+                                 <a href="javascript:;" class="nav-link" name="newProject">
+                                 <span lang="en" class="title">New Project</span>
+                                 <span lang="fr" class="title">Nouveau projet</span>
+                                 </a>
+                              </li>
+                           </ul>
+                        </li>
                         <li class="nav-item active">
                             <a href="javascript:;" class="nav-link">
                               <span lang="en">Available Charts</span>
                               <span lang="fr">Graphiques Disponibles</span>
                             </a>
-                            <ul class="sub-menu">
+                            <ul class="charts sub-menu">
                             </ul>
                         </li>
                     </ul>

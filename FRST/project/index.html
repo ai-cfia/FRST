@@ -80,38 +80,40 @@
                 </div>
                 <!-- END LANGUAGE BAR -->
                 <!-- BEGIN PAGE LINKS -->
-                <ul class="nav navbar-nav">
-                   <li>
-                      <a href="/FRST/about">
-                      <i class="icon-info navText"></i>
-                      <span lang="en" class="title navText">About</span>
-                      <span lang="fr" class="title navText">À propos</span>
-                      </a>
-                   </li>
-                   <li>
-                     <a href="/FRST/charts" class="nav-link nav-toggle">
-                     <i class="icon-bar-chart navText"></i>
-                     <span lang="en" class="title navText">Charts</span>
-                     <span lang="fr" class="title navText">Graphiques</span>
-                     </a>
-                   </li>
-                   <li class="dropdown active">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      <i class="icon-briefcase navText"></i>
-                      <span lang="en" class="title navText">Projects</span>
-                      <span lang="fr" class="title navText">Projets</span>
-                      <i class="fa fa-angle-down navArrow"></i>
-                      </a>
-                      <ul class="dropdown-menu">
-                         <li class="nav-item project" name="newProject">
-                            <a href="javascript:;" class="nav-link" name="newProject">
-                            <span lang="en" class="title">New Project</span>
-                            <span lang="fr" class="title">Nouveau projet</span>
-                            </a>
-                         </li>
-                      </ul>
-                   </li>
-                </ul>
+                <div class = page-links>
+                  <ul class="nav navbar-nav">
+                     <li>
+                        <a href="/FRST/about">
+                        <i class="icon-info navText"></i>
+                        <span lang="en" class="title navText">About</span>
+                        <span lang="fr" class="title navText">À propos</span>
+                        </a>
+                     </li>
+                     <li>
+                       <a href="/FRST/charts" class="nav-link nav-toggle">
+                       <i class="icon-bar-chart navText"></i>
+                       <span lang="en" class="title navText">Charts</span>
+                       <span lang="fr" class="title navText">Graphiques</span>
+                       </a>
+                     </li>
+                     <li class="dropdown active">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-briefcase navText"></i>
+                        <span lang="en" class="title navText">Projects</span>
+                        <span lang="fr" class="title navText">Projets</span>
+                        <i class="fa fa-angle-down navArrow"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                           <li class="nav-item project" name="newProject">
+                              <a href="javascript:;" class="nav-link" name="newProject">
+                              <span lang="en" class="title">New Project</span>
+                              <span lang="fr" class="title">Nouveau projet</span>
+                              </a>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+              </div>
                 <!-- END PAGE LINKS -->
             </div>
             <!-- END HEADER INNER -->
@@ -122,6 +124,64 @@
         <!-- END HEADER & CONTENT DIVIDER -->
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
+          <!-- BEGIN SIDEBAR -->
+          <div class="page-sidebar-wrapper responsive">
+              <!-- BEGIN SIDEBAR -->
+              <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+              <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+              <div class="page-sidebar navbar-collapse collapse">
+                  <!-- BEGIN SIDEBAR MENU -->
+                  <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+                  <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+                  <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                  <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                  <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+                  <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                  <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                      <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                      <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                      <li class="sidebar-toggler-wrapper hide">
+                          <div class="sidebar-toggler">
+                              <span></span>
+                          </div>
+                      </li>
+                      <!-- END SIDEBAR TOGGLER BUTTON -->
+                      <li class="nav-item">
+                         <a href="../about">
+                         <i class="icon-info "></i>
+                         <span lang="en" class="title ">About</span>
+                         <span lang="fr" class="title ">À propos</span>
+                         </a>
+                      </li>
+                      <li class="nav-item">
+                         <a href="/FRST/charts" class="nav-link nav-toggle">
+                         <i class="icon-bar-chart"></i>
+                         <span lang="en" class="title">Charts</span>
+                         <span lang="fr" class="title">Graphiques</span>
+                         </a>
+                      </li>
+                      <li class="nav-item active">
+                         <a href="javascript:;" class="nav-link nav-toggle" name="Projects">
+                         <i class="icon-briefcase"></i>
+                         <span lang="en" class="title">Projects</span>
+                         <span lang="fr" class="title">Projets</span>
+                         <span class="arrow"></span>
+                         </a>
+                         <ul class="sub-menu">
+                            <li class="nav-item" name="newProject">
+                               <a href="javascript:;" class="nav-link" name="newProject">
+                               <span lang="en" class="title">New Project</span>
+                               <span lang="fr" class="title">Nouveau projet</span>
+                               </a>
+                            </li>
+                         </ul>
+                      </li>
+                  </ul>
+                  <!-- END SIDEBAR MENU -->
+              </div>
+              <!-- END SIDEBAR -->
+          </div>
+          <!-- END SIDEBAR -->
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
                 <!-- BEGIN CONTENT BODY -->
