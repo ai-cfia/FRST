@@ -216,6 +216,6 @@
     margin-top: 15px;
 }
 
- #toggle[clicked="true"]{
-    opacity: 100;
+ .toggle[clicked="true"]{
+    opacity: 100 !important;
  }

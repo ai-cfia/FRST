@@ -1,5 +1,5 @@
 function setMenuToggleStatus(){
-  $("#toggle").click(function() {
+  $(".toggle").click(function() {
     // store the current state of its clicked attribute
     clicked = $(this).attr("clicked");
 

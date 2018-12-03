@@ -49,7 +49,7 @@
             <div class="page-header-inner ">
                 <!-- BEGIN LOGO -->
                 <div class="charts page-logo">
-                  <div class="menu-toggler sidebar-toggler" id="toggle" clicked = "true">
+                  <div class="menu-toggler sidebar-toggler toggle" clicked = "true">
                       <span></span>
                   </div>
                     <a href="/FRST">
@@ -90,8 +90,8 @@
                      <li>
                         <a href="/FRST/about">
                         <i class="icon-info navText"></i>
-                        <span lang="en" class="title navText">About</span>
-                        <span lang="fr" class="title navText">À propos</span>
+                        <span lang="en" class="title navText">Home</span>
+                        <span lang="fr" class="title navText">Accueil</span>
                         </a>
                      </li>
                      <li class="active">
@@ -154,8 +154,8 @@
                         <li class="charts nav-item">
                            <a href="../about">
                            <i class="icon-info "></i>
-                           <span lang="en" class="title ">About</span>
-                           <span lang="fr" class="title ">À propos</span>
+                           <span lang="en" class="title ">Home</span>
+                           <span lang="fr" class="title ">Accueil</span>
                            </a>
                         </li>
                         <li class="charts nav-item active">
@@ -189,6 +189,14 @@
                             <ul class="charts sub-menu">
                             </ul>
                         </li>
+
+                        <li class="nav-item">
+                          <a href="javascript:;" class="nav-link">
+                            <span lang="en">Modifications</span>
+                            <span lang="fr">Graphiques Disponibles</span>
+                          </a>
+
+                        </li>
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>
@@ -212,6 +220,23 @@
                     <!-- END PAGE TITLE-->
                     <!-- END PAGE HEADER-->
                     <!-- BEGIN : CHARTS -->
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet light portlet-fit bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-layers font-green"></i>
+                                        <span lang="en" class="caption-subject font-green bold uppercase">Cost/Quarter</span>
+                                        <span lang="fr" class="caption-subject font-green bold uppercase">Minimale et Maximal Bénéfice</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body" style="height:500px;">
+                                    <canvas name="costPerQuarterChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-12">

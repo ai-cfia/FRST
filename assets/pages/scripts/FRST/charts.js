@@ -31,13 +31,11 @@ let Charts = function() {
 
             // define Chart object for the cost release bar chart
             let costReleaseChart = new Chart($("canvas[name='costReleaseChart']"), {
-                // type is a custom type defined in the Chart.js plugin
                 type: "bar",
                 // initialize the data arrays
                 data: {
                     labels: [],
-                    datasets: [],
-                    error: []
+                    datasets: []
                 },
                 // set options for the chart
                 options: {
@@ -159,7 +157,6 @@ let Charts = function() {
 
             // initialize the min and max benefit chart
             let minMaxBenefitChart = new Chart($("canvas[name='minMaxBenefitChart']"), {
-                // type is a custom type defined in the Chart.js plugin
                 type: "bar",
                 // initialize the data arrays
                 data: {
@@ -179,7 +176,7 @@ let Charts = function() {
 
                     // set position of the legend
                     legend: {
-                        position: "bottom"
+                        position: "right"
                     },
                     // set labels for the x and y axes
                     scales: {
@@ -217,6 +214,50 @@ let Charts = function() {
                         }
                     }
                 },
+            });
+
+            let costPerQuarterChart = new Chart($("canvas[name='costPerQuarterChart']"), {
+              // set type to be line chart
+              type: 'line',
+
+              data: {
+                  labels: [],
+                  datasets: []
+              },
+
+              options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  title: {
+                      // show title and set default title to show when no complete project is selected
+                      display: true,
+                      text: "Nothing to show, please select a project",
+                      fontSize: 19
+                  },
+
+                  scales: {
+                      xAxes: [{
+                          scaleLabel: {
+                              display: true,
+                              labelString: "Quarter Number"
+                          }
+                      }],
+                      yAxes: [{
+                          ticks: {
+                              // define a function to add a dollar sign to the labels for y axes
+                              userCallback: function(value, index, values) {
+                                  return "$" + value.toLocaleString();
+                              },
+                              suggestedMax: 100000,
+                              beginAtZero: true
+                          },
+                      }]
+                  }
+                },
+
+
+
+
             });
 
 

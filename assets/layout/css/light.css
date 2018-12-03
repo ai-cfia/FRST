@@ -824,10 +824,6 @@ font-size:15px;
     .page-sidebar .page-sidebar-menu>li>a {
         border-top: 1px solid #FFF
     }
-    .page-sidebar .page-sidebar-menu>li.open>a,
-    .page-sidebar .page-sidebar-menu>li:hover>a {
-        background: #d9d9d9
-    }
     .page-sidebar .page-sidebar-menu>li:last-child>a {
         border-bottom: 0!important
     }
