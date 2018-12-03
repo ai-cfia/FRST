@@ -206,7 +206,7 @@ let Charts = function() {
 
                         }],
                         yAxes: [{
-                          
+
                             scaleLabel: {
                                 display: true,
                                 labelString: "Project Name"
@@ -224,7 +224,7 @@ let Charts = function() {
                               currSet = data.datasets[tooltipItem.datasetIndex];
                               // retrieve the title of the dataset
                               label = currSet.label +
-                              ": $" + tooltipItem.yLabel.toFixed(2);
+                              ": $" + tooltipItem.xLabel.toFixed(2);
                               return(label);
                             }
                         }
