@@ -47,10 +47,14 @@ let Charts = function() {
                         text: "Nothing to show, please select a project",
                         fontSize: 19
                     },
+                    // add a bounce animation for graphs on load
+                    animation:{
+                      easing: 'easeOutBounce'
+                    },
 
                     // set position of the legend
                     legend: {
-                        position: "bottom"
+                        position: "right"
                     },
                     // set labels for the x and y axes
                     scales: {
@@ -125,12 +129,16 @@ let Charts = function() {
                         fontSize: 19
                     },
 
+                    animation:{
+                      easing: 'easeOutCirc'
+                    },
+
                     // set legend properties
                     legend: {
                         labels: {
                             defaultFontSize: 15
                         },
-                        position: "bottom"
+                        position: "right"
                     },
                     // set properties for the scale
                     scale: {
@@ -157,7 +165,7 @@ let Charts = function() {
 
             // initialize the min and max benefit chart
             let minMaxBenefitChart = new Chart($("canvas[name='minMaxBenefitChart']"), {
-                type: "bar",
+                type: "horizontalBar",
                 // initialize the data arrays
                 data: {
                     labels: [],
@@ -174,27 +182,35 @@ let Charts = function() {
                         fontSize: 19
                     },
 
+                    animation:{
+                      easing: 'easeOutBounce'
+                    },
+
                     // set position of the legend
                     legend: {
                         position: "right"
                     },
+
                     // set labels for the x and y axes
                     scales: {
                         xAxes: [{
+
+                          ticks: {
+                              // define a function to add a dollar sign to the labels for y axes
+                              userCallback: function(value, index, values) {
+                                  return "$" + value.toLocaleString();
+                              },
+                              suggestedMax: 100000,
+                              beginAtZero: true
+                          }
+
+                        }],
+                        yAxes: [{
+                          
                             scaleLabel: {
                                 display: true,
                                 labelString: "Project Name"
                             }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                // define a function to add a dollar sign to the labels for y axes
-                                userCallback: function(value, index, values) {
-                                    return "$" + value.toLocaleString();
-                                },
-                                suggestedMax: 100000,
-                                beginAtZero: true
-                            },
                         }]
                     },
 
