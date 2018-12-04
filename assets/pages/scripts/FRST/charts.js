@@ -408,13 +408,13 @@ let Charts = function() {
             // calculate the cost per quarter of phase one by multiplying the number of FTE's per quarter by 25000 and adding the total operating cost
             // also we need to parse the values because the input from sliders are text
             let projectCostPhase1 = parseFloat(project.costRelease.fteNumberCostPhase1) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase1);
-            // set release and error values to 0 and null respectively since there is no release for the first phase
+            // set release and risk values to 0 and null respectively since there is no release for the first phase
             let maxReleasePhase1 = 0;
-            let minReleasePhase1 = null;
+            let minReleasePhase1 = 0;
 
             // loop for each quarter in the phase
             for (let i = 1; i <= projectQuaterNumberPhase1; i++) {
-                // push the cost, release and error data into the data arrays for the project for each quarter in the current phase
+                // push the cost, release and risk data into the data arrays for the project for each quarter in the current phase
                 projectCostData.push(projectCostPhase1);
                 maxReleaseData.push(maxReleasePhase1);
                 minReleaseData.push(minReleasePhase1);
@@ -437,7 +437,7 @@ let Charts = function() {
             // calculate the release by following the same process followed to calculate the cost
             let maxReleasePhase2 = parseFloat(project.costRelease.fteNumberReleasePhase2) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase2);
 
-            // calculate the lowest possible release based on the error
+            // calculate the lowest possible release based on the risk
             // multiply the release by a calculated factor to obtain this value
             let minReleasePhase2 = projectUncertainty / 170 * maxReleasePhase2;
 
@@ -491,8 +491,8 @@ let Charts = function() {
                 label: "Max Release of " + project.title,
                 // set the data of this chart to be max release array generated
                 data: maxReleaseData,
-                // the error array becomes the error for this chart
-                error: minReleaseData,
+                // the risk array becomes the risk for this chart
+                risk: minReleaseData,
                 // set bar colour
                 backgroundColor: Charts.releaseColours[projectNumber]
             };
@@ -500,7 +500,7 @@ let Charts = function() {
             // create a data object for the minRelease
             minRelease = {
               label: "Min Release of " + project.title,
-              // set the data to the be the min release error generated
+              // set the data to the be the min release risk generated
               data: minReleaseData,
               // set the bar colour
               backgroundColor: Charts.minReleaseColours[projectNumber]
@@ -534,15 +534,15 @@ let Charts = function() {
 
            @param cost - the cost data
            @param release - the release data
-           @param error - the error data
+           @param risk - the risk data
            @returns an array containing the total cost, total release,
                     the minimum benefit and maximum benefit in that order all
                     values are floats
         */
-        calculateTotals: function(cost, release, error) {
+        calculateTotals: function(cost, release, risk) {
             let totalCost = 0;
             let totalRelease = 0;
-            let totalError = 0;
+            let totalRisk = 0;
             let maxBenefit = 0;
             let minBenefit = 0;
 
@@ -556,13 +556,13 @@ let Charts = function() {
             });
 
             // calculate the minimum total release
-            totalError = error.reduce(function(acc, val) {
+            totalRisk = risk.reduce(function(acc, val) {
                 return acc + val;
             });
 
             // calculate the minimum and max benefits
             maxBenefit = totalRelease - totalCost;
-            minBenefit = totalRelease - totalCost - totalError;
+            minBenefit = totalRelease - totalCost - totalRisk;
 
             // return cost, release and the benefits
             return [totalCost, totalRelease, maxBenefit, minBenefit];
@@ -603,7 +603,7 @@ let Charts = function() {
             projectTotalQuaterNumber = (data[4]);
 
             // calculate totals and benefits
-            projectTotalData = Charts.calculateTotals(projectCost.data, maxRelease.data, maxRelease.error);
+            projectTotalData = Charts.calculateTotals(projectCost.data, maxRelease.data, maxRelease.risk);
 
             // generate opening headers for the tab and the data pane including the project numbers in their IDs
             // check if the currrent tab needs to be active
@@ -625,22 +625,12 @@ let Charts = function() {
             dataText += '<p style="margin:0 5px 0 5px; color: #555">' +
                 '<span lang="en">Total cost: </span>' +
                 '<span lang="fr">Coût total : </span>' +
-                '<span>' + projectTotalData[0].toFixed(2).toLocaleString() + '</span>' +
+                '<span>$' + projectTotalData[0].toFixed(2).toLocaleString() + '</span>' +
                 '</p>' +
                 '<p style="margin:0 5px 0 5px; color: #555">' +
                 '<span lang="en">Gross Revenue: </span>' +
                 '<span lang="fr">Revenu brut : </span>' +
-                '<span>' + projectTotalData[1].toFixed(2).toLocaleString() + '</span>' +
-                '</p>' +
-                '<p style="margin:0 5px 0 5px; color: #555">' +
-                '<span lang="en">Maximum net benefit: </span>' +
-                '<span lang="fr">Bénéfice net maximal : </span>' +
-                '<span>' + projectTotalData[2].toFixed(2).toLocaleString() + '</span>' +
-                '</p>' +
-                '<p style="margin:0 5px 0 5px; color: #555">' +
-                '<span lang="en">Minimum net benefit: </span>' +
-                '<span lang="fr">Bénéfice net minimal : </span>' +
-                '<span>' + projectTotalData[3].toFixed(2).toLocaleString() + '</span>' +
+                '<span>$' + projectTotalData[1].toFixed(2).toLocaleString() + '</span>' +
                 '</p>' +
                 '</div>';
 
@@ -724,6 +714,8 @@ let Charts = function() {
                 for (let i = 1; i <= cr2Data[2]; i++) {
                     projectQuaters.push(i);
                 }
+
+                this.generateCPQ(cr2Data[0], cr2Data[2]);
 
                 // push the labels to the chart
                 costRelease.data.labels = projectQuaters;
@@ -859,7 +851,7 @@ let Charts = function() {
             names.push(projects[projectNumber].title);
 
             // generate the data for the minimum and maximum maxBenefits
-            let totals = Charts.calculateTotals(projectData[i][0].data, projectData[i][1].data, projectData[i][1].error);
+            let totals = Charts.calculateTotals(projectData[i][0].data, projectData[i][1].data, projectData[i][1].risk);
             // push the min and max benefits to the arrays
             maxBenefits.push(totals[2]);
             minBenefits.push(totals[3]);
@@ -872,7 +864,7 @@ let Charts = function() {
               // set the data array to be the maximum benefit array
               data: maxBenefits,
               // set bar colour
-              backgroundColor: Charts.costColours[1]
+              backgroundColor: Charts.costColours[2]
           };
 
           minBen = {
@@ -880,7 +872,7 @@ let Charts = function() {
               // set the data array to be the maximum benefit array
               data: minBenefits,
               // set bar colour
-              backgroundColor: Charts.releaseColours[1]
+              backgroundColor: Charts.releaseColours[2]
           };
 
           // return the data sets and the names array
@@ -945,6 +937,34 @@ let Charts = function() {
 
           // return the both sets
           return [costReleaseSets, complexityRiskSets, highestQuarters];
+
+
+        },
+
+        /* this method will generate the relative data for the cost per quarter chart*/
+        generateCPQ: function(costReleaseData, highestQuarters){
+          // declare an array to store each datasets
+          let costData = [], maxData = [], minData = [];
+          // initialize the arrays to have all zeros
+          for (let i = 0; i < highestQuarters; i++){
+            costData.unshift(0);
+            maxData.unshift(0);
+            minData.unshift(0);
+          }
+
+          // loop through each project
+          let numProjects = costReleaseData.length/3;
+          for (let i = 0; i < numProjects; i++){
+            // store the individual arrays representing each projects cost max and min releases
+            let projectCost = costReleaseData[i * 3].data;
+            let projectMax = costReleaseData[i * 3 + 1].data;
+            let projectMin = costReleaseData[i * 3 + 2].data;
+            // loop through the each quarter of the project
+            for (j = 0; j < projectCost.length; j++){
+              
+            }
+          }
+
 
         }
 
