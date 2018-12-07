@@ -46,7 +46,10 @@ let Charts = function() {
 
                 // set position of the legend
                 legend: {
-                    position: "right"
+                    position: "right",
+                    labels: {
+                      boxWidth: 11.5
+                    }
                 },
                 // set labels for the x and y axes
                 scales: {
@@ -130,7 +133,10 @@ let Charts = function() {
                     labels: {
                         defaultFontSize: 15
                     },
-                    position: "right"
+                    position: "right",
+                    labels: {
+                      boxWidth: 11.5
+                    }
                 },
                 // set properties for the scale
                 scale: {
@@ -180,7 +186,10 @@ let Charts = function() {
 
                 // set position of the legend
                 legend: {
-                    position: "right"
+                    position: "right",
+                    labels: {
+                      boxWidth: 11.5
+                    }
                 },
 
                 // set labels for the x and y axes
@@ -249,7 +258,10 @@ let Charts = function() {
 
                 // set position of the legend
                 legend: {
-                    position: "right"
+                    position: "right",
+                    labels: {
+                      boxWidth: 11.5
+                    }
                 },
 
                 scales: {
@@ -282,9 +294,17 @@ let Charts = function() {
                         title: function(tooltipItem, data) {
                             return "Quarter " + tooltipItem[0].xLabel;
                         },
+                        label: function(tooltipItem, data){
+                          // store current dataset
+                          currSet = data.datasets[tooltipItem.datasetIndex];
+                          // retrieve the title of the dataset
+                          label = currSet.label +
+                              ": $" + tooltipItem.yLabel.toFixed(2);
+                          return (label);
+                        },
+
                         labelColor: function(tooltipItem, data) {
                             currSet = data.tooltip._data.datasets[tooltipItem.datasetIndex]
-                            console.log(currSet)
                             return {
                                 borderColor: currSet.borderColor,
                                 backgroundColor: currSet.borderColor

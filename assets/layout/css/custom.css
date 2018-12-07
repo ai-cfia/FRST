@@ -213,9 +213,13 @@
 }
 
  canvas[name="costReleaseChart"] {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
  .toggle[clicked="true"]{
     opacity: 100 !important;
+ }
+
+ .portlet.light>.portlet-title>.caption.charts{
+  padding: 0;
  }
