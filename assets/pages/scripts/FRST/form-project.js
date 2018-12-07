@@ -79,9 +79,9 @@ var FormProject = function () {
 		}
 
 		function tripleConstraint() {
-			let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseFloat($("#fteNumberCostPhase1").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase1").val()))
-			+ parseInt($("#quaterNumberPhase2").val()) * (parseFloat($("#fteNumberCostPhase2").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase2").val()))
-			+ parseInt($("#quaterNumberPhase3").val()) * (parseFloat($("#fteNumberCostPhase3").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase3").val()));
+			let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseInt($("#fteNumberCostPhase1").val()) * 100000 + parseInt($("#operatingMoneyCostPhase1").val()))
+			+ parseInt($("#quaterNumberPhase2").val()) * (parseInt($("#fteNumberCostPhase2").val()) * 100000 + parseInt($("#operatingMoneyCostPhase2").val()))
+			+ parseInt($("#quaterNumberPhase3").val()) * (parseInt($("#fteNumberCostPhase3").val()) * 100000 + parseInt($("#operatingMoneyCostPhase3").val()));
 
 			let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
 
@@ -406,7 +406,7 @@ var FormProject = function () {
 					}
 				}
 				$("input[name='procurement3']").closest(".form-group").removeClass("has-success");
-
+				
 			}
 
 			handleCheckedRadios();
@@ -455,15 +455,15 @@ var FormProject = function () {
 					required: true
 				},
 				fteNumberCostPhase1: {
-					number: true,
+					digits: true,
 					required: true
 				},
 				fteNumberCostPhase2: {
-					number: true,
+					digits: true,
 					required: true
 				},
 				fteNumberCostPhase3: {
-					number: true,
+					digits: true,
 					required: true
 				},
 				operatingMoneyCostPhase1: {
@@ -479,11 +479,11 @@ var FormProject = function () {
 					required: true
 				},
 				fteNumberReleasePhase2: {
-					number: true,
+					digits: true,
 					required: true
 				},
 				fteNumberReleasePhase3: {
-					number: true,
+					digits: true,
 					required: true
 				},
 				operatingMoneyReleasePhase2: {
@@ -598,7 +598,7 @@ var FormProject = function () {
 				},
 				humanResourcesCommunications2: {
 					required: true
-				}
+				}			
 			},
 
 			errorPlacement: function (error, element) {
@@ -658,9 +658,9 @@ var FormProject = function () {
 				projects[current_project].costRelease.fteNumberReleasePhase3 = $("#fteNumberReleasePhase3").val();
 				projects[current_project].costRelease.operatingMoneyReleasePhase3 = $("#operatingMoneyReleasePhase3").val();
 
-				let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseFloat($("#fteNumberCostPhase1").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase1").val()))
-				+ parseInt($("#quaterNumberPhase2").val()) * (parseFloat($("#fteNumberCostPhase2").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase2").val()))
-				+ parseInt($("#quaterNumberPhase3").val()) * (parseFloat($("#fteNumberCostPhase3").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase3").val()));
+				let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseInt($("#fteNumberCostPhase1").val()) * 100000 + parseInt($("#operatingMoneyCostPhase1").val()))
+				+ parseInt($("#quaterNumberPhase2").val()) * (parseInt($("#fteNumberCostPhase2").val()) * 100000 + parseInt($("#operatingMoneyCostPhase2").val()))
+				+ parseInt($("#quaterNumberPhase3").val()) * (parseInt($("#fteNumberCostPhase3").val()) * 100000 + parseInt($("#operatingMoneyCostPhase3").val()));
 
 				let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
 
@@ -882,7 +882,7 @@ var FormProject = function () {
 
 				projects[current_project].title = $("#newTitle").val();
 				window.localStorage.setItem("projects", JSON.stringify(projects));
-
+					
 				window.reload();
 			}
 

@@ -1,1072 +1,723 @@
-let Charts = function() {
-
-    return {
-
-        costColours: (["rgba(238, 59, 59, 0.8)", "rgba(231, 019, 99, 0.8)", "rgba(250, 128, 114, 0.8)", "rgba(250, 0, 0, 0.8)", "rgba(165, 48, 48, 0.8)",
-            "rgba(238, 59, 59, 0.4)", "rgba(231, 019, 99, 0.4)", "rgba(250, 128, 114, 0.4)", "rgba(250, 0, 0, 0.4)", "rgba(165, 48, 48, 0.4)"
-        ]),
-
-        releaseColours: (["rgba(30,144,255,0.8)", "rgba(0,255,255,0.8)", "rgba(134,206,235,0.8)", "rgba(0,0,250,0.8)", "rgba(66,105,225,0.8)",
-            "rgba(30,144,255,0.4)", "rgba(0,255,255,0.4)", "rgba(134,206,235,0.4)", "rgba(0,0,250,0.4)", "rgba(66,105,225,0.4)"
-        ]),
-
-        minReleaseColours: (["rgba(50,204,0,0.8)", "rgba(102,255,102, 0.8)", "rgba(51,255,153, 0.8)", "rgba(0,255,0,0.8)", "rgba(0,102,51, 0.8)",
-            "rgba(50,204,0,0.4)", "rgba(102,255,102, 0.4)", "rgbs(51,255,153, 0.4)", "rgba(0,255,0,0.4)", "rgba(0,102,51, 0.4)"
-        ]),
-
-        riskFillColour: (["rgba(238, 59, 59, 0.2)", "rgba(30,144,255,0.2)", "rgba(231, 019, 99, 0.2)", "rgba(0,255,255,0.2)", "rgba(250, 128, 114, 0.2)",
-            "rgba(134,206,235,0.2)", "rgba(250, 0, 0, 0.2)", "rgba(50,205,50,0.2)", "rgba(255, 165, 0, 0.2)", "rgba(66,105,225,0.2)"
-        ]),
-
-        riskBorderColour: (["rgba(238, 59, 59, 0.8)", "rgba(30,144,255,0.8)", "rgba(231, 019, 99, 0.8)", "rgba(0,255,255,0.8)", "rgba(250, 128, 114, 0.8)",
-            "rgba(134,206,235,0.8)", "rgba(250, 0, 0, 0.8)", "rgba(50,205,50,0.8)", "rgba(255, 165, 0, 0.8)", "rgba(66,105,225,0.8)"
-        ]),
-
-        costReleaseChart: new Chart($("canvas[name='costReleaseChart']"), {
-            type: "bar",
-            // initialize the data arrays
-            data: {
-                labels: [],
-                datasets: []
-            },
-            // set options for the chart
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                title: {
-                    // show title and set default title to show when no complete project is selected
-                    display: true,
-                    text: "Nothing to show, please select a project",
-                    fontSize: 19
-                },
-                // add a bounce animation for graphs on load
-                animation: {
-                    easing: 'easeOutBounce'
-                },
-
-                // set position of the legend
-                legend: {
-                    position: "right",
-                    labels: {
-                      boxWidth: 11.5
-                    }
-                },
-                // set labels for the x and y axes
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Number of Quaters"
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            // define a function to add a dollar sign to the labels for y axes
-                            userCallback: function(value, index, values) {
-                                return "$" + value.toLocaleString();
-                            },
-                            min: 0,
-                            suggestedMax: 100000,
-                            beginAtZero: true
-                        },
-                    }]
-                },
-                // enable tooltips to show quarter number and current cost/release values on hover over the bar
-                tooltips: {
-                    enabled: true,
-                    callbacks: {
-                        title: function(tooltipItems, data) {
-                            let tooltipItem = tooltipItems[0];
-                            title = "Quater " + data.labels[tooltipItem.index];
-                            return title;
-                        },
-
-                        label: function(tooltipItem, data) {
-                            // store current dataset
-                            currSet = data.datasets[tooltipItem.datasetIndex];
-                            // retrieve the title of the dataset
-                            label = currSet.label +
-                                ": $" + tooltipItem.yLabel.toFixed(2);
-                            return (label);
-                        }
-                    }
-                }
-            },
-        }),
-
-        // initialize the complexity risk chart
-        complexityRiskChart: new Chart($("canvas[name='complexityRiskChart']"), {
-            // set it to be a radar chart
-            type: "radar",
-            // initialize the data arrays
-            data: {
-                // manually set the labels to be 7 predefined risk categories
-                labels: [
-                    "Project Characteristics",
-                    "Strategic Management Risks",
-                    "Procurement Risks",
-                    "Human Resources Risks",
-                    "Business Risks",
-                    "Project Management Risks",
-                    "Project Requirement Management"
-                ],
-                datasets: []
-            },
-
-            // set options for the chart
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                // set default title to be displayed when there's no active project
-                title: {
-                    display: true,
-                    text: "Nothing to show, please select a project",
-                    fontSize: 19
-                },
-
-                animation: {
-                    easing: 'easeOutCirc'
-                },
-
-                // set legend properties
-                legend: {
-
-                    labels: {
-                        defaultFontSize: 15
-                    },
-                    position: "bottom",
-                    labels: {
-                      boxWidth: 11.5
-                    }
-                },
-                // set properties for the scale
-                scale: {
-                    ticks: {
-                        max: 5.0,
-                        min: 0.0
-                    },
-                    pointLabels: {
-                        fontSize: 12
-                    }
-                },
-
-                // enable tool tips to show property and calculated risk score at a given point
-                tooltips: {
-                    enabled: true,
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            return parseFloat(Math.round(tooltipItem.yLabel * 100) / 100).toFixed(2);
-                        },
-
-                        labelColor: function(tooltipItem, data) {
-                            currSet = data.tooltip._data.datasets[tooltipItem.datasetIndex]
-                            return {
-                                borderColor: currSet.borderColor,
-                                backgroundColor: currSet.borderColor
-                            }
-                        }
-                    }
-                }
-            }
-        }),
-
-        // initialize the min and max benefit chart
-        minMaxBenefitChart: new Chart($("canvas[name='minMaxBenefitChart']"), {
-            type: "horizontalBar",
-            // initialize the data arrays
-            data: {
-                labels: [],
-                datasets: []
-            },
-            // set options for the chart
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                title: {
-                    // show title and set default title to show when no complete project is selected
-                    display: true,
-                    text: "Nothing to show, please select a project",
-                    fontSize: 19
-                },
-
-                animation: {
-                    easing: 'easeOutBounce'
-                },
-
-                // set position of the legend
-                legend: {
-                    position: "right",
-                    labels: {
-                      boxWidth: 11.5
-                    }
-                },
-
-                // set labels for the x and y axes
-                scales: {
-                    xAxes: [{
-
-                        ticks: {
-                            // define a function to add a dollar sign to the labels for y axes
-                            userCallback: function(value, index, values) {
-                                return "$" + value.toLocaleString();
-                            },
-                            suggestedMax: 100000,
-                            beginAtZero: true
-                        }
-
-                    }],
-                    yAxes: [{
-
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Project Name"
-                        }
-                    }]
-                },
-
-                tooltips: {
-                    // enable tooltipItems
-                    enabled: true,
-                    // set custom label for the tool tips
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            // store current dataset
-                            currSet = data.datasets[tooltipItem.datasetIndex];
-                            // retrieve the title of the dataset
-                            label = currSet.label +
-                                ": $" + tooltipItem.xLabel.toFixed(2);
-                            return (label);
-                        }
-                    }
-                }
-            },
-        }),
-
-        costPerQuarterChart: new Chart($("canvas[name='costPerQuarterChart']"), {
-            // set type to be line chart
-            type: 'line',
-
-            data: {
-                labels: [],
-                datasets: []
-            },
-
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                title: {
-                    // show title and set default title to show when no complete project is selected
-                    display: true,
-                    text: "Nothing to show, please select a project",
-                    fontSize: 19
-                },
-
-                animation: {
-                    easing: 'easeOutBounce'
-                },
-
-                // set position of the legend
-                legend: {
-                    position: "right",
-                    labels: {
-                      boxWidth: 11.5
-                    }
-                },
-
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Quarter Number"
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            // define a function to add a dollar sign to the labels for y axes
-                            userCallback: function(value, index, values) {
-                                return "$" + value.toLocaleString();
-                            },
-                            suggestedMax: 100000,
-                            beginAtZero: true
-                        },
-                    }]
-                },
-
-                tooltips: {
-                    // enable tooltipItems
-                    enabled: true,
-                    // show all values at any given index
-                    mode: "index",
-                    intersect: false,
-                    position: "nearest",
-                    callbacks: {
-                        title: function(tooltipItem, data) {
-                            return "Quarter " + tooltipItem[0].xLabel;
-                        },
-                        label: function(tooltipItem, data){
-                          // store current dataset
-                          currSet = data.datasets[tooltipItem.datasetIndex];
-                          // retrieve the title of the dataset
-                          label = currSet.label +
-                              ": $" + tooltipItem.yLabel.toFixed(2);
-                          return (label);
-                        },
-
-                        labelColor: function(tooltipItem, data) {
-                            currSet = data.tooltip._data.datasets[tooltipItem.datasetIndex]
-                            return {
-                                borderColor: currSet.borderColor,
-                                backgroundColor: currSet.borderColor
-                            }
-                        }
-                    }
-                }
-            },
-
-
-
-
-        }),
-
-
-        initCharts: function() {
-
-            // setting some basic defualt for chart texts
-            Chart.defaults.global.defaultFontFamily = "Arial";
-            Chart.defaults.global.defaultFontSize = 12;
-            Chart.defaults.global.defaultFontColor = "#777";
-            // load the charts dropdown
-            Charts.loadChartsDropdown();
-            // obtain projects array
-            let projects = JSON.parse(window.localStorage.getItem("projects"));
-            Charts.initalizeCharts(projects);
-            Charts.updateCharts(projects);
-
-        },
-
-        /* load the charts drop down list */
-        loadChartsDropdown: function() {
-            // first obtain and store the list of projects from the browser
-            let projects = JSON.parse(window.localStorage.getItem("projects"));
-            // create a fore loop to loop through each variable in the array
-            let currChart = "";
-            for (let i = 0; i < projects.length; i++) {
-                // add the html for each list item in the drop down list
-                if (!(projects[i].costRelease.quaterNumberPhase1 == null ||
-                        projects[i].complexityRisk._cost == null)) {
-
-                    currChart += '<li class = "nav-item chart-dropdown">';
-                    currChart += '<label class="chart-list-item">' + projects[i].title;
-                    currChart += '<input type="checkbox" id=chart' + i + '>';
-                    currChart += '<span class="checkmark"></span></label></li>';
-                }
-            }
-            // append the html code to the actual list
-            $("ul.charts.sub-menu").append(currChart);
-
-        },
-
-        /* generate the correct data sets based on a given project
-           @param  project - the current project object to generate data for
-           @param  projectNumber - the index of the project in the projects array
-           @returns an array that contains the data for the project cost,
-                    the project release, the complexity risk data and the total
-                    number or quarters in that order
-        */
-        generateData: function(project, projectNumber) {
-            // degfine some variables for later use
-            let projectTotalQuaterNumber = 0;
-            let projectCostData = [];
-            let maxReleaseData = [];
-            let minReleaseData = [];
-            let projectCost = {};
-            let maxRelease = {};
-            let projectFactors = {};
-            let projectUncertainty = 0;
-
-            // first obtain the amount of quarters for the project
-            let projectQuaterNumberPhase1 = parseInt(project.costRelease.quaterNumberPhase1);
-            let projectQuaterNumberPhase2 = parseInt(project.costRelease.quaterNumberPhase2);
-            let projectQuaterNumberPhase3 = parseInt(project.costRelease.quaterNumberPhase3);
-
-            // obtain all the start dates
-            let projectStartDatePhase1 = new Date(project.costRelease.startDatePhase1);
-            let projectStartDatePhase2 = new Date(project.costRelease.startDatePhase2);
-            let projectStartDatePhase3 = new Date(project.costRelease.startDatePhase3);
-
-            // define and calculate all 7 seven factors based on the complexity risk secttion answers
-            // used to calculate the overall uncertainty for the project
-            let projectFactor1 = 0;
-            // loop through every element in section1 array
-            for (let i = 0; i < project.complexityRisk.section1.length; i++) {
-                // sum all the values together
-                projectFactor1 += parseFloat(project.complexityRisk.section1[i]);
-            }
-            // divide the sum by the length of the array to calculate the average risk
-            let projectFactor1Uniformed = projectFactor1 / project.complexityRisk.section1.length;
-
-            let projectFactor2 = 0;
-            // loop through every element in section2 array
-            for (let i = 0; i < project.complexityRisk.section2.length; i++) {
-                // sum all the values together
-                projectFactor2 += parseFloat(project.complexityRisk.section2[i]);
-            }
-            // divide the sum by the length of the array to calculate the average risk
-            let projectFactor2Uniformed = projectFactor2 / project.complexityRisk.section2.length;
-
-            let projectFactor3 = 0;
-            // loop through every element in section3 array
-            for (let i = 0; i < project.complexityRisk.section3.length; i++) {
-                // sum all the values together
-                projectFactor3 += parseFloat(project.complexityRisk.section3[i]);
-            }
-            // divide the sum by the length of the array to calculate the average risk
-            let projectFactor3Uniformed = projectFactor3 / project.complexityRisk.section3.length;
-
-            let projectFactor4 = 0;
-            // loop through every element in section4 array
-            for (let i = 0; i < project.complexityRisk.section4.length; i++) {
-                // sum all the values together
-                projectFactor4 += parseFloat(project.complexityRisk.section4[i]);
-            }
-            // divide the sum by the length of the array to calculate the average risk
-            let projectFactor4Uniformed = projectFactor4 / project.complexityRisk.section4.length;
-
-            let projectFactor5 = 0;
-            // loop through every element in section5 array
-            for (let i = 0; i < project.complexityRisk.section5.length; i++) {
-                // sum all the values together
-                projectFactor5 += parseFloat(project.complexityRisk.section5[i]);
-            }
-            // divide the sum by the length of the array to calculate the average risk
-            let projectFactor5Uniformed = projectFactor5 / project.complexityRisk.section5.length;
-
-            let projectFactor6 = 0;
-            // loop through every element in section6 array
-            for (let i = 0; i < project.complexityRisk.section6.length; i++) {
-                // sum all the values together
-                projectFactor6 += parseFloat(project.complexityRisk.section6[i]);
-            }
-            // divide the sum by the length of the array to calculate the average risk
-            let projectFactor6Uniformed = projectFactor6 / project.complexityRisk.section6.length;
-
-            let projectFactor7 = 0;
-            // loop through every element in section7 array
-            for (let i = 0; i < project.complexityRisk.section7.length; i++) {
-                // sum all the values together
-                projectFactor7 += parseFloat(project.complexityRisk.section7[i]);
-            }
-            // divide the sum by the length of the array to calculate the average risk
-            let projectFactor7Uniformed = projectFactor7 / project.complexityRisk.section7.length;
-
-            // sum together all the factor values to calculate the total uncertainty
-            projectUncertainty = projectFactor1 + projectFactor2 + projectFactor3 +
-                projectFactor4 + projectFactor5 + projectFactor6 + projectFactor7;
-
-            // calculate the cost per quarter of phase one by multiplying the number of FTE's per quarter by 25000 and adding the total operating cost
-            // also we need to parse the values because the input from sliders are text
-            let projectCostPhase1 = parseFloat(project.costRelease.fteNumberCostPhase1) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase1);
-            // set release and risk values to 0 and null respectively since there is no release for the first phase
-            let maxReleasePhase1 = 0;
-            let minReleasePhase1 = 0;
-
-            // loop for each quarter in the phase
-            for (let i = 1; i <= projectQuaterNumberPhase1; i++) {
-                // push the cost, release and risk data into the data arrays for the project for each quarter in the current phase
-                projectCostData.push(projectCostPhase1);
-                maxReleaseData.push(maxReleasePhase1);
-                minReleaseData.push(minReleasePhase1);
-            }
-
-            // calculate the gap between phase 1 and phase 2
-            let projectDifferenceP1P2 = parseInt((projectStartDatePhase2.getTime() -
-                    (projectStartDatePhase1.getTime() + projectQuaterNumberPhase1 * (1000 * 60 * 60 * 24 * 30 * 3))) /
-                (1000 * 60 * 60 * 24 * 30 * 3));
-
-            for (let i = 0; i < projectDifferenceP1P2; i++) {
-                // for each additional quarter push empty data into the arrays, this is to account for projects that will have a gap between phases
-                projectCostData.push(0);
-                maxReleaseData.push(0);
-                minReleaseData.push(0);
-            }
-
-            // calculate the phase 2 cost
-            let projectCostPhase2 = parseFloat(project.costRelease.fteNumberCostPhase2) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase2);
-            // calculate the release by following the same process followed to calculate the cost
-            let maxReleasePhase2 = parseFloat(project.costRelease.fteNumberReleasePhase2) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase2);
-
-            // calculate the lowest possible release based on the risk
-            // multiply the release by a calculated factor to obtain this value
-            let minReleasePhase2 = projectUncertainty / 170 * maxReleasePhase2;
-
-            // loop for every quarter in the phase
-            for (let i = 1; i <= projectQuaterNumberPhase2; i++) {
-                // push the cost, release and uncertainty for every quarter
-                projectCostData.push(projectCostPhase2);
-                maxReleaseData.push(maxReleasePhase2);
-                minReleaseData.push(minReleasePhase2);
-            }
-
-            // calculate the gap between phase2 and phase 3
-            let projectDifferenceP2P3 = parseInt((projectStartDatePhase3.getTime() -
-                    (projectStartDatePhase2.getTime() + projectQuaterNumberPhase2 * (1000 * 60 * 60 * 24 * 30 * 3))) /
-                (1000 * 60 * 60 * 24 * 30 * 3));
-
-            // push blank info in for each quarter difference
-            for (let i = 0; i < projectDifferenceP2P3; i++) {
-                projectCostData.push(0);
-                maxReleaseData.push(0);
-                minReleaseData.push(0);
-            }
-
-
-            // calculate phase3 cost, release and lowest possible release value
-            let projectCostPhase3 = parseFloat(project.costRelease.fteNumberCostPhase3) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase3);
-            let maxReleasePhase3 = parseFloat(project.costRelease.fteNumberReleasePhase3) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase3);
-            let minReleasePhase3 = projectUncertainty / 170 * maxReleasePhase3;
-
-            // loop for each quarter and push data into the data arrays for each
-            for (let i = 1; i <= projectQuaterNumberPhase3; i++) {
-                projectCostData.push(projectCostPhase3);
-                maxReleaseData.push(maxReleasePhase3);
-                minReleaseData.push(minReleasePhase3);
-            }
-
-            // calculate the total amount of quarters including the gaps calculated
-            projectTotalQuaterNumber = projectQuaterNumberPhase1 + projectDifferenceP1P2 + projectQuaterNumberPhase2 + projectDifferenceP2P3 + projectQuaterNumberPhase3;
-
-            // generate a data object for project cost
-            projectCost = {
-                label: "Cost of " + project.title,
-                // set the data array to be the final cost array generated
-                data: projectCostData,
-                // set bar colour
-                backgroundColor: Charts.costColours[projectNumber]
-            };
-
-            // generate a data object for the maxRelease
-            maxRelease = {
-                label: "Max Release of " + project.title,
-                // set the data of this chart to be max release array generated
-                data: maxReleaseData,
-                // the risk array becomes the risk for this chart
-                risk: minReleaseData,
-                // set bar colour
-                backgroundColor: Charts.releaseColours[projectNumber]
-            };
-
-            // create a data object for the minRelease
-            minRelease = {
-                label: "Min Release of " + project.title,
-                // set the data to the be the min release risk generated
-                data: minReleaseData,
-                // set the bar colour
-                backgroundColor: Charts.minReleaseColours[projectNumber]
-
-            }
-
-            // generate data for complexity and risk graph
-            projectFactors = {
-                // input each averaged out risk score as the data
-                data: [
-                    projectFactor1Uniformed,
-                    projectFactor2Uniformed,
-                    projectFactor3Uniformed,
-                    projectFactor4Uniformed,
-                    projectFactor5Uniformed,
-                    projectFactor6Uniformed,
-                    projectFactor7Uniformed
-                ],
-                // set the background and border colour for the radar
-                backgroundColor: Charts.riskFillColour[projectNumber],
-                borderColor: Charts.riskBorderColour[projectNumber],
-                label: "Uncertainty of " + project.title + ", Total Score: " + projectUncertainty
-            };
-
-            return [projectCost, maxRelease, minRelease, projectFactors, projectTotalQuaterNumber];
-
-        },
-
-        /* This function will calculate the total cost, release in addition to
-           the minimum and maximum benfits of a project
-
-           @param cost - the cost data
-           @param release - the release data
-           @param risk - the risk data
-           @returns an array containing the total cost, total release,
-                    the minimum benefit and maximum benefit in that order all
-                    values are floats
-        */
-        calculateTotals: function(cost, release, risk) {
-            let totalCost = 0;
-            let totalRelease = 0;
-            let totalRisk = 0;
-            let maxBenefit = 0;
-            let minBenefit = 0;
-
-            // calculate the sum total cost from all quarters
-            totalCost = cost.reduce(function(acc, val) {
-                return acc + val;
-            });
-            // calculate the maximum total release
-            totalRelease = release.reduce(function(acc, val) {
-                return acc + val;
-            });
-
-            // calculate the minimum total release
-            totalRisk = risk.reduce(function(acc, val) {
-                return acc + val;
-            });
-
-            // calculate the minimum and max benefits
-            maxBenefit = totalRelease - totalCost;
-            minBenefit = totalRelease - totalCost - totalRisk;
-
-            // return cost, release and the benefits
-            return [totalCost, totalRelease, maxBenefit, minBenefit];
-
-        },
-
-        /* This method will display the data tabs for each selected chart
-
-           @param projects - the project array that stores the information for
-                             all submitted projects
-           @param projectNumber {int} - the index number of the project in the projects array
-           @param data - an array that contains all the computed data for the project(generated by generateData())
-           @param active {boolean} - a boolean indicating whether the current project tab is active or not
-        */
-        displayDataTabs: function(projects, projectNumber, data, active) {
-            // generate the data for the tabs
-            let tabHTML = Charts.generateDataTabText(projectNumber, projects[projectNumber], active, data);
-
-            // append the data to the DOM
-            $(".nav-tabs").append(tabHTML[0]);
-            $(".tab-content").append(tabHTML[1]);
-
-        },
-
-        /* This method will generate the HTML text for each data tab on the cost release chart
-
-           @param projectNumber - the index number of the project in the projects array
-           @param currProject - the actual project object for the current project
-           @param active - a boolean indicating whether the current project tab is active or not
-           @param data - an array that contains all the computed data for the project(generated by generateData())
-           @returns an array contianing the HTML text for the actual tab and the data pane in that order
-        */
-        generateDataTabText: function(projectNumber, currProject, active, data) {
-            // store the data from the data array into its own variables
-            projectCost = data[0];
-            maxRelease = data[1];
-            projectFactors = data[3];
-            projectTotalQuaterNumber = (data[4]);
-
-            // calculate totals and benefits
-            projectTotalData = Charts.calculateTotals(projectCost.data, maxRelease.data, maxRelease.risk);
-
-            // generate opening headers for the tab and the data pane including the project numbers in their IDs
-            // check if the currrent tab needs to be active
-            let tabText = '';
-            let dataText = '';
-            if (active) {
-
-                // if it is active add the active class to the relevant div tags
-                tabText = '<li id="tabNavProject"' + projectNumber + ' class = "tab-element active"><a style="padding: 0 5px 0 5px" href="#tabProject' + projectNumber + '" data-toggle="tab">' + currProject.title + '</a></li>'
-                dataText = '<div class="tab-pane active" id="tabProject' + projectNumber + '" >';
-            } else {
-
-                // if not active then no active class
-                tabText = '<li id="tabNavProject ' + projectNumber + '" class = "tab-element"><a style="padding: 0 5px 0 5px" href="#tabProject' + projectNumber + '" data-toggle="tab">' + currProject.title + '</a></li>'
-                dataText = '<div class="tab-pane" id="tabProject' + projectNumber + '" >';
-            }
-
-            // add the remaining text to the data pane which adds the labels and the relevant values for the current project
-            dataText += '<p style="margin:0 5px 0 5px; color: #555">' +
-                '<span lang="en">Total cost: </span>' +
-                '<span lang="fr">Coût total : </span>' +
-                '<span>$' + projectTotalData[0].toFixed(2).toLocaleString() + '</span>' +
-                '</p>' +
-                '<p style="margin:0 5px 0 5px; color: #555">' +
-                '<span lang="en">Gross Revenue: </span>' +
-                '<span lang="fr">Revenu brut : </span>' +
-                '<span>$' + projectTotalData[1].toFixed(2).toLocaleString() + '</span>' +
-                '</p>' +
-                '</div>';
-
-            // return the HTML for the tav and the data pane
-            return [tabText, dataText];
-        },
-
-        /* this method will display the the relevant charts for the selected projects
-
-           @param projects - the array of projects
-           @param checkedElements - an array containing the IDs of the cheked elements from the drop down
-        */
-        displayCharts: function(projects, checkedElements) {
-            // store each gloabal chart into a local variables
-            let costRelease = Charts.costReleaseChart,
-                complexityRisk = Charts.complexityRiskChart,
-                minMaxBenefit = Charts.minMaxBenefitChart,
-                costPerQuarter = Charts.costPerQuarterChart;
-
-            // initialize the costRelease and complexityRisk datasets
-            // this is so there aren't duplicate bars and to account
-            // for when no charts are selected
-            costRelease.data.datasets = [];
-            complexityRisk.data.datasets = [];
-            minMaxBenefit.data.datasets = [];
-            costPerQuarter.data.datasets = [];
-            costRelease.data.labels = [];
-            minMaxBenefit.data.labels = [];
-            costPerQuarter.data.labels = [];
-
-            // delete all present tabs and data
-            $(".tab-element").remove();
-            $(".tab-pane").remove();
-
-            if (checkedElements.length != 0) {
-                //loop through every clicked element obtain each projects data
-                // store all the data in an array
-                let projectData = [];
-
-                // define variables to track the earliest start time
-                let lowestTime = Number.MAX_SAFE_INTEGER;
-
-                //TESTING only
-                if (!checkedElements) {
-                    checkedElements = [];
-                }
-                // loop through every element that is checked
-                for (let i = 0; i < checkedElements.length; i++) {
-
-                    // parse the project number from the elements ID
-                    projectNumber = parseInt(checkedElements[i].charAt(checkedElements[i].length - 1));
-
-                    // generate the data for the current project
-                    let data = Charts.generateData(projects[projectNumber], projectNumber);
-                    // add the current projects data to the projectData array
-                    projectData.push(data);
-
-                    // generate the data tabs
-                    Charts.displayDataTabs(projects, projectNumber, data, (i === 0));
-
-                    // check the startTime of the current project
-                    let projectStartDate = new Date(projects[projectNumber].costRelease.startDatePhase1);
-                    let projectStartTime = projectStartDate.getTime();
-
-                    // check if the current projects time is less than the current lowest time
-                    if (projectStartTime < lowestTime) {
-
-                        // set new lowest time if current time is lower
-                        lowestTime = projectStartTime;
-                    }
-
-                }
-
-                // generate the datasets for the cost release and complexity risk charts
-                let cr2Data = Charts.generateCR2(projectData, checkedElements, projects, lowestTime);
-
-                // set the data sets for the charts to the ones returned by the method
-                costRelease.data.datasets = cr2Data[0];
-                complexityRisk.data.datasets = cr2Data[1];
-
-                // give title and labels to cost and release graph
-                costRelease.options.title.display = false;
-
-                // define the label for the x-axes of cost release graph to be the quarter number
-                let projectQuaters = [];
-                for (let i = 1; i <= cr2Data[2]; i++) {
-                    projectQuaters.push(i);
-                }
-
-
-
-                // push the labels to the chart
-                costRelease.data.labels = projectQuaters;
-
-                // give title to complexity and risk graph
-                complexityRisk.options.title.display = false;
-
-                // generate minMaxBenefit data and update the chart
-                minMax = Charts.generateMinMax(projectData, checkedElements, projects);
-                minMaxBenefit.options.title.display = false;
-                minMaxBenefit.data.datasets.push(minMax[0]);
-                minMaxBenefit.data.datasets.push(minMax[1]);
-                minMaxBenefit.data.labels = minMax[2];
-
-                // generate cost Per quarter data and update charts
-                cpq = Charts.generateCPQ(cr2Data[0], cr2Data[2]);
-                costPerQuarter.data.datasets = cpq;
-                costPerQuarter.data.labels = projectQuaters;
-                costPerQuarter.options.title.display = false;
-
-
-            } else {
-
-                // set these to the titles if the list is blank
-                costRelease.options.title.text = "Nothing to show, please select a project";
-                complexityRisk.options.title.text = "Nothing to show, please select a project";
-                minMaxBenefit.options.title.text = "Nothing to show, please select a project";
-                costPerQuarter.options.title.text = "Nothing to show, please select a project"
-            }
-
-            // update and render the charts
-            costRelease.update();
-            costRelease.render();
-            complexityRisk.update();
-            complexityRisk.render();
-            minMaxBenefit.update();
-            minMaxBenefit.render();
-            costPerQuarter.update();
-            costPerQuarter.render();
-        },
-
-
-        /* This method listens for updates to the drop down list and updates
-           the charts and data tabs accordingly
-
-           @param projects - the array of projects
-        */
-        updateCharts: function(projects) {
-
-            // define the event listener
-            $(".chart-dropdown").click(function() {
-                // obtain all the checked elements
-                let checkedElements = $(".chart-list-item input:checked");
-
-                // store all checkedElements' IDs in an arrays
-                let checkedIDs = [];
-                for (let i = 0; i < checkedElements.length; i++) {
-                    // store the id's in the array
-                    checkedIDs.push(checkedElements[i].id);
-                }
-                // set the checkedElements in localStorage
-                window.localStorage.setItem("checked", JSON.stringify(checkedIDs));
-                // define variable to ensure the function only executes on the after click
-                let clicks = $(this).data('clicks');
-
-                if (clicks) {
-
-                    // display the charts
-                    Charts.displayCharts(projects, checkedIDs);
-
-                    // set correct language
-                    Charts.setLanguage();
-                }
-                $(this).data("clicks", !clicks);
-
-            });
-
-        },
-
-        /* This method initalizes the charts and the dropdown list on start up
-           to display the charts selected last time the page was loaded
-
-           @param projects - the array of projects
-        */
-        initalizeCharts: function(projects) {
-            // obtain previously checked items and display the charts
-            let checkedElements = JSON.parse(window.localStorage.getItem("checked"));
-
-            if (checkedElements != null) {
-                // loop through each id and set the given element
-                Charts.displayCharts(projects, checkedElements);
-
-                // loop through each id in checkedElements and set those list items to checked
-                for (let i = 0; i < checkedElements.length; i++) {
-                    // use jquery to obtain the relevant DOM element and set the class
-                    $("#" + checkedElements[i]).prop('checked', true);
-                }
-
-            }
-
-            // set correct language
-            Charts.setLanguage();
-
-        },
-
-        /* This method ensures that the correct span elements are displayed based on the selected lang */
-        setLanguage: function() {
-            // ensure the correct span elements are present based on the set language
-            if (Cookies.get("lang") === "en") {
-                $("[lang='fr']").attr("style", "display:none !important");
-
-            } else {
-                $("[lang='en']").attr("style", "display:none !important");
-
-            }
-        },
-
-        /* This function will display the Min and Max Benefit chart
-
-           @param projectData - an array containing all the data arrays for each selected project
-           @param checkedElements - an array containing the ID's of all the projects that have been selected
-           @param projects - an array containing all created projects
-           @returns an array containing the data for the maximum and minimum benefit and all project names
-
-        */
-        generateMinMax: function(projectData, checkedElements, projects) {
-
-            // define an array to store each projects name, max benefit and min benefit
-            let names = [],
-                maxBenefits = [],
-                minBenefits = [];
-
-            // loop through the data generating the totals and retrieving the project names
-            for (let i = 0; i < projectData.length; i++) {
-                // first obtain the project number
-                projectNumber = parseInt(checkedElements[i].charAt(checkedElements[i].length - 1));
-
-                // obtain the name from the project and push it to the names array
-                names.push(projects[projectNumber].title);
-
-                // generate the data for the minimum and maximum maxBenefits
-                let totals = Charts.calculateTotals(projectData[i][0].data, projectData[i][1].data, projectData[i][1].risk);
-                // push the min and max benefits to the arrays
-                maxBenefits.push(totals[2]);
-                minBenefits.push(totals[3]);
-
-            }
-
-            // define datasets for minimum and maximum
-            maxBen = {
-                label: "Maximum Benefit",
-                // set the data array to be the maximum benefit array
-                data: maxBenefits,
-                // set bar colour
-                backgroundColor: Charts.costColours[2]
-            };
-
-            minBen = {
-                label: "Minimum Benefit",
-                // set the data array to be the maximum benefit array
-                data: minBenefits,
-                // set bar colour
-                backgroundColor: Charts.releaseColours[2]
-            };
-
-            // return the data sets and the names array
-            return [maxBen, minBen, names];
-
-        },
-
-        /* This method will generate the datasets for the cost release and complexity risk charts
-
-           @param projectData - an array containing all the data arrays for each selected project
-           @param checkedElements - an array containing the ID's of all the projects that have been selected
-           @param projects - an array containing all created projects
-           @param lowestTime - an int indicating the lowest startTime between all selected projects
-           @param datasets - an array containing all the cost release and complexity risk datasets
-           @returns an array containing the datasets for the cost release and complexity risk charts
-                    the total amount of quarters to be generated
-
-        */
-        generateCR2: function(projectData, checkedElements, projects, lowestTime) {
-
-            // keep track of the highest amount of quarters and the two new Datasets
-            let highestQuarters = 0,
-                costReleaseSets = [],
-                complexityRiskSets = [];
-
-
-            for (let i = 0; i < checkedElements.length; i++) {
-
-                // parse the current project number from the element id
-                projectNumber = parseInt(checkedElements[i].charAt(checkedElements[i].length - 1))
-
-                // obtain the start time of the current project
-                let projectStartDate = new Date(projects[projectNumber].costRelease.startDatePhase1);
-                let projectStartTime = projectStartDate.getTime();
-
-                // calculate the difference and convert to quarters
-                let difference = parseInt((projectStartTime - lowestTime) / (1000 * 60 * 60 * 24 * 30 * 3));
-
-                // add the difference to project 1s total quarter number
-                // this is to have to total number of quarters that project 1 accounts for including all the blank quarters
-                projectData[i][4] += difference;
-                if (projectData[i][4] > highestQuarters) {
-                    highestQuarters = projectData[i][4]
-                }
-
-                // for every quarter difference loop through the project
-                for (let j = 0; j < difference; j++) {
-
-                    // add blank data to account for the difference in the start time
-                    projectData[i][0].data.unshift(0);
-                    projectData[i][1].data.unshift(0);
-                    projectData[i][2].data.unshift(0);
-                }
-
-                // after adding the distance push the current projects data to the chart
-                // write data from project1 to cost and release graph
-                costReleaseSets.push(projectData[i][0]);
-                costReleaseSets.push(projectData[i][1]);
-                costReleaseSets.push(projectData[i][2]);
-
-                // write data from project1 to complexity and risk graph
-                complexityRiskSets.push(projectData[i][3]);
-            }
-
-            // return the both sets
-            return [costReleaseSets, complexityRiskSets, highestQuarters];
-
-
-        },
-
-        /* this method will generate the relative data for the cost per quarter chart*/
-        generateCPQ: function(costReleaseData, highestQuarters) {
-            // declare an array to store each datasets
-            let costData = [],
-                maxData = [],
-                minData = [];
-            // initialize the arrays to have all zeros
-            for (let i = 0; i < highestQuarters; i++) {
-                costData.unshift(0);
-                maxData.unshift(0);
-                minData.unshift(0);
-            }
-
-            // loop through each project
-            let numProjects = costReleaseData.length / 3;
-            for (let i = 0; i < numProjects; i++) {
-                // store the individual arrays representing each projects cost max and min releases
-                let projectCost = costReleaseData[i * 3].data;
-                let projectMax = costReleaseData[i * 3 + 1].data;
-                let projectMin = costReleaseData[i * 3 + 2].data;
-                // loop through the each quarter of the project
-                for (j = 0; j < projectCost.length; j++) {
-                    // add the current value in the relative index to the data arrays
-                    costData[j] += projectCost[j];
-                    maxData[j] += projectMax[j];
-                    minData[j] += projectMin[j];
-                }
-            }
-            // define the actual datasets for each line
-            let costSet = {
-                label: "Cost",
-                data: costData,
-                borderColor: Charts.costColours[2],
-                fill: false
-            }
-
-            let maxSet = {
-                label: "Maximum Release",
-                data: maxData,
-                borderColor: Charts.releaseColours[2],
-                fill: false
-            }
-
-            let minSet = {
-                label: "Minimum Release",
-                data: minData,
-                borderColor: Charts.minReleaseColours[2],
-                fill: false
-            }
-
-            // return the created Datasets
-            return ([costSet, minSet, maxSet]);
-
-        }
-
-    };
+var Charts = function () {
+
+	return {
+
+		initCharts: function() {
+
+			Chart.defaults.global.defaultFontFamily = "Arial";
+			Chart.defaults.global.defaultFontSize = 12;
+			Chart.defaults.global.defaultFontColor = "#777";
+
+			let costReleaseChart = new Chart($("canvas[name='costReleaseChart']"), {
+				type: "barError",
+				data: {
+					labels: [],
+					datasets: [],
+					error: []
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					title: {
+						display: true,
+						text: "Nothing to show, please select a project",
+						fontSize: 19
+					},
+					legend: {
+						position: "bottom"
+					},
+					scales: {
+						xAxes: [{
+							scaleLabel: {
+								display: true,
+								labelString: "Number of Quaters"
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								userCallback: function(value, index, values) {
+									return "$" + value.toLocaleString();
+								},
+								min: 0,
+								suggestedMax: 100000,
+								beginAtZero: true
+							},
+						}]
+					},
+					tooltips: {
+						enabled: true,
+						callbacks: {
+							title: function(tooltipItems, data) {
+								let tooltipItem = tooltipItems[0];
+								title = "Quater " + data.labels[tooltipItem.index];
+								return title;
+							}
+						}
+					}
+				},
+			});
+
+			let complexityRiskChart = new Chart($("canvas[name='complexityRiskChart']"), {
+				type: "radar",
+				data: {
+					labels: [
+						/*
+						"Cost",
+						"Scope",
+						"Communications",
+						"Project Integration Management",
+						"Time",
+						"Investment Portfolio Management",
+						"Procurement",
+						"Human Resources"
+						*/
+						"Projet Characteristics",
+						"Strategic Management Risks",
+						"Procurement Risks",
+						"Human Resources Risks",
+						"Business Risks",
+						"Project Management Risks",
+						"Project Requirement Management"
+					],
+					datasets: []
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					title: {
+						display: true,
+						text: "Nothing to show, please select a project",
+						fontSize: 19
+					},
+					legend: {
+						labels: {
+							defaultFontSize: 15
+						},
+						position: "bottom"
+					},
+					scale: {
+						ticks: {
+							max: 5.0,
+							min: 0.0
+						},
+						pointLabels: {
+							fontSize: 12
+						}
+					},
+					tooltips: {
+						enabled: true,
+						callbacks: {
+							label: function(tooltipItem, data) {
+								return parseFloat(Math.round(tooltipItem.yLabel * 100) / 100).toFixed(2);
+							}
+						}
+					}
+				}
+			});
+
+			function displayCharts() {
+				if ($("#selectProject1").val() != "-1" || $("#selectProject2").val() != "-1") {
+					let projects = JSON.parse(window.localStorage.getItem("projects"));
+
+					let project1TotalQuaterNumber = 0;
+					let project2TotalQuaterNumber = 0;
+
+					let project1 = null;
+					let project2 = null;
+
+					let project1CostData = [];
+					let project1ReleaseData = [];
+					let project1Error = [];
+
+					let project2CostData = [];
+					let project2ReleaseData = [];
+					let project2Error = [];
+
+					let project1Cost = {};
+					let project1Release = {};
+					let project1Factors = {};
+
+					let project1TotalCost = 0;
+					let project1TotalRelease = 0;
+					let project1TotalError = 0;
+
+					let project2Cost = {};
+					let project2Release ={};
+					let project2Factors = {};
+
+					let project2TotalCost = 0;
+					let project2TotalRelease = 0;
+					let project2TotalError = 0;
+
+					let project1Uncertainty = 0;
+					let project2Uncertainty = 0;
+
+					$("#costReleaseValues").removeAttr("hidden");
+
+					if ($("#selectProject1").val() != "-1") {
+						project1 = projects[$("#selectProject1").val()];
+
+						// fetch data from project1
+						let project1QuaterNumberPhase1 = parseInt(project1.costRelease.quaterNumberPhase1);
+						let project1QuaterNumberPhase2 = parseInt(project1.costRelease.quaterNumberPhase2);
+						let project1QuaterNumberPhase3 = parseInt(project1.costRelease.quaterNumberPhase3);
+
+						let project1StartDatePhase1 = new Date(project1.costRelease.startDatePhase1);
+						let project1StartDatePhase2 = new Date(project1.costRelease.startDatePhase2);
+						let project1StartDatePhase3 = new Date(project1.costRelease.startDatePhase3);
+
+						/*
+						let project1Factor1 = 0;
+						for (let i = 0; i < project1.complexityRisk._cost.length; i++) {
+							project1Factor1 += parseInt(project1.complexityRisk._cost[i]);
+						}
+						project1Factor1 = project1Factor1 / project1.complexityRisk._cost.length;
+
+						let project1Factor2 = 0;
+						for (let i = 0; i < project1.complexityRisk._scope.length; i++) {
+							project1Factor2 += parseInt(project1.complexityRisk._scope[i]);
+						}
+						project1Factor2 = project1Factor2 / project1.complexityRisk._scope.length;
+
+						let project1Factor3 = 0;
+						for (let i = 0; i < project1.complexityRisk._communications.length; i++) {
+							project1Factor3 += parseInt(project1.complexityRisk._communications[i]);
+						}
+						project1Factor3 = project1Factor3 / project1.complexityRisk._communications.length;
+
+						let project1Factor4 = 0;
+						for (let i = 0; i < project1.complexityRisk._projectIntegrationManagement.length; i++) {
+							project1Factor4 += parseInt(project1.complexityRisk._projectIntegrationManagement[i]);
+						}
+						project1Factor4 = project1Factor4 / project1.complexityRisk._projectIntegrationManagement.length;
+
+						let project1Factor5 = 0;
+						for (let i = 0; i < project1.complexityRisk._time.length; i++) {
+							project1Factor5 += parseInt(project1.complexityRisk._time[i]);
+						}
+						project1Factor5 = project1Factor5 / project1.complexityRisk._time.length;
+
+						let project1Factor6 = 0;
+						for (let i = 0; i < project1.complexityRisk._communications.length; i++) {
+							project1Factor6 += parseInt(project1.complexityRisk._communications[i]);
+						}
+						project1Factor6 = project1Factor6 / project1.complexityRisk._communications.length;
+
+						let project1Factor7 = 0;
+						for (let i = 0; i < project1.complexityRisk._procurement.length; i++) {
+							project1Factor7 += parseInt(project1.complexityRisk._procurement[i]);
+						}
+						project1Factor7 = project1Factor7 / project1.complexityRisk._procurement.length;
+
+						let project1Factor8 = 0;
+						for (let i = 0; i < project1.complexityRisk._humanResources.length; i++) {
+							project1Factor8 += parseInt(project1.complexityRisk._humanResources[i]);
+						}
+						project1Factor8 = project1Factor8 / project1.complexityRisk._humanResources.length;
+						*/
+
+						let project1Factor1 = 0;
+						for (let i = 0; i < project1.complexityRisk.section1.length; i++) {
+							project1Factor1 += parseInt(project1.complexityRisk.section1[i]);
+						}
+						let project1Factor1Uniformed = project1Factor1 / project1.complexityRisk.section1.length;
+
+						let project1Factor2 = 0;
+						for (let i = 0; i < project1.complexityRisk.section2.length; i++) {
+							project1Factor2 += parseInt(project1.complexityRisk.section2[i]);
+						}
+						let project1Factor2Uniformed = project1Factor2 / project1.complexityRisk.section2.length;
+
+						let project1Factor3 = 0;
+						for (let i = 0; i < project1.complexityRisk.section3.length; i++) {
+							project1Factor3 += parseInt(project1.complexityRisk.section3[i]);
+						}
+						let project1Factor3Uniformed = project1Factor3 / project1.complexityRisk.section3.length;
+
+						let project1Factor4 = 0;
+						for (let i = 0; i < project1.complexityRisk.section4.length; i++) {
+							project1Factor4 += parseInt(project1.complexityRisk.section4[i]);
+						}
+						let project1Factor4Uniformed = project1Factor4 / project1.complexityRisk.section4.length;
+
+						let project1Factor5 = 0;
+						for (let i = 0; i < project1.complexityRisk.section5.length; i++) {
+							project1Factor5 += parseInt(project1.complexityRisk.section5[i]);
+						}
+						let project1Factor5Uniformed = project1Factor5 / project1.complexityRisk.section5.length;
+
+						let project1Factor6 = 0;
+						for (let i = 0; i < project1.complexityRisk.section6.length; i++) {
+							project1Factor6 += parseInt(project1.complexityRisk.section6[i]);
+						}
+						let project1Factor6Uniformed = project1Factor6 / project1.complexityRisk.section6.length;
+
+						let project1Factor7 = 0;
+						for (let i = 0; i < project1.complexityRisk.section7.length; i++) {
+							project1Factor7 += parseInt(project1.complexityRisk.section7[i]);
+						}
+						let project1Factor7Uniformed = project1Factor7 / project1.complexityRisk.section7.length;
+
+						project1Uncertainty = project1Factor1 + project1Factor2 + project1Factor3
+						+ project1Factor4 + project1Factor5 + project1Factor6 + project1Factor7;
+
+						//let project1CostPhase1 = -(parseInt(project1.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase1));
+						let project1CostPhase1 = parseInt(project1.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase1);
+						let project1ReleasePhase1 = 0;
+						let project1ErrorPhase1 = null;
+
+						for (let i = 1; i <= project1QuaterNumberPhase1; i++) {
+							project1CostData.push(project1CostPhase1);
+							project1ReleaseData.push(project1ReleasePhase1);
+							project1Error.push(project1ErrorPhase1);
+						}
+
+						let project1DifferenceP1P2 = parseInt((project1StartDatePhase2.getTime()
+							- (project1StartDatePhase1.getTime() + project1QuaterNumberPhase1 * (1000 * 60 * 60 * 24 * 30 * 3)))
+							/ (1000 * 60 * 60 * 24 * 30 * 3));
+
+						for (let i = 0; i < project1DifferenceP1P2; i++) {
+							project1CostData.push(0);
+							project1ReleaseData.push(0);
+							project1Error.push(null);
+						}
+
+						//let project1CostPhase2 = -(parseInt(project1.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase2));
+						let project1CostPhase2 = parseInt(project1.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase2);
+						let project1ReleasePhase2 = parseInt(project1.costRelease.fteNumberReleasePhase2) * 100000 + parseInt(project1.costRelease.operatingMoneyReleasePhase2);
+						let project1ErrorPhase2 = project1Uncertainty / 170 * project1ReleasePhase2;
+
+						for (let i = 1; i <= project1QuaterNumberPhase2; i++) {
+							project1CostData.push(project1CostPhase2);
+							project1ReleaseData.push(project1ReleasePhase2);
+							project1Error.push(project1ErrorPhase2);
+						}
+
+						let project1DifferenceP2P3 = parseInt((project1StartDatePhase3.getTime()
+							- (project1StartDatePhase2.getTime() + project1QuaterNumberPhase2 * (1000 * 60 * 60 * 24 * 30 * 3)))
+							/ (1000 * 60 * 60 * 24 * 30 * 3));
+
+						for (let i = 0; i < project1DifferenceP2P3; i++) {
+							project1CostData.push(0);
+							project1ReleaseData.push(0);
+							project1Error.push(null);
+						}
+
+						//let project1CostPhase3 = -(parseInt(project1.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase3));
+						let project1CostPhase3 = parseInt(project1.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project1.costRelease.operatingMoneyCostPhase3);
+						let project1ReleasePhase3 = parseInt(project1.costRelease.fteNumberReleasePhase3) * 100000 + parseInt(project1.costRelease.operatingMoneyReleasePhase3);
+						let project1ErrorPhase3 = project1Uncertainty / 170 * project1ReleasePhase3;
+
+						for (let i = 1; i <= project1QuaterNumberPhase3; i++) {
+							project1CostData.push(project1CostPhase3);
+							project1ReleaseData.push(project1ReleasePhase3);
+							project1Error.push(project1ErrorPhase3);
+						}
+
+						project1TotalQuaterNumber = project1QuaterNumberPhase1 + project1DifferenceP1P2 + project1QuaterNumberPhase2 + project1DifferenceP2P3 + project1QuaterNumberPhase3;
+
+						// generate data for cost and release graph
+						project1Cost = {
+							label: "Cost of " + project1.title,
+							data: project1CostData,
+							backgroundColor: "rgba(238, 59, 59, 0.8)"
+						};
+
+						project1Release = {
+							label: "Release of " + project1.title,
+							data: project1ReleaseData,
+							error: project1Error,
+							backgroundColor: "rgba(30, 144, 255, 0.8)"
+						};
+
+						project1TotalCost = project1CostData.reduce(function(acc, val) { return acc + val; });
+						project1TotalRelease = project1ReleaseData.reduce(function(acc, val) { return acc + val; });
+						project1TotalError = project1Error.reduce(function(acc, val) { return acc + val; });
+
+						// generate data for complexity and risk graph
+						/*
+						project1Factors = {
+							data: [
+							project1Factor1,
+							project1Factor2,
+							project1Factor3,
+							project1Factor4,
+							project1Factor5,
+							project1Factor6,
+							project1Factor7,
+							project1Factor8,
+							project1Factor9
+							],
+							backgroundColor: [
+							"rgba(244, 96, 108, 0.6)",
+							"rgba(236, 173, 158, 0.6)",
+							"rgba(230, 206, 172, 0.6)",
+							"rgba(209, 186, 116, 0.6)",
+							"rgba(214, 213, 183, 0.6)",
+							"rgba(190, 237, 199, 0.6)",
+							"rgba(190, 231, 233, 0.6)",
+							"rgba(160, 238, 225, 0.6)",
+							"rgba(140, 199, 181, 0.6)",
+							]
+						};
+						*/
+						project1Factors = {
+							data: [
+							project1Factor1Uniformed,
+							project1Factor2Uniformed,
+							project1Factor3Uniformed,
+							project1Factor4Uniformed,
+							project1Factor5Uniformed,
+							project1Factor6Uniformed,
+							project1Factor7Uniformed
+							],
+							backgroundColor: "rgba(238, 59, 59, 0.2)",
+							borderColor: "rgba(238, 59, 59, 0.8)",
+							label: "Uncertainty of " + project1.title + ", Total Score: " + project1Uncertainty
+						};
+
+					}
+
+					if ($("#selectProject2").val() != "-1") {
+						project2 = projects[$("#selectProject2").val()];
+
+						// fetch data from project2
+						let project2QuaterNumberPhase1 = parseInt(project2.costRelease.quaterNumberPhase1);
+						let project2QuaterNumberPhase2 = parseInt(project2.costRelease.quaterNumberPhase2);
+						let project2QuaterNumberPhase3 = parseInt(project2.costRelease.quaterNumberPhase3);
+
+						let project2StartDatePhase1 = new Date(project2.costRelease.startDatePhase1);
+						let project2StartDatePhase2 = new Date(project2.costRelease.startDatePhase2);
+						let project2StartDatePhase3 = new Date(project2.costRelease.startDatePhase3);
+
+						/*
+						let project2Factor1 = 0;
+						for (let i = 0; i < project2.complexityRisk._cost.length; i++) {
+							project2Factor1 += parseInt(project2.complexityRisk._cost[i]);
+						}
+						project2Factor1 = project2Factor1 / project2.complexityRisk._cost.length;
+
+						let project2Factor2 = 0;
+						for (let i = 0; i < project2.complexityRisk._scope.length; i++) {
+							project2Factor2 += parseInt(project2.complexityRisk._scope[i]);
+						}
+						project2Factor2 = project2Factor2 / project2.complexityRisk._scope.length;
+
+						let project2Factor3 = 0;
+						for (let i = 0; i < project2.complexityRisk._communications.length; i++) {
+							project2Factor3 += parseInt(project2.complexityRisk._communications[i]);
+						}
+						project2Factor3 = project2Factor3 / project2.complexityRisk._communications.length;
+
+						let project2Factor4 = 0;
+						for (let i = 0; i < project2.complexityRisk._projectIntegrationManagement.length; i++) {
+							project2Factor4 += parseInt(project2.complexityRisk._projectIntegrationManagement[i]);
+						}
+						project2Factor4 = project2Factor4 / project2.complexityRisk._projectIntegrationManagement.length;
+
+						let project2Factor5 = 0;
+						for (let i = 0; i < project2.complexityRisk._time.length; i++) {
+							project2Factor5 += parseInt(project2.complexityRisk._time[i]);
+						}
+						project2Factor5 = project2Factor5 / project2.complexityRisk._time.length;
+
+						let project2Factor6 = 0;
+						for (let i = 0; i < project2.complexityRisk._communications.length; i++) {
+							project2Factor6 += parseInt(project2.complexityRisk._communications[i]);
+						}
+						project2Factor6 = project2Factor6 / project2.complexityRisk._communications.length;
+
+						let project2Factor7 = 0;
+						for (let i = 0; i < project2.complexityRisk._procurement.length; i++) {
+							project2Factor7 += parseInt(project2.complexityRisk._procurement[i]);
+						}
+						project2Factor7 = project2Factor7 / project2.complexityRisk._procurement.length;
+
+						let project2Factor8 = 0;
+						for (let i = 0; i < project2.complexityRisk._humanResources.length; i++) {
+							project2Factor8 += parseInt(project2.complexityRisk._humanResources[i]);
+						}
+						project2Factor8 = project2Factor8 / project2.complexityRisk._humanResources.length;
+						*/
+
+						let project2Factor1 = 0;
+						for (let i = 0; i < project2.complexityRisk.section1.length; i++) {
+							project2Factor1 += parseInt(project2.complexityRisk.section1[i]);
+						}
+						let project2Factor1Uniformed = project2Factor1 / project2.complexityRisk.section1.length;
+
+						let project2Factor2 = 0;
+						for (let i = 0; i < project2.complexityRisk.section2.length; i++) {
+							project2Factor2 += parseInt(project2.complexityRisk.section2[i]);
+						}
+						let project2Factor2Uniformed = project2Factor2 / project2.complexityRisk.section2.length;
+
+						let project2Factor3 = 0;
+						for (let i = 0; i < project2.complexityRisk.section3.length; i++) {
+							project2Factor3 += parseInt(project2.complexityRisk.section3[i]);
+						}
+						let project2Factor3Uniformed = project2Factor3 / project2.complexityRisk.section3.length;
+
+						let project2Factor4 = 0;
+						for (let i = 0; i < project2.complexityRisk.section4.length; i++) {
+							project2Factor4 += parseInt(project2.complexityRisk.section4[i]);
+						}
+						let project2Factor4Uniformed = project2Factor4 / project2.complexityRisk.section4.length;
+
+						let project2Factor5 = 0;
+						for (let i = 0; i < project2.complexityRisk.section5.length; i++) {
+							project2Factor5 += parseInt(project2.complexityRisk.section5[i]);
+						}
+						let project2Factor5Uniformed = project2Factor5 / project2.complexityRisk.section5.length;
+
+						let project2Factor6 = 0;
+						for (let i = 0; i < project2.complexityRisk.section6.length; i++) {
+							project2Factor6 += parseInt(project2.complexityRisk.section6[i]);
+						}
+						let project2Factor6Uniformed = project2Factor6 / project2.complexityRisk.section6.length;
+
+						let project2Factor7 = 0;
+						for (let i = 0; i < project2.complexityRisk.section7.length; i++) {
+							project2Factor7 += parseInt(project2.complexityRisk.section7[i]);
+						}
+						let project2Factor7Uniformed = project2Factor7 / project2.complexityRisk.section7.length;
+
+						project2Uncertainty = project2Factor1 + project2Factor2 + project2Factor3
+						+ project2Factor4 + project2Factor5 + project2Factor6 + project2Factor7;
+
+						//let project2CostPhase1 = -(parseInt(project2.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase1));
+						let project2CostPhase1 = parseInt(project2.costRelease.fteNumberCostPhase1) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase1);
+						let project2ReleasePhase1 = 0;
+						let project2ErrorPhase1 = null;
+
+						for (let i = 1; i <= project2QuaterNumberPhase1; i++) {
+							project2CostData.push(project2CostPhase1);
+							project2ReleaseData.push(project2ReleasePhase1);
+							project2Error.push(project2ErrorPhase1);
+						}
+
+						let project2DifferenceP1P2 = parseInt((project2StartDatePhase2.getTime()
+							- (project2StartDatePhase1.getTime() + project2QuaterNumberPhase1 * (1000 * 60 * 60 * 24 * 30 * 3)))
+							/ (1000 * 60 * 60 * 24 * 30 * 3));
+
+						for (let i = 0; i < project2DifferenceP1P2; i++) {
+							project2CostData.push(0);
+							project2ReleaseData.push(0);
+							project2Error.push(null);
+						}
+
+						//let project2CostPhase2 = -(parseInt(project2.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase2));
+						let project2CostPhase2 = parseInt(project2.costRelease.fteNumberCostPhase2) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase2);
+						let project2ReleasePhase2 = parseInt(project2.costRelease.fteNumberReleasePhase2) * 100000 + parseInt(project2.costRelease.operatingMoneyReleasePhase2);
+						let project2ErrorPhase2 = project2Uncertainty / 170 * project2ReleasePhase2;
+
+						for (let i = 1; i <= project2QuaterNumberPhase2; i++) {
+							project2CostData.push(project2CostPhase2);
+							project2ReleaseData.push(project2ReleasePhase2);
+							project2Error.push(project2ErrorPhase2);
+						}
+
+						let project2DifferenceP2P3 = parseInt((project2StartDatePhase3.getTime()
+							- (project2StartDatePhase2.getTime() + project2QuaterNumberPhase2 * (1000 * 60 * 60 * 24 * 30 * 3)))
+							/ (1000 * 60 * 60 * 24 * 30 * 3));
+
+						for (let i = 0; i < project2DifferenceP2P3; i++) {
+							project2CostData.push(0);
+							project2ReleaseData.push(0);
+							project2Error.push(null);
+						}
+
+						//let project2CostPhase3 = -(parseInt(project2.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase3));
+						let project2CostPhase3 = parseInt(project2.costRelease.fteNumberCostPhase3) * 100000 + parseInt(project2.costRelease.operatingMoneyCostPhase3);
+						let project2ReleasePhase3 = parseInt(project2.costRelease.fteNumberReleasePhase3) * 100000 + parseInt(project2.costRelease.operatingMoneyReleasePhase3);
+						let project2ErrorPhase3 = project2Uncertainty / 170 * project2ReleasePhase3;
+
+						for (let i = 1; i <= project2QuaterNumberPhase3; i++) {
+							project2CostData.push(project2CostPhase3);
+							project2ReleaseData.push(project2ReleasePhase3);
+							project2Error.push(project2ErrorPhase3);
+						}
+
+						project2TotalQuaterNumber = project2QuaterNumberPhase1 + project2DifferenceP1P2 + project2QuaterNumberPhase2 + project2DifferenceP2P3 + project2QuaterNumberPhase3;
+
+						// generate data for cost and release graph
+						project2Cost = {
+							label: "Cost of " + project2.title,
+							data: project2CostData,
+							backgroundColor: "rgba(238, 59, 59, 0.4)"
+						};
+
+						project2Release = {
+							label: "Release of " + project2.title,
+							data: project2ReleaseData,
+							error: project2Error,
+							backgroundColor: "rgba(30, 144, 255, 0.4)"
+						};
+
+						project2TotalCost = project2CostData.reduce(function(acc, val) { return acc + val; });
+						project2TotalRelease = project2ReleaseData.reduce(function(acc, val) { return acc + val; });
+						project2TotalError = project2Error.reduce(function(acc, val) { return acc + val; });
+						
+						// generate data for complexity and risk graph
+						/*
+						project2Factors = {
+							data: [
+							project2Factor1,
+							project2Factor2,
+							project2Factor3,
+							project2Factor4,
+							project2Factor5,
+							project2Factor6,
+							project2Factor7,
+							project2Factor8,
+							project2Factor9
+							],
+							backgroundColor: [
+							"rgba(244, 96, 108, 0.6)",
+							"rgba(236, 173, 158, 0.6)",
+							"rgba(230, 206, 172, 0.6)",
+							"rgba(209, 186, 116, 0.6)",
+							"rgba(214, 213, 183, 0.6)",
+							"rgba(190, 237, 199, 0.6)",
+							"rgba(190, 231, 233, 0.6)",
+							"rgba(160, 238, 225, 0.6)",
+							"rgba(140, 199, 181, 0.6)",
+							]
+						};
+						*/
+						project2Factors = {
+							data: [
+							project2Factor1Uniformed,
+							project2Factor2Uniformed,
+							project2Factor3Uniformed,
+							project2Factor4Uniformed,
+							project2Factor5Uniformed,
+							project2Factor6Uniformed,
+							project2Factor7Uniformed
+							],
+							backgroundColor: "rgba(30, 144, 255, 0.2)",
+							borderColor: "rgba(30, 144, 255, 0.8)",
+							label: "Uncertainty of " + project2.title + ", Total Score: " + project2Uncertainty
+						};
+
+					}
+
+					if (($("#selectProject1").val() != "-1") && ($("#selectProject2").val() != "-1")) {
+						let project1StartDate = new Date(project1.costRelease.startDatePhase1);
+						let project2StartDate = new Date(project2.costRelease.startDatePhase1);
+
+						let project1StartTime = project1StartDate.getTime();
+						let project2StartTime = project2StartDate.getTime();
+
+						if (project1StartTime >= project2StartTime) {
+							let difference = parseInt((project1StartTime - project2StartTime) / (1000 * 60 * 60 * 24 * 30 * 3));
+							project1TotalQuaterNumber += difference;
+							for (let i = 0; i < difference; i++) {
+								project1CostData.unshift(0);
+								project1ReleaseData.unshift(0);
+								project1Error.unshift(null);
+							}
+						} else {
+							let difference = parseInt((project2StartTime - project1StartTime) / (1000 * 60 * 60 * 24 * 30 * 3));
+							project2TotalQuaterNumber += difference;
+							for (let i = 0; i < difference; i++) {
+								project2CostData.unshift(0);
+								project2ReleaseData.unshift(0);
+								project2Error.unshift(null);
+							}
+						}
+
+					}
+
+					// use the larger quater number of the two projects to make full data being displayed
+					projectTotalQuaterNumber = project1TotalQuaterNumber >= project2TotalQuaterNumber ? project1TotalQuaterNumber : project2TotalQuaterNumber;
+
+					// give title and labels to cost and release graph
+					costReleaseChart.options.title.text = "Cost & Released Benefit";
+
+					let projectQuaters = [];
+					for (let i = 1; i <=  projectTotalQuaterNumber; i++) {
+						projectQuaters.push(i);
+					}
+					costReleaseChart.data.labels = projectQuaters;
+
+					// give title to complexity and risk graph
+					complexityRiskChart.options.title.text = "Complexity & Risk Factors";
+
+					if (project1 != null) {
+						// write data from project1 to cost and release graph
+						costReleaseChart.data.datasets.push(project1Cost);
+						costReleaseChart.data.datasets.push(project1Release);
+
+						// write data from project1 to complexity and risk graph
+						complexityRiskChart.data.datasets.push(project1Factors);
+
+						$("#tabNavProject1").show();
+						$("#tabNavProject1 a").text(project1.title);
+						$("#tabNavProject1").addClass("active");
+						$("#tabProject1").addClass("active");
+
+						$("#totalCostProject1").text(project1TotalCost.toLocaleString());
+						$("#totalReleaseProject1").text(project1TotalRelease.toLocaleString());
+						$("#maximumNetReleaseProject1").text((project1TotalRelease - project1TotalCost).toLocaleString());
+						$("#minimumNetReleaseProject1").text(parseInt(project1TotalRelease - project1TotalCost - project1TotalError).toLocaleString());
+					}
+
+					if (project2 != null) {
+						// write data from project2 to cost and release graph
+						costReleaseChart.data.datasets.push(project2Cost);
+						costReleaseChart.data.datasets.push(project2Release);
+
+						// write data from project2 to complexity and risk graph
+						complexityRiskChart.data.datasets.push(project2Factors);
+
+						$("#tabNavProject2").show();
+						$("#tabNavProject2 a").text(project2.title);
+						if (!$("#tabNavProject1").hasClass("active")) {
+							$("#tabNavProject2").addClass("active");
+							$("#tabProject2").addClass("active");
+						}
+
+						$("#totalCostProject2").text(project2TotalCost.toLocaleString());
+						$("#totalReleaseProject2").text(project2TotalRelease.toLocaleString());
+						$("#maximumNetReleaseProject2").text((project2TotalRelease - project2TotalCost).toLocaleString());
+						$("#minimumNetReleaseProject2").text(parseInt(project2TotalRelease - project2TotalCost - project2TotalError).toLocaleString());
+					}
+				}
+
+				costReleaseChart.update();
+				costReleaseChart.render();
+				complexityRiskChart.update();
+				complexityRiskChart.render();
+
+			}
+
+			$("button[name='select']").click(function() {
+				window.localStorage.setItem("visual_project1", $("#selectProject1").val());
+				window.localStorage.setItem("visual_project2", $("#selectProject2").val());
+				
+				costReleaseChart.data.datasets = [];
+				complexityRiskChart.data.datasets = [];
+
+				costReleaseChart.options.title.text = "Nothing to show, please select a project";
+				complexityRiskChart.options.title.text = "Nothing to show, please select a project";
+
+				$("#costReleaseValues").attr("hidden", "");
+				$("#tabNavProject1").hide();
+				$("#tabNavProject2").hide();
+				$("#tabNavProject1").removeClass("active");
+				$("#tabProject1").removeClass("active");
+				$("#tabNavProject2").removeClass("active");
+				$("#tabProject2").removeClass("active");
+
+				displayCharts();
+
+			});
+
+			displayCharts();
+
+		}
+
+	};
 
 }();
