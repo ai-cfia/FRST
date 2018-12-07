@@ -156,14 +156,6 @@ let Charts = function() {
                     callbacks: {
                         label: function(tooltipItem, data) {
                             return parseFloat(Math.round(tooltipItem.yLabel * 100) / 100).toFixed(2);
-                        },
-
-                        labelColor: function(tooltipItem, data) {
-                            currSet = data.tooltip._data.datasets[tooltipItem.datasetIndex]
-                            return {
-                                borderColor: currSet.borderColor,
-                                backgroundColor: currSet.borderColor
-                            }
                         }
                     }
                 }
