@@ -130,10 +130,11 @@ let Charts = function() {
 
                 // set legend properties
                 legend: {
+
                     labels: {
                         defaultFontSize: 15
                     },
-                    position: "right",
+                    position: "bottom",
                     labels: {
                       boxWidth: 11.5
                     }
