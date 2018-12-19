@@ -65,7 +65,7 @@ let Charts = function() {
                             userCallback: function(value, index, values) {
                                 return "$" + value.toLocaleString();
                             },
-                            min: 0,
+                            suggestedMin: 0,
                             suggestedMax: 100000,
                             beginAtZero: true
                         },
@@ -489,7 +489,7 @@ let Charts = function() {
 
             // calculate the lowest possible release based on the risk
             // multiply the release by a calculated factor to obtain this value
-            let minReleasePhase2 = projectUncertainty / 170 * maxReleasePhase2;
+            let minReleasePhase2 = (maxReleasePhase2 - (projectUncertainty / 170 * maxReleasePhase2));
 
             // loop for every quarter in the phase
             for (let i = 1; i <= projectQuaterNumberPhase2; i++) {
@@ -515,7 +515,7 @@ let Charts = function() {
             // calculate phase3 cost, release and lowest possible release value
             let projectCostPhase3 = parseFloat(project.costRelease.fteNumberCostPhase3) * 25000 + parseFloat(project.costRelease.operatingMoneyCostPhase3);
             let maxReleasePhase3 = parseFloat(project.costRelease.fteNumberReleasePhase3) * 25000 + parseFloat(project.costRelease.operatingMoneyReleasePhase3);
-            let minReleasePhase3 = projectUncertainty / 170 * maxReleasePhase3;
+            let minReleasePhase3 = (maxReleasePhase3 - (projectUncertainty / 170 * maxReleasePhase3));
 
             // loop for each quarter and push data into the data arrays for each
             for (let i = 1; i <= projectQuaterNumberPhase3; i++) {
@@ -591,8 +591,8 @@ let Charts = function() {
         */
         calculateTotals: function(cost, release, risk) {
             let totalCost = 0;
-            let totalRelease = 0;
-            let totalRisk = 0;
+            let maxRelease = 0;
+            let minRelease = 0;
             let maxBenefit = 0;
             let minBenefit = 0;
 
@@ -601,21 +601,21 @@ let Charts = function() {
                 return acc + val;
             });
             // calculate the maximum total release
-            totalRelease = release.reduce(function(acc, val) {
+            maxRelease = release.reduce(function(acc, val) {
                 return acc + val;
             });
 
             // calculate the minimum total release
-            totalRisk = risk.reduce(function(acc, val) {
+            minRelease = risk.reduce(function(acc, val) {
                 return acc + val;
             });
 
             // calculate the minimum and max benefits
-            maxBenefit = totalRelease - totalCost;
-            minBenefit = totalRelease - totalCost - totalRisk;
+            maxBenefit = maxRelease - totalCost;
+            minBenefit = minRelease - totalCost;
 
             // return cost, release and the benefits
-            return [totalCost, totalRelease, maxBenefit, minBenefit];
+            return [totalCost, maxRelease, maxBenefit, minBenefit];
 
         },
 
@@ -649,11 +649,12 @@ let Charts = function() {
             // store the data from the data array into its own variables
             projectCost = data[0];
             maxRelease = data[1];
+            minRelease - data[2];
             projectFactors = data[3];
             projectTotalQuaterNumber = (data[4]);
 
             // calculate totals and benefits
-            projectTotalData = Charts.calculateTotals(projectCost.data, maxRelease.data, maxRelease.risk);
+            projectTotalData = Charts.calculateTotals(projectCost.data, maxRelease.data, minRelease.data);
 
             // generate opening headers for the tab and the data pane including the project numbers in their IDs
             // check if the currrent tab needs to be active
@@ -912,7 +913,7 @@ let Charts = function() {
                 names.push(projects[projectNumber].title);
 
                 // generate the data for the minimum and maximum maxBenefits
-                let totals = Charts.calculateTotals(projectData[i][0].data, projectData[i][1].data, projectData[i][1].risk);
+                let totals = Charts.calculateTotals(projectData[i][0].data, projectData[i][1].data, projectData[i][2].data);
                 // push the min and max benefits to the arrays
                 maxBenefits.push(totals[2]);
                 minBenefits.push(totals[3]);
