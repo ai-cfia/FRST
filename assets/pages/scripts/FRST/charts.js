@@ -56,7 +56,7 @@ let Charts = function() {
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: "Number of Quaters"
+                            labelString: "Quarter Number"
                         }
                     }],
                     yAxes: [{
@@ -320,7 +320,7 @@ let Charts = function() {
 
         }),
 
-        costReleaseModal: new Chart($(""), {
+        costReleaseModal: new Chart($("canvas[name='costReleaseModal']"), {
             type: "bar",
             // initialize the data arrays
             data: {
@@ -354,7 +354,7 @@ let Charts = function() {
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: "Number of Quaters"
+                            labelString: "Quarter Number"
                         }
                     }],
                     yAxes: [{
@@ -393,7 +393,7 @@ let Charts = function() {
         }),
 
         // initialize the complexity risk chart
-        complexityRiskModal: new Chart($(""), {
+        complexityRiskModal: new Chart($("canvas[name='complexityRiskModal']"), {
             // set it to be a radar chart
             type: "radar",
             // initialize the data arrays
@@ -461,7 +461,7 @@ let Charts = function() {
         }),
 
         // initialize the min and max benefit chart
-        minMaxBenefitModal: new Chart($(""), {
+        minMaxBenefitModal: new Chart($("canvas[name='minMaxBenefitModal']"), {
             type: "horizontalBar",
             // initialize the data arrays
             data: {
@@ -532,7 +532,7 @@ let Charts = function() {
             },
         }),
 
-        costPerQuarterModal: new Chart($(""), {
+        costPerQuarterModal: new Chart($("canvas[name='costPerQuarterModal']"), {
             // set type to be line chart
             type: 'line',
 
