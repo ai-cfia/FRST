@@ -320,6 +320,304 @@ let Charts = function() {
 
         }),
 
+        costReleaseModal: new Chart($(""), {
+            type: "bar",
+            // initialize the data arrays
+            data: {
+                labels: [],
+                datasets: []
+            },
+            // set options for the chart
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                title: {
+                    // show title and set default title to show when no complete project is selected
+                    display: true,
+                    text: "Nothing to show, please select a project",
+                    fontSize: 19
+                },
+                // add a bounce animation for graphs on load
+                animation: {
+                    easing: 'easeOutBounce'
+                },
+
+                // set position of the legend
+                legend: {
+                    position: "right",
+                    labels: {
+                      boxWidth: 11.5
+                    }
+                },
+                // set labels for the x and y axes
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Number of Quaters"
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            // define a function to add a dollar sign to the labels for y axes
+                            userCallback: function(value, index, values) {
+                                return "$" + value.toLocaleString();
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100000,
+                            beginAtZero: true
+                        },
+                    }]
+                },
+                // enable tooltips to show quarter number and current cost/release values on hover over the bar
+                tooltips: {
+                    enabled: true,
+                    callbacks: {
+                        title: function(tooltipItems, data) {
+                            let tooltipItem = tooltipItems[0];
+                            title = "Quater " + data.labels[tooltipItem.index];
+                            return title;
+                        },
+
+                        label: function(tooltipItem, data) {
+                            // store current dataset
+                            currSet = data.datasets[tooltipItem.datasetIndex];
+                            // retrieve the title of the dataset
+                            label = currSet.label +
+                                ": $" + tooltipItem.yLabel.toFixed(2);
+                            return (label);
+                        }
+                    }
+                }
+            },
+        }),
+
+        // initialize the complexity risk chart
+        complexityRiskModal: new Chart($(""), {
+            // set it to be a radar chart
+            type: "radar",
+            // initialize the data arrays
+            data: {
+                // manually set the labels to be 7 predefined risk categories
+                labels: [
+                    "Project Characteristics",
+                    "Strategic Management Risks",
+                    "Procurement Risks",
+                    "Human Resources Risks",
+                    "Business Risks",
+                    "Project Management Risks",
+                    "Project Requirement Management"
+                ],
+                datasets: []
+            },
+
+            // set options for the chart
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                // set default title to be displayed when there's no active project
+                title: {
+                    display: true,
+                    text: "Nothing to show, please select a project",
+                    fontSize: 19
+                },
+
+                animation: {
+                    easing: 'easeOutCirc'
+                },
+
+                // set legend properties
+                legend: {
+
+                    labels: {
+                        defaultFontSize: 15
+                    },
+                    position: "bottom",
+                    labels: {
+                      boxWidth: 11.5
+                    }
+                },
+                // set properties for the scale
+                scale: {
+                    ticks: {
+                        max: 5.0,
+                        min: 0.0
+                    },
+                    pointLabels: {
+                        fontSize: 12
+                    }
+                },
+
+                // enable tool tips to show property and calculated risk score at a given point
+                tooltips: {
+                    enabled: true,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            return parseFloat(Math.round(tooltipItem.yLabel * 100) / 100).toFixed(2);
+                        }
+                    }
+                }
+            }
+        }),
+
+        // initialize the min and max benefit chart
+        minMaxBenefitModal: new Chart($(""), {
+            type: "horizontalBar",
+            // initialize the data arrays
+            data: {
+                labels: [],
+                datasets: []
+            },
+            // set options for the chart
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                title: {
+                    // show title and set default title to show when no complete project is selected
+                    display: true,
+                    text: "Nothing to show, please select a project",
+                    fontSize: 19
+                },
+
+                animation: {
+                    easing: 'easeOutBounce'
+                },
+
+                // set position of the legend
+                legend: {
+                    position: "right",
+                    labels: {
+                      boxWidth: 11.5
+                    }
+                },
+
+                // set labels for the x and y axes
+                scales: {
+                    xAxes: [{
+
+                        ticks: {
+                            // define a function to add a dollar sign to the labels for y axes
+                            userCallback: function(value, index, values) {
+                                return "$" + value.toLocaleString();
+                            },
+                            suggestedMax: 100000,
+                            beginAtZero: true
+                        }
+
+                    }],
+                    yAxes: [{
+
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Project Name"
+                        }
+                    }]
+                },
+
+                tooltips: {
+                    // enable tooltipItems
+                    enabled: true,
+                    // set custom label for the tool tips
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            // store current dataset
+                            currSet = data.datasets[tooltipItem.datasetIndex];
+                            // retrieve the title of the dataset
+                            label = currSet.label +
+                                ": $" + tooltipItem.xLabel.toFixed(2);
+                            return (label);
+                        }
+                    }
+                }
+            },
+        }),
+
+        costPerQuarterModal: new Chart($(""), {
+            // set type to be line chart
+            type: 'line',
+
+            data: {
+                labels: [],
+                datasets: []
+            },
+
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                title: {
+                    // show title and set default title to show when no complete project is selected
+                    display: true,
+                    text: "Nothing to show, please select a project",
+                    fontSize: 19
+                },
+
+                animation: {
+                    easing: 'easeOutBounce'
+                },
+
+                // set position of the legend
+                legend: {
+                    position: "right",
+                    labels: {
+                      boxWidth: 11.5
+                    }
+                },
+
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Quarter Number"
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            // define a function to add a dollar sign to the labels for y axes
+                            userCallback: function(value, index, values) {
+                                return "$" + value.toLocaleString();
+                            },
+                            suggestedMax: 100000,
+                            beginAtZero: true
+                        },
+                    }]
+                },
+
+                tooltips: {
+                    // enable tooltipItems
+                    enabled: true,
+                    // show all values at any given index
+                    mode: "index",
+                    intersect: false,
+                    position: "nearest",
+                    callbacks: {
+                        title: function(tooltipItem, data) {
+                            return "Quarter " + tooltipItem[0].xLabel;
+                        },
+                        label: function(tooltipItem, data){
+                          // store current dataset
+                          currSet = data.datasets[tooltipItem.datasetIndex];
+                          // retrieve the title of the dataset
+                          label = currSet.label +
+                              ": $" + tooltipItem.yLabel.toFixed(2);
+                          return (label);
+                        },
+
+                        labelColor: function(tooltipItem, data) {
+                            currSet = data.tooltip._data.datasets[tooltipItem.datasetIndex]
+                            return {
+                                borderColor: currSet.borderColor,
+                                backgroundColor: currSet.borderColor
+                            }
+                        }
+                    }
+                }
+            },
+
+
+
+
+        }),
+
 
         initCharts: function() {
 

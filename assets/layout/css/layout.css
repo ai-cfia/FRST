@@ -1384,6 +1384,16 @@
          display: inline !important;
          padding-left: 15px;
     }
+
+    .chart-fullscreen {
+    float: right;
+    color: #bbc1c8;
+    }
+
+    .chart-fullscreen:hover {
+    color: #d9534f;
+    }
+
      .page-sidebar-closed .page-sidebar .page-sidebar-menu.page-sidebar-menu-closed > li:hover > a > .badge {
          display: block !important;
     }
