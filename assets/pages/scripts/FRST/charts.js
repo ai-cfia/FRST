@@ -48,7 +48,7 @@ let Charts = function() {
                 legend: {
                     position: "right",
                     labels: {
-                      boxWidth: 11.5
+                        boxWidth: 11.5
                     }
                 },
                 // set labels for the x and y axes
@@ -136,7 +136,7 @@ let Charts = function() {
                     },
                     position: "bottom",
                     labels: {
-                      boxWidth: 11.5
+                        boxWidth: 11.5
                     }
                 },
                 // set properties for the scale
@@ -189,7 +189,7 @@ let Charts = function() {
                 legend: {
                     position: "right",
                     labels: {
-                      boxWidth: 11.5
+                        boxWidth: 11.5
                     }
                 },
 
@@ -261,7 +261,7 @@ let Charts = function() {
                 legend: {
                     position: "right",
                     labels: {
-                      boxWidth: 11.5
+                        boxWidth: 11.5
                     }
                 },
 
@@ -295,13 +295,13 @@ let Charts = function() {
                         title: function(tooltipItem, data) {
                             return "Quarter " + tooltipItem[0].xLabel;
                         },
-                        label: function(tooltipItem, data){
-                          // store current dataset
-                          currSet = data.datasets[tooltipItem.datasetIndex];
-                          // retrieve the title of the dataset
-                          label = currSet.label +
-                              ": $" + tooltipItem.yLabel.toFixed(2);
-                          return (label);
+                        label: function(tooltipItem, data) {
+                            // store current dataset
+                            currSet = data.datasets[tooltipItem.datasetIndex];
+                            // retrieve the title of the dataset
+                            label = currSet.label +
+                                ": $" + tooltipItem.yLabel.toFixed(2);
+                            return (label);
                         },
 
                         labelColor: function(tooltipItem, data) {
@@ -346,7 +346,7 @@ let Charts = function() {
                 legend: {
                     position: "right",
                     labels: {
-                      boxWidth: 11.5
+                        boxWidth: 11.5
                     }
                 },
                 // set labels for the x and y axes
@@ -434,7 +434,7 @@ let Charts = function() {
                     },
                     position: "bottom",
                     labels: {
-                      boxWidth: 11.5
+                        boxWidth: 11.5
                     }
                 },
                 // set properties for the scale
@@ -487,7 +487,7 @@ let Charts = function() {
                 legend: {
                     position: "right",
                     labels: {
-                      boxWidth: 11.5
+                        boxWidth: 11.5
                     }
                 },
 
@@ -559,7 +559,7 @@ let Charts = function() {
                 legend: {
                     position: "right",
                     labels: {
-                      boxWidth: 11.5
+                        boxWidth: 11.5
                     }
                 },
 
@@ -593,13 +593,13 @@ let Charts = function() {
                         title: function(tooltipItem, data) {
                             return "Quarter " + tooltipItem[0].xLabel;
                         },
-                        label: function(tooltipItem, data){
-                          // store current dataset
-                          currSet = data.datasets[tooltipItem.datasetIndex];
-                          // retrieve the title of the dataset
-                          label = currSet.label +
-                              ": $" + tooltipItem.yLabel.toFixed(2);
-                          return (label);
+                        label: function(tooltipItem, data) {
+                            // store current dataset
+                            currSet = data.datasets[tooltipItem.datasetIndex];
+                            // retrieve the title of the dataset
+                            label = currSet.label +
+                                ": $" + tooltipItem.yLabel.toFixed(2);
+                            return (label);
                         },
 
                         labelColor: function(tooltipItem, data) {
@@ -997,7 +997,11 @@ let Charts = function() {
             let costRelease = Charts.costReleaseChart,
                 complexityRisk = Charts.complexityRiskChart,
                 minMaxBenefit = Charts.minMaxBenefitChart,
-                costPerQuarter = Charts.costPerQuarterChart;
+                costPerQuarter = Charts.costPerQuarterChart,
+                costReleaseModal = Charts.costReleaseModal,
+                complexityRiskModal = Charts.complexityRiskModal,
+                minMaxBenefitModal = Charts.minMaxBenefitModal,
+                costPerQuarterModal = Charts.costPerQuarterModal;
 
             // initialize the costRelease and complexityRisk datasets
             // this is so there aren't duplicate bars and to account
@@ -1006,9 +1010,16 @@ let Charts = function() {
             complexityRisk.data.datasets = [];
             minMaxBenefit.data.datasets = [];
             costPerQuarter.data.datasets = [];
+            costReleaseModal.data.datasets = [];
+            complexityRiskModal.data.datasets = [];
+            minMaxBenefitModal.data.datasets = [];
+            costPerQuarterModal.data.datasets = [];
             costRelease.data.labels = [];
             minMaxBenefit.data.labels = [];
             costPerQuarter.data.labels = [];
+            costReleaseModal.data.labels = [];
+            minMaxBenefitModal.data.labels = [];
+            costPerQuarterModal.data.labels = [];
 
             // delete all present tabs and data
             $(".tab-element").remove();
@@ -1056,39 +1067,25 @@ let Charts = function() {
                 // generate the datasets for the cost release and complexity risk charts
                 let cr2Data = Charts.generateCR2(projectData, checkedElements, projects, lowestTime);
 
-                // set the data sets for the charts to the ones returned by the method
-                costRelease.data.datasets = cr2Data[0];
-                complexityRisk.data.datasets = cr2Data[1];
-
-                // give title and labels to cost and release graph
-                costRelease.options.title.display = false;
-
                 // define the label for the x-axes of cost release graph to be the quarter number
-                let projectQuaters = [];
+                let projectQuarters = [];
                 for (let i = 1; i <= cr2Data[2]; i++) {
-                    projectQuaters.push(i);
+                    projectQuarters.push(i);
                 }
 
+                Charts.displayCR2(costRelease, complexityRisk, cr2Data, projectQuarters);
+                Charts.displayCR2(costReleaseModal, complexityRiskModal, cr2Data, projectQuarters);
 
+                // generate and display minMaxBenefit charts
+                Charts.displayMinMax(minMaxBenefit, projectData, checkedElements, projects);
+                Charts.displayMinMax(minMaxBenefitModal, projectData, checkedElements, projects);
 
-                // push the labels to the chart
-                costRelease.data.labels = projectQuaters;
+                // generate and display cost per quarter charts
+                Charts.displayCPQ(costPerQuarter, cr2Data, projectQuarters);
+                Charts.displayCPQ(costPerQuarterModal, cr2Data, projectQuarters);
 
-                // give title to complexity and risk graph
-                complexityRisk.options.title.display = false;
-
-                // generate minMaxBenefit data and update the chart
-                minMax = Charts.generateMinMax(projectData, checkedElements, projects);
-                minMaxBenefit.options.title.display = false;
-                minMaxBenefit.data.datasets.push(minMax[0]);
-                minMaxBenefit.data.datasets.push(minMax[1]);
-                minMaxBenefit.data.labels = minMax[2];
-
-                // generate cost Per quarter data and update charts
-                cpq = Charts.generateCPQ(cr2Data[0], cr2Data[2]);
-                costPerQuarter.data.datasets = cpq;
-                costPerQuarter.data.labels = projectQuaters;
-                costPerQuarter.options.title.display = false;
+                charts = [costRelease, complexityRisk, minMaxBenefit, costPerQuarter, costReleaseModal, complexityRiskModal, minMaxBenefitModal, costPerQuarterModal];
+                Charts.updateAndRenderCharts(charts);
 
 
             } else {
@@ -1100,15 +1097,68 @@ let Charts = function() {
                 costPerQuarter.options.title.text = "Nothing to show, please select a project"
             }
 
-            // update and render the charts
-            costRelease.update();
-            costRelease.render();
-            complexityRisk.update();
-            complexityRisk.render();
-            minMaxBenefit.update();
-            minMaxBenefit.render();
-            costPerQuarter.update();
-            costPerQuarter.render();
+        },
+
+        /*
+          This function will update and render a given chart
+          @param charts - the charts to be updated and rendered
+        */
+        updateAndRenderCharts: function(charts) {
+
+            for (let i = 0; i < charts.length; i++) {
+                charts[i].update();
+                charts[i].render();
+            }
+        },
+
+        /*
+        This method will display the data for a minMaxBenefit chart
+
+        @param chart - the chart element to be displayed
+        @param projectData - the data for the current project
+        @param checkedElements - which projects have been selected from the project selection
+        @param projects - the data for all submitted projects
+        */
+
+        displayMinMax: function(chart, projectData, checkedElements, projects) {
+            // generate minMaxBenefit data and update the chart
+            minMax = Charts.generateMinMax(projectData, checkedElements, projects);
+            chart.options.title.display = false;
+            chart.data.datasets.push(minMax[0]);
+            chart.data.datasets.push(minMax[1]);
+            chart.data.labels = minMax[2];
+        },
+
+        /*
+        This method will display the data for a cost per quarter chart
+
+        @param chart - the chart element to be displayed
+        @param cr2Data - data array generated for the cost release graph
+        @param projectQuarters - an array consisting of the project quarter numbers
+        */
+
+        displayCPQ: function(chart, cr2Data, projectQuarters) {
+            // generate cost Per quarter data and update charts
+            cpq = Charts.generateCPQ(cr2Data[0], cr2Data[2]);
+            chart.data.datasets = cpq;
+            chart.data.labels = projectQuarters;
+            chart.options.title.display = false;
+        },
+
+        displayCR2: function(costRelease, comRisk, cr2Data, projectQuarters) {
+
+            // set the data sets for the charts to the ones returned by the method
+            costRelease.data.datasets = cr2Data[0];
+            comRisk.data.datasets = cr2Data[1];
+
+            // give title and labels to cost and release graph
+            costRelease.options.title.display = false;
+
+            // push the labels to the chart
+            costRelease.data.labels = projectQuarters;
+
+            // give title to complexity and risk graph
+            comRisk.options.title.display = false;
         },
 
 
