@@ -943,6 +943,12 @@
          margin: 0;
     }
 
+    /*charts modal title text adjustment*/
+    .charts.modal-title {
+    font-size: 18px;
+    font-weight: 300;
+    }
+
 }
  @media (max-width: 991px) {
     /* Page container */
