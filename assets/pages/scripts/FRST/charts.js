@@ -1130,7 +1130,7 @@ let Charts = function() {
         },
 
         /*
-        This method will display the data for a cost per quarter chart
+        This method will display the data for a cost per quarter charts
 
         @param chart - the chart element to be displayed
         @param cr2Data - data array generated for the cost release graph
@@ -1144,6 +1144,15 @@ let Charts = function() {
             chart.data.labels = projectQuarters;
             chart.options.title.display = false;
         },
+
+        /*
+        This method wukk display the data for the cost release charts
+
+        @param costRelease - the cost release chart element to be displated
+        @param comRisk - the complexity risk chart element to be displayed
+        @param cr2Data - the data generated for the complexity risk and cost release charts
+        @param projectQuarters - an array containing numbers indicating the project quarter
+        */
 
         displayCR2: function(costRelease, comRisk, cr2Data, projectQuarters) {
 
