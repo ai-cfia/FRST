@@ -26,25 +26,39 @@ var FormProject = function () {
 			return output;
 		}
 
+		/* This function updates the the second phases start date corresponding to
+		the phase 1 start date and length */
 		function updateStartDatePhase2() {
+
+			// ensure that the phase one start date isn't null
 			if ($("#quaterNumberPhase1").val() != null) {
+
+				// store the phase 1 quarter number
 				let quaterNumberPhase1 = parseInt($("#quaterNumberPhase1").val());
 
+				// ensure teh date can be parsed properly
 				if (Date.parse($("#startDatePhase1").val())) {
+					// store phase 1's month day and year subtract one month to account for discrepancy when adding the quarters later on
 					let startDatePhase1Month = parseInt($("#startDatePhase1").val().split("/")[0]);
 					let startDatePhase1Day = parseInt($("#startDatePhase1").val().split("/")[1]);
 					let startDatePhase1Year = parseInt($("#startDatePhase1").val().split("/")[2]);
 
+					// store the date and get its time
 					let startDatePhase1 = new Date(startDatePhase1Year, startDatePhase1Month - 1, startDatePhase1Day);
 					let startDatePhase1Time = startDatePhase1.getTime();
 
+					// store start date phase 2 by adding the amount of quarters for phase 1 converted to milliseconds
 					let startDatePhase2Time = startDatePhase1Time + quaterNumberPhase1 * (1000 * 60 * 60 * 24 * 30 * 3);
+
+					// convert the time into a date
 					let startDatePhase2 = new Date(startDatePhase2Time);
 
+					// store the month day and year from the date
 					let startDatePhase2Month = startDatePhase2.getMonth() + 1;
 					let startDatePhase2Day = startDatePhase2.getDate();
 					let startDatePhase2Year = startDatePhase2.getFullYear();
 
+					// set the value of the date
 					$("#startDatePhase2").val(leftPad(startDatePhase2Month, 2) + "/" + leftPad(startDatePhase2Day, 2) + "/" + startDatePhase2Year);
 					$("#datePickerStartDatePhase2").datepicker("setStartDate", new Date(startDatePhase2.getFullYear(), startDatePhase2.getMonth(), startDatePhase2.getDate()));
 					$("#datePickerStartDatePhase2").datepicker("update");
@@ -79,12 +93,16 @@ var FormProject = function () {
 		}
 
 		function tripleConstraint() {
+
+			// caclculate total project cost
 			let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseFloat($("#fteNumberCostPhase1").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase1").val()))
 			+ parseInt($("#quaterNumberPhase2").val()) * (parseFloat($("#fteNumberCostPhase2").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase2").val()))
 			+ parseInt($("#quaterNumberPhase3").val()) * (parseFloat($("#fteNumberCostPhase3").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase3").val()));
 
+			// calculate the projects total length in quarters
 			let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
 
+			// assign a scaling factor to the project cost
 			if (projectTotalCost <= 1250000) {
 				projectTotalCost = "1";
 			} else if (projectTotalCost > 1250000 && projectTotalCost <= 2500000) {
@@ -97,6 +115,7 @@ var FormProject = function () {
 				projectTotalCost = "5";
 			}
 
+			// assign a scaling factor for the project length
 			if (projectTotalQuaterNumber <= 4) {
 				projectTotalQuaterNumber = "1";
 			} else if (projectTotalQuaterNumber > 4 && projectTotalQuaterNumber <= 8) {
@@ -109,8 +128,12 @@ var FormProject = function () {
 				projectTotalQuaterNumber = "5";
 			}
 
+			// if the user inputted that the project is large for the agency and has extremely high cost and high length
+			// force maximum risk for project characteristics
 			if ($("input[name='investmentPortfolioManagement1']:checked").val() == "5"
 			&& projectTotalCost == "5" && projectTotalQuaterNumber == "5") {
+
+				// trigger clicks on questions corresponding to project characteristics
 				$("input[name='cost1'][value=5]").trigger('click');
 				$("input[name='scope1'][value=5]").trigger('click');
 				$("input[name='communications1'][value=5]").trigger('click');
@@ -125,7 +148,9 @@ var FormProject = function () {
 				$("input[name='time6'][value=5]").trigger('click');
 				$("input[name='time7'][value=5]").trigger('click');
 
+				// disable options for all triggered questions to block users from changing the values
 				for (let i = 0; i < $("input[name='cost1']").length; i++) {
+					// loop through all options for the question disabling them
 					$("input[name='cost1']")[i].disabled = true;
 				}
 				for (let i = 0; i < $("input[name='scope1']").length; i++) {
@@ -165,8 +190,12 @@ var FormProject = function () {
 					$("input[name='time7']")[i].disabled = true;
 				}
 			} else {
+				// if all the criteria aren't met or values change re-enable any
+				// question that may have been checked and disabled
 				for (let i = 0; i < $("input[name='cost1']").length; i++) {
+					// check if the option was disabled
 					if ($("input[name='cost1']")[i].disabled == true) {
+						// if it was uncheck and enable it
 						$("input[name='cost1']")[i].disabled = false;
 						$("input[name='cost1']")[i].checked = false;
 					}
@@ -277,10 +306,15 @@ var FormProject = function () {
 		handleDatePickers();
 		handleCheckedRadios();
 
+		// check to see if the number of quarters for phase 1 isn't null
 		if ($("#quaterNumberPhase1").val() != null) {
+			// if it isn't null store the number of quarters
 			let quaterNumberPhase1 = parseInt($("#quaterNumberPhase1").val());
 
+			// check if the start date has been inputted
 			if (Date.parse($("#startDatePhase1").val())) {
+				// obtain the date if it has been inputted
+				// split the date into month and year
 				let startDatePhase1Month = parseInt($("#startDatePhase1").val().split("/")[0]);
 				let startDatePhase1Day = parseInt($("#startDatePhase1").val().split("/")[1]);
 				let startDatePhase1Year = parseInt($("#startDatePhase1").val().split("/")[2]);
@@ -291,11 +325,13 @@ var FormProject = function () {
 				let startDatePhase2Time = startDatePhase1Time + quaterNumberPhase1 * (1000 * 60 * 60 * 24 * 30 * 3);
 				let startDatePhase2 = new Date(startDatePhase2Time);
 
+				// update the start date based on the phase 1 quarters
 				$("#datePickerStartDatePhase2").datepicker("setStartDate", new Date(startDatePhase2.getFullYear(), startDatePhase2.getMonth(), startDatePhase2.getDate()));
 				$("#datePickerStartDatePhase2").datepicker("update");
 			}
 		}
 
+		// repeat for phase 2
 		if ($("#quaterNumberPhase2").val() != null) {
 			let quaterNumberPhase2 = parseInt($("#quaterNumberPhase2").val());
 
@@ -316,25 +352,30 @@ var FormProject = function () {
 		}
 
 		$("#startDatePhase1").change(function() {
+			// if the phase 1 start date changes update the phase 2 and 3 start dates
 			updateStartDatePhase2();
 			updateStartDatePhase3();
 		});
 
 		$("#startDatePhase2").change(function() {
+			// if the phase 2 start date changes update the phase 3 start date
 			updateStartDatePhase3();
 		})
 
 		$("#quaterNumberPhase1").change(function() {
+			// If the phase 1 quarter number changes update phase 2 and 3 start dates
 			updateStartDatePhase2();
 			updateStartDatePhase3();
 			tripleConstraint();
 		});
 
 		$("#quaterNumberPhase2").change(function() {
+			// if the phase 2 quarter number changes update phase 3 start date
 			updateStartDatePhase3();
 			tripleConstraint();
 		});
 
+		// if the third phase quarter number changes or if any of the cost values change run triple constraint
 		$("#quaterNumberPhase3").change(function() {
 			tripleConstraint();
 		});
@@ -367,12 +408,16 @@ var FormProject = function () {
 			tripleConstraint();
 		});
 
+		// check if the question asking if procurement is required's value has changed
 		$("input[name='cost1']").change(function() {
+			// if it has check if it states procurement is not required
 			if ($("input[name='cost1']:checked").val() == "1") {
+				// set the risk values for procurment questions to minimum
 				$("input[name='procurement1'][value=1]").trigger('click');
 				$("input[name='procurement2'][value=1]").trigger('click');
 				$("input[name='procurement3'][value=1]").trigger('click');
 
+				// disable options for the procurment questions so user can't manually change them
 				for (let i = 0; i < $("input[name='procurement1']").length; i++) {
 					$("input[name='procurement1']")[i].disabled = true;
 				}
@@ -383,6 +428,8 @@ var FormProject = function () {
 					$("input[name='procurement3']")[i].disabled = true;
 				}
 			} else {
+				// if procurment is required after the question changed then enable the options
+				// that may have been disabled and re-enable and uncheck them if they were
 				for (let i = 0; i < $("input[name='procurement1']").length; i++) {
 					if ($("input[name='procurement1']")[i].disabled == true) {
 						$("input[name='procurement1']")[i].disabled = false;
@@ -425,11 +472,14 @@ var FormProject = function () {
 		}, "Please enter a date in the format MM/DD/YYYY");
 
 		form1.validate({
+			// setup validator for the form submission
 			errorElement: "span",
 			errorClass: "help-block help-block-error",
 			focusInvalid: false,
 			ignore: "",
 			rules: {
+				// ensure all elements have been specified
+				// ensure the dates is in the correct format
 				startDatePhase1: {
 					required: true,
 					DateFormat: true
@@ -442,6 +492,7 @@ var FormProject = function () {
 					required: true,
 					DateFormat: true
 				},
+				// ensure the quarter numbers are only whole numbers
 				quaterNumberPhase1: {
 					digits: true,
 					required: true
@@ -454,6 +505,7 @@ var FormProject = function () {
 					digits: true,
 					required: true
 				},
+				// allow any number for fte cost value
 				fteNumberCostPhase1: {
 					number: true,
 					required: true
@@ -466,6 +518,7 @@ var FormProject = function () {
 					number: true,
 					required: true
 				},
+				// allow only whole number values for operating costs
 				operatingMoneyCostPhase1: {
 					digits: true,
 					required: true
@@ -478,6 +531,7 @@ var FormProject = function () {
 					digits: true,
 					required: true
 				},
+				// allow any number for fte release value
 				fteNumberReleasePhase2: {
 					number: true,
 					required: true
@@ -494,6 +548,7 @@ var FormProject = function () {
 					digits: true,
 					required: true
 				},
+				// ensure all questionaire elements are required
 				cost1: {
 					required: true
 				},
@@ -636,9 +691,13 @@ var FormProject = function () {
 				success1.show();
 				error1.hide();
 
+				// obtain the projects array from the browsers storage
 				let projects = JSON.parse(window.localStorage.getItem("projects"));
+
+				// obtain the current projects index number
 				let current_project = parseInt(window.localStorage.getItem("current_project"));
 
+				// store the values inputted into the form to the project element obtained
 				projects[current_project].costRelease.startDatePhase1 = $("#startDatePhase1").val();
 				projects[current_project].costRelease.quaterNumberPhase1 = $("#quaterNumberPhase1").val();
 				projects[current_project].costRelease.fteNumberCostPhase1 = $("#fteNumberCostPhase1").val();
@@ -658,12 +717,15 @@ var FormProject = function () {
 				projects[current_project].costRelease.fteNumberReleasePhase3 = $("#fteNumberReleasePhase3").val();
 				projects[current_project].costRelease.operatingMoneyReleasePhase3 = $("#operatingMoneyReleasePhase3").val();
 
+				// calculate the projects total cost
 				let projectTotalCost = parseInt($("#quaterNumberPhase1").val()) * (parseFloat($("#fteNumberCostPhase1").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase1").val()))
 				+ parseInt($("#quaterNumberPhase2").val()) * (parseFloat($("#fteNumberCostPhase2").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase2").val()))
 				+ parseInt($("#quaterNumberPhase3").val()) * (parseFloat($("#fteNumberCostPhase3").val()) * 25000 + parseFloat($("#operatingMoneyCostPhase3").val()));
 
+				// calculate the total number of quarters
 				let projectTotalQuaterNumber = parseInt($("#quaterNumberPhase1").val()) + parseInt($("#quaterNumberPhase2").val()) + parseInt($("#quaterNumberPhase3").val());
 
+				// determine risk associated to the cost of the project
 				if (projectTotalCost <= 1250000) {
 					projectTotalCost = "1";
 				} else if (projectTotalCost > 1250000 && projectTotalCost <= 2500000) {
@@ -676,6 +738,7 @@ var FormProject = function () {
 					projectTotalCost = "5";
 				}
 
+				// determine risk caused by the length of the project
 				if (projectTotalQuaterNumber <= 4) {
 					projectTotalQuaterNumber = "1";
 				} else if (projectTotalQuaterNumber > 4 && projectTotalQuaterNumber <= 8) {
@@ -688,79 +751,10 @@ var FormProject = function () {
 					projectTotalQuaterNumber = "5";
 				}
 
-				let _cost = [
-				projectTotalCost,
-				$("input[name='cost1']:checked").val(),
-				$("input[name='cost2']:checked").val(),
-				$("input[name='cost3']:checked").val()
-				];
 
-				let _scope = [
-				$("input[name='scope1']:checked").val(),
-				$("input[name='scope2']:checked").val(),
-				$("input[name='scope3']:checked").val(),
-				$("input[name='scope4']:checked").val(),
-				$("input[name='scope5']:checked").val(),
-				$("input[name='scope6']:checked").val(),
-				$("input[name='scope7']:checked").val(),
-				$("input[name='scope8']:checked").val()
-				];
-
-				let _communications = [
-				$("input[name='communications1']:checked").val(),
-				$("input[name='communications2']:checked").val(),
-				$("input[name='communications3']:checked").val(),
-				$("input[name='humanResourcesCommunications1']:checked").val(),
-				$("input[name='humanResourcesCommunications2']:checked").val()
-				];
-
-				let _projectIntegrationManagement = [
-				$("input[name='projectIntegrationManagement1']:checked").val(),
-				$("input[name='projectIntegrationManagement2']:checked").val()
-				];
-
-				let _time = [
-				projectTotalQuaterNumber,
-				$("input[name='time1']:checked").val(),
-				$("input[name='time2']:checked").val(),
-				$("input[name='time3']:checked").val(),
-				$("input[name='time4']:checked").val(),
-				$("input[name='time5']:checked").val(),
-				$("input[name='time6']:checked").val(),
-				$("input[name='time7']:checked").val()
-				];
-
-				let _investmentPortfolioManagement = [
-				$("input[name='investmentPortfolioManagement1']:checked").val(),
-				$("input[name='investmentPortfolioManagement2']:checked").val(),
-				$("input[name='investmentPortfolioManagement3']:checked").val(),
-				$("input[name='investmentPortfolioManagement4']:checked").val()
-				];
-
-				let _procurement = [
-				$("input[name='procurement1']:checked").val(),
-				$("input[name='procurement2']:checked").val(),
-				$("input[name='procurement3']:checked").val()
-				];
-
-				let _humanResources = [
-				$("input[name='humanResources1']:checked").val(),
-				$("input[name='humanResources2']:checked").val(),
-				$("input[name='humanResources3']:checked").val(),
-				$("input[name='humanResourcesCommunications1']:checked").val(),
-				$("input[name='humanResourcesCommunications2']:checked").val()
-				];
-
-				projects[current_project].complexityRisk._cost = _cost;
-				projects[current_project].complexityRisk._scope = _scope;
-				projects[current_project].complexityRisk._communications = _communications;
-				projects[current_project].complexityRisk._projectIntegrationManagement = _projectIntegrationManagement;
-				projects[current_project].complexityRisk._time = _time;
-				projects[current_project].complexityRisk._investmentPortfolioManagement = _investmentPortfolioManagement;
-				projects[current_project].complexityRisk._procurement = _procurement;
-				projects[current_project].complexityRisk._humanResources = _humanResources;
-
-				let section1 = [
+				// define arrays for each individual risk category
+				// store the values of questions that correspond to each risk category
+				let projectCharacteristics = [
 				$("input[name='investmentPortfolioManagement1']:checked").val(),
 				$("input[name='cost1']:checked").val(),
 				$("input[name='scope1']:checked").val(),
@@ -777,35 +771,35 @@ var FormProject = function () {
 				$("input[name='time7']:checked").val()
 				];
 
-				let section2 = [
+				let strategicRisks = [
 				$("input[name='investmentPortfolioManagement2']:checked").val(),
 				$("input[name='investmentPortfolioManagement3']:checked").val(),
 				$("input[name='communications2']:checked").val(),
 				$("input[name='projectIntegrationManagement2']:checked").val()
 				];
 
-				let section3 = [
+				let procurmentRisks = [
 				$("input[name='procurement1']:checked").val(),
 				$("input[name='procurement2']:checked").val(),
 				$("input[name='procurement3']:checked").val()
 				];
 
-				let section4 = [
+				let hrRisks = [
 				$("input[name='humanResources1']:checked").val(),
 				$("input[name='humanResources2']:checked").val(),
 				$("input[name='humanResources3']:checked").val()
 				];
 
-				let section5 = [
+				let businessRisks = [
 				$("input[name='humanResourcesCommunications1']:checked").val(),
 				$("input[name='humanResourcesCommunications2']:checked").val()
 				];
 
-				let section6 = [
+				let projectManagementRisks = [
 				$("input[name='communications3']:checked").val()
 				];
 
-				let section7 = [
+				let reqManagementRisks = [
 				$("input[name='scope2']:checked").val(),
 				$("input[name='scope3']:checked").val(),
 				$("input[name='scope4']:checked").val(),
@@ -816,14 +810,16 @@ var FormProject = function () {
 				$("input[name='scope8']:checked").val()
 				];
 
-				projects[current_project].complexityRisk.section1 = section1;
-				projects[current_project].complexityRisk.section2 = section2;
-				projects[current_project].complexityRisk.section3 = section3;
-				projects[current_project].complexityRisk.section4 = section4;
-				projects[current_project].complexityRisk.section5 = section5;
-				projects[current_project].complexityRisk.section6 = section6;
-				projects[current_project].complexityRisk.section7 = section7;
+				// store the arrays in the project element
+				projects[current_project].complexityRisk.projectCharacteristics = projectCharacteristics;
+				projects[current_project].complexityRisk.strategicRisks = strategicRisks;
+				projects[current_project].complexityRisk.procurmentRisks = procurmentRisks;
+				projects[current_project].complexityRisk.hrRisks = hrRisks;
+				projects[current_project].complexityRisk.businessRisks = businessRisks;
+				projects[current_project].complexityRisk.projectManagementRisks = projectManagementRisks;
+				projects[current_project].complexityRisk.reqManagementRisks = reqManagementRisks;
 
+				// save the arrays to the local storage
 				window.localStorage.setItem("projects", JSON.stringify(projects));
 				window.localStorage.setItem("visual_project1", current_project);
 				window.localStorage.setItem("visual_project2", -1);

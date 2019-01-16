@@ -11,7 +11,7 @@ var Projects = function() {
                 // check if the last project added has been filled out
                 if (projects.length > 0 &&
                     (projects[projects.length - 1].costRelease.quaterNumberPhase1 == null ||
-                        projects[projects.length - 1].complexityRisk._cost == null)) {
+                        projects[projects.length - 1].complexityRisk.projectCharacteristics == null)) {
                     // alert if the project has not been completed
                     alert("Please first fill out the project " + projects[projects.length - 1].title);
                 } else if (projects.length >= 10) {
@@ -43,21 +43,13 @@ var Projects = function() {
                         // define the properties corresponding to the complexity risk assessment
                         "complexityRisk": {
                             // state all as empty arrays until later defined when form is submitted
-                            "_cost": [],
-                            "_scope": [],
-                            "_communications": [],
-                            "_projectIntegrationManagement": [],
-                            "_time": [],
-                            "_investmentPortfolioManagement": [],
-                            "_procurement": [],
-                            "_humanResources": [],
-                            "section1": [],
-                            "section2": [],
-                            "section3": [],
-                            "section4": [],
-                            "section5": [],
-                            "section6": [],
-                            "section7": []
+                            "projectCharacteristics": [],
+                            "strategicRisks": [],
+                            "procurmentRisks": [],
+                            "hrRisks": [],
+                            "businessRisks": [],
+                            "projectManagementRisks": [],
+                            "reqManagementRisks": []
                         }
                     };
 
@@ -74,22 +66,6 @@ var Projects = function() {
                     window.location.replace("/FRST/project")
                 }
             });
-        },
-
-        /* load projects drop down menu*/
-        loadProjects: function() {
-            // obtain project array from local storage
-            let projects = JSON.parse(window.localStorage.getItem("projects"));
-            // intialize variable to store html code
-            let text = "";
-            // generate HTML text for all the drop down elements
-            for (let i = 0; i < projects.length; i++) {
-                text += '<li class="nav-item" name="project' + i + '">';
-                text += '<a href="javascript:;" class="nav-link" name="project" id="project' + i + '"><span class="title">' + projects[i].title + '</span></a>';
-                text += '</li>';
-            }
-            // insert text into the DOM
-            $("li[name='newProject']").before(text);
         },
 
 
@@ -208,48 +184,48 @@ var Projects = function() {
             // obtain the current value for each question from the current project object
             // each value is associated to one of the options for each question on the questionnaire
             // use value obtained to select the correct button using jQuery and set its checked attribute to true
-            $("input[name='cost1'][value='" + projects[current_project].complexityRisk._cost[1] + "']").attr("checked", true);
-            $("input[name='cost2'][value='" + projects[current_project].complexityRisk._cost[2] + "']").attr("checked", true);
-            $("input[name='cost3'][value='" + projects[current_project].complexityRisk._cost[3] + "']").attr("checked", true);
+            $("input[name='cost1'][value='" + projects[current_project].complexityRisk.projectCharacteristics[1] + "']").attr("checked", true);
+            $("input[name='cost2'][value='" + projects[current_project].complexityRisk.projectCharacteristics[5] + "']").attr("checked", true);
+            $("input[name='cost3'][value='" + projects[current_project].complexityRisk.projectCharacteristics[6] + "']").attr("checked", true);
 
-            $("input[name='scope1'][value='" + projects[current_project].complexityRisk._scope[0] + "']").attr("checked", true);
-            $("input[name='scope2'][value='" + projects[current_project].complexityRisk._scope[1] + "']").attr("checked", true);
-            $("input[name='scope3'][value='" + projects[current_project].complexityRisk._scope[2] + "']").attr("checked", true);
-            $("input[name='scope4'][value='" + projects[current_project].complexityRisk._scope[3] + "']").attr("checked", true);
-            $("input[name='scope5'][value='" + projects[current_project].complexityRisk._scope[4] + "']").attr("checked", true);
-            $("input[name='scope6'][value='" + projects[current_project].complexityRisk._scope[5] + "']").attr("checked", true);
-            $("input[name='scope7'][value='" + projects[current_project].complexityRisk._scope[6] + "']").attr("checked", true);
-            $("input[name='scope8'][value='" + projects[current_project].complexityRisk._scope[7] + "']").attr("checked", true);
+            $("input[name='scope1'][value='" + projects[current_project].complexityRisk.projectCharacteristics[2] + "']").attr("checked", true);
+            $("input[name='scope2'][value='" + projects[current_project].complexityRisk.reqManagementRisks[0] + "']").attr("checked", true);
+            $("input[name='scope3'][value='" + projects[current_project].complexityRisk.reqManagementRisks[1] + "']").attr("checked", true);
+            $("input[name='scope4'][value='" + projects[current_project].complexityRisk.reqManagementRisks[2] + "']").attr("checked", true);
+            $("input[name='scope5'][value='" + projects[current_project].complexityRisk.reqManagementRisks[4] + "']").attr("checked", true);
+            $("input[name='scope6'][value='" + projects[current_project].complexityRisk.reqManagementRisks[5] + "']").attr("checked", true);
+            $("input[name='scope7'][value='" + projects[current_project].complexityRisk.reqManagementRisks[6] + "']").attr("checked", true);
+            $("input[name='scope8'][value='" + projects[current_project].complexityRisk.reqManagementRisks[7] + "']").attr("checked", true);
 
-            $("input[name='communications1'][value='" + projects[current_project].complexityRisk._communications[0] + "']").attr("checked", true);
-            $("input[name='communications2'][value='" + projects[current_project].complexityRisk._communications[1] + "']").attr("checked", true);
-            $("input[name='communications3'][value='" + projects[current_project].complexityRisk._communications[2] + "']").attr("checked", true);
-            $("input[name='humanResourcesCommunications1'][value='" + projects[current_project].complexityRisk._communications[3] + "']").attr("checked", true);
-            $("input[name='humanResourcesCommunications2'][value='" + projects[current_project].complexityRisk._communications[4] + "']").attr("checked", true);
+            $("input[name='communications1'][value='" + projects[current_project].complexityRisk.projectCharacteristics[3] + "']").attr("checked", true);
+            $("input[name='communications2'][value='" + projects[current_project].complexityRisk.strategicRisks[2] + "']").attr("checked", true);
+            $("input[name='communications3'][value='" + projects[current_project].complexityRisk.projectManagementRisks[0] + "']").attr("checked", true);
+            $("input[name='humanResourcesCommunications1'][value='" + projects[current_project].complexityRisk.businessRisks[0] + "']").attr("checked", true);
+            $("input[name='humanResourcesCommunications2'][value='" + projects[current_project].complexityRisk.businessRisks[1] + "']").attr("checked", true);
 
-            $("input[name='projectIntegrationManagement1'][value='" + projects[current_project].complexityRisk._projectIntegrationManagement[0] + "']").attr("checked", true);
-            $("input[name='projectIntegrationManagement2'][value='" + projects[current_project].complexityRisk._projectIntegrationManagement[1] + "']").attr("checked", true);
+            $("input[name='projectIntegrationManagement1'][value='" + projects[current_project].complexityRisk.projectCharacteristics[4] + "']").attr("checked", true);
+            $("input[name='projectIntegrationManagement2'][value='" + projects[current_project].complexityRisk.strategicRisks[3] + "']").attr("checked", true);
 
-            $("input[name='time1'][value='" + projects[current_project].complexityRisk._time[1] + "']").attr("checked", true);
-            $("input[name='time2'][value='" + projects[current_project].complexityRisk._time[2] + "']").attr("checked", true);
-            $("input[name='time3'][value='" + projects[current_project].complexityRisk._time[3] + "']").attr("checked", true);
-            $("input[name='time4'][value='" + projects[current_project].complexityRisk._time[4] + "']").attr("checked", true);
-            $("input[name='time5'][value='" + projects[current_project].complexityRisk._time[5] + "']").attr("checked", true);
-            $("input[name='time6'][value='" + projects[current_project].complexityRisk._time[6] + "']").attr("checked", true);
-            $("input[name='time7'][value='" + projects[current_project].complexityRisk._time[7] + "']").attr("checked", true);
+            $("input[name='time1'][value='" + projects[current_project].complexityRisk.projectCharacteristics[7] + "']").attr("checked", true);
+            $("input[name='time2'][value='" + projects[current_project].complexityRisk.projectCharacteristics[8] + "']").attr("checked", true);
+            $("input[name='time3'][value='" + projects[current_project].complexityRisk.projectCharacteristics[9] + "']").attr("checked", true);
+            $("input[name='time4'][value='" + projects[current_project].complexityRisk.projectCharacteristics[10] + "']").attr("checked", true);
+            $("input[name='time5'][value='" + projects[current_project].complexityRisk.projectCharacteristics[11] + "']").attr("checked", true);
+            $("input[name='time6'][value='" + projects[current_project].complexityRisk.projectCharacteristics[12] + "']").attr("checked", true);
+            $("input[name='time7'][value='" + projects[current_project].complexityRisk.projectCharacteristics[13] + "']").attr("checked", true);
 
-            $("input[name='investmentPortfolioManagement1'][value='" + projects[current_project].complexityRisk._investmentPortfolioManagement[0] + "']").attr("checked", true);
-            $("input[name='investmentPortfolioManagement2'][value='" + projects[current_project].complexityRisk._investmentPortfolioManagement[1] + "']").attr("checked", true);
-            $("input[name='investmentPortfolioManagement3'][value='" + projects[current_project].complexityRisk._investmentPortfolioManagement[2] + "']").attr("checked", true);
-            $("input[name='investmentPortfolioManagement4'][value='" + projects[current_project].complexityRisk._investmentPortfolioManagement[3] + "']").attr("checked", true);
+            $("input[name='investmentPortfolioManagement1'][value='" + projects[current_project].complexityRisk.projectCharacteristics[0] + "']").attr("checked", true);
+            $("input[name='investmentPortfolioManagement2'][value='" + projects[current_project].complexityRisk.strategicRisks[0] + "']").attr("checked", true);
+            $("input[name='investmentPortfolioManagement3'][value='" + projects[current_project].complexityRisk.strategicRisks[1] + "']").attr("checked", true);
+            $("input[name='investmentPortfolioManagement4'][value='" + projects[current_project].complexityRisk.reqManagementRisks[3] + "']").attr("checked", true);
 
-            $("input[name='procurement1'][value='" + projects[current_project].complexityRisk._procurement[0] + "']").attr("checked", true);
-            $("input[name='procurement2'][value='" + projects[current_project].complexityRisk._procurement[1] + "']").attr("checked", true);
-            $("input[name='procurement3'][value='" + projects[current_project].complexityRisk._procurement[2] + "']").attr("checked", true);
+            $("input[name='procurement1'][value='" + projects[current_project].complexityRisk.procurmentRisks[0] + "']").attr("checked", true);
+            $("input[name='procurement2'][value='" + projects[current_project].complexityRisk.procurmentRisks[1] + "']").attr("checked", true);
+            $("input[name='procurement3'][value='" + projects[current_project].complexityRisk.procurmentRisks[2] + "']").attr("checked", true);
 
-            $("input[name='humanResources1'][value='" + projects[current_project].complexityRisk._humanResources[0] + "']").attr("checked", true);
-            $("input[name='humanResources2'][value='" + projects[current_project].complexityRisk._humanResources[1] + "']").attr("checked", true);
-            $("input[name='humanResources3'][value='" + projects[current_project].complexityRisk._humanResources[2] + "']").attr("checked", true);
+            $("input[name='humanResources1'][value='" + projects[current_project].complexityRisk.hrRisks[0] + "']").attr("checked", true);
+            $("input[name='humanResources2'][value='" + projects[current_project].complexityRisk.hrRisks[1] + "']").attr("checked", true);
+            $("input[name='humanResources3'][value='" + projects[current_project].complexityRisk.hrRisks[2] + "']").attr("checked", true);
         },
 
         updateRange: function(direction, currVal, slider) {

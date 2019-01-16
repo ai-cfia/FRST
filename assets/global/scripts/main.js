@@ -11,6 +11,7 @@ function setMenuToggleStatus(){
     }
   });
 }
+
 function changeLang(){
   $("#switchLang").click(function () {
 
@@ -33,6 +34,8 @@ function changeLang(){
       }
   });
 }
+
+
 function setLang(){
   // set the language on the page based on whats currently set in cookies
   if (Cookies.get("lang") === "en") {
@@ -44,4 +47,20 @@ function setLang(){
       $("[lang='en']").attr("style", "display:none !important");
       $("#newTitle").attr("placeholder", "Renommez le projet au maximum 20 caractères");
   }
+}
+
+/* load projects drop down menu*/
+function loadProjectsDropDown() {
+    // obtain project array from local storage
+    let projects = JSON.parse(window.localStorage.getItem("projects"));
+    // intialize variable to store html code
+    let text = "";
+    // generate HTML text for all the drop down elements
+    for (let i = 0; i < projects.length; i++) {
+        text += '<li class="nav-item" name="project' + i + '">';
+        text += '<a href="javascript:;" class="nav-link" name="project" id="project' + i + '"><span class="title">' + projects[i].title + '</span></a>';
+        text += '</li>';
+    }
+    // insert text into the DOM
+    $("li[name='newProject']").before(text);
 }

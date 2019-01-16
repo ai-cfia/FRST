@@ -643,7 +643,7 @@ let Charts = function() {
             for (let i = 0; i < projects.length; i++) {
                 // add the html for each list item in the drop down list
                 if (!(projects[i].costRelease.quaterNumberPhase1 == null ||
-                        projects[i].complexityRisk._cost == null)) {
+                        projects[i].complexityRisk.projectCharacteristics == null)) {
 
                     currChart += '<li class = "nav-item chart-dropdown">';
                     currChart += '<label class="chart-list-item">' + projects[i].title;
@@ -687,67 +687,67 @@ let Charts = function() {
             // define and calculate all 7 seven factors based on the complexity risk secttion answers
             // used to calculate the overall uncertainty for the project
             let projectFactor1 = 0;
-            // loop through every element in section1 array
-            for (let i = 0; i < project.complexityRisk.section1.length; i++) {
+            // loop through every element in projectCharacteristics array
+            for (let i = 0; i < project.complexityRisk.projectCharacteristics.length; i++) {
                 // sum all the values together
-                projectFactor1 += parseFloat(project.complexityRisk.section1[i]);
+                projectFactor1 += parseFloat(project.complexityRisk.projectCharacteristics[i]);
             }
             // divide the sum by the length of the array to calculate the average risk
-            let projectFactor1Uniformed = projectFactor1 / project.complexityRisk.section1.length;
+            let projectFactor1Uniformed = projectFactor1 / project.complexityRisk.projectCharacteristics.length;
 
             let projectFactor2 = 0;
-            // loop through every element in section2 array
-            for (let i = 0; i < project.complexityRisk.section2.length; i++) {
+            // loop through every element in strategicRisks array
+            for (let i = 0; i < project.complexityRisk.strategicRisks.length; i++) {
                 // sum all the values together
-                projectFactor2 += parseFloat(project.complexityRisk.section2[i]);
+                projectFactor2 += parseFloat(project.complexityRisk.strategicRisks[i]);
             }
             // divide the sum by the length of the array to calculate the average risk
-            let projectFactor2Uniformed = projectFactor2 / project.complexityRisk.section2.length;
+            let projectFactor2Uniformed = projectFactor2 / project.complexityRisk.strategicRisks.length;
 
             let projectFactor3 = 0;
-            // loop through every element in section3 array
-            for (let i = 0; i < project.complexityRisk.section3.length; i++) {
+            // loop through every element in procurmentRisks array
+            for (let i = 0; i < project.complexityRisk.procurmentRisks.length; i++) {
                 // sum all the values together
-                projectFactor3 += parseFloat(project.complexityRisk.section3[i]);
+                projectFactor3 += parseFloat(project.complexityRisk.procurmentRisks[i]);
             }
             // divide the sum by the length of the array to calculate the average risk
-            let projectFactor3Uniformed = projectFactor3 / project.complexityRisk.section3.length;
+            let projectFactor3Uniformed = projectFactor3 / project.complexityRisk.procurmentRisks.length;
 
             let projectFactor4 = 0;
-            // loop through every element in section4 array
-            for (let i = 0; i < project.complexityRisk.section4.length; i++) {
+            // loop through every element in hrRisks array
+            for (let i = 0; i < project.complexityRisk.hrRisks.length; i++) {
                 // sum all the values together
-                projectFactor4 += parseFloat(project.complexityRisk.section4[i]);
+                projectFactor4 += parseFloat(project.complexityRisk.hrRisks[i]);
             }
             // divide the sum by the length of the array to calculate the average risk
-            let projectFactor4Uniformed = projectFactor4 / project.complexityRisk.section4.length;
+            let projectFactor4Uniformed = projectFactor4 / project.complexityRisk.hrRisks.length;
 
             let projectFactor5 = 0;
-            // loop through every element in section5 array
-            for (let i = 0; i < project.complexityRisk.section5.length; i++) {
+            // loop through every element in businessRisks array
+            for (let i = 0; i < project.complexityRisk.businessRisks.length; i++) {
                 // sum all the values together
-                projectFactor5 += parseFloat(project.complexityRisk.section5[i]);
+                projectFactor5 += parseFloat(project.complexityRisk.businessRisks[i]);
             }
             // divide the sum by the length of the array to calculate the average risk
-            let projectFactor5Uniformed = projectFactor5 / project.complexityRisk.section5.length;
+            let projectFactor5Uniformed = projectFactor5 / project.complexityRisk.businessRisks.length;
 
             let projectFactor6 = 0;
-            // loop through every element in section6 array
-            for (let i = 0; i < project.complexityRisk.section6.length; i++) {
+            // loop through every element in projectManagementRisks array
+            for (let i = 0; i < project.complexityRisk.projectManagementRisks.length; i++) {
                 // sum all the values together
-                projectFactor6 += parseFloat(project.complexityRisk.section6[i]);
+                projectFactor6 += parseFloat(project.complexityRisk.projectManagementRisks[i]);
             }
             // divide the sum by the length of the array to calculate the average risk
-            let projectFactor6Uniformed = projectFactor6 / project.complexityRisk.section6.length;
+            let projectFactor6Uniformed = projectFactor6 / project.complexityRisk.projectManagementRisks.length;
 
             let projectFactor7 = 0;
-            // loop through every element in section7 array
-            for (let i = 0; i < project.complexityRisk.section7.length; i++) {
+            // loop through every element in reqManagementRisks array
+            for (let i = 0; i < project.complexityRisk.reqManagementRisks.length; i++) {
                 // sum all the values together
-                projectFactor7 += parseFloat(project.complexityRisk.section7[i]);
+                projectFactor7 += parseFloat(project.complexityRisk.reqManagementRisks[i]);
             }
             // divide the sum by the length of the array to calculate the average risk
-            let projectFactor7Uniformed = projectFactor7 / project.complexityRisk.section7.length;
+            let projectFactor7Uniformed = projectFactor7 / project.complexityRisk.reqManagementRisks.length;
 
             // sum together all the factor values to calculate the total uncertainty
             projectUncertainty = projectFactor1 + projectFactor2 + projectFactor3 +
