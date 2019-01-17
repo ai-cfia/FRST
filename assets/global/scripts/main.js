@@ -64,3 +64,11 @@ function loadProjectsDropDown() {
     // insert text into the DOM
     $("li[name='newProject']").before(text);
 }
+
+/* set navigation position for home dropdown */
+function setPosition(){
+  $(".home-dropdown").click(function(){
+    
+    $('html, body').animate({scrollTop:413}, 0);
+  })
+}

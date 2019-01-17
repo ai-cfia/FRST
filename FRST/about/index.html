@@ -83,12 +83,21 @@
                      <!-- BEGIN PAGE LINKS -->
                      <div class = page-links>
                        <ul class="nav navbar-nav">
-                          <li class="active">
-                             <a href="#">
+                          <li class="active dropdown">
+                             <a  class="dropdown-toggle" data-toggle="dropdown">
                              <i class="icon-info navText"></i>
                              <span lang="en" class="title navText">Home</span>
                              <span lang="fr" class="title navText">Accueil</span>
+                             <i class="fa fa-angle-down navArrow"></i>
                              </a>
+                             <ul class="dropdown-menu">
+                                <li class="nav-item home-dropdown">
+                                   <a href="javascript:;">
+                                   <span lang="en" class="title">How it Works</span>
+                                   <span lang="fr" class="title">Comment ça Fonctionne</span>
+                                   </a>
+                                </li>
+                             </ul>
                           </li>
                           <li>
                              <a href="/FRST/charts" class="nav-link nav-toggle">
@@ -98,7 +107,7 @@
                              </a>
                           </li>
                           <li class="dropdown">
-                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                             <a class="dropdown-toggle" data-toggle="dropdown">
                              <i class="icon-briefcase navText"></i>
                              <span lang="en" class="title navText">Projects</span>
                              <span lang="fr" class="title navText">Projets</span>
@@ -214,7 +223,7 @@
                         <div class="row margin-bottom-15">
                            <div class="col-lg-12">
                               <div class="portlet light about-text">
-                                 <h4>
+                                 <h4 id = "HowItWorks">
                                     <i class="fa fa-check icon-info"></i> How it Works
                                  </h4>
                                  <p class="margin-top-20" style="font-size: 16px">
@@ -391,6 +400,7 @@
                	setMenuToggleStatus();
                	setLang();
                	changeLang();
+                setPosition();
                	loadProjectsDropDown();
                	Projects.addProject();
                	Projects.selectProject();
