@@ -1,7 +1,7 @@
 # Functional Realignment Scenario Tool (FRST)
 
 ## What is FRST?
-FRST is a scenario building tool to support resource allocation decision-making  
+FRST is a scenario building tool to support resource allocation decision-making 
 within the context of risk and resource alignment flexibility
 
 ## How Does FRST Work?
