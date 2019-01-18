@@ -149,14 +149,8 @@ Anout Us Page
 /* BEGIN ABOUt AND VIDEO */
 .about-text {
   height: auto !important;
-  padding: 0 !important; }
-  .about-text > h4 {
-    background-color: #d9534f;
-    font-size: 24px;
-    font-weight: 600;
-    color: #fff;
-    padding: 1em 20px;
-    margin: 0; }
+  padding: 0 0 20px 0 !important; }
+
     .about-text > h4 > i {
       font-size: 24px !important;
       color: #fff; }
@@ -184,6 +178,22 @@ Anout Us Page
 .about-links-item {
   margin-bottom: 2em; }
 
+  .about-panel {
+    background-color: #d9534f;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    padding: 1em 20px;
+    margin: 0; }
+
+    .about-heading {
+    margin: 0!important;
+    padding: 0!important;
+    }
+
+    .about-panel .navArrow{
+    float: right;
+    }
 /* END ABOUt AND VIDEO */
 /* BEGIN RESPONSIVE */
 @media (max-width: 600px) {

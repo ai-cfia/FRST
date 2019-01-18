@@ -66,9 +66,9 @@ function loadProjectsDropDown() {
 }
 
 /* set navigation position for home dropdown */
-function setPosition(){
-  $(".home-dropdown").click(function(){
-    
-    $('html, body').animate({scrollTop:413}, 0);
+function changeArrow(){
+  $(".about-panel .navArrow").click(function(){
+    $(this).toggleClass("fa-angle-down");
+    $(this).toggleClass("fa-angle-left");
   })
 }
