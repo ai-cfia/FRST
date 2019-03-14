@@ -1084,7 +1084,7 @@ let Charts = function() {
                 Charts.displayCPQ(costPerQuarter, cr2Data, projectQuarters);
                 Charts.displayCPQ(costPerQuarterModal, cr2Data, projectQuarters);
 
-                charts = [costRelease, complexityRisk, minMaxBenefit, costPerQuarter, costReleaseModal, complexityRiskModal, minMaxBenefitModal, costPerQuarterModal];
+                charts = [costRelease, complexityRisk, minMaxBenefit, costReleaseModal, complexityRiskModal, minMaxBenefitModal];
                 Charts.updateAndRenderCharts(charts);
 
 
@@ -1160,13 +1160,13 @@ let Charts = function() {
             costRelease.data.datasets = cr2Data[0];
             comRisk.data.datasets = cr2Data[1];
 
-            // give title and labels to cost and release graph
+            // disable title for cost release
             costRelease.options.title.display = false;
 
             // push the labels to the chart
             costRelease.data.labels = projectQuarters;
 
-            // give title to complexity and risk graph
+            // disable title for complexity risk
             comRisk.options.title.display = false;
         },
 
@@ -1365,55 +1365,27 @@ let Charts = function() {
         /* this method will generate the relative data for the cost per quarter chart*/
         generateCPQ: function(costReleaseData, highestQuarters) {
             // declare an array to store each datasets
-            let costData = [],
-                maxData = [],
-                minData = [];
-            // initialize the arrays to have all zeros
-            for (let i = 0; i < highestQuarters; i++) {
-                costData.unshift(0);
-                maxData.unshift(0);
-                minData.unshift(0);
-            }
+            let projectsCost = []
+            let projectsMax = []
+            let projectsMin = []
 
             // loop through each project
             let numProjects = costReleaseData.length / 3;
             for (let i = 0; i < numProjects; i++) {
                 // store the individual arrays representing each projects cost max and min releases
-                let projectCost = costReleaseData[i * 3].data;
-                let projectMax = costReleaseData[i * 3 + 1].data;
-                let projectMin = costReleaseData[i * 3 + 2].data;
-                // loop through the each quarter of the project
-                for (j = 0; j < projectCost.length; j++) {
-                    // add the current value in the relative index to the data arrays
-                    costData[j] += projectCost[j];
-                    maxData[j] += projectMax[j];
-                    minData[j] += projectMin[j];
-                }
-            }
-            // define the actual datasets for each line
-            let costSet = {
-                label: "Cost",
-                data: costData,
-                borderColor: Charts.costColours[2],
-                fill: false
+                projectsCost[i] = costReleaseData[i * 3].data;
+                projectsMax[i] = costReleaseData[i * 3 + 1].data;
+                projectsMin[i] = costReleaseData[i * 3 + 2].data;
             }
 
-            let maxSet = {
-                label: "Maximum Release",
-                data: maxData,
-                borderColor: Charts.releaseColours[2],
-                fill: false
-            }
+            console.log(projectsCost)
+            console.log(projectsMax)
+            console.log(projectsMin)
 
-            let minSet = {
-                label: "Minimum Release",
-                data: minData,
-                borderColor: Charts.minReleaseColours[2],
-                fill: false
-            }
+            // define two data sets per project
+            // one for max and one for min ben per quarter
+            // calculate the data for each data set
 
-            // return the created Datasets
-            return ([costSet, minSet, maxSet]);
 
         }
 
