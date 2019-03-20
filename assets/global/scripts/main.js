@@ -32,7 +32,10 @@ function changeLang(){
           Cookies.set("lang", "en");
           $("#newTitle").attr("placeholder", "Rename the project with a maximum of 20 characters");
       }
+      // call charts language change method
+      Charts.changeLanguage(Cookies.get("lang"))
   });
+
 }
 
 
