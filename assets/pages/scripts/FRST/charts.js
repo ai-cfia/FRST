@@ -638,6 +638,7 @@ let Charts = function() {
             let projects = JSON.parse(window.localStorage.getItem("projects"));
             Charts.initializeCharts(projects);
             Charts.updateCharts(projects);
+            Charts.changeLanguage(Cookies.get("lang"))
 
         },
 
@@ -1299,6 +1300,15 @@ let Charts = function() {
                 "Project Management Risks",
                 "Project Requirement Management"
             ]
+            complexityRiskModal.data.labels = [
+                "Project Characteristics",
+                "Strategic Management Risks",
+                "Procurement Risks",
+                "Human Resources Risks",
+                "Business Risks",
+                "Project Management Risks",
+                "Project Requirement Management"
+            ]
           }else{
             minMaxBenefit.options.scales.yAxes[0].scaleLabel.labelString = "Nom du Projet"
             minMaxBenefitModal.options.scales.yAxes[0].scaleLabel.labelString = "Nom du Projet"
@@ -1307,6 +1317,15 @@ let Charts = function() {
             costRelease.options.scales.xAxes[0].scaleLabel.labelString = "Numéro du Trimestre"
             costReleaseModal.options.scales.xAxes[0].scaleLabel.labelString = "Numéro du Trimestre"
             complexityRisk.data.labels = [
+                "Caractéristiques du Projet",
+                "Risques de Gestion Stratégique",
+                "Risques d'Approvisionnement",
+                "Risques de Ressources Humaines",
+                "Risques d'Entreprise",
+                "Risques de Gestion de Projet",
+                "Gestion du Projet Exigence"
+            ]
+            complexityRiskModal.data.labels = [
                 "Caractéristiques du Projet",
                 "Risques de Gestion Stratégique",
                 "Risques d'Approvisionnement",
