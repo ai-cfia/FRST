@@ -905,6 +905,7 @@ var FormProject = function () {
 					}
 					current_project = -1;
 				}
+				window.localStorage.setItem("checked", JSON.stringify([]));
 				window.localStorage.setItem("current_project", current_project);
 				window.localStorage.setItem("visual_project1", visual_project1);
 				window.localStorage.setItem("visual_project2", visual_project2);

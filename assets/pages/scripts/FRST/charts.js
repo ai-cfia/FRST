@@ -1059,10 +1059,6 @@ let Charts = function() {
                 // define variables to track the earliest start time
                 let lowestTime = Number.MAX_SAFE_INTEGER;
 
-                //TESTING only
-                if (!checkedElements) {
-                    checkedElements = [];
-                }
                 // loop through every element that is checked
                 for (let i = 0; i < checkedElements.length; i++) {
 

@@ -19,7 +19,7 @@ function changeLang(){
       if (Cookies.get("lang") === "en") {
           // if the current lang is en change everything to french
           $("[lang='fr']").attr("style", "display");
-          $("[lang='en']").attr("style", "display:none !important");
+          $("[lang='en']").attr("style", "display:none");
 
           // set lang to be french
           Cookies.set("lang", "fr");
@@ -32,8 +32,11 @@ function changeLang(){
           Cookies.set("lang", "en");
           $("#newTitle").attr("placeholder", "Rename the project with a maximum of 20 characters");
       }
-      // call charts language change method
-      Charts.changeLanguage(Cookies.get("lang"))
+      // call charts language change method if the current page is the charts page
+      if (document.URL.toUpperCase().search('/FRST/Charts') != -1){
+        Charts.changeLanguage(Cookies.get("lang"))
+      }
+
   });
 
 }
@@ -60,8 +63,8 @@ function loadProjectsDropDown() {
     let text = "";
     // generate HTML text for all the drop down elements
     for (let i = 0; i < projects.length; i++) {
-        text += '<li class="nav-item" name="project' + i + '">';
-        text += '<a href="javascript:;" class="nav-link" name="project" id="project' + i + '"><span class="title">' + projects[i].title + '</span></a>';
+        text += '<li name="project' + i + '">';
+        text += '<a name="project" id="project' + i + '"><span class="title">' + projects[i].title + '</span></a>';
         text += '</li>';
     }
     // insert text into the DOM

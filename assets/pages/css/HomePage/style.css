@@ -1,0 +1,735 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
+
+
+
+
+
+/* desktop view */
+
+* {
+  box-sizing: border-box;
+}
+
+p {
+  font-size: 18px;
+}
+
+/* navigation and hero image */
+
+/* setting up the body */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  width: 100%;
+  height: 1700px;
+}
+
+/* hero image  */
+.hero-image {
+  position: relative;
+  height: 900px;
+  overflow: hidden;
+  background: url('../../img/HomePage/images/bg-1.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* positioning of the logo and text */
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  font-weight: 700;
+}
+
+/* making logo responsive */
+.container img {
+  max-width: 600px;
+  width: 100%;
+}
+
+/* description spacing */
+h2 {
+  letter-spacing: 0.1em;
+}
+
+/* nav bar bg and positioning */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0 100px 0 50px;
+  width: 100%;
+  box-sizing: border-box;
+  background: hsl(212.5, 10.26%, 45.88%);
+  border-bottom: 5px solid hsl(186, 64.52%, 48.63%);
+}
+
+/* Aligns logo with Nav */
+div.logo {
+  height: 40px;
+  line-height: 50px;
+  float: left;
+  padding-top: 0px;
+}
+
+/* icons in nav spacing */
+header nav ul li a i {
+  padding-right: 10px;
+}
+
+/* moves nav content to the right */
+header nav {
+  float: right;
+}
+
+/* makes content in the nav display horizontal */
+header nav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+/* nav content- bulet points removed */
+header nav ul li {
+  list-style: none;
+  position: relative;
+  font-size: 16px;
+}
+
+/* targets English to move it further from the rest */
+#changeLang {
+  margin-left: 3rem;
+}
+
+/* Drop down icon from fontAwesome down */
+header nav ul li.sub-menu:before {
+  content: '\f078';
+  font-family: fontAwesome;
+  position: absolute;
+  line-height: 50px;
+  color: #fff;
+  right: 1px;
+}
+
+/* Drop down icon from fontAwesome up */
+header nav ul li.active.sub-menu:before {
+  content: '\f077';
+}
+
+/* keeps sub menu hidden */
+header nav ul li ul {
+  position: absolute;
+  left: 0;
+  background: #333;
+  display: none
+}
+
+/* displays sub menu */
+header nav ul li.active ul {
+  display: block;
+}
+
+/* sizing of sub menu */
+header nav ul li ul li {
+  display: block;
+  width: 190px;
+}
+
+/* targets the nav content */
+header nav ul li a {
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
+  color: #fff;
+  text-decoration: none;
+  display: block;
+}
+
+/* hover effect on nav */
+header nav ul li a:hover {
+  /* height: 100%; */
+  color: #fff;
+  background: #a7a7a7;
+}
+
+/* active tab effect */
+header nav ul li a.active {
+  border-bottom: 3px solid hsl(186, 64.52%, 48.63%);
+}
+
+/* when it's tablet/mobie this will display (hamburger menu)  */
+.menu-toggle {
+  color: #fff;
+  float: right;
+  line-height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  display: none
+}
+
+
+
+
+
+
+
+/* section 2 */
+
+/* section 2 background color */
+.row {
+  background-color: #EFF2F3;
+}
+
+/* displays horizonal (responsive) */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+
+}
+
+/* each section */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 15px;
+
+}
+
+/* blue line  */
+.column p {
+  border-left: 5px solid hsl(186, 64.52%, 48.63%);
+  padding-left: 10px;
+}
+
+/* centers content */
+.center {
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+
+}
+
+
+
+
+
+/* Section 3 */
+
+/* the columns */
+.vertical {
+  float: left;
+  width: 33.33%;
+  padding: 15px;
+}
+
+.horizontal {
+  padding-bottom: 2rem;
+}
+
+/* holds everything (responsive) */
+.horizontal:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* font color changed for sub titles */
+.vertical h2 {
+  text-align: center;
+  color: #FF3200;
+  font-weight: 1;
+
+}
+
+/* displayin icon centerd */
+.vertical img {
+
+  display: block;
+  margin: 0 auto;
+}
+
+/* centering the header */
+.heading {
+  text-align: center;
+  padding-bottom: 5rem;
+}
+
+/* font color changed for heading */
+.heading h1 {
+  color: #FF3200;
+  font-weight: 1;
+  font-size: 40px;
+}
+
+
+
+
+
+
+
+/* section 4 */
+
+/* general */
+
+.cluster {
+  position: absolute;
+  width: 100%;
+  z-index: -2;
+
+  ;
+}
+.box {
+  z-index: -2;
+  position: relative;
+  width: 100%;
+  margin-bottom: 50rem;
+  background-color: black;
+
+}
+.group {
+  position: relative;
+  width: 33%;
+  height: 400px;
+  display: inline-grid;
+}
+
+.group {
+  z-index: -1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  height: 400px;
+  width: 33.33%;
+  margin: auto;
+  float: left;
+}
+
+/* image sizing */
+.group img {
+  width: 100%;
+  height: 400px;
+}
+
+.image {
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+
+/* captions colour */
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: sans-serif;
+}
+
+/* font colour  p tag is hidden */
+.group a {
+  display: grid;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56.5%;
+  text-align: center;
+  height: 400px;
+  width: 100%;
+}
+
+/* image size */
+.grid-caption {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-weight: 300;
+}
+
+/* positions H2 */
+.grid-caption h2 {
+  padding-top: 90px;
+  transition: transform 0.35s;
+  transform: translate3d(0, -30px, 0);
+  font-weight: 300;
+  font-size: 26px;
+}
+
+/*  makes font thinner */
+.grid-caption h2 {
+  font-weight: 700;
+}
+
+/* displays caption when hovered on */
+.group>a:hover h2,
+.group>a:hover p {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* hides the caption */
+.grid-caption p {
+  opacity: 0;
+  padding: 10px 15px;
+  transform: translate3d(0, -10px, 0);
+  transition: opacity 0.35s, transform 0.35s;
+  padding: 10px 50px;
+  font-size: 20px;
+}
+
+/* caption b and a */
+.grid-caption::before,
+.grid-caption::after {
+  content: "";
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.35s, transform 0.35s;
+}
+
+/* caption b */
+.grid-caption::before {
+  transform: scale(0, 1);
+  left: 25px;
+  right: 25px;
+  top: 40px;
+  bottom: 40px;
+  /* border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff; */
+  transform-origin: 0 0;
+}
+
+/* caption a */
+.grid-caption::after {
+  top: 25px;
+  bottom: 25px;
+  left: 40px;
+  right: 40px;
+  transform-origin: 100% 0;
+}
+
+/* caption a and b */
+.group>a:hover .grid-caption::before,
+.group>a:hover .grid-caption::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* caption a and b */
+.group>a:hover .grid-caption::after,
+.group>a:hover h2,
+.grid>a:hover p {
+  transition-delay: 0.15s;
+}
+
+/* section 5 */
+
+
+.sec-5-heading {
+  position: relative;
+  top: 800px;
+  height: 100%;
+  z-index: -2;
+  max-height: 200px;
+  text-align: center;
+
+}
+
+.sec-5-bottom {
+  position: relative;
+  top: 850px;
+  height: 100%;
+  z-index: -2;
+  max-height: 200px;
+  text-align: center;
+}
+
+.sec-5-heading h1 {
+  color: #FF3200;
+  font-weight: 1;
+  font-size: 40px;
+}
+
+
+.parts {
+  position: relative;
+  top: 800px;
+  display: flex;
+  align-items: center;
+}
+
+.parts > * {
+  list-style: none;
+  /* background, padding and alignment can be chagne as you wish */
+
+  padding: 10px;
+}
+
+
+.parts.two {
+  flex-wrap: wrap;
+}
+
+
+
+.parts.two > * {
+  flex: 1 1 50%;
+}
+
+  .parts.two > *:nth-child(2n+1) {
+    margin-left: 0px;
+  }
+  .parts.two > *:nth-child(2n+2) {
+    margin-right: 0px;
+  }
+
+  .parts img {
+    float: left;
+    margin-top: 1rem;
+    margin-right: 1rem;
+  }
+
+
+
+  /* section 6 */
+
+  .footer {
+    margin-left: 20px;
+    position: relative;
+    top: 805px;
+    z-index: -2;
+    max-height: 200px;
+
+  }
+
+  .footer p {
+    color: #fff;
+    font-weight: 100;
+  }
+
+
+  .back-to-top {
+    display: inline-block;
+    margin-bottom: 18px;
+    text-decoration: underline;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+
+  background:  hsl(186, 64.52%, 48.63%);
+  position: fixed;
+  bottom: -150px;
+  right: 18px;
+  transition: bottom 1s;
+  cursor: pointer;
+
+  }
+  .back-to-top:before {
+    content: " ";
+    display: block;
+    width: 42%;
+    padding: 21% 0;
+    border: solid #FFF;
+    border-width: 0 2px 2px 0;
+    transform: rotate(225deg);
+    margin-left: 26%;
+    margin-top: 35%;
+    position: absolute;
+    z-index: 20;
+  }
+
+  .block {
+    width: 100%;
+    height: 2%;
+    background-color: hsl(212.5, 10.26%, 45.88%);
+    position: relative;
+    top: 760px;
+    z-index: -3;
+
+  }
+
+/* mobile/tablet view */
+
+@media (max-width: 860px) {
+
+
+
+  /* section 1 */
+
+  /* menu in rigth corner */
+  header {
+    padding: 0 20px;
+  }
+
+  /* menu button */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* hides content under the menu */
+  header nav {
+    position: absolute;
+    top: 50px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 50px);
+    background: #333;
+    transition: 0.5s;
+  }
+
+  /* active nav */
+  header nav.active {
+    left: 0;
+  }
+
+  /* displays nav content block */
+  header nav ul {
+    display: block;
+    text-align: center;
+  }
+
+  /* aligns it back with the rest */
+  header nav ul li:nth-child(4) {
+    margin-left: 0;
+  }
+
+  /* slight black line that helps seperate the cnav content */
+  header nav ul li a {
+    border-bottom: 0.9px solid rgba(0, 0, 0, .2);
+  }
+
+  /* submenu information will be th brand blue colour */
+  header nav ul li.active ul {
+    position: relative;
+    background: #2cbccc;
+  }
+
+  /* makes sure it take the full width of the screen */
+  header nav ul li ul li {
+    width: 100%;
+  }
+
+  /* positions it not so close to th eend of the page */
+  header nav ul li.sub-menu:before {
+    right: 25px;
+  }
+
+
+
+
+
+
+  /* section 3 */
+
+  /* makses width 100% */
+  .vertical {
+    width: 100%;
+  }
+
+  .heading h1 {
+    color: #FF3200;
+    font-weight: 1;
+    font-size: 30px;
+  }
+
+
+
+
+
+
+  /* section 4 */
+
+  /* general  */
+  .group {
+    /* display: inline; */
+    /* position: relative; */
+    width: 100%;
+    height: 400px;
+
+  }
+/* making the images responsive */
+  .group img,
+  .grid-caption {
+    width: 100%;
+
+  }
+
+  .group a {
+    width: 100%;
+  }
+
+
+
+
+  /* section 5 */
+
+  .sec-5-heading {
+    position: relative;
+    top: 2400px;
+    height: 100%;
+    z-index: -2;
+    max-height: 200px;
+
+  }
+
+  .sec-5-bottom {
+    position: relative;
+    top: 2450px;
+    height: 100%;
+    z-index: -2;
+    max-height: 200px;
+
+  }
+
+  .parts {
+    z-index: -2;
+    position: relative;
+    top: 2400px;
+    display: block;
+  }
+  .parts > * {
+    display: block !important;
+    border: 1px solid #fff;
+  }
+
+
+  .parts.two > * {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+
+  /* section 6 */
+.footer p {
+  position: relative;
+    top: 1600px;
+    z-index: -2;
+}
+.block {
+  width: 100%;
+  height: 2%;
+  background-color: hsl(212.5, 10.26%, 45.88%);
+  position: relative;
+  top: 2360px;
+  z-index: -3;
+
+}
+}
