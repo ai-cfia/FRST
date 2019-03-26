@@ -839,8 +839,8 @@ let Charts = function() {
             let riskTotal = ''
             if(Cookies.get('lang') === 'en'){
               costLabel = 'Cost of ';
-              minReleaseLabel = 'Minimum Benefit of ';
-              maxReleaseLabel = 'Minimum Benefit of ';
+              minReleaseLabel = 'Minimum Release of ';
+              maxReleaseLabel = 'Maximum Release of ';
               riskLabel = 'Uncertainty of ';
               riskTotal = ', Total Score: ';
             }else{
